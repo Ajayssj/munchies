@@ -1,0 +1,15 @@
+
+.rf_page_wrapper {
+    padding: 50px 0px;
+}
+.rf_page_wrapper h2 {
+    color: #E5663D;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 100px;
+}
+.rf_page_wrapper p {
+    line-height: 30px;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+}

@@ -13,6 +13,7 @@
     },
     "repository": {},
     "scripts": {
-        "start": "node --inspect app.js"
+        "start": "node --inspect app.js",
+		"build-frontend":"node build-frontend.js"
     }
 }

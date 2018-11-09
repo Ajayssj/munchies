@@ -1,0 +1,80 @@
+@import './../assets/css/language.css';
+@import './../assets/css/opensanshebrew.css';
+@font-face {
+    font-family: 'MyWebFont';
+     src:  url('../assets/font/0078f486-8e52-42c0-ad81-3c8d3d43f48e.woff2') format('woff2'),
+          url('../assets/font/3c5beda8-45cc-4f76-abca-8eccfeb6220c.woff2') format('woff2'),
+          url('../assets/font/4021a3b9-f782-438b-aeb4-c008109a8b64.woff') format('woff'),
+          url('../assets/font/60be5c39-863e-40cb-9434-6ebafb62ab2b.woff') format('woff'),
+          url('../assets/font/69b40392-453a-438a-a121-a49e5fbc9213.woff2') format('woff2'),
+          url('../assets/font/aee74cb3-c913-4b54-9722-6001c92325f2.woff2') format('woff2'),
+          url('../assets/font/bc176270-17fa-4c78-a343-9fe52824e501.woff') format('woff'),
+          url('../assets/font/d513e15e-8f35-4129-ad05-481815e52625.woff2') format('woff2'); 
+  }
+
+.main_wrapper {
+    width: 100%;
+}
+
+header, .content, footer .content {
+    width: 72%;
+    margin: 0 auto;
+    left: 189px;
+    background-color: #fff;
+    font-family: 'MyWebFont' !important;
+}
+.content_position {
+    padding-top: 80px;
+    padding-bottom: 50px;
+    height: 100%;
+    min-height: 100%;
+    display: block;
+    margin-bottom: 100px;
+    -webkit-transition:all 1.0s ease-in-out;
+  -moz-transition:all 1.0s ease-in-out;
+  -o-transition:all 1.0s ease-in-out;
+  transition:all 1.0s ease-in-out;
+}
+.margin_bottom250 {
+    margin-bottom: 250px;
+}
+
+
+@media screen and (min-width: 300px) {
+    header, .content {
+        padding-top: 10px;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (min-width: 480px) {
+
+}
+@media screen and (min-width: 768px) {
+    header, .content {
+        padding-top: 80px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+@media screen and (min-width: 992px) {
+    header, .content {
+        left: 137px;
+        width: 72%;
+        box-sizing: border-box;
+    }
+    
+}
+@media screen and (min-width: 1024px) {
+    header, .content {
+        left: 137px;
+        width: 72%;
+        box-sizing: border-box;
+    }
+
+}
+@media screen and (min-width: 1280px) {
+
+}

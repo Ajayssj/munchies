@@ -555,7 +555,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\projects\munchies\github_munchies\client\angular\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! F:\projects\munchies\heroku_munchies\trunk\frontEnd\src\styles.css */"./src/styles.css");
 
 
 /***/ })

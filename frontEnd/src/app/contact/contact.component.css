@@ -1,0 +1,101 @@
+.contact_page_wrapper {
+    width: 100%;
+    display: flex;
+    margin-top: 40px;
+}
+.contact_information {
+    width: 400px;
+    height: 400px;
+    background-color: rgb(63, 124, 172);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: -35px;
+    margin-top: -50px;
+    letter-spacing: 1px;
+}
+.contact_information .email_id {
+    margin-top: 140px;
+    margin-left: 70px;
+}
+.contact_information .email_id a {
+    text-decoration: none;
+    color: #fff;
+}
+.contact_information .mobile_number {
+    margin-top: 30px;
+    margin-left: 70px;
+}
+.contact_us_text {
+    color: #E5663D;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+@media screen and (min-width: 300px) {
+    .contact_page_wrapper, .signin_page_wrapper {
+        flex-direction: column;
+    }
+    .contact_information {
+        width: 300px;
+        height: 300px;
+        margin: -50px auto 0 auto;
+    }
+    .contact_information .email_id {
+        padding-top: 0px;
+        font-size: 18px;
+        margin-top: 70px;
+        margin-left: 40px;
+    }
+    .contact_us_text {
+        margin: 30px auto;
+    }
+    .contact_information .mobile_number {
+        margin-top: 30px;
+        margin-left: 70px;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .contact_information .email_id {
+        padding-top: 0;
+        margin-top: 70px;
+        margin-left: 40px;
+    
+    }
+}
+@media screen and (min-width: 768px) {
+    
+    .contact_page_wrapper{
+        flex-direction: row;
+    }
+    .contact_information {
+
+        width: 400px;
+        height: 400px;
+        margin: -90px 0px 0px 25px;
+    
+    }
+    .contact_information .email_id {
+        padding-top: 0;
+        margin-top: 140px;
+        margin-left: 70px;
+    
+    }
+    .contact_us_text {
+        margin-left: 10px;
+        margin-top: 0;
+    }
+}
+@media screen and (min-width: 992px) {
+    
+}
+@media screen and (min-width: 1024px) {
+    
+}
+@media screen and (min-width: 1280px) {
+
+}

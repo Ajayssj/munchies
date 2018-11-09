@@ -1,0 +1,80 @@
+.select_delivery_address_wrapper {
+    width: 60%;
+    margin: 0 auto;
+    padding: 60px 0px;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+}
+.delivery_content {
+    width: 100%;
+    float: left;
+}
+.select_delivery_address_wrapper h3 {
+    font-size: 23px;
+    color: #E5663D;
+}
+.delivery_form form .row {
+    width: 100%;
+    float: left;
+    margin-bottom: 15px;
+}
+.delivery_form form .field1 {
+    width: 40%;
+    float: left;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 2px solid #e2e2e2;
+}
+.delivery_form form .field2 {
+    width: 56%;
+    float: left;
+    box-sizing: border-box;
+    margin-left: 4%;
+    padding: 10px;
+    border: 2px solid #e2e2e2;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.delivery_form p {
+    float: left;
+    margin-top: 0;
+    font-size: 14px;
+    color: #E5663D;
+}
+.create_account {   
+    width: 50%;
+    float: left;
+}
+.create_account h2 {
+    color: #E5663D;
+    font-size: 23px;
+    margin-bottom: 30px;
+}
+.create_account form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 2px solid #e2e2e2;
+}
+.make_payment_btn {
+    width: 100%;
+    float: left;
+    padding-left: 30px;
+    padding-bottom: 50px;
+    margin-top: 50px;
+}
+.make_payment_btn a {
+    text-decoration: none;
+    color: rgba(50, 50, 50, 1);
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 25px;
+    border: 2px solid rgba(50, 50, 50, 1);
+}
+.make_payment_btn a:hover {
+    color: #fff;
+    background-color: rgba(50, 50, 50, 1);
+    border: 2px solid rgba(50, 50, 50, 1);
+}
