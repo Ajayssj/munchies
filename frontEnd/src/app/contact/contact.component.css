@@ -38,6 +38,7 @@
 @media screen and (min-width: 300px) {
     .contact_page_wrapper, .signin_page_wrapper {
         flex-direction: column;
+        margin-top: 90px;
     }
     .contact_information {
         width: 300px;
@@ -71,6 +72,7 @@
     
     .contact_page_wrapper{
         flex-direction: row;
+        margin-top: 40px;
     }
     .contact_information {
 

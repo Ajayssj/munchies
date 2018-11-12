@@ -34,3 +34,20 @@ ol li p {
 ol li p a {
     color: #605E5E;
 }
+
+@media screen and (min-width: 300px) {
+    h2.faq {
+        margin-top: 120px;
+    }
+    ol {
+        margin-top: 35px;
+    }
+}
+@media screen and (min-width: 768px) {
+    h2.faq {
+        margin-top: 50px;
+    }
+    ol {
+        margin-top: 80px;
+    }
+}

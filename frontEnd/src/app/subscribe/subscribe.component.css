@@ -113,3 +113,12 @@
     top: 70px;
     left: 150px;
 }
+
+@media screen and (min-width: 768px) {
+    .question_wrapper .product_images.first_box img:first-child {
+        left: 95px;
+    }
+    .question_wrapper .product_images.second_box img:last-child {
+        left: 240px;
+    }
+}

@@ -20,10 +20,6 @@ export class AppComponent {
     this.styles = {
       'min-height': contentElementHeight
     }
-    this.http.get("http://localhost:9191/user/login").subscribe((response) => {
-      response = response;
-      console.log(response);
-    }); 
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
           return;

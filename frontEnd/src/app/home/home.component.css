@@ -257,7 +257,44 @@
     .responsive_menu {
         display: block;
     }
-
+    .snack_right_video h2 {
+        font-size: 22px;
+        line-height: 35px;
+    }
+    .watch_video + h2, .whats_inside h2, .munchers_have_spoken_text, .page_down_content h2 {
+        font-size: 25px;
+    }
+    .list_item {
+        display: block;
+    }
+    .list_item .list_number {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 18px;
+        vertical-align: top;
+        margin-right: 15px;
+        display: inline-block;
+    }
+    .list_item .list_text {
+        width: 80%;
+        display: inline-block;
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .munchers_have_spoken_box_wrapper {
+        flex-direction: column;
+    }
+    .munchers_have_spoken_box {
+        width: 75%;
+        margin: 0 auto 70px auto;
+    }
+    .munchers_have_spoken_box:nth-child(2) {
+        margin: 0 auto 70px auto;
+    }
+    .content_box_wrapper > h2 {
+        font-size: 25px;
+    }
     .boxes .box {
         margin-right: 0px;
         margin-bottom: 10px;
@@ -302,6 +339,43 @@
 
 }
 @media screen and (min-width: 768px) {
+    
+    .snack_right_video h2 {
+        font-size: 40px;
+        line-height: 60px;
+    }
+    .watch_video + h2 {
+        font-size: 38px;
+    }
+    .whats_inside h2, .munchers_have_spoken_text, .page_down_content h2 {
+        font-size: 30px;
+    }
+    .list_item {
+        display: flex;
+    }
+    .list_item .list_number {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 22px;
+        vertical-align: top;
+        margin-right: 30px;
+    }
+    .list_item .list_text {
+        width: auto;
+        font-size: 23px;
+        line-height: 50px;
+    }
+    .munchers_have_spoken_box_wrapper {
+        flex-direction: row;
+    }
+    .munchers_have_spoken_box {
+        width: 30%;
+        margin: 0;
+    }
+    .munchers_have_spoken_box:nth-child(2) {
+        margin: 0 5%;
+    }
     .content_box {
         padding: 30px 20px 80px 30px;
     }
