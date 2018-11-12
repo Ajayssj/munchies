@@ -25,13 +25,15 @@ footer .content {
 }
 .footer_line {
     color: #fff;
-    width: 100%;
-    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 .footer_line div {
     text-align: center;
     display: inline-block;
     padding-right: 55px;
+    flex: auto;
 }
 .copy_right {
     letter-spacing: 1px;
@@ -45,7 +47,7 @@ footer .content {
 }
 @media screen and (min-width: 300px) {
     .footer_line {
-        float: none;
+        flex-direction: column;
     }
     .social_media_icons {
         text-align: center;
@@ -78,7 +80,7 @@ footer .content {
         box-sizing: border-box;
     }
     .footer_line {
-        float: left;
+        flex-direction: row;
     }
     .social_media_icons {
         text-align: center;
@@ -88,8 +90,6 @@ footer .content {
 
     footer .content {
         width: 72%;
-    }
-    .footer_line div {
     }
 }
 @media screen and (min-width: 1024px) {
