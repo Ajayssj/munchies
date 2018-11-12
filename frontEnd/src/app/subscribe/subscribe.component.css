@@ -31,11 +31,17 @@
     line-height: 22px;
     color: #2F2E2E;
 }
+.select_plan .plan a {
+    text-decoration: none;
+}
 .select_plan .plan h2 {
     font-size: 26px;
     color: #2F2E2E;
     margin: 0px;
     font-weight: normal;
+}
+.select_plan .plan p {
+    color: #2F2E2E;
 }
 .select_plan .plan:nth-child(2) {
     margin: 0 8%;
