@@ -7,7 +7,7 @@ header, .content, footer .content {
 }
 footer {
     font-family: 'MyWebFont' !important;
-    min-height: 175px;
+    min-height: 120px;
     background-color: #fe938c;
     padding: 10px;
     box-sizing: border-box;
