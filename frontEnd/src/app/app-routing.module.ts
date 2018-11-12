@@ -16,6 +16,7 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { from } from 'rxjs';
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: "personal-details", component: PersonalDetailsComponent },
   { path: "change-password", component: ChangePasswordComponent },
   { path: "refund-and-cancellation", component: RefundAndCancellationComponent },
+  { path: "privacy-policy", component: PrivacyPolicyComponent },
   { path: "", redirectTo: "/home", pathMatch: "full" }
 ];
 

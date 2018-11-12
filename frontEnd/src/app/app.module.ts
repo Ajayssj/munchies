@@ -22,6 +22,8 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     ThankYouComponent,
     PersonalDetailsComponent,
     ChangePasswordComponent,
-    SignUpComponent
+    SignUpComponent,
+    PrivacyPolicyComponent,
+    TermsAndConditionsComponent
   ],
   imports: [
     BrowserModule,
