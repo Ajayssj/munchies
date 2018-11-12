@@ -1,6 +1,5 @@
 
 .vendors_home_chefs {
-    padding: 30px 0px;
     width: 100%;
 }
 .vendors_home_chefs .box {
@@ -11,9 +10,8 @@
 .vendors_home_chefs .box h2 {
     text-align: center;
     margin-bottom: 40px;
-    margin-top: 70px;
     text-transform: uppercase;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 23px;
 }
 .heading_color {
