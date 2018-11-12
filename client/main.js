@@ -173,7 +173,7 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         var browserHeight = window.innerHeight;
-        var contentElementHeight = browserHeight - 300 + 'px';
+        var contentElementHeight = browserHeight - 120 + 'px';
         this.styles = {
             'min-height': contentElementHeight
         };

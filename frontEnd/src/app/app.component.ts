@@ -16,7 +16,7 @@ export class AppComponent {
   }
   ngOnInit() {
     var browserHeight = window.innerHeight;
-    var contentElementHeight = browserHeight - 300 + 'px';
+    var contentElementHeight = browserHeight - 120 + 'px';
     this.styles = {
       'min-height': contentElementHeight
     }
