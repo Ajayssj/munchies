@@ -15,7 +15,9 @@
 .main_wrapper {
     width: 100%;
 }
-
+body, html {
+    font-family: 'MyWebFont' !important;
+}
 header, .content, footer .content {
     width: 72%;
     margin: 0 auto;
