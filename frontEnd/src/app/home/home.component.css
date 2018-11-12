@@ -84,7 +84,7 @@
 .boxes .box {
     background-color: rgba(125, 187, 195, 0.85);
     margin-right: 10px;
-    padding: 10px;
+    padding: 10px 20px;
     min-height: 475px;
     float: left;
     width: 24%;
@@ -444,7 +444,7 @@
         font-size: 16px;
     }
     .content_box_wrapper .content_box:nth-child(2) {
-        padding: 80px 0px 80px 15px;
+        padding: 0px 0px 80px 30px;
     }
 }
 @media screen and (min-width: 1024px) {

@@ -26,8 +26,8 @@ nav .wrapper .logo {
     width: 42%;
 }
 nav .wrapper .logo img {
-    width: 200px;
-    height: auto;
+    width: auto;
+    height: 80px;
 }
 nav .wrapper ul {
     list-style: none;

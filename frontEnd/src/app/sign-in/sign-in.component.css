@@ -220,6 +220,7 @@
     }
     .signin_box_content h2 {
         font-size: 30px;
+        margin: 10px 0px 30px 115px;
     }
 }
 @media screen and (min-width: 992px) {
