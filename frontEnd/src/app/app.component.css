@@ -3,14 +3,15 @@
 @font-face {
     font-family: 'MyWebFont';
      src:  
-          url('../assets/font/3c5beda8-45cc-4f76-abca-8eccfeb6220c.woff2') format('woff2'),
-          url('../assets/font/4021a3b9-f782-438b-aeb4-c008109a8b64.woff') format('woff'),
-          url('../assets/font/0078f486-8e52-42c0-ad81-3c8d3d43f48e.woff2') format('woff2'),
-          url('../assets/font/60be5c39-863e-40cb-9434-6ebafb62ab2b.woff') format('woff'),
-          url('../assets/font/69b40392-453a-438a-a121-a49e5fbc9213.woff2') format('woff2'),
-          url('../assets/font/bc176270-17fa-4c78-a343-9fe52824e501.woff') format('woff'),
-          url('../assets/font/aee74cb3-c913-4b54-9722-6001c92325f2.woff2') format('woff2'),
-          url('../assets/font/d513e15e-8f35-4129-ad05-481815e52625.woff2') format('woff2'); 
+        url('../assets/font/bc176270-17fa-4c78-a343-9fe52824e501.woff') format('woff'),
+        url('../assets/font/69b40392-453a-438a-a121-a49e5fbc9213.woff2') format('woff2'),
+        url('../assets/font/60be5c39-863e-40cb-9434-6ebafb62ab2b.woff') format('woff'),
+        url('../assets/font/60be5c39-863e-40cb-9434-6ebafb62ab2b.woff') format('woff'),
+        url('../assets/font/3c5beda8-45cc-4f76-abca-8eccfeb6220c.woff2') format('woff2'),
+        url('../assets/font/4021a3b9-f782-438b-aeb4-c008109a8b64.woff') format('woff'),
+        url('../assets/font/0078f486-8e52-42c0-ad81-3c8d3d43f48e.woff2') format('woff2'),
+        url('../assets/font/aee74cb3-c913-4b54-9722-6001c92325f2.woff2') format('woff2'),
+        url('../assets/font/d513e15e-8f35-4129-ad05-481815e52625.woff2') format('woff2'); 
   }
 
 .main_wrapper {
