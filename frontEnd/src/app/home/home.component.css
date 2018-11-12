@@ -158,7 +158,7 @@
     margin: 0 auto;
 }
 .you_will_get h3 {
-    margin-left: 30px;
+    margin-left: 80px;
     font-size: 23px;
     color: #E5663D;
 }
@@ -347,19 +347,23 @@
     .watch_video + h2 {
         font-size: 38px;
     }
-    .whats_inside h2, .munchers_have_spoken_text, .page_down_content h2 {
+    .whats_inside h2, .munchers_have_spoken_text {
         font-size: 30px;
+    }
+    .page_down_content h2 {
+        font-size: 36px;
     }
     .list_item {
         display: flex;
     }
     .list_item .list_number {
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-        font-size: 22px;
+        width: 58px;
+        height: 58px;
+        line-height: 58px;
+        font-size: 23px;
         vertical-align: top;
         margin-right: 30px;
+        font-weight: bold;
     }
     .list_item .list_text {
         width: auto;

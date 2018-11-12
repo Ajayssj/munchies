@@ -13,7 +13,6 @@
         url('../assets/font/aee74cb3-c913-4b54-9722-6001c92325f2.woff2') format('woff2'),
         url('../assets/font/d513e15e-8f35-4129-ad05-481815e52625.woff2') format('woff2'); 
   }
-
 .main_wrapper {
     width: 100%;
 }
@@ -33,7 +32,6 @@ header, .content, footer .content {
     height: 100%;
     min-height: 100%;
     display: block;
-    margin-bottom: 100px;
     -webkit-transition:all 1.0s ease-in-out;
   -moz-transition:all 1.0s ease-in-out;
   -o-transition:all 1.0s ease-in-out;
