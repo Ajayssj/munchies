@@ -130,6 +130,7 @@
     background-color: #fff;
     border-radius: 25px;
     border: 2px solid rgba(50, 50, 50, 1);
+    padding: 10px 50px;
 }
 .ok_button a:hover {
     color: #fff;
