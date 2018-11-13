@@ -23,7 +23,7 @@ header, .content, footer .content {
 nav .wrapper .logo {
     height: 80px;
     float: left;
-    width: 42%;
+    padding-left: 10px;
 }
 nav .wrapper .logo img {
     width: auto;
@@ -31,9 +31,9 @@ nav .wrapper .logo img {
 }
 nav .wrapper ul {
     list-style: none;
-    padding: 0;
+    padding-left: 10px;
     margin: 0;   
-    float: left;
+    float: right;
 }
 nav .wrapper ul li.bars, nav .wrapper ul li.bars_cross {
     display: none;
@@ -395,22 +395,12 @@ nav .wrapper ul li.bars_cross .bar3 {
         margin: 0px 14px;
         display: inline-block;
     }
-    
-    nav .wrapper .logo {
-        width: 33%;
-    }
 }
 @media screen and (min-width: 1024px) {
 
-    nav .wrapper .logo {
-        width: 37%;
-    }
 }
 @media screen and (min-width: 1280px) {
     header {
         left: 189px;
-    }
-    nav .wrapper .logo {
-        width: 50%;
     }
 }
