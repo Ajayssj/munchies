@@ -1,12 +1,11 @@
 
-/* @font-face {
+@font-face {
     font-family: 'Brandon-Grot-W01-Light';
-     src:url("../../assets/font/e00ba30a-0bf3-4c76-9392-8641fa237a92.eot") format("eot"),
-	 url("../../assets/font/69b40392-453a-438a-a121-a49e5fbc92131.woff2") format("woff2"),
-	 url("../../assets/font/9362bca5-b362-4543-a051-2129e2def911.woff") format("woff"),
-	 url("../../assets/font/85060878-ca6c-43cc-ac31-7edccfdca71b.ttf") format("truetype"); 
+     src:url("./../../assets/font/e00ba30a-0bf3-4c76-9392-8641fa237a92.eot") format("eot"),
+	 url("./../../assets/font/69b40392-453a-438a-a121-a49e5fbc92131.woff2") format("woff2"),
+	 url("./../../assets/font/9362bca5-b362-4543-a051-2129e2def911.woff") format("woff"),
+	 url("./../../assets/font/85060878-ca6c-43cc-ac31-7edccfdca71b.ttf") format("truetype");
   }
-  */
 header, .content, footer .content {
     width: 72%;
     margin: 0 auto;
@@ -14,7 +13,7 @@ header, .content, footer .content {
     background-color: rgb(240, 238, 235);
 }
 footer {
-    font-family: 'MyWebFont' !important;
+    font-family: 'Brandon-Grot-W01-Light' !important;
     min-height: 120px;
     background-color: #fe938c;
     padding: 10px;
