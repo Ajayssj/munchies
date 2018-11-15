@@ -1003,7 +1003,7 @@ module.exports = ".manage_subscription_page_wrapper {\r\n    display: flex;\r\n}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"manage_subscription_page_wrapper\">\n  <div class=\"manage_subscription\">\n      <div class=\"block\">\n          <h3><a href=\"/my-orders\">My Orders</a></h3>\n          <p>See your order history</p>\n      </div>\n      <div class=\"block\">\n          <h3><a href=\"/skip-week\">Skip the coming weeks bag</a></h3>\n          <p>you can skip a week's bag just give us a 2 day head's up</p>\n      </div>\n      <div class=\"logout\">\n          <div (click)=\"logout()\">logout</div>\n      </div>\n  </div>\n</div>"
+module.exports = "<div class=\"manage_subscription_page_wrapper\">\n  <div class=\"manage_subscription\">\n      <div class=\"block\">\n          <h3><a href=\"/my-orders\">My Orders</a></h3>\n          <p>See your order history</p>\n      </div>\n      <div class=\"block\">\n          <h3><a href=\"/skip-week\">Skip the coming weeks bag</a></h3>\n          <p>you can skip a week's bag just give us a 2 day head's up</p>\n      </div>\n  </div>\n</div>"
 
 /***/ }),
 
