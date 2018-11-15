@@ -391,7 +391,7 @@ var AuthService = /** @class */ (function () {
             }, function (error) {
                 reject(error);
             });
-            _this.afAuth.auth.currentUser.getToken().then(function (idToken) {
+            _this.afAuth.auth.currentUser.getToken(true).then(function (idToken) {
                 console.log("loginwithFacebook==>idToken", idToken);
                 _this.varifyFirebaseToken(idToken, function (result) {
                     console.log(result.data);
@@ -429,7 +429,7 @@ var AuthService = /** @class */ (function () {
             provider.addScope('https://www.googleapis.com/auth/plus.login');
             provider.addScope('https://www.googleapis.com/auth/plus.profile.emails.read');
             provider.addScope('email');
-            _this.afAuth.auth.currentUser.getToken().then(function (idToken) {
+            _this.afAuth.auth.currentUser.getIdToken(true).then(function (idToken) {
                 console.log("firbase login idToken==>", idToken);
                 _this.varifyFirebaseToken(idToken, function (res) {
                     if (res.success) {
