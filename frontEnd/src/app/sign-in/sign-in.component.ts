@@ -2,9 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { first } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
 import { from } from 'rxjs';
-
+import {Subject} from "rxjs/Subject";
+import { first } from 'rxjs/operators';
+interface SignInRes {
+  success: boolean;
+  error: string;
+}
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -14,14 +19,21 @@ export class SignInComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   returnUrl: string;
+  success = true;
+  error = '';
   username = '';
   password = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router, private http: HttpClient) { 
+    private router: Router, private http: HttpClient, private authService: AuthService) { 
   }
-
+  fbLogin() {
+    this.authService.doFacebookLogin();
+  }
+  googleLogin() {
+    this.authService.doGoogleLogin();
+  }
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
@@ -41,8 +53,28 @@ export class SignInComponent implements OnInit {
     this.password = this.loginForm.get('password').value;
     console.log(this.username +"\n");
     console.log(this.password);
-    this.http.post('http://localhost:9191/api/user/login', {'email': this.username, 'password': this.password}).subscribe(data => {
-        console.log("PATCH Request is successful ", data);
+    this.http.post('http://localhost:9191/api/user/login', {'email': this.username, 'password': this.password}).subscribe( (data: SignInRes) => {
+        console.log("PATCH Request is successful ", data.error);
+        this.success = data.success;
+        this.error = data.error;
+        if(data.success) {
+          
+          sessionStorage.setItem('isLoggedIn', "true");
+          sessionStorage.setItem('token', this.username);
+          console.log("gooooddddd");
+          this.http.post('http://localhost:9191/api/order/getMyorders', {}).subscribe(resData => {
+            console.log(resData);
+          }, error => {
+            console.log('error', 'Allow Signup', 'Server Error');
+          });
+          if(sessionStorage.getItem('isLoggedIn')) {
+            this.router.navigate(['/manage-subscription']);
+          }
+        }
+        else {
+          console.log("baddddddddddddd");
+          return;
+        }
       },
       err => {
         console.log("Err", err);

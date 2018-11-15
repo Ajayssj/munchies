@@ -107,6 +107,9 @@
     width: 60%;
     text-align: right;
 }
+.facebook_google img {
+    cursor: pointer;
+}
 .facebook_google img:first-child {
     margin-right: 22px;
 }
@@ -171,8 +174,11 @@
         margin-left: 40px;
     
     }
-    
     .signin_box_content input[type="email"], .signin_box_content input[type="password"] {
+        width: 63%;
+        margin: 0px 0px 15px 70px;
+    }
+    .invalid-feedback {
         width: 63%;
         margin: 0px 0px 15px 70px;
     }

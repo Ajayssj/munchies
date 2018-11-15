@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-manage-subscription',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageSubscriptionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router) {
+    // console.log(sessionStorage.getItem('isLoggedIn') == 'false');
+    // if(sessionStorage.getItem('isLoggedIn') == 'false') {
+    //   this.router.navigate(['/signIn']);
+    // }
+   }
 
   ngOnInit() {
   }
+  // logout() {
+  //   sessionStorage.setItem('isLoggedIn', "false");
+  //   sessionStorage.removeItem('token');
+  //   this.router.navigate(['/signIn']);
+  // }
 
 }

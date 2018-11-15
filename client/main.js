@@ -245,13 +245,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./sign-up/sign-up.component */ "./src/app/sign-up/sign-up.component.ts");
 /* harmony import */ var _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./privacy-policy/privacy-policy.component */ "./src/app/privacy-policy/privacy-policy.component.ts");
 /* harmony import */ var _terms_and_conditions_terms_and_conditions_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./terms-and-conditions/terms-and-conditions.component */ "./src/app/terms-and-conditions/terms-and-conditions.component.ts");
-/* harmony import */ var _social_media_sign_in_social_media_sign_in_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./social-media-sign-in/social-media-sign-in.component */ "./src/app/social-media-sign-in/social-media-sign-in.component.ts");
+/* harmony import */ var angularfire2__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! angularfire2 */ "./node_modules/angularfire2/index.js");
+/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! angularfire2/firestore */ "./node_modules/angularfire2/firestore/index.js");
+/* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! angularfire2/auth */ "./node_modules/angularfire2/auth/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -305,20 +311,154 @@ var AppModule = /** @class */ (function () {
                 _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_22__["ChangePasswordComponent"],
                 _sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_23__["SignUpComponent"],
                 _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_24__["PrivacyPolicyComponent"],
-                _terms_and_conditions_terms_and_conditions_component__WEBPACK_IMPORTED_MODULE_25__["TermsAndConditionsComponent"],
-                _social_media_sign_in_social_media_sign_in_component__WEBPACK_IMPORTED_MODULE_26__["SocialMediaSignInComponent"]
+                _terms_and_conditions_terms_and_conditions_component__WEBPACK_IMPORTED_MODULE_25__["TermsAndConditionsComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
+                angularfire2__WEBPACK_IMPORTED_MODULE_26__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_29__["environment"].firebase, "myApp"),
+                angularfire2_firestore__WEBPACK_IMPORTED_MODULE_27__["AngularFirestoreModule"],
+                angularfire2_auth__WEBPACK_IMPORTED_MODULE_28__["AngularFireAuthModule"],
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth.service.ts":
+/*!*********************************!*\
+  !*** ./src/app/auth.service.ts ***!
+  \*********************************/
+/*! exports provided: AuthService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var angularfire2_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angularfire2/auth */ "./node_modules/angularfire2/auth/index.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/index.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var rxjs_add_operator_switchMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/add/operator/switchMap */ "./node_modules/rxjs-compat/_esm5/add/operator/switchMap.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var AuthService = /** @class */ (function () {
+    function AuthService(afAuth, http) {
+        this.afAuth = afAuth;
+        this.http = http;
+        this.varifyFirebaseToken = function (token, callback) {
+            console.log("hiiiiiiiiiii");
+            this.http.post('http://localhost:9191/user/varifyFirebaseToken', token).subscribe(function (resData) {
+                console.log(resData);
+                callback(resData);
+            }, function (error) {
+                console.log('error', 'Allow Signup', 'Server Error');
+            });
+        };
+    }
+    AuthService.prototype.doFacebookLogin = function () {
+        var _this = this;
+        console.log("in do fb login");
+        return new Promise(function (resolve, reject) {
+            var provider = new firebase_app__WEBPACK_IMPORTED_MODULE_3__["auth"].FacebookAuthProvider();
+            _this.afAuth.auth
+                .signInWithPopup(provider)
+                .then(function (fbres) {
+                console.log(fbres);
+                resolve(fbres);
+            }, function (error) {
+                reject(error);
+            });
+            provider.addScope('email');
+            _this.afAuth.auth.currentUser.getIdToken(true).then(function (idToken) {
+                console.log("loginwithFacebook==>idToken", idToken);
+                _this.varifyFirebaseToken(idToken, function (result) {
+                    console.log(result.data);
+                    if (result.success) {
+                        var token = {
+                            token: result.data
+                        };
+                        console.log("varifyFirebaseToken response  ", result);
+                    }
+                    else {
+                        alert(result.data);
+                    }
+                    console.log(result);
+                });
+            }).catch(function (error) {
+                alert(error);
+                console.log("login Error==>", error);
+            }).catch(function (error) {
+                alert(error);
+                console.log("login Error sign in popup==>", error);
+            });
+        });
+    };
+    AuthService.prototype.doGoogleLogin = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var provider = new firebase_app__WEBPACK_IMPORTED_MODULE_3__["auth"].GoogleAuthProvider();
+            _this.afAuth.auth
+                .signInWithPopup(provider)
+                .then(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+            provider.addScope('https://www.googleapis.com/auth/plus.login');
+            provider.addScope('https://www.googleapis.com/auth/plus.profile.emails.read');
+            provider.addScope('email');
+            _this.afAuth.auth.currentUser.getIdToken(true).then(function (idToken) {
+                console.log("firbase login idToken==>", idToken);
+                _this.varifyFirebaseToken(idToken, function (res) {
+                    if (res.success) {
+                        var token = {
+                            token: res.data
+                        };
+                        console.log("varifyFirebaseToken response  ", res);
+                    }
+                    else {
+                        alert(res.data);
+                    }
+                    console.log(res);
+                });
+            }).catch(function (error) {
+                alert(error);
+                console.log("login Error==>", error);
+            }).catch(function (error) {
+                alert(error);
+                console.log("login Error sign in popup==>", error);
+            });
+        });
+    };
+    AuthService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [angularfire2_auth__WEBPACK_IMPORTED_MODULE_2__["AngularFireAuth"], _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], AuthService);
+    return AuthService;
 }());
 
 
@@ -863,7 +1003,7 @@ module.exports = ".manage_subscription_page_wrapper {\r\n    display: flex;\r\n}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"manage_subscription_page_wrapper\">\n  <div class=\"manage_subscription\">\n      <div class=\"block\">\n          <h3><a href=\"/my-orders\">My Orders</a></h3>\n          <p>See your order history</p>\n      </div>\n      <div class=\"block\">\n          <h3><a href=\"/skip-week\">Skip the coming weeks bag</a></h3>\n          <p>you can skip a week's bag just give us a 2 day head's up</p>\n      </div>\n  </div>\n</div>"
+module.exports = "<div class=\"manage_subscription_page_wrapper\">\n  <div class=\"manage_subscription\">\n      <div class=\"block\">\n          <h3><a href=\"/my-orders\">My Orders</a></h3>\n          <p>See your order history</p>\n      </div>\n      <div class=\"block\">\n          <h3><a href=\"/skip-week\">Skip the coming weeks bag</a></h3>\n          <p>you can skip a week's bag just give us a 2 day head's up</p>\n      </div>\n      <div class=\"logout\">\n          <div (click)=\"logout()\">logout</div>\n      </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -878,6 +1018,8 @@ module.exports = "<div class=\"manage_subscription_page_wrapper\">\n  <div class
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ManageSubscriptionComponent", function() { return ManageSubscriptionComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -888,8 +1030,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var ManageSubscriptionComponent = /** @class */ (function () {
-    function ManageSubscriptionComponent() {
+    function ManageSubscriptionComponent(http, router) {
+        this.http = http;
+        this.router = router;
+        // console.log(sessionStorage.getItem('isLoggedIn') == 'false');
+        // if(sessionStorage.getItem('isLoggedIn') == 'false') {
+        //   this.router.navigate(['/signIn']);
+        // }
     }
     ManageSubscriptionComponent.prototype.ngOnInit = function () {
     };
@@ -899,7 +1049,7 @@ var ManageSubscriptionComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./manage-subscription.component.html */ "./src/app/manage-subscription/manage-subscription.component.html"),
             styles: [__webpack_require__(/*! ./manage-subscription.component.css */ "./src/app/manage-subscription/manage-subscription.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], ManageSubscriptionComponent);
     return ManageSubscriptionComponent;
 }());
@@ -941,6 +1091,7 @@ module.exports = "<div class=\"my_orders_page_wrapper\">\n  <h2>My Orders</h2>\n
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyOrdersComponent", function() { return MyOrdersComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -951,8 +1102,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var MyOrdersComponent = /** @class */ (function () {
-    function MyOrdersComponent() {
+    function MyOrdersComponent(http) {
+        this.http = http;
     }
     MyOrdersComponent.prototype.ngOnInit = function () {
     };
@@ -962,7 +1115,7 @@ var MyOrdersComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./my-orders.component.html */ "./src/app/my-orders/my-orders.component.html"),
             styles: [__webpack_require__(/*! ./my-orders.component.css */ "./src/app/my-orders/my-orders.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], MyOrdersComponent);
     return MyOrdersComponent;
 }());
@@ -1230,7 +1383,7 @@ var RefundAndCancellationComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".signin_page_wrapper {\r\n    display: flex;\r\n    margin-top: 80px;\r\n}\r\n.signin_page_first_box {\r\n    width: 400px;\r\n    height: 400px;\r\n    border-radius: 50%;\r\n    background-color: rgba(131, 167, 155, 1);\r\n    margin: 40px 0px 40px -35px;\r\n}\r\n.signin_page_first_box img {\r\n    margin: 180px 0 0 170px;\r\n}\r\n.signin_box {\r\n    width: 500px;\r\n    height: 500px;\r\n    background-color: #fff;\r\n    border-radius: 50%;\r\n    position: relative;\r\n    right: -180px;\r\n    top: -30px;\r\n}\r\n.signin_box_content {\r\n    width: 100%;\r\n    display: block;\r\n}\r\n.signin_box_content h2 {\r\n    margin: 40px 0px 0px 115px;\r\n    color: #DE6B48;\r\n    font-size: 30px;\r\n}\r\n.signin_box_content input[type=\"email\"], .signin_box_content input[type=\"password\"] {\r\n    padding: 15px;\r\n    border: 0px;\r\n    width: 53%;\r\n    margin: 0px 0px 15px 70px;\r\n    color: rgba(63,124,172,1);\r\n}\r\n.signin_box_content input.border_bottom {\r\n    border-bottom: 2px solid rgba(63,124,172,1);\r\n}\r\n.forgot_remember_links, .sign_up_wrapper {\r\n    width: 100%;\r\n    display: block;\r\n}\r\n.remember_me {\r\n    margin: 20px 85px 20px 70px;\r\n    display: inline-block;\r\n    font-size: 16px;\r\n    color: #DE6B48;\r\n}\r\n.forgot_password {\r\n    display: inline-block;\r\n    color: #DE6B48;\r\n}\r\n.sign_in_button {\r\n    display: block;\r\n    margin: 20px 0px 35px 70px;\r\n}\r\n.sign_in_button button {\r\n    text-decoration: none;\r\n    padding: 10px 145px;\r\n    background: #fff;\r\n    color: #3F7CAC;\r\n    cursor: pointer;\r\n    border: 2px solid;\r\n    border-color: #3F7CAC;\r\n    box-shadow: -0.42px 1.96px 4px 0px rgba(0,0,0,0.6);\r\n    transition: border-color 0.4s ease 0s, color 0.4s ease 0s;\r\n}\r\n.sign_in_button a:hover {\r\n    color: #000;\r\n    border-color: #fff; \r\n}\r\n.dont_have_account_text {\r\n    font-size: 16px;\r\n    display: inline-block;\r\n    float: left;\r\n    margin: 0px 70px 20px 68px;\r\n    color: #DE6B48;\r\n}\r\n.sign_up_text {\r\n    display: inline-block;\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n}\r\n.sign_up_text a {\r\n    text-decoration: none;\r\n    color: #2F2E2E;\r\n}\r\n.or_login_with {\r\n    margin-bottom: 10px;\r\n}\r\n.or {\r\n    width: 45%;\r\n    text-align: right;\r\n    color: #DE6B48;\r\n}\r\n.loginwith {\r\n    width: 58%;\r\n    text-align: right;\r\n    margin-top: 10px;\r\n    color: #DE6B48;\r\n}\r\n.facebook_google {\r\n    width: 60%;\r\n    text-align: right;\r\n}\r\n.facebook_google img:first-child {\r\n    margin-right: 22px;\r\n}\r\n.invalid-feedback {\r\n    margin-left: 70px;\r\n    color: red;\r\n    padding: 10px;\r\n    background-color: antiquewhite;\r\n    width: 55%;\r\n    border-radius: 5px;\r\n}\r\n@media screen and (min-width: 300px) {\r\n    .signin_page_first_box {\r\n        margin: 40px 0px 40px 40px;\r\n        display: none;\r\n    }\r\n    .signin_page_first_box img {\r\n        height: 200px;\r\n        margin: 250px 0 0px 180px;\r\n    }\r\n    .signin_box {\r\n        top: 0px;\r\n        right: 0px;\r\n        width: 600px;\r\n        height: 600px;\r\n    }\r\n    .signin_box_content h2 {\r\n        font-size: 26px;\r\n        margin: 40px 0px 25px 28px;\r\n    }\r\n    .signin_box_content input[type=\"email\"], .signin_box_content input[type=\"password\"] {\r\n        width: 73%;\r\n        margin: 0px 0px 15px 28px;\r\n    }\r\n    .invalid-feedback {\r\n        margin: 0px 0px 15px 28px;\r\n        width: 77%;\r\n    }\r\n    .remember_me {\r\n        margin: 20px 15px 20px 30px;\r\n    }\r\n    .sign_in_button {\r\n        margin: 20px 0px 35px 34px;\r\n    }\r\n    .sign_in_button button {\r\n        padding: 10px 105px;\r\n    }\r\n    .sign_up_text {\r\n        margin-left: 100px;\r\n        margin-bottom: 20px;\r\n    }\r\n    .facebook_google {\r\n        width: 63%;\r\n    }\r\n}\r\n@media screen and (min-width: 480px) {\r\n    .contact_information .email_id {\r\n        padding-top: 0;\r\n        margin-top: 70px;\r\n        margin-left: 40px;\r\n    \r\n    }\r\n    .signin_box_content input[type=\"email\"], .signin_box_content input[type=\"password\"] {\r\n        width: 63%;\r\n        margin: 0px 0px 15px 70px;\r\n    }\r\n    .invalid-feedback {\r\n        width: 63%;\r\n        margin: 0px 0px 15px 70px;\r\n    }\r\n    .signin_box {\r\n        top: 0px;\r\n        right: 0px;\r\n        width: 500px;\r\n        height: 500px;\r\n    }\r\n    .signin_box_content h2 {\r\n        font-size: 26px;\r\n        margin: 40px 0px 0px 115px;\r\n    }\r\n    .remember_me {\r\n        margin: 20px 85px 20px 70px;\r\n    }\r\n    .sign_in_button {\r\n        margin: 20px 0px 35px 70px;\r\n    }\r\n    .sign_in_button button {\r\n        padding: 10px 143px;\r\n    }\r\n    .sign_up_text {\r\n        margin-left: 0px;\r\n        margin-bottom: 0px;\r\n    }\r\n    .facebook_google {\r\n        width: 61%;\r\n    }\r\n}\r\n@media screen and (min-width: 768px) {\r\n    .signin_page_first_box {\r\n        width: 300px;\r\n        height: 300px;\r\n        margin: 40px 0px 40px -35px;\r\n        display: block;\r\n    }\r\n    .signin_page_first_box img {\r\n        margin: 160px 0 0 110px;\r\n        height: 200px;\r\n    }\r\n    .signin_box {\r\n        right: -10px;\r\n        top: -30px;\r\n    }\r\n    .signin_box_content h2 {\r\n        font-size: 30px;\r\n        margin: 10px 0px 30px 115px;\r\n    }\r\n}\r\n@media screen and (min-width: 992px) {\r\n    .signin_box {\r\n        right: -90px;\r\n    }\r\n    \r\n}\r\n@media screen and (min-width: 1024px) {\r\n    .signin_box {\r\n        right: -90px;\r\n    }\r\n}\r\n@media screen and (min-width: 1280px) {\r\n    .signin_page_first_box {\r\n        width: 400px;\r\n        height: 400px;\r\n    }\r\n    .signin_page_first_box img {\r\n        margin: 180px 0 0 170px;\r\n        height: auto;\r\n    }\r\n    .signin_box {\r\n        right: -180px;\r\n    }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2lnbi1pbi9zaWduLWluLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxjQUFjO0lBQ2QsaUJBQWlCO0NBQ3BCO0FBQ0Q7SUFDSSxhQUFhO0lBQ2IsY0FBYztJQUNkLG1CQUFtQjtJQUNuQix5Q0FBeUM7SUFDekMsNEJBQTRCO0NBQy9CO0FBQ0Q7SUFDSSx3QkFBd0I7Q0FDM0I7QUFDRDtJQUNJLGFBQWE7SUFDYixjQUFjO0lBQ2QsdUJBQXVCO0lBQ3ZCLG1CQUFtQjtJQUNuQixtQkFBbUI7SUFDbkIsY0FBYztJQUNkLFdBQVc7Q0FDZDtBQUNEO0lBQ0ksWUFBWTtJQUNaLGVBQWU7Q0FDbEI7QUFDRDtJQUNJLDJCQUEyQjtJQUMzQixlQUFlO0lBQ2YsZ0JBQWdCO0NBQ25CO0FBQ0Q7SUFDSSxjQUFjO0lBQ2QsWUFBWTtJQUNaLFdBQVc7SUFDWCwwQkFBMEI7SUFDMUIsMEJBQTBCO0NBQzdCO0FBQ0Q7SUFDSSw0Q0FBNEM7Q0FDL0M7QUFDRDtJQUNJLFlBQVk7SUFDWixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSw0QkFBNEI7SUFDNUIsc0JBQXNCO0lBQ3RCLGdCQUFnQjtJQUNoQixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxzQkFBc0I7SUFDdEIsZUFBZTtDQUNsQjtBQUNEO0lBQ0ksZUFBZTtJQUNmLDJCQUEyQjtDQUM5QjtBQUNEO0lBQ0ksc0JBQXNCO0lBQ3RCLG9CQUFvQjtJQUNwQixpQkFBaUI7SUFDakIsZUFBZTtJQUNmLGdCQUFnQjtJQUNoQixrQkFBa0I7SUFDbEIsc0JBQXNCO0lBQ3RCLG1EQUFtRDtJQUNuRCwwREFBMEQ7Q0FDN0Q7QUFDRDtJQUNJLFlBQVk7SUFDWixtQkFBbUI7Q0FDdEI7QUFDRDtJQUNJLGdCQUFnQjtJQUNoQixzQkFBc0I7SUFDdEIsWUFBWTtJQUNaLDJCQUEyQjtJQUMzQixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxzQkFBc0I7SUFDdEIsZ0JBQWdCO0lBQ2hCLGtCQUFrQjtDQUNyQjtBQUNEO0lBQ0ksc0JBQXNCO0lBQ3RCLGVBQWU7Q0FDbEI7QUFDRDtJQUNJLG9CQUFvQjtDQUN2QjtBQUNEO0lBQ0ksV0FBVztJQUNYLGtCQUFrQjtJQUNsQixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxXQUFXO0lBQ1gsa0JBQWtCO0lBQ2xCLGlCQUFpQjtJQUNqQixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxXQUFXO0lBQ1gsa0JBQWtCO0NBQ3JCO0FBQ0Q7SUFDSSxtQkFBbUI7Q0FDdEI7QUFDRDtJQUNJLGtCQUFrQjtJQUNsQixXQUFXO0lBQ1gsY0FBYztJQUNkLCtCQUErQjtJQUMvQixXQUFXO0lBQ1gsbUJBQW1CO0NBQ3RCO0FBRUQ7SUFDSTtRQUNJLDJCQUEyQjtRQUMzQixjQUFjO0tBQ2pCO0lBQ0Q7UUFDSSxjQUFjO1FBQ2QsMEJBQTBCO0tBQzdCO0lBQ0Q7UUFDSSxTQUFTO1FBQ1QsV0FBVztRQUNYLGFBQWE7UUFDYixjQUFjO0tBQ2pCO0lBQ0Q7UUFDSSxnQkFBZ0I7UUFDaEIsMkJBQTJCO0tBQzlCO0lBQ0Q7UUFDSSxXQUFXO1FBQ1gsMEJBQTBCO0tBQzdCO0lBQ0Q7UUFDSSwwQkFBMEI7UUFDMUIsV0FBVztLQUNkO0lBQ0Q7UUFDSSw0QkFBNEI7S0FDL0I7SUFDRDtRQUNJLDJCQUEyQjtLQUM5QjtJQUNEO1FBQ0ksb0JBQW9CO0tBQ3ZCO0lBQ0Q7UUFDSSxtQkFBbUI7UUFDbkIsb0JBQW9CO0tBQ3ZCO0lBQ0Q7UUFDSSxXQUFXO0tBQ2Q7Q0FDSjtBQUVEO0lBQ0k7UUFDSSxlQUFlO1FBQ2YsaUJBQWlCO1FBQ2pCLGtCQUFrQjs7S0FFckI7SUFDRDtRQUNJLFdBQVc7UUFDWCwwQkFBMEI7S0FDN0I7SUFDRDtRQUNJLFdBQVc7UUFDWCwwQkFBMEI7S0FDN0I7SUFDRDtRQUNJLFNBQVM7UUFDVCxXQUFXO1FBQ1gsYUFBYTtRQUNiLGNBQWM7S0FDakI7SUFDRDtRQUNJLGdCQUFnQjtRQUNoQiwyQkFBMkI7S0FDOUI7SUFDRDtRQUNJLDRCQUE0QjtLQUMvQjtJQUNEO1FBQ0ksMkJBQTJCO0tBQzlCO0lBQ0Q7UUFDSSxvQkFBb0I7S0FDdkI7SUFDRDtRQUNJLGlCQUFpQjtRQUNqQixtQkFBbUI7S0FDdEI7SUFDRDtRQUNJLFdBQVc7S0FDZDtDQUNKO0FBQ0Q7SUFDSTtRQUNJLGFBQWE7UUFDYixjQUFjO1FBQ2QsNEJBQTRCO1FBQzVCLGVBQWU7S0FDbEI7SUFDRDtRQUNJLHdCQUF3QjtRQUN4QixjQUFjO0tBQ2pCO0lBQ0Q7UUFDSSxhQUFhO1FBQ2IsV0FBVztLQUNkO0lBQ0Q7UUFDSSxnQkFBZ0I7UUFDaEIsNEJBQTRCO0tBQy9CO0NBQ0o7QUFDRDtJQUNJO1FBQ0ksYUFBYTtLQUNoQjs7Q0FFSjtBQUNEO0lBQ0k7UUFDSSxhQUFhO0tBQ2hCO0NBQ0o7QUFFRDtJQUNJO1FBQ0ksYUFBYTtRQUNiLGNBQWM7S0FDakI7SUFDRDtRQUNJLHdCQUF3QjtRQUN4QixhQUFhO0tBQ2hCO0lBQ0Q7UUFDSSxjQUFjO0tBQ2pCO0NBQ0oiLCJmaWxlIjoic3JjL2FwcC9zaWduLWluL3NpZ24taW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zaWduaW5fcGFnZV93cmFwcGVyIHtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBtYXJnaW4tdG9wOiA4MHB4O1xyXG59XHJcbi5zaWduaW5fcGFnZV9maXJzdF9ib3gge1xyXG4gICAgd2lkdGg6IDQwMHB4O1xyXG4gICAgaGVpZ2h0OiA0MDBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMTMxLCAxNjcsIDE1NSwgMSk7XHJcbiAgICBtYXJnaW46IDQwcHggMHB4IDQwcHggLTM1cHg7XHJcbn1cclxuLnNpZ25pbl9wYWdlX2ZpcnN0X2JveCBpbWcge1xyXG4gICAgbWFyZ2luOiAxODBweCAwIDAgMTcwcHg7XHJcbn1cclxuLnNpZ25pbl9ib3gge1xyXG4gICAgd2lkdGg6IDUwMHB4O1xyXG4gICAgaGVpZ2h0OiA1MDBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmY7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICByaWdodDogLTE4MHB4O1xyXG4gICAgdG9wOiAtMzBweDtcclxufVxyXG4uc2lnbmluX2JveF9jb250ZW50IHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbn1cclxuLnNpZ25pbl9ib3hfY29udGVudCBoMiB7XHJcbiAgICBtYXJnaW46IDQwcHggMHB4IDBweCAxMTVweDtcclxuICAgIGNvbG9yOiAjREU2QjQ4O1xyXG4gICAgZm9udC1zaXplOiAzMHB4O1xyXG59XHJcbi5zaWduaW5fYm94X2NvbnRlbnQgaW5wdXRbdHlwZT1cImVtYWlsXCJdLCAuc2lnbmluX2JveF9jb250ZW50IGlucHV0W3R5cGU9XCJwYXNzd29yZFwiXSB7XHJcbiAgICBwYWRkaW5nOiAxNXB4O1xyXG4gICAgYm9yZGVyOiAwcHg7XHJcbiAgICB3aWR0aDogNTMlO1xyXG4gICAgbWFyZ2luOiAwcHggMHB4IDE1cHggNzBweDtcclxuICAgIGNvbG9yOiByZ2JhKDYzLDEyNCwxNzIsMSk7XHJcbn1cclxuLnNpZ25pbl9ib3hfY29udGVudCBpbnB1dC5ib3JkZXJfYm90dG9tIHtcclxuICAgIGJvcmRlci1ib3R0b206IDJweCBzb2xpZCByZ2JhKDYzLDEyNCwxNzIsMSk7XHJcbn1cclxuLmZvcmdvdF9yZW1lbWJlcl9saW5rcywgLnNpZ25fdXBfd3JhcHBlciB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG59XHJcbi5yZW1lbWJlcl9tZSB7XHJcbiAgICBtYXJnaW46IDIwcHggODVweCAyMHB4IDcwcHg7XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICBjb2xvcjogI0RFNkI0ODtcclxufVxyXG4uZm9yZ290X3Bhc3N3b3JkIHtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIGNvbG9yOiAjREU2QjQ4O1xyXG59XHJcbi5zaWduX2luX2J1dHRvbiB7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxuICAgIG1hcmdpbjogMjBweCAwcHggMzVweCA3MHB4O1xyXG59XHJcbi5zaWduX2luX2J1dHRvbiBidXR0b24ge1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gICAgcGFkZGluZzogMTBweCAxNDVweDtcclxuICAgIGJhY2tncm91bmQ6ICNmZmY7XHJcbiAgICBjb2xvcjogIzNGN0NBQztcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkO1xyXG4gICAgYm9yZGVyLWNvbG9yOiAjM0Y3Q0FDO1xyXG4gICAgYm94LXNoYWRvdzogLTAuNDJweCAxLjk2cHggNHB4IDBweCByZ2JhKDAsMCwwLDAuNik7XHJcbiAgICB0cmFuc2l0aW9uOiBib3JkZXItY29sb3IgMC40cyBlYXNlIDBzLCBjb2xvciAwLjRzIGVhc2UgMHM7XHJcbn1cclxuLnNpZ25faW5fYnV0dG9uIGE6aG92ZXIge1xyXG4gICAgY29sb3I6ICMwMDA7XHJcbiAgICBib3JkZXItY29sb3I6ICNmZmY7IFxyXG59XHJcbi5kb250X2hhdmVfYWNjb3VudF90ZXh0IHtcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWFyZ2luOiAwcHggNzBweCAyMHB4IDY4cHg7XHJcbiAgICBjb2xvcjogI0RFNkI0ODtcclxufVxyXG4uc2lnbl91cF90ZXh0IHtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbi5zaWduX3VwX3RleHQgYSB7XHJcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgICBjb2xvcjogIzJGMkUyRTtcclxufVxyXG4ub3JfbG9naW5fd2l0aCB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xyXG59XHJcbi5vciB7XHJcbiAgICB3aWR0aDogNDUlO1xyXG4gICAgdGV4dC1hbGlnbjogcmlnaHQ7XHJcbiAgICBjb2xvcjogI0RFNkI0ODtcclxufVxyXG4ubG9naW53aXRoIHtcclxuICAgIHdpZHRoOiA1OCU7XHJcbiAgICB0ZXh0LWFsaWduOiByaWdodDtcclxuICAgIG1hcmdpbi10b3A6IDEwcHg7XHJcbiAgICBjb2xvcjogI0RFNkI0ODtcclxufVxyXG4uZmFjZWJvb2tfZ29vZ2xlIHtcclxuICAgIHdpZHRoOiA2MCU7XHJcbiAgICB0ZXh0LWFsaWduOiByaWdodDtcclxufVxyXG4uZmFjZWJvb2tfZ29vZ2xlIGltZzpmaXJzdC1jaGlsZCB7XHJcbiAgICBtYXJnaW4tcmlnaHQ6IDIycHg7XHJcbn1cclxuLmludmFsaWQtZmVlZGJhY2sge1xyXG4gICAgbWFyZ2luLWxlZnQ6IDcwcHg7XHJcbiAgICBjb2xvcjogcmVkO1xyXG4gICAgcGFkZGluZzogMTBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGFudGlxdWV3aGl0ZTtcclxuICAgIHdpZHRoOiA1NSU7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbn1cclxuXHJcbkBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDMwMHB4KSB7XHJcbiAgICAuc2lnbmluX3BhZ2VfZmlyc3RfYm94IHtcclxuICAgICAgICBtYXJnaW46IDQwcHggMHB4IDQwcHggNDBweDtcclxuICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9wYWdlX2ZpcnN0X2JveCBpbWcge1xyXG4gICAgICAgIGhlaWdodDogMjAwcHg7XHJcbiAgICAgICAgbWFyZ2luOiAyNTBweCAwIDBweCAxODBweDtcclxuICAgIH1cclxuICAgIC5zaWduaW5fYm94IHtcclxuICAgICAgICB0b3A6IDBweDtcclxuICAgICAgICByaWdodDogMHB4O1xyXG4gICAgICAgIHdpZHRoOiA2MDBweDtcclxuICAgICAgICBoZWlnaHQ6IDYwMHB4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3hfY29udGVudCBoMiB7XHJcbiAgICAgICAgZm9udC1zaXplOiAyNnB4O1xyXG4gICAgICAgIG1hcmdpbjogNDBweCAwcHggMjVweCAyOHB4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3hfY29udGVudCBpbnB1dFt0eXBlPVwiZW1haWxcIl0sIC5zaWduaW5fYm94X2NvbnRlbnQgaW5wdXRbdHlwZT1cInBhc3N3b3JkXCJdIHtcclxuICAgICAgICB3aWR0aDogNzMlO1xyXG4gICAgICAgIG1hcmdpbjogMHB4IDBweCAxNXB4IDI4cHg7XHJcbiAgICB9XHJcbiAgICAuaW52YWxpZC1mZWVkYmFjayB7XHJcbiAgICAgICAgbWFyZ2luOiAwcHggMHB4IDE1cHggMjhweDtcclxuICAgICAgICB3aWR0aDogNzclO1xyXG4gICAgfVxyXG4gICAgLnJlbWVtYmVyX21lIHtcclxuICAgICAgICBtYXJnaW46IDIwcHggMTVweCAyMHB4IDMwcHg7XHJcbiAgICB9XHJcbiAgICAuc2lnbl9pbl9idXR0b24ge1xyXG4gICAgICAgIG1hcmdpbjogMjBweCAwcHggMzVweCAzNHB4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25faW5fYnV0dG9uIGJ1dHRvbiB7XHJcbiAgICAgICAgcGFkZGluZzogMTBweCAxMDVweDtcclxuICAgIH1cclxuICAgIC5zaWduX3VwX3RleHQge1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiAxMDBweDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG4gICAgfVxyXG4gICAgLmZhY2Vib29rX2dvb2dsZSB7XHJcbiAgICAgICAgd2lkdGg6IDYzJTtcclxuICAgIH1cclxufVxyXG5cclxuQG1lZGlhIHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNDgwcHgpIHtcclxuICAgIC5jb250YWN0X2luZm9ybWF0aW9uIC5lbWFpbF9pZCB7XHJcbiAgICAgICAgcGFkZGluZy10b3A6IDA7XHJcbiAgICAgICAgbWFyZ2luLXRvcDogNzBweDtcclxuICAgICAgICBtYXJnaW4tbGVmdDogNDBweDtcclxuICAgIFxyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3hfY29udGVudCBpbnB1dFt0eXBlPVwiZW1haWxcIl0sIC5zaWduaW5fYm94X2NvbnRlbnQgaW5wdXRbdHlwZT1cInBhc3N3b3JkXCJdIHtcclxuICAgICAgICB3aWR0aDogNjMlO1xyXG4gICAgICAgIG1hcmdpbjogMHB4IDBweCAxNXB4IDcwcHg7XHJcbiAgICB9XHJcbiAgICAuaW52YWxpZC1mZWVkYmFjayB7XHJcbiAgICAgICAgd2lkdGg6IDYzJTtcclxuICAgICAgICBtYXJnaW46IDBweCAwcHggMTVweCA3MHB4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3gge1xyXG4gICAgICAgIHRvcDogMHB4O1xyXG4gICAgICAgIHJpZ2h0OiAwcHg7XHJcbiAgICAgICAgd2lkdGg6IDUwMHB4O1xyXG4gICAgICAgIGhlaWdodDogNTAwcHg7XHJcbiAgICB9XHJcbiAgICAuc2lnbmluX2JveF9jb250ZW50IGgyIHtcclxuICAgICAgICBmb250LXNpemU6IDI2cHg7XHJcbiAgICAgICAgbWFyZ2luOiA0MHB4IDBweCAwcHggMTE1cHg7XHJcbiAgICB9XHJcbiAgICAucmVtZW1iZXJfbWUge1xyXG4gICAgICAgIG1hcmdpbjogMjBweCA4NXB4IDIwcHggNzBweDtcclxuICAgIH1cclxuICAgIC5zaWduX2luX2J1dHRvbiB7XHJcbiAgICAgICAgbWFyZ2luOiAyMHB4IDBweCAzNXB4IDcwcHg7XHJcbiAgICB9XHJcbiAgICAuc2lnbl9pbl9idXR0b24gYnV0dG9uIHtcclxuICAgICAgICBwYWRkaW5nOiAxMHB4IDE0M3B4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25fdXBfdGV4dCB7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDBweDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOiAwcHg7XHJcbiAgICB9XHJcbiAgICAuZmFjZWJvb2tfZ29vZ2xlIHtcclxuICAgICAgICB3aWR0aDogNjElO1xyXG4gICAgfVxyXG59XHJcbkBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDc2OHB4KSB7XHJcbiAgICAuc2lnbmluX3BhZ2VfZmlyc3RfYm94IHtcclxuICAgICAgICB3aWR0aDogMzAwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiAzMDBweDtcclxuICAgICAgICBtYXJnaW46IDQwcHggMHB4IDQwcHggLTM1cHg7XHJcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICB9XHJcbiAgICAuc2lnbmluX3BhZ2VfZmlyc3RfYm94IGltZyB7XHJcbiAgICAgICAgbWFyZ2luOiAxNjBweCAwIDAgMTEwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiAyMDBweDtcclxuICAgIH1cclxuICAgIC5zaWduaW5fYm94IHtcclxuICAgICAgICByaWdodDogLTEwcHg7XHJcbiAgICAgICAgdG9wOiAtMzBweDtcclxuICAgIH1cclxuICAgIC5zaWduaW5fYm94X2NvbnRlbnQgaDIge1xyXG4gICAgICAgIGZvbnQtc2l6ZTogMzBweDtcclxuICAgICAgICBtYXJnaW46IDEwcHggMHB4IDMwcHggMTE1cHg7XHJcbiAgICB9XHJcbn1cclxuQG1lZGlhIHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTkycHgpIHtcclxuICAgIC5zaWduaW5fYm94IHtcclxuICAgICAgICByaWdodDogLTkwcHg7XHJcbiAgICB9XHJcbiAgICBcclxufVxyXG5AbWVkaWEgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxMDI0cHgpIHtcclxuICAgIC5zaWduaW5fYm94IHtcclxuICAgICAgICByaWdodDogLTkwcHg7XHJcbiAgICB9XHJcbn1cclxuXHJcbkBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDEyODBweCkge1xyXG4gICAgLnNpZ25pbl9wYWdlX2ZpcnN0X2JveCB7XHJcbiAgICAgICAgd2lkdGg6IDQwMHB4O1xyXG4gICAgICAgIGhlaWdodDogNDAwcHg7XHJcbiAgICB9XHJcbiAgICAuc2lnbmluX3BhZ2VfZmlyc3RfYm94IGltZyB7XHJcbiAgICAgICAgbWFyZ2luOiAxODBweCAwIDAgMTcwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3gge1xyXG4gICAgICAgIHJpZ2h0OiAtMTgwcHg7XHJcbiAgICB9XHJcbn1cclxuIl19 */"
+module.exports = ".signin_page_wrapper {\r\n    display: flex;\r\n    margin-top: 80px;\r\n}\r\n.signin_page_first_box {\r\n    width: 400px;\r\n    height: 400px;\r\n    border-radius: 50%;\r\n    background-color: rgba(131, 167, 155, 1);\r\n    margin: 40px 0px 40px -35px;\r\n}\r\n.signin_page_first_box img {\r\n    margin: 180px 0 0 170px;\r\n}\r\n.signin_box {\r\n    width: 500px;\r\n    height: 500px;\r\n    background-color: #fff;\r\n    border-radius: 50%;\r\n    position: relative;\r\n    right: -180px;\r\n    top: -30px;\r\n}\r\n.signin_box_content {\r\n    width: 100%;\r\n    display: block;\r\n}\r\n.signin_box_content h2 {\r\n    margin: 40px 0px 0px 115px;\r\n    color: #DE6B48;\r\n    font-size: 30px;\r\n}\r\n.signin_box_content input[type=\"email\"], .signin_box_content input[type=\"password\"] {\r\n    padding: 15px;\r\n    border: 0px;\r\n    width: 53%;\r\n    margin: 0px 0px 15px 70px;\r\n    color: rgba(63,124,172,1);\r\n}\r\n.signin_box_content input.border_bottom {\r\n    border-bottom: 2px solid rgba(63,124,172,1);\r\n}\r\n.forgot_remember_links, .sign_up_wrapper {\r\n    width: 100%;\r\n    display: block;\r\n}\r\n.remember_me {\r\n    margin: 20px 85px 20px 70px;\r\n    display: inline-block;\r\n    font-size: 16px;\r\n    color: #DE6B48;\r\n}\r\n.forgot_password {\r\n    display: inline-block;\r\n    color: #DE6B48;\r\n}\r\n.sign_in_button {\r\n    display: block;\r\n    margin: 20px 0px 35px 70px;\r\n}\r\n.sign_in_button button {\r\n    text-decoration: none;\r\n    padding: 10px 145px;\r\n    background: #fff;\r\n    color: #3F7CAC;\r\n    cursor: pointer;\r\n    border: 2px solid;\r\n    border-color: #3F7CAC;\r\n    box-shadow: -0.42px 1.96px 4px 0px rgba(0,0,0,0.6);\r\n    transition: border-color 0.4s ease 0s, color 0.4s ease 0s;\r\n}\r\n.sign_in_button a:hover {\r\n    color: #000;\r\n    border-color: #fff; \r\n}\r\n.dont_have_account_text {\r\n    font-size: 16px;\r\n    display: inline-block;\r\n    float: left;\r\n    margin: 0px 70px 20px 68px;\r\n    color: #DE6B48;\r\n}\r\n.sign_up_text {\r\n    display: inline-block;\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n}\r\n.sign_up_text a {\r\n    text-decoration: none;\r\n    color: #2F2E2E;\r\n}\r\n.or_login_with {\r\n    margin-bottom: 10px;\r\n}\r\n.or {\r\n    width: 45%;\r\n    text-align: right;\r\n    color: #DE6B48;\r\n}\r\n.loginwith {\r\n    width: 58%;\r\n    text-align: right;\r\n    margin-top: 10px;\r\n    color: #DE6B48;\r\n}\r\n.facebook_google {\r\n    width: 60%;\r\n    text-align: right;\r\n}\r\n.facebook_google img {\r\n    cursor: pointer;\r\n}\r\n.facebook_google img:first-child {\r\n    margin-right: 22px;\r\n}\r\n.invalid-feedback {\r\n    margin-left: 70px;\r\n    color: red;\r\n    padding: 10px;\r\n    background-color: antiquewhite;\r\n    width: 55%;\r\n    border-radius: 5px;\r\n}\r\n@media screen and (min-width: 300px) {\r\n    .signin_page_first_box {\r\n        margin: 40px 0px 40px 40px;\r\n        display: none;\r\n    }\r\n    .signin_page_first_box img {\r\n        height: 200px;\r\n        margin: 250px 0 0px 180px;\r\n    }\r\n    .signin_box {\r\n        top: 0px;\r\n        right: 0px;\r\n        width: 600px;\r\n        height: 600px;\r\n    }\r\n    .signin_box_content h2 {\r\n        font-size: 26px;\r\n        margin: 40px 0px 25px 28px;\r\n    }\r\n    .signin_box_content input[type=\"email\"], .signin_box_content input[type=\"password\"] {\r\n        width: 73%;\r\n        margin: 0px 0px 15px 28px;\r\n    }\r\n    .invalid-feedback {\r\n        margin: 0px 0px 15px 28px;\r\n        width: 77%;\r\n    }\r\n    .remember_me {\r\n        margin: 20px 15px 20px 30px;\r\n    }\r\n    .sign_in_button {\r\n        margin: 20px 0px 35px 34px;\r\n    }\r\n    .sign_in_button button {\r\n        padding: 10px 105px;\r\n    }\r\n    .sign_up_text {\r\n        margin-left: 100px;\r\n        margin-bottom: 20px;\r\n    }\r\n    .facebook_google {\r\n        width: 63%;\r\n    }\r\n}\r\n@media screen and (min-width: 480px) {\r\n    .contact_information .email_id {\r\n        padding-top: 0;\r\n        margin-top: 70px;\r\n        margin-left: 40px;\r\n    \r\n    }\r\n    .signin_box_content input[type=\"email\"], .signin_box_content input[type=\"password\"] {\r\n        width: 63%;\r\n        margin: 0px 0px 15px 70px;\r\n    }\r\n    .invalid-feedback {\r\n        width: 63%;\r\n        margin: 0px 0px 15px 70px;\r\n    }\r\n    .signin_box {\r\n        top: 0px;\r\n        right: 0px;\r\n        width: 500px;\r\n        height: 500px;\r\n    }\r\n    .signin_box_content h2 {\r\n        font-size: 26px;\r\n        margin: 40px 0px 0px 115px;\r\n    }\r\n    .remember_me {\r\n        margin: 20px 85px 20px 70px;\r\n    }\r\n    .sign_in_button {\r\n        margin: 20px 0px 35px 70px;\r\n    }\r\n    .sign_in_button button {\r\n        padding: 10px 143px;\r\n    }\r\n    .sign_up_text {\r\n        margin-left: 0px;\r\n        margin-bottom: 0px;\r\n    }\r\n    .facebook_google {\r\n        width: 61%;\r\n    }\r\n}\r\n@media screen and (min-width: 768px) {\r\n    .signin_page_first_box {\r\n        width: 300px;\r\n        height: 300px;\r\n        margin: 40px 0px 40px -35px;\r\n        display: block;\r\n    }\r\n    .signin_page_first_box img {\r\n        margin: 160px 0 0 110px;\r\n        height: 200px;\r\n    }\r\n    .signin_box {\r\n        right: -10px;\r\n        top: -30px;\r\n    }\r\n    .signin_box_content h2 {\r\n        font-size: 30px;\r\n        margin: 10px 0px 30px 115px;\r\n    }\r\n}\r\n@media screen and (min-width: 992px) {\r\n    .signin_box {\r\n        right: -90px;\r\n    }\r\n    \r\n}\r\n@media screen and (min-width: 1024px) {\r\n    .signin_box {\r\n        right: -90px;\r\n    }\r\n}\r\n@media screen and (min-width: 1280px) {\r\n    .signin_page_first_box {\r\n        width: 400px;\r\n        height: 400px;\r\n    }\r\n    .signin_page_first_box img {\r\n        margin: 180px 0 0 170px;\r\n        height: auto;\r\n    }\r\n    .signin_box {\r\n        right: -180px;\r\n    }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2lnbi1pbi9zaWduLWluLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxjQUFjO0lBQ2QsaUJBQWlCO0NBQ3BCO0FBQ0Q7SUFDSSxhQUFhO0lBQ2IsY0FBYztJQUNkLG1CQUFtQjtJQUNuQix5Q0FBeUM7SUFDekMsNEJBQTRCO0NBQy9CO0FBQ0Q7SUFDSSx3QkFBd0I7Q0FDM0I7QUFDRDtJQUNJLGFBQWE7SUFDYixjQUFjO0lBQ2QsdUJBQXVCO0lBQ3ZCLG1CQUFtQjtJQUNuQixtQkFBbUI7SUFDbkIsY0FBYztJQUNkLFdBQVc7Q0FDZDtBQUNEO0lBQ0ksWUFBWTtJQUNaLGVBQWU7Q0FDbEI7QUFDRDtJQUNJLDJCQUEyQjtJQUMzQixlQUFlO0lBQ2YsZ0JBQWdCO0NBQ25CO0FBQ0Q7SUFDSSxjQUFjO0lBQ2QsWUFBWTtJQUNaLFdBQVc7SUFDWCwwQkFBMEI7SUFDMUIsMEJBQTBCO0NBQzdCO0FBQ0Q7SUFDSSw0Q0FBNEM7Q0FDL0M7QUFDRDtJQUNJLFlBQVk7SUFDWixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSw0QkFBNEI7SUFDNUIsc0JBQXNCO0lBQ3RCLGdCQUFnQjtJQUNoQixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxzQkFBc0I7SUFDdEIsZUFBZTtDQUNsQjtBQUNEO0lBQ0ksZUFBZTtJQUNmLDJCQUEyQjtDQUM5QjtBQUNEO0lBQ0ksc0JBQXNCO0lBQ3RCLG9CQUFvQjtJQUNwQixpQkFBaUI7SUFDakIsZUFBZTtJQUNmLGdCQUFnQjtJQUNoQixrQkFBa0I7SUFDbEIsc0JBQXNCO0lBQ3RCLG1EQUFtRDtJQUNuRCwwREFBMEQ7Q0FDN0Q7QUFDRDtJQUNJLFlBQVk7SUFDWixtQkFBbUI7Q0FDdEI7QUFDRDtJQUNJLGdCQUFnQjtJQUNoQixzQkFBc0I7SUFDdEIsWUFBWTtJQUNaLDJCQUEyQjtJQUMzQixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxzQkFBc0I7SUFDdEIsZ0JBQWdCO0lBQ2hCLGtCQUFrQjtDQUNyQjtBQUNEO0lBQ0ksc0JBQXNCO0lBQ3RCLGVBQWU7Q0FDbEI7QUFDRDtJQUNJLG9CQUFvQjtDQUN2QjtBQUNEO0lBQ0ksV0FBVztJQUNYLGtCQUFrQjtJQUNsQixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxXQUFXO0lBQ1gsa0JBQWtCO0lBQ2xCLGlCQUFpQjtJQUNqQixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxXQUFXO0lBQ1gsa0JBQWtCO0NBQ3JCO0FBQ0Q7SUFDSSxnQkFBZ0I7Q0FDbkI7QUFDRDtJQUNJLG1CQUFtQjtDQUN0QjtBQUNEO0lBQ0ksa0JBQWtCO0lBQ2xCLFdBQVc7SUFDWCxjQUFjO0lBQ2QsK0JBQStCO0lBQy9CLFdBQVc7SUFDWCxtQkFBbUI7Q0FDdEI7QUFFRDtJQUNJO1FBQ0ksMkJBQTJCO1FBQzNCLGNBQWM7S0FDakI7SUFDRDtRQUNJLGNBQWM7UUFDZCwwQkFBMEI7S0FDN0I7SUFDRDtRQUNJLFNBQVM7UUFDVCxXQUFXO1FBQ1gsYUFBYTtRQUNiLGNBQWM7S0FDakI7SUFDRDtRQUNJLGdCQUFnQjtRQUNoQiwyQkFBMkI7S0FDOUI7SUFDRDtRQUNJLFdBQVc7UUFDWCwwQkFBMEI7S0FDN0I7SUFDRDtRQUNJLDBCQUEwQjtRQUMxQixXQUFXO0tBQ2Q7SUFDRDtRQUNJLDRCQUE0QjtLQUMvQjtJQUNEO1FBQ0ksMkJBQTJCO0tBQzlCO0lBQ0Q7UUFDSSxvQkFBb0I7S0FDdkI7SUFDRDtRQUNJLG1CQUFtQjtRQUNuQixvQkFBb0I7S0FDdkI7SUFDRDtRQUNJLFdBQVc7S0FDZDtDQUNKO0FBRUQ7SUFDSTtRQUNJLGVBQWU7UUFDZixpQkFBaUI7UUFDakIsa0JBQWtCOztLQUVyQjtJQUNEO1FBQ0ksV0FBVztRQUNYLDBCQUEwQjtLQUM3QjtJQUNEO1FBQ0ksV0FBVztRQUNYLDBCQUEwQjtLQUM3QjtJQUNEO1FBQ0ksU0FBUztRQUNULFdBQVc7UUFDWCxhQUFhO1FBQ2IsY0FBYztLQUNqQjtJQUNEO1FBQ0ksZ0JBQWdCO1FBQ2hCLDJCQUEyQjtLQUM5QjtJQUNEO1FBQ0ksNEJBQTRCO0tBQy9CO0lBQ0Q7UUFDSSwyQkFBMkI7S0FDOUI7SUFDRDtRQUNJLG9CQUFvQjtLQUN2QjtJQUNEO1FBQ0ksaUJBQWlCO1FBQ2pCLG1CQUFtQjtLQUN0QjtJQUNEO1FBQ0ksV0FBVztLQUNkO0NBQ0o7QUFDRDtJQUNJO1FBQ0ksYUFBYTtRQUNiLGNBQWM7UUFDZCw0QkFBNEI7UUFDNUIsZUFBZTtLQUNsQjtJQUNEO1FBQ0ksd0JBQXdCO1FBQ3hCLGNBQWM7S0FDakI7SUFDRDtRQUNJLGFBQWE7UUFDYixXQUFXO0tBQ2Q7SUFDRDtRQUNJLGdCQUFnQjtRQUNoQiw0QkFBNEI7S0FDL0I7Q0FDSjtBQUNEO0lBQ0k7UUFDSSxhQUFhO0tBQ2hCOztDQUVKO0FBQ0Q7SUFDSTtRQUNJLGFBQWE7S0FDaEI7Q0FDSjtBQUVEO0lBQ0k7UUFDSSxhQUFhO1FBQ2IsY0FBYztLQUNqQjtJQUNEO1FBQ0ksd0JBQXdCO1FBQ3hCLGFBQWE7S0FDaEI7SUFDRDtRQUNJLGNBQWM7S0FDakI7Q0FDSiIsImZpbGUiOiJzcmMvYXBwL3NpZ24taW4vc2lnbi1pbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNpZ25pbl9wYWdlX3dyYXBwZXIge1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIG1hcmdpbi10b3A6IDgwcHg7XHJcbn1cclxuLnNpZ25pbl9wYWdlX2ZpcnN0X2JveCB7XHJcbiAgICB3aWR0aDogNDAwcHg7XHJcbiAgICBoZWlnaHQ6IDQwMHB4O1xyXG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgxMzEsIDE2NywgMTU1LCAxKTtcclxuICAgIG1hcmdpbjogNDBweCAwcHggNDBweCAtMzVweDtcclxufVxyXG4uc2lnbmluX3BhZ2VfZmlyc3RfYm94IGltZyB7XHJcbiAgICBtYXJnaW46IDE4MHB4IDAgMCAxNzBweDtcclxufVxyXG4uc2lnbmluX2JveCB7XHJcbiAgICB3aWR0aDogNTAwcHg7XHJcbiAgICBoZWlnaHQ6IDUwMHB4O1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgIHJpZ2h0OiAtMTgwcHg7XHJcbiAgICB0b3A6IC0zMHB4O1xyXG59XHJcbi5zaWduaW5fYm94X2NvbnRlbnQge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxufVxyXG4uc2lnbmluX2JveF9jb250ZW50IGgyIHtcclxuICAgIG1hcmdpbjogNDBweCAwcHggMHB4IDExNXB4O1xyXG4gICAgY29sb3I6ICNERTZCNDg7XHJcbiAgICBmb250LXNpemU6IDMwcHg7XHJcbn1cclxuLnNpZ25pbl9ib3hfY29udGVudCBpbnB1dFt0eXBlPVwiZW1haWxcIl0sIC5zaWduaW5fYm94X2NvbnRlbnQgaW5wdXRbdHlwZT1cInBhc3N3b3JkXCJdIHtcclxuICAgIHBhZGRpbmc6IDE1cHg7XHJcbiAgICBib3JkZXI6IDBweDtcclxuICAgIHdpZHRoOiA1MyU7XHJcbiAgICBtYXJnaW46IDBweCAwcHggMTVweCA3MHB4O1xyXG4gICAgY29sb3I6IHJnYmEoNjMsMTI0LDE3MiwxKTtcclxufVxyXG4uc2lnbmluX2JveF9jb250ZW50IGlucHV0LmJvcmRlcl9ib3R0b20ge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMnB4IHNvbGlkIHJnYmEoNjMsMTI0LDE3MiwxKTtcclxufVxyXG4uZm9yZ290X3JlbWVtYmVyX2xpbmtzLCAuc2lnbl91cF93cmFwcGVyIHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbn1cclxuLnJlbWVtYmVyX21lIHtcclxuICAgIG1hcmdpbjogMjBweCA4NXB4IDIwcHggNzBweDtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIGNvbG9yOiAjREU2QjQ4O1xyXG59XHJcbi5mb3Jnb3RfcGFzc3dvcmQge1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgY29sb3I6ICNERTZCNDg7XHJcbn1cclxuLnNpZ25faW5fYnV0dG9uIHtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgbWFyZ2luOiAyMHB4IDBweCAzNXB4IDcwcHg7XHJcbn1cclxuLnNpZ25faW5fYnV0dG9uIGJ1dHRvbiB7XHJcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgICBwYWRkaW5nOiAxMHB4IDE0NXB4O1xyXG4gICAgYmFja2dyb3VuZDogI2ZmZjtcclxuICAgIGNvbG9yOiAjM0Y3Q0FDO1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgYm9yZGVyOiAycHggc29saWQ7XHJcbiAgICBib3JkZXItY29sb3I6ICMzRjdDQUM7XHJcbiAgICBib3gtc2hhZG93OiAtMC40MnB4IDEuOTZweCA0cHggMHB4IHJnYmEoMCwwLDAsMC42KTtcclxuICAgIHRyYW5zaXRpb246IGJvcmRlci1jb2xvciAwLjRzIGVhc2UgMHMsIGNvbG9yIDAuNHMgZWFzZSAwcztcclxufVxyXG4uc2lnbl9pbl9idXR0b24gYTpob3ZlciB7XHJcbiAgICBjb2xvcjogIzAwMDtcclxuICAgIGJvcmRlci1jb2xvcjogI2ZmZjsgXHJcbn1cclxuLmRvbnRfaGF2ZV9hY2NvdW50X3RleHQge1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBtYXJnaW46IDBweCA3MHB4IDIwcHggNjhweDtcclxuICAgIGNvbG9yOiAjREU2QjQ4O1xyXG59XHJcbi5zaWduX3VwX3RleHQge1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuLnNpZ25fdXBfdGV4dCBhIHtcclxuICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxuICAgIGNvbG9yOiAjMkYyRTJFO1xyXG59XHJcbi5vcl9sb2dpbl93aXRoIHtcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbn1cclxuLm9yIHtcclxuICAgIHdpZHRoOiA0NSU7XHJcbiAgICB0ZXh0LWFsaWduOiByaWdodDtcclxuICAgIGNvbG9yOiAjREU2QjQ4O1xyXG59XHJcbi5sb2dpbndpdGgge1xyXG4gICAgd2lkdGg6IDU4JTtcclxuICAgIHRleHQtYWxpZ246IHJpZ2h0O1xyXG4gICAgbWFyZ2luLXRvcDogMTBweDtcclxuICAgIGNvbG9yOiAjREU2QjQ4O1xyXG59XHJcbi5mYWNlYm9va19nb29nbGUge1xyXG4gICAgd2lkdGg6IDYwJTtcclxuICAgIHRleHQtYWxpZ246IHJpZ2h0O1xyXG59XHJcbi5mYWNlYm9va19nb29nbGUgaW1nIHtcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG4uZmFjZWJvb2tfZ29vZ2xlIGltZzpmaXJzdC1jaGlsZCB7XHJcbiAgICBtYXJnaW4tcmlnaHQ6IDIycHg7XHJcbn1cclxuLmludmFsaWQtZmVlZGJhY2sge1xyXG4gICAgbWFyZ2luLWxlZnQ6IDcwcHg7XHJcbiAgICBjb2xvcjogcmVkO1xyXG4gICAgcGFkZGluZzogMTBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGFudGlxdWV3aGl0ZTtcclxuICAgIHdpZHRoOiA1NSU7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbn1cclxuXHJcbkBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDMwMHB4KSB7XHJcbiAgICAuc2lnbmluX3BhZ2VfZmlyc3RfYm94IHtcclxuICAgICAgICBtYXJnaW46IDQwcHggMHB4IDQwcHggNDBweDtcclxuICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9wYWdlX2ZpcnN0X2JveCBpbWcge1xyXG4gICAgICAgIGhlaWdodDogMjAwcHg7XHJcbiAgICAgICAgbWFyZ2luOiAyNTBweCAwIDBweCAxODBweDtcclxuICAgIH1cclxuICAgIC5zaWduaW5fYm94IHtcclxuICAgICAgICB0b3A6IDBweDtcclxuICAgICAgICByaWdodDogMHB4O1xyXG4gICAgICAgIHdpZHRoOiA2MDBweDtcclxuICAgICAgICBoZWlnaHQ6IDYwMHB4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3hfY29udGVudCBoMiB7XHJcbiAgICAgICAgZm9udC1zaXplOiAyNnB4O1xyXG4gICAgICAgIG1hcmdpbjogNDBweCAwcHggMjVweCAyOHB4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3hfY29udGVudCBpbnB1dFt0eXBlPVwiZW1haWxcIl0sIC5zaWduaW5fYm94X2NvbnRlbnQgaW5wdXRbdHlwZT1cInBhc3N3b3JkXCJdIHtcclxuICAgICAgICB3aWR0aDogNzMlO1xyXG4gICAgICAgIG1hcmdpbjogMHB4IDBweCAxNXB4IDI4cHg7XHJcbiAgICB9XHJcbiAgICAuaW52YWxpZC1mZWVkYmFjayB7XHJcbiAgICAgICAgbWFyZ2luOiAwcHggMHB4IDE1cHggMjhweDtcclxuICAgICAgICB3aWR0aDogNzclO1xyXG4gICAgfVxyXG4gICAgLnJlbWVtYmVyX21lIHtcclxuICAgICAgICBtYXJnaW46IDIwcHggMTVweCAyMHB4IDMwcHg7XHJcbiAgICB9XHJcbiAgICAuc2lnbl9pbl9idXR0b24ge1xyXG4gICAgICAgIG1hcmdpbjogMjBweCAwcHggMzVweCAzNHB4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25faW5fYnV0dG9uIGJ1dHRvbiB7XHJcbiAgICAgICAgcGFkZGluZzogMTBweCAxMDVweDtcclxuICAgIH1cclxuICAgIC5zaWduX3VwX3RleHQge1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiAxMDBweDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG4gICAgfVxyXG4gICAgLmZhY2Vib29rX2dvb2dsZSB7XHJcbiAgICAgICAgd2lkdGg6IDYzJTtcclxuICAgIH1cclxufVxyXG5cclxuQG1lZGlhIHNjcmVlbiBhbmQgKG1pbi13aWR0aDogNDgwcHgpIHtcclxuICAgIC5jb250YWN0X2luZm9ybWF0aW9uIC5lbWFpbF9pZCB7XHJcbiAgICAgICAgcGFkZGluZy10b3A6IDA7XHJcbiAgICAgICAgbWFyZ2luLXRvcDogNzBweDtcclxuICAgICAgICBtYXJnaW4tbGVmdDogNDBweDtcclxuICAgIFxyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3hfY29udGVudCBpbnB1dFt0eXBlPVwiZW1haWxcIl0sIC5zaWduaW5fYm94X2NvbnRlbnQgaW5wdXRbdHlwZT1cInBhc3N3b3JkXCJdIHtcclxuICAgICAgICB3aWR0aDogNjMlO1xyXG4gICAgICAgIG1hcmdpbjogMHB4IDBweCAxNXB4IDcwcHg7XHJcbiAgICB9XHJcbiAgICAuaW52YWxpZC1mZWVkYmFjayB7XHJcbiAgICAgICAgd2lkdGg6IDYzJTtcclxuICAgICAgICBtYXJnaW46IDBweCAwcHggMTVweCA3MHB4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3gge1xyXG4gICAgICAgIHRvcDogMHB4O1xyXG4gICAgICAgIHJpZ2h0OiAwcHg7XHJcbiAgICAgICAgd2lkdGg6IDUwMHB4O1xyXG4gICAgICAgIGhlaWdodDogNTAwcHg7XHJcbiAgICB9XHJcbiAgICAuc2lnbmluX2JveF9jb250ZW50IGgyIHtcclxuICAgICAgICBmb250LXNpemU6IDI2cHg7XHJcbiAgICAgICAgbWFyZ2luOiA0MHB4IDBweCAwcHggMTE1cHg7XHJcbiAgICB9XHJcbiAgICAucmVtZW1iZXJfbWUge1xyXG4gICAgICAgIG1hcmdpbjogMjBweCA4NXB4IDIwcHggNzBweDtcclxuICAgIH1cclxuICAgIC5zaWduX2luX2J1dHRvbiB7XHJcbiAgICAgICAgbWFyZ2luOiAyMHB4IDBweCAzNXB4IDcwcHg7XHJcbiAgICB9XHJcbiAgICAuc2lnbl9pbl9idXR0b24gYnV0dG9uIHtcclxuICAgICAgICBwYWRkaW5nOiAxMHB4IDE0M3B4O1xyXG4gICAgfVxyXG4gICAgLnNpZ25fdXBfdGV4dCB7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDBweDtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOiAwcHg7XHJcbiAgICB9XHJcbiAgICAuZmFjZWJvb2tfZ29vZ2xlIHtcclxuICAgICAgICB3aWR0aDogNjElO1xyXG4gICAgfVxyXG59XHJcbkBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDc2OHB4KSB7XHJcbiAgICAuc2lnbmluX3BhZ2VfZmlyc3RfYm94IHtcclxuICAgICAgICB3aWR0aDogMzAwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiAzMDBweDtcclxuICAgICAgICBtYXJnaW46IDQwcHggMHB4IDQwcHggLTM1cHg7XHJcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICB9XHJcbiAgICAuc2lnbmluX3BhZ2VfZmlyc3RfYm94IGltZyB7XHJcbiAgICAgICAgbWFyZ2luOiAxNjBweCAwIDAgMTEwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiAyMDBweDtcclxuICAgIH1cclxuICAgIC5zaWduaW5fYm94IHtcclxuICAgICAgICByaWdodDogLTEwcHg7XHJcbiAgICAgICAgdG9wOiAtMzBweDtcclxuICAgIH1cclxuICAgIC5zaWduaW5fYm94X2NvbnRlbnQgaDIge1xyXG4gICAgICAgIGZvbnQtc2l6ZTogMzBweDtcclxuICAgICAgICBtYXJnaW46IDEwcHggMHB4IDMwcHggMTE1cHg7XHJcbiAgICB9XHJcbn1cclxuQG1lZGlhIHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTkycHgpIHtcclxuICAgIC5zaWduaW5fYm94IHtcclxuICAgICAgICByaWdodDogLTkwcHg7XHJcbiAgICB9XHJcbiAgICBcclxufVxyXG5AbWVkaWEgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxMDI0cHgpIHtcclxuICAgIC5zaWduaW5fYm94IHtcclxuICAgICAgICByaWdodDogLTkwcHg7XHJcbiAgICB9XHJcbn1cclxuXHJcbkBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDEyODBweCkge1xyXG4gICAgLnNpZ25pbl9wYWdlX2ZpcnN0X2JveCB7XHJcbiAgICAgICAgd2lkdGg6IDQwMHB4O1xyXG4gICAgICAgIGhlaWdodDogNDAwcHg7XHJcbiAgICB9XHJcbiAgICAuc2lnbmluX3BhZ2VfZmlyc3RfYm94IGltZyB7XHJcbiAgICAgICAgbWFyZ2luOiAxODBweCAwIDAgMTcwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xyXG4gICAgfVxyXG4gICAgLnNpZ25pbl9ib3gge1xyXG4gICAgICAgIHJpZ2h0OiAtMTgwcHg7XHJcbiAgICB9XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -1241,7 +1394,7 @@ module.exports = ".signin_page_wrapper {\r\n    display: flex;\r\n    margin-top
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"signin_page_wrapper\">\n    <div class=\"signin_page_first_box\">\n        <img src=\"../assets/a.png\" />\n    </div>\n    <div class=\"signin_box\">\n        <div class=\"signin_box_content\">\n            <h2>Welcome to Munchies!</h2>\n            <h2 *ngIf=\"!success\">{{error}}</h2>\n            <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n                <input class=\"border_bottom\" type=\"email\" formControlName=\"username\" name=\"username\" [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\" placeholder=\"Email ID\" required />\n                <div *ngIf=\"submitted && (f.username.errors || f.username.invalid)\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.username.errors.required\">Username is required</div>\n                    <div *ngIf=\"f.username.errors.email\">Email must be a valid email address</div>\n                </div>\n                <input class=\"border_bottom\" formControlName=\"password\" type=\"password\" name=\"password\" [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" placeholder=\"Password\" required />\n                <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.password.errors.required\">Password is required</div>\n                </div>\n                <div class=\"forgot_remember_links\">\n                    <div class=\"remember_me\"><input type=\"checkbox\" name=\"chk\" checked /> <span>Remember Me</span></div>\n                    <div class=\"forgot_password\">Forgot Password</div>\n                </div>\n                <div class=\"sign_in_button\">\n                    <button type=\"submit\">Sign In</button>\n                </div>\n                <div class=\"sign_up_wrapper\">\n                    <div class=\"dont_have_account_text\">Don't have an account?</div>\n                    <div class=\"sign_up_text\"><a href=\"/sign-up\">Sign Up now</a></div>\n                </div>\n                <div class=\"or_login_with\">\n                    <div class=\"or\">or</div>\n                    <div class=\"loginwith\">Log in with</div>\n                </div>\n            </form>\n            <div class=\"facebook_google\">\n                <img src=\"../assets/fb.png\" alt=\"No Image\" id=\"loginwithFacebook\"/>\n                <img src=\"../assets/google_plus.png\" alt=\"No Image\" id=\"loginwithGoogle\" />\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"signin_page_wrapper\">\n    <div class=\"signin_page_first_box\">\n        <img src=\"../assets/a.png\" />\n    </div>\n    <div class=\"signin_box\">\n        <div class=\"signin_box_content\">\n            <h2>Welcome to Munchies!</h2>\n            <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n                <div class=\"invalid-feedback\" *ngIf=\"!success\">{{error}}</div>\n                <input class=\"border_bottom\" type=\"email\" formControlName=\"username\" name=\"username\" [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\" placeholder=\"Email ID\" required />\n                <div *ngIf=\"submitted && (f.username.errors || f.username.invalid)\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.username.errors.required\">Username is required</div>\n                    <div *ngIf=\"f.username.errors.email\">Email must be a valid email address</div>\n                </div>\n                <input class=\"border_bottom\" formControlName=\"password\" type=\"password\" name=\"password\" [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" placeholder=\"Password\" required />\n                <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.password.errors.required\">Password is required</div>\n                </div>\n                <div class=\"forgot_remember_links\">\n                    <div class=\"remember_me\"><input type=\"checkbox\" name=\"chk\" checked /> <span>Remember Me</span></div>\n                    <div class=\"forgot_password\">Forgot Password</div>\n                </div>\n                <div class=\"sign_in_button\">\n                    <button type=\"submit\">Sign In</button>\n                </div>\n                <div class=\"sign_up_wrapper\">\n                    <div class=\"dont_have_account_text\">Don't have an account?</div>\n                    <div class=\"sign_up_text\"><a href=\"/sign-up\">Sign Up now</a></div>\n                </div>\n                <div class=\"or_login_with\">\n                    <div class=\"or\">or</div>\n                    <div class=\"loginwith\">Log in with</div>\n                </div>\n            </form>\n            <div class=\"facebook_google\">\n                <img src=\"../assets/fb.png\" alt=\"No Image\" (click) = \"fbLogin()\"/>\n                <img src=\"../assets/google_plus.png\" alt=\"No Image\"  (click)=\"googleLogin()\" />\n            </div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -1259,6 +1412,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1272,17 +1426,25 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var SignInComponent = /** @class */ (function () {
-    function SignInComponent(formBuilder, router, http) {
+    function SignInComponent(formBuilder, router, http, authService) {
         this.formBuilder = formBuilder;
         this.router = router;
         this.http = http;
+        this.authService = authService;
         this.submitted = false;
         this.success = true;
         this.error = '';
         this.username = '';
         this.password = '';
     }
+    SignInComponent.prototype.fbLogin = function () {
+        this.authService.doFacebookLogin();
+    };
+    SignInComponent.prototype.googleLogin = function () {
+        this.authService.doGoogleLogin();
+    };
     SignInComponent.prototype.ngOnInit = function () {
         this.loginForm = this.formBuilder.group({
             username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]],
@@ -1312,8 +1474,17 @@ var SignInComponent = /** @class */ (function () {
                 _this.success = data.success;
                 _this.error = data.error;
                 if (data.success) {
+                    sessionStorage.setItem('isLoggedIn', "true");
+                    sessionStorage.setItem('token', _this.username);
                     console.log("gooooddddd");
-                    _this.router.navigate(['/manage-subscription']);
+                    _this.http.post('http://localhost:9191/api/order/getMyorders', {}).subscribe(function (resData) {
+                        console.log(resData);
+                    }, function (error) {
+                        console.log('error', 'Allow Signup', 'Server Error');
+                    });
+                    if (sessionStorage.getItem('isLoggedIn')) {
+                        _this.router.navigate(['/manage-subscription']);
+                    }
                 }
                 else {
                     console.log("baddddddddddddd");
@@ -1331,7 +1502,7 @@ var SignInComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./sign-in.component.css */ "./src/app/sign-in/sign-in.component.css")]
         }),
         __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
     ], SignInComponent);
     return SignInComponent;
 }());
@@ -1536,99 +1707,6 @@ var SkipWeekComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], SkipWeekComponent);
     return SkipWeekComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/social-media-sign-in/social-media-sign-in.component.css":
-/*!*************************************************************************!*\
-  !*** ./src/app/social-media-sign-in/social-media-sign-in.component.css ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3NvY2lhbC1tZWRpYS1zaWduLWluL3NvY2lhbC1tZWRpYS1zaWduLWluLmNvbXBvbmVudC5jc3MifQ== */"
-
-/***/ }),
-
-/***/ "./src/app/social-media-sign-in/social-media-sign-in.component.html":
-/*!**************************************************************************!*\
-  !*** ./src/app/social-media-sign-in/social-media-sign-in.component.html ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  social-media-sign-in works!\n</p>\n"
-
-/***/ }),
-
-/***/ "./src/app/social-media-sign-in/social-media-sign-in.component.ts":
-/*!************************************************************************!*\
-  !*** ./src/app/social-media-sign-in/social-media-sign-in.component.ts ***!
-  \************************************************************************/
-/*! exports provided: SocialMediaSignInComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SocialMediaSignInComponent", function() { return SocialMediaSignInComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var SocialMediaSignInComponent = /** @class */ (function () {
-    function SocialMediaSignInComponent(httpClient) {
-        this.httpClient = httpClient;
-    }
-    SocialMediaSignInComponent.prototype.varifyFirebaseToken = function (token, callback) {
-        this.httpClient.post('/user/varifyFirebaseToken', token).subscribe(function (data) {
-            callback(data);
-        }, function (error) {
-            console.log('error', 'Allow Signup', 'Server Error');
-        });
-    };
-    SocialMediaSignInComponent.prototype.logInWithFB = function () {
-        /* var provider = new firebase.auth.FacebookAuthProvider();
-             provider.addScope('email');
-             provider.setCustomParameters({
-               'display': 'popup'
-             });
-     
-             firebase.auth().signInWithPopup(provider).then(function(temp) {
-               firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-                 console.log("loginwithFacebook==>idToken",idToken,temp);
-                      
-               }).catch(function(error) {
-                 // Handle error
-                 alert(error)
-               });
-             }).catch(function(error) {
-               alert(error)
-             });
-         */
-    };
-    SocialMediaSignInComponent.prototype.ngOnInit = function () {
-    };
-    SocialMediaSignInComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-social-media-sign-in',
-            template: __webpack_require__(/*! ./social-media-sign-in.component.html */ "./src/app/social-media-sign-in/social-media-sign-in.component.html"),
-            styles: [__webpack_require__(/*! ./social-media-sign-in.component.css */ "./src/app/social-media-sign-in/social-media-sign-in.component.css")]
-        }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
-    ], SocialMediaSignInComponent);
-    return SocialMediaSignInComponent;
 }());
 
 
@@ -1840,16 +1918,12 @@ __webpack_require__.r(__webpack_exports__);
 var environment = {
     production: false,
     firebase: {
-        type: "service_account",
-        project_id: "fir-auth-fc6c2",
-        private_key_id: "ddecc489611137ea0fc23aaee15c259501abadb7",
-        private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCWFDXD/OZy8WA6\nCKmI2R1w8rlwIXOxwE2q2ORCfFoUqQqaTzne02JV7ab5bxe0ttiaADTiCsbLJvMC\n3LJ3RhTFkEQ6HvZMRGQ+XOn4pAcZWc8l96fc9avr5OGuaHAvEFSLAj4U4nlQ2hI6\n+osawJed80Gd/zu16bsI5nRTndCZ3llSfnKT/tW4oCpmtGP08zSt4Q1dbFSlz3Ch\n7xQGywCcpCZOoAKLwqvPzf4aq83AN3BzJuf5Mki0p4gH9Qee5jEl5mzuNKjC9Dft\nuL9uHDes9l8la5PoY6JRNBROFodyni64CVIkkTf1tzVT5c34ehlGs1Hi/QCMWCsM\nMGo+qWoHAgMBAAECggEAARFREmC/Fn+TweQnqXysldUdGe+NpyWeoLcuukwh8pZY\nYPbeboYKce9hGERH1KuBNvc/ofMkV8kweyfXqZ7jyZsfWgUp7EcyDZah2M4VeYLq\nfeTgPiqb6ZojO4kP/7BhKZaqDRBtm574ox5URwFVEsojVc6gy+S44h/FIWpC4hVU\nEC9oi870AVg8q/FcmhSv3bc6ibYJ6lC+fgcrX2QW4NJf+0SWZ2rYZiJi5m08MYKy\nAJT3XTX4EID118IZs36FgsVTyNsUpH+XSPC9qPogftXybVMpbrbILYhfig0c1zyy\nfZfX2JZTMFS8QW0JwzJeCeFpyxZ4BPKPE5b4skNaIQKBgQDL2w6FovPbuCh5OwHN\nDkAnedJhHJnzPLsQ/YtyOOzyGBcKBmK5KySXpjeIu8/JSGzabs4S/LH3bYHN6yn3\nLWm1Pwufr1Jn35Ol7QmcHbqBlkLPERzRa63Pgb6T7I+8eroTuVPXP8aEYs9TWC/F\n19Cen49E+rHTPVK2bSlz6aRYSwKBgQC8d7ozaWLvGbcDEe7QEazbkFBsxj153T9e\nm6ra9+TdNYaRfxSW+uXtjdLmpc0oDf/PhQkPVk8Nim2mrsLxD/3DLz2zJ5c98mEt\naOA6CvJaC1rFMTVUXtHDwEUUpb6OAoQ5dnjmR6grpfuSdYJ/F1EwknRGeGDmH/hD\nm/NII/DXtQKBgE3xqfHKxnbCSSdhOmUPB9SQLbJX3z0zgUsTxpeb0G0YbOa2XlTy\nfAFH2n/7X41UldpG96Am4lz6j+EOA3Ow93QHcQhTXqy8vZV5tmzsqP0XWOAXaO9h\nvolS0G16y9KDElasS7RHfD3uEduKImoBBJFB7OOw/wEHt3Js9qaNNPtVAoGBAKNI\n593bFIgrM1BJnSpP5f9kjQlwx5ppgZmqLOEBnRu6YBh2jZQxVDv4gBys0Y4+cr+M\nd0j+cgc9Q7sB9ot8W1Nb/ozVZEebU25QStR+33H8HGx0McwjSoHadv9oiivnKj/O\n0PhSZPVMHSXLAYCy5vi6KltTuEAouqN43dJGsUdxAoGARzCzdvoFc1QTeivybHvn\ncRI7dPzFyxMihrxLMrvHNMvemGSx/qpzVsTdvyU88q9oBiqcJrF+WIAtxyHJXJoa\nIjv5ybTVQE9oRhqcv9zoOnr/ldSkE4eBdY63n/sUEq8ahgN5AgfLAmKJ3hLkSDBA\nQH/9R2Uu0EVsy7Xq2VccONg=\n-----END PRIVATE KEY-----\n",
-        client_email: "firebase-adminsdk-9tgga@fir-auth-fc6c2.iam.gserviceaccount.com",
-        client_id: "102045984991420095599",
-        auth_uri: "https://accounts.google.com/o/oauth2/auth",
-        token_uri: "https://oauth2.googleapis.com/token",
-        auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-        client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-9tgga%40fir-auth-fc6c2.iam.gserviceaccount.com"
+        apiKey: "AIzaSyAXypfKjo32hy1gJ5ygNZ41h7yPU_WyAhU",
+        authDomain: "ffbauth.firebaseapp.com",
+        databaseURL: "https://ffbauth.firebaseio.com",
+        projectId: "ffbauth",
+        storageBucket: "ffbauth.appspot.com",
+        messagingSenderId: "314480568771"
     }
 };
 /*
