@@ -35,7 +35,7 @@ export class AuthService {
       }, error => {
         reject(error);
       });
-      this.afAuth.auth.currentUser.getToken(true).then( idToken => {
+      this.afAuth.auth.currentUser.getIdToken(true).then( idToken => {
         console.log("loginwithFacebook==>idToken",idToken);
         this.varifyFirebaseToken(idToken, function(result) {
           console.log(result.data);
