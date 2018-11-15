@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   firebase: {
     apiKey: "AIzaSyAXypfKjo32hy1gJ5ygNZ41h7yPU_WyAhU",
-    authDomain: "ffbauth.firebaseapp.com",
+    // authDomain: "ffbauth.firebaseapp.com",
+    authDomain:'https://dev-munchies.herokuapp.com',
     databaseURL: "https://ffbauth.firebaseio.com",
     projectId: "ffbauth",
     storageBucket: "ffbauth.appspot.com",
