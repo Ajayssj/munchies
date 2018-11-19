@@ -17,6 +17,12 @@ export class ManageSubscriptionComponent implements OnInit {
    }
 
   ngOnInit() {
+    
+          this.http.get('http://localhost:9191/api/order/getMyorders').subscribe(resData => {
+            console.log('loll',resData);
+          }, error => {
+            console.log('error', 'Allow Signup', 'Server Error');
+          });
   }
   // logout() {
   //   sessionStorage.setItem('isLoggedIn', "false");

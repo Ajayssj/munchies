@@ -4,77 +4,29 @@
     <h3 class="color_none">Select a Plan</h3>
     <div class="select_plan">
       <div class="plans">
-        <div class="plan">
-          <a href="/delivery">
-            <h3>Trial Week</h3>
-            <h2 class="rate">500Rs/bag</h2>
-            <p>Try our snack bag of one week. You'll get one bag with 6 healthy snacks that will take care of your evening hunger pangs.</p>
-          </a>
-        </div>
-        <div class="plan">
-          <a href="/delivery">
-            <h3>For 4 Weeks</h3>
-            <h2 class="rate">500Rs/bag</h2>
-            <p>1 snack bag delivered each week for a period of 1 month</p>
-          </a>
-        </div>
-        <div class="plan">
-          <a href="/delivery">
-            <h3>For 12 Weeks</h3>
-            <h2 class="rate">500Rs/bag</h2>
-            <p>1 snack bag delivered each week for a period of 6 months</p>
-          </a>
+        <div class="plan" *ngFor="let item of plan; let i = index">
+          <div (click)="selectedPlan(i+1)">
+            <h3>{{item.planName}}</h3>
+            <h2 class="rate">{{item.planRate}}</h2>
+            <p>{{item.planText}}</p>
+          </div>
         </div>
       </div>
     </div>
     <div class="answer_questions">
       <h3 class="color_none">Answer a few simple questions so we know what snacks are best for you</h3>
-      <div class="question_wrapper">
-        <p>Are you allergic to any of the following?</p>
+      <div class="question_wrapper" *ngFor="let q of questions">
+        <p>{{q.question}}</p>
         <ul>
-          <li><input type="radio" value="milk" name="q1" />Milk</li>
-          <li><input type="radio" value="eggs" name="q1" />EGGS</li>
-          <li><input type="radio" value="peanuts" name="q1" />PEANUTS</li>
-          <li><input type="radio" value="other nuts" name="q1" />OTHER NUTS</li>
-          <li><input type="radio" value="wheat" name="q1" />WHEAT</li>
-          <li><input type="radio" value="none" name="q1" />NONE</li>
+          <li *ngFor="let opt of q.options"><input type="radio" value="{{opt.optionText}}" name="{{opt.optName}}" [(ngModel)]="q.selectedOpt" />{{opt.optionText}}</li>
         </ul>
-        <div class="product_images first_box">
-          <img src="../../assets/peanut.png" alt="peanut.png"/>
-          <img src="../../assets/chocolate-bar.png" alt="chocolate_bar.png"/>
+        <div class="product_images + {{ q.class}}" >
+          <img *ngFor="let image of q.images" src="{{image.url}}" alt="{{image.alt}}"/>
         </div>
       </div>
-      <div class="question_wrapper">
-        <p>Pick flavours you don't like </p>
-        <ul>
-          <li><input type="radio" value="chocolate" name="q2" />CHOCOLATE</li>
-          <li><input type="radio" value="strawberry" name="q2" />STRAWBERRY</li>
-          <li><input type="radio" value="mint" name="q2" />MINT</li>
-          <li><input type="radio" value="tomato" name="q2" />TOMATO</li>
-          <li><input type="radio" value="no preference" name="q2" />NO PREFERENCE</li>
-        </ul>
-        <div class="product_images second_box">
-          <img src="../../assets/harvest.png" alt="banana.png"/>
-          <img src="../../assets/cheese.png" alt="cheese.png"/>
-        </div>
-      </div>
-      <div class="question_wrapper">
-        <p>Pick fruits you don't like </p>
-        <ul>
-          <li><input type="radio" value="banana" name="q3" />BANANA</li>
-          <li><input type="radio" value="apple" name="q3" />APPLE</li>
-          <li><input type="radio" value="pear" name="q3" />PEAR</li>
-          <li><input type="radio" value="guava" name="q3" />GUAVA</li>
-          <li><input type="radio" value="mango" name="q3" />MANGO</li>
-          <li><input type="radio" value="no preference" name="q3" />NO PREFERENCE</li>
-        </ul>
-        <div class="product_images third_box">
-          <img src="../../assets/strawberry.png" alt="strawberry.png"/>
-        </div>
-      </div>  
     </div>
-    <div class="ok_button">
-      <a href="/delivery">Ok</a>
+    <div class="ok_button" (click)="checkDelivery()">
+      <a routerLink="/delivery" [queryParams] = "{selectedPlan: selectedPlanId, question1: questions[0].selectedOpt, question2: questions[1].selectedOpt, question3: questions[2].selectedOpt }">Ok</a>
     </div>
   </div>
 </div>

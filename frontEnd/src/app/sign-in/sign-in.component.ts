@@ -54,7 +54,7 @@ export class SignInComponent implements OnInit {
     console.log(this.username +"\n");
     console.log(this.password);
     this.http.post('http://localhost:9191/api/user/login', {'email': this.username, 'password': this.password}).subscribe( (data: SignInRes) => {
-        console.log("PATCH Request is successful ", data.error);
+        console.log("PATCH Request is successful ", data);
         this.success = data.success;
         this.error = data.error;
         if(data.success) {
@@ -62,11 +62,11 @@ export class SignInComponent implements OnInit {
           sessionStorage.setItem('isLoggedIn', "true");
           sessionStorage.setItem('token', this.username);
           console.log("gooooddddd");
-          this.http.post('http://localhost:9191/api/order/getMyorders', {}).subscribe(resData => {
-            console.log(resData);
-          }, error => {
-            console.log('error', 'Allow Signup', 'Server Error');
-          });
+          // this.http.get('http://localhost:9191/api/order/getMyorders').subscribe(resData => {
+          //   console.log(resData);
+          // }, error => {
+          //   console.log('error', 'Allow Signup', 'Server Error');
+          // });
           if(sessionStorage.getItem('isLoggedIn')) {
             this.router.navigate(['/manage-subscription']);
           }

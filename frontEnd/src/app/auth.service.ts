@@ -15,7 +15,7 @@ export class AuthService {
   }
     varifyFirebaseToken = function(token, callback) {
     console.log("hiiiiiiiiiii");
-    this.http.post('http://localhost:9191/user/varifyFirebaseToken', token).subscribe(resData => {
+    this.http.post('http://localhost:9191/api/user/verifyFirebaseToken', token).subscribe(resData => {
       console.log(resData);
       callback(resData);
     }, error => {

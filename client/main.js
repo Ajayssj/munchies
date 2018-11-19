@@ -285,6 +285,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -316,6 +317,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 angularfire2__WEBPACK_IMPORTED_MODULE_26__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_29__["environment"].firebase, "myApp"),
@@ -369,7 +371,7 @@ var AuthService = /** @class */ (function () {
         this.http = http;
         this.varifyFirebaseToken = function (token, callback) {
             console.log("hiiiiiiiiiii");
-            this.http.post('http://localhost:9191/user/varifyFirebaseToken', token).subscribe(function (resData) {
+            this.http.post('http://localhost:9191/api/user/verifyFirebaseToken', token).subscribe(function (resData) {
                 console.log(resData);
                 callback(resData);
             }, function (error) {
@@ -674,7 +676,7 @@ var ContactComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".select_delivery_address_wrapper {\r\n    width: 60%;\r\n    margin: 0 auto;\r\n    padding: 60px 0px;\r\n    display: block;\r\n    height: 100%;\r\n    overflow: hidden;\r\n}\r\n.delivery_content {\r\n    width: 100%;\r\n    float: left;\r\n}\r\n.select_delivery_address_wrapper h3 {\r\n    font-size: 23px;\r\n    color: #E5663D;\r\n}\r\n.delivery_form form .row {\r\n    width: 100%;\r\n    float: left;\r\n    margin-bottom: 15px;\r\n}\r\n.delivery_form form .field1 {\r\n    width: 40%;\r\n    float: left;\r\n    box-sizing: border-box;\r\n    padding: 10px;\r\n    border: 2px solid #e2e2e2;\r\n}\r\n.delivery_form form .field2 {\r\n    width: 56%;\r\n    float: left;\r\n    box-sizing: border-box;\r\n    margin-left: 4%;\r\n    padding: 10px;\r\n    border: 2px solid #e2e2e2;\r\n    -webkit-appearance: none;\r\n    -moz-appearance: none;\r\n         appearance: none;\r\n}\r\n.delivery_form p {\r\n    float: left;\r\n    margin-top: 0;\r\n    font-size: 14px;\r\n    color: #E5663D;\r\n}\r\n.create_account {   \r\n    width: 50%;\r\n    float: left;\r\n}\r\n.create_account h2 {\r\n    color: #E5663D;\r\n    font-size: 23px;\r\n    margin-bottom: 30px;\r\n}\r\n.create_account form input {\r\n    width: 100%;\r\n    padding: 10px;\r\n    margin-bottom: 15px;\r\n    box-sizing: border-box;\r\n    border: 2px solid #e2e2e2;\r\n}\r\n.make_payment_btn {\r\n    width: 100%;\r\n    float: left;\r\n    padding-left: 30px;\r\n    padding-bottom: 50px;\r\n    margin-top: 50px;\r\n}\r\n.make_payment_btn a {\r\n    text-decoration: none;\r\n    color: rgba(50, 50, 50, 1);\r\n    padding: 10px 20px;\r\n    background-color: #fff;\r\n    border-radius: 25px;\r\n    border: 2px solid rgba(50, 50, 50, 1);\r\n    font-weight: bold;\r\n}\r\n.make_payment_btn a:hover {\r\n    color: #fff;\r\n    background-color: rgba(50, 50, 50, 1);\r\n    border: 2px solid rgba(50, 50, 50, 1);\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGVsaXZlcnkvZGVsaXZlcnkuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFdBQVc7SUFDWCxlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLGVBQWU7SUFDZixhQUFhO0lBQ2IsaUJBQWlCO0NBQ3BCO0FBQ0Q7SUFDSSxZQUFZO0lBQ1osWUFBWTtDQUNmO0FBQ0Q7SUFDSSxnQkFBZ0I7SUFDaEIsZUFBZTtDQUNsQjtBQUNEO0lBQ0ksWUFBWTtJQUNaLFlBQVk7SUFDWixvQkFBb0I7Q0FDdkI7QUFDRDtJQUNJLFdBQVc7SUFDWCxZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCLGNBQWM7SUFDZCwwQkFBMEI7Q0FDN0I7QUFDRDtJQUNJLFdBQVc7SUFDWCxZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCLGdCQUFnQjtJQUNoQixjQUFjO0lBQ2QsMEJBQTBCO0lBQzFCLHlCQUF5QjtJQUN6QixzQkFBaUI7U0FBakIsaUJBQWlCO0NBQ3BCO0FBQ0Q7SUFDSSxZQUFZO0lBQ1osY0FBYztJQUNkLGdCQUFnQjtJQUNoQixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxXQUFXO0lBQ1gsWUFBWTtDQUNmO0FBQ0Q7SUFDSSxlQUFlO0lBQ2YsZ0JBQWdCO0lBQ2hCLG9CQUFvQjtDQUN2QjtBQUNEO0lBQ0ksWUFBWTtJQUNaLGNBQWM7SUFDZCxvQkFBb0I7SUFDcEIsdUJBQXVCO0lBQ3ZCLDBCQUEwQjtDQUM3QjtBQUNEO0lBQ0ksWUFBWTtJQUNaLFlBQVk7SUFDWixtQkFBbUI7SUFDbkIscUJBQXFCO0lBQ3JCLGlCQUFpQjtDQUNwQjtBQUNEO0lBQ0ksc0JBQXNCO0lBQ3RCLDJCQUEyQjtJQUMzQixtQkFBbUI7SUFDbkIsdUJBQXVCO0lBQ3ZCLG9CQUFvQjtJQUNwQixzQ0FBc0M7SUFDdEMsa0JBQWtCO0NBQ3JCO0FBQ0Q7SUFDSSxZQUFZO0lBQ1osc0NBQXNDO0lBQ3RDLHNDQUFzQztDQUN6QyIsImZpbGUiOiJzcmMvYXBwL2RlbGl2ZXJ5L2RlbGl2ZXJ5LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc2VsZWN0X2RlbGl2ZXJ5X2FkZHJlc3Nfd3JhcHBlciB7XHJcbiAgICB3aWR0aDogNjAlO1xyXG4gICAgbWFyZ2luOiAwIGF1dG87XHJcbiAgICBwYWRkaW5nOiA2MHB4IDBweDtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxufVxyXG4uZGVsaXZlcnlfY29udGVudCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG59XHJcbi5zZWxlY3RfZGVsaXZlcnlfYWRkcmVzc193cmFwcGVyIGgzIHtcclxuICAgIGZvbnQtc2l6ZTogMjNweDtcclxuICAgIGNvbG9yOiAjRTU2NjNEO1xyXG59XHJcbi5kZWxpdmVyeV9mb3JtIGZvcm0gLnJvdyB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMTVweDtcclxufVxyXG4uZGVsaXZlcnlfZm9ybSBmb3JtIC5maWVsZDEge1xyXG4gICAgd2lkdGg6IDQwJTtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcclxuICAgIHBhZGRpbmc6IDEwcHg7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCAjZTJlMmUyO1xyXG59XHJcbi5kZWxpdmVyeV9mb3JtIGZvcm0gLmZpZWxkMiB7XHJcbiAgICB3aWR0aDogNTYlO1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gICAgbWFyZ2luLWxlZnQ6IDQlO1xyXG4gICAgcGFkZGluZzogMTBweDtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICNlMmUyZTI7XHJcbiAgICAtd2Via2l0LWFwcGVhcmFuY2U6IG5vbmU7XHJcbiAgICBhcHBlYXJhbmNlOiBub25lO1xyXG59XHJcbi5kZWxpdmVyeV9mb3JtIHAge1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBtYXJnaW4tdG9wOiAwO1xyXG4gICAgZm9udC1zaXplOiAxNHB4O1xyXG4gICAgY29sb3I6ICNFNTY2M0Q7XHJcbn1cclxuLmNyZWF0ZV9hY2NvdW50IHsgICBcclxuICAgIHdpZHRoOiA1MCU7XHJcbiAgICBmbG9hdDogbGVmdDtcclxufVxyXG4uY3JlYXRlX2FjY291bnQgaDIge1xyXG4gICAgY29sb3I6ICNFNTY2M0Q7XHJcbiAgICBmb250LXNpemU6IDIzcHg7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAzMHB4O1xyXG59XHJcbi5jcmVhdGVfYWNjb3VudCBmb3JtIGlucHV0IHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgcGFkZGluZzogMTBweDtcclxuICAgIG1hcmdpbi1ib3R0b206IDE1cHg7XHJcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gICAgYm9yZGVyOiAycHggc29saWQgI2UyZTJlMjtcclxufVxyXG4ubWFrZV9wYXltZW50X2J0biB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgcGFkZGluZy1sZWZ0OiAzMHB4O1xyXG4gICAgcGFkZGluZy1ib3R0b206IDUwcHg7XHJcbiAgICBtYXJnaW4tdG9wOiA1MHB4O1xyXG59XHJcbi5tYWtlX3BheW1lbnRfYnRuIGEge1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gICAgY29sb3I6IHJnYmEoNTAsIDUwLCA1MCwgMSk7XHJcbiAgICBwYWRkaW5nOiAxMHB4IDIwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xyXG4gICAgYm9yZGVyLXJhZGl1czogMjVweDtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkIHJnYmEoNTAsIDUwLCA1MCwgMSk7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxufVxyXG4ubWFrZV9wYXltZW50X2J0biBhOmhvdmVyIHtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSg1MCwgNTAsIDUwLCAxKTtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkIHJnYmEoNTAsIDUwLCA1MCwgMSk7XHJcbn1cclxuIl19 */"
+module.exports = ".select_delivery_address_wrapper {\r\n    width: 60%;\r\n    margin: 0 auto;\r\n    padding: 60px 0px;\r\n    display: block;\r\n    height: 100%;\r\n    overflow: hidden;\r\n}\r\n.delivery_content {\r\n    width: 100%;\r\n    float: left;\r\n}\r\n.select_delivery_address_wrapper h3 {\r\n    font-size: 23px;\r\n    color: #E5663D;\r\n}\r\n.delivery_form form .row:first-child {\r\n    width: 40%;\r\n    float: left;\r\n}\r\n.delivery_form form .row:nth-child(2) {\r\n    width: 56%;\r\n    float: left;\r\n    margin-left: 4%;\r\n}\r\n.form_control {\r\n    width: 100%;\r\n    padding: 10px;\r\n    box-sizing: border-box;\r\n    margin-bottom: 20px;\r\n    border: 2px solid #e2e2e2;\r\n}\r\n.invalid-feedback {    \r\n    color: red;\r\n    background-color: antiquewhite;\r\n    border: 2px solid antiquewhite !important;\r\n    margin-bottom: 20px;\r\n}\r\n.delivery_form p {\r\n    float: left;\r\n    margin-top: 0;\r\n    font-size: 14px;\r\n    color: #E5663D;\r\n}\r\n.make_payment_btn {\r\n    text-decoration: none;\r\n    color: rgba(50, 50, 50, 1);\r\n    padding: 10px 20px;\r\n    background-color: #fff;\r\n    border-radius: 25px;\r\n    border: 2px solid rgba(50, 50, 50, 1);\r\n    font-weight: bold;\r\n    margin-top: 50px;\r\n    cursor: pointer;\r\n    outline: none;\r\n    float: left;\r\n}\r\n.make_payment_btn a {\r\n    text-decoration: none;\r\n    color: rgba(50, 50, 50, 1);\r\n    padding: 10px 20px;\r\n    background-color: #fff;\r\n    border-radius: 25px;\r\n    border: 2px solid rgba(50, 50, 50, 1);\r\n    font-weight: bold;\r\n}\r\n.make_payment_btn:hover {\r\n    color: #fff;\r\n    background-color: rgba(50, 50, 50, 1);\r\n    border: 2px solid rgba(50, 50, 50, 1);\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGVsaXZlcnkvZGVsaXZlcnkuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFdBQVc7SUFDWCxlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLGVBQWU7SUFDZixhQUFhO0lBQ2IsaUJBQWlCO0NBQ3BCO0FBQ0Q7SUFDSSxZQUFZO0lBQ1osWUFBWTtDQUNmO0FBQ0Q7SUFDSSxnQkFBZ0I7SUFDaEIsZUFBZTtDQUNsQjtBQUNEO0lBQ0ksV0FBVztJQUNYLFlBQVk7Q0FDZjtBQUNEO0lBQ0ksV0FBVztJQUNYLFlBQVk7SUFDWixnQkFBZ0I7Q0FDbkI7QUFDRDtJQUNJLFlBQVk7SUFDWixjQUFjO0lBQ2QsdUJBQXVCO0lBQ3ZCLG9CQUFvQjtJQUNwQiwwQkFBMEI7Q0FDN0I7QUFDRDtJQUNJLFdBQVc7SUFDWCwrQkFBK0I7SUFDL0IsMENBQTBDO0lBQzFDLG9CQUFvQjtDQUN2QjtBQUNEO0lBQ0ksWUFBWTtJQUNaLGNBQWM7SUFDZCxnQkFBZ0I7SUFDaEIsZUFBZTtDQUNsQjtBQUNEO0lBQ0ksc0JBQXNCO0lBQ3RCLDJCQUEyQjtJQUMzQixtQkFBbUI7SUFDbkIsdUJBQXVCO0lBQ3ZCLG9CQUFvQjtJQUNwQixzQ0FBc0M7SUFDdEMsa0JBQWtCO0lBQ2xCLGlCQUFpQjtJQUNqQixnQkFBZ0I7SUFDaEIsY0FBYztJQUNkLFlBQVk7Q0FDZjtBQUNEO0lBQ0ksc0JBQXNCO0lBQ3RCLDJCQUEyQjtJQUMzQixtQkFBbUI7SUFDbkIsdUJBQXVCO0lBQ3ZCLG9CQUFvQjtJQUNwQixzQ0FBc0M7SUFDdEMsa0JBQWtCO0NBQ3JCO0FBQ0Q7SUFDSSxZQUFZO0lBQ1osc0NBQXNDO0lBQ3RDLHNDQUFzQztDQUN6QyIsImZpbGUiOiJzcmMvYXBwL2RlbGl2ZXJ5L2RlbGl2ZXJ5LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc2VsZWN0X2RlbGl2ZXJ5X2FkZHJlc3Nfd3JhcHBlciB7XHJcbiAgICB3aWR0aDogNjAlO1xyXG4gICAgbWFyZ2luOiAwIGF1dG87XHJcbiAgICBwYWRkaW5nOiA2MHB4IDBweDtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxufVxyXG4uZGVsaXZlcnlfY29udGVudCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG59XHJcbi5zZWxlY3RfZGVsaXZlcnlfYWRkcmVzc193cmFwcGVyIGgzIHtcclxuICAgIGZvbnQtc2l6ZTogMjNweDtcclxuICAgIGNvbG9yOiAjRTU2NjNEO1xyXG59XHJcbi5kZWxpdmVyeV9mb3JtIGZvcm0gLnJvdzpmaXJzdC1jaGlsZCB7XHJcbiAgICB3aWR0aDogNDAlO1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbn1cclxuLmRlbGl2ZXJ5X2Zvcm0gZm9ybSAucm93Om50aC1jaGlsZCgyKSB7XHJcbiAgICB3aWR0aDogNTYlO1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBtYXJnaW4tbGVmdDogNCU7XHJcbn1cclxuLmZvcm1fY29udHJvbCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmc6IDEwcHg7XHJcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMjBweDtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICNlMmUyZTI7XHJcbn1cclxuLmludmFsaWQtZmVlZGJhY2sgeyAgICBcclxuICAgIGNvbG9yOiByZWQ7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBhbnRpcXVld2hpdGU7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCBhbnRpcXVld2hpdGUgIWltcG9ydGFudDtcclxuICAgIG1hcmdpbi1ib3R0b206IDIwcHg7XHJcbn1cclxuLmRlbGl2ZXJ5X2Zvcm0gcCB7XHJcbiAgICBmbG9hdDogbGVmdDtcclxuICAgIG1hcmdpbi10b3A6IDA7XHJcbiAgICBmb250LXNpemU6IDE0cHg7XHJcbiAgICBjb2xvcjogI0U1NjYzRDtcclxufVxyXG4ubWFrZV9wYXltZW50X2J0biB7XHJcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgICBjb2xvcjogcmdiYSg1MCwgNTAsIDUwLCAxKTtcclxuICAgIHBhZGRpbmc6IDEwcHggMjBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmY7XHJcbiAgICBib3JkZXItcmFkaXVzOiAyNXB4O1xyXG4gICAgYm9yZGVyOiAycHggc29saWQgcmdiYSg1MCwgNTAsIDUwLCAxKTtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgbWFyZ2luLXRvcDogNTBweDtcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgIG91dGxpbmU6IG5vbmU7XHJcbiAgICBmbG9hdDogbGVmdDtcclxufVxyXG4ubWFrZV9wYXltZW50X2J0biBhIHtcclxuICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxuICAgIGNvbG9yOiByZ2JhKDUwLCA1MCwgNTAsIDEpO1xyXG4gICAgcGFkZGluZzogMTBweCAyMHB4O1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjtcclxuICAgIGJvcmRlci1yYWRpdXM6IDI1cHg7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCByZ2JhKDUwLCA1MCwgNTAsIDEpO1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuLm1ha2VfcGF5bWVudF9idG46aG92ZXIge1xyXG4gICAgY29sb3I6ICNmZmY7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDUwLCA1MCwgNTAsIDEpO1xyXG4gICAgYm9yZGVyOiAycHggc29saWQgcmdiYSg1MCwgNTAsIDUwLCAxKTtcclxufVxyXG4iXX0= */"
 
 /***/ }),
 
@@ -685,7 +687,7 @@ module.exports = ".select_delivery_address_wrapper {\r\n    width: 60%;\r\n    m
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"select_delivery_address_wrapper\">\n  <div class=\"delivery_content\">\n      <h3>Munchies bag to this address</h3>\n      <div class=\"delivery_form\">\n          <form [formGroup] = \"deliveryForm\" (ngSubmit) = \"onSubmit()\">\n              <div class=\"row\">\n                  <input class=\"field1\" type=\"text\" name=\"name\" placeholder=\"Name\" />\n                  <select class=\"field2\" name=\"area\">\n                      <option value=\"Area of Delivery\">Area of Delivery</option>\n                  </select>\n              </div>\n              <div class=\"row\">\n                  <input class=\"field1\" type=\"text\" name=\"surname\" placeholder=\"Surname\" />\n                  <input class=\"field2\" type=\"text\" name=\"address\" placeholder=\"Address...\" />\n              </div>\n              <div class=\"row\">\n                  <input class=\"field1\" type=\"text\" name=\"phone_number\" placeholder=\"Phone Number\" />\n                  <input class=\"field2\" type=\"text\" name=\"postal_code\" placeholder=\"Postal Code\" />\n              </div>\n          </form>\n          <p>*If you can't find you're area, we aren't delivering there yet. But we will be there soon :)</p>\n      </div>\n  </div>\n  <div class=\"create_account\">\n      <h2>Create an account</h2>\n      <form [formGroup] = \"createAccount\" (ngSubmit) = \"onSubmit()\">\n          <input type=\"email\" name=\"email\" placeholder=\"Email\" />\n          <input type=\"password\" name=\"createPassword\" placeholder=\"Create Password\" />\n          <input type=\"password\" name=\"confirmPassword\" placeholder=\"Confirm Password\" />\n      </form>\n  </div>\n  <div class=\"make_payment_btn\">\n      <a href=\"/order-summary\">Make Payment</a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"select_delivery_address_wrapper\">\n  <div class=\"delivery_content\">\n      <h3>Munchies bag to this address</h3>\n      <div class=\"delivery_form\">\n          <form [formGroup] = \"deliveryForm\" (ngSubmit) = \"onSubmit()\">\n              <div class=\"row\">\n                  <div class=\"fields\">\n                      <div>\n                        <input class=\"form_control\" formControlName=\"name\" type=\"text\" name=\"name\" placeholder=\"Name\" />\n                        <div *ngIf=\"submitted && f.name.errors\" class=\"invalid-feedback form_control\">\n                            <div *ngIf=\"submitted && f.name.errors.required\">Name is required</div>\n                        </div>\n                      </div>\n                      <div>\n                        <input class=\"form_control\" type=\"text\" formControlName=\"surName\" name=\"surName\" placeholder=\"Surname\" />\n                        <div *ngIf=\"submitted && f.surName.errors\" class=\"invalid-feedback form_control\">\n                            <div *ngIf=\"submitted && f.surName.errors.required\">SurName is required</div>\n                        </div>\n                      </div>\n                      <div>\n                        <input class=\"form_control\" type=\"text\" formControlName=\"phone\" name=\"phone\" minlength=\"10\" maxlength=\"10\" placeholder=\"Phone Number\" />\n                        <div *ngIf=\"submitted && f.phone.errors\" class=\"invalid-feedback form_control\">\n                            <div *ngIf=\"submitted && f.phone.errors.required\">Phone Number is required</div>\n                            <div *ngIf=\"submitted && f.phone.errors.maxlength\">Maxlength</div>\n                            <div *ngIf=\"submitted && f.phone.errors.pattern\">Please enter valid Phone Number</div>\n                        </div>\n                      </div>\n                  </div>\n              </div>\n              <div class=\"row\">\n                    <div class=\"fields\">\n                        <div>\n                            <select class=\"form_control\" formControlName=\"area\" name=\"area\" placeholder=\"Area\">\n                                <option value=\"Area of Delivery\">Area of Delivery</option>\n                            </select>\n                            <div *ngIf=\"submitted && f.area.errors\" class=\"invalid-feedback form_control\">\n                                <div *ngIf=\"submitted && f.area.errors.required\">Area is required</div>\n                            </div>\n                        </div>\n                        <div>\n                            <input class=\"form_control\" type=\"text\" formControlName=\"address\" name=\"address\" placeholder=\"Address...\" />\n                            <div *ngIf=\"submitted && f.address.errors\" class=\"invalid-feedback form_control\">\n                                <div *ngIf=\"submitted && f.address.errors.required\">Address is required</div>\n                            </div>\n                        </div>\n                        <div>\n                            <input class=\"form_control\" type=\"text\" formControlName=\"postalCode\" name=\"postalCode\" placeholder=\"Postal Code\" />\n                            <div *ngIf=\"submitted && f.postalCode.errors\" class=\"invalid-feedback form_control\">\n                                <div *ngIf=\"submitted && f.postalCode.errors.required\">Postal Code is required</div>\n                                <div *ngIf=\"submitted && f.postalCode.errors.pattern\">Please Enter Valid postal Code</div>\n                            </div>\n                        </div>\n                    </div>\n              </div>\n          <p>*If you can't find you're area, we aren't delivering there yet. But we will be there soon :)</p>\n          <button class=\"make_payment_btn\">Make Payment</button>          \n        </form>\n      </div>\n  </div>\n  <!-- <div class=\"create_account\">\n      <h2>Create an account</h2>\n      <form [formGroup] = \"createAccount\" (ngSubmit) = \"onSubmit()\">\n          <input type=\"email\" name=\"email\" placeholder=\"Email\" />\n          <input type=\"password\" name=\"createPassword\" placeholder=\"Create Password\" />\n          <input type=\"password\" name=\"confirmPassword\" placeholder=\"Confirm Password\" />\n      </form>\n  </div> -->\n  <!-- <div class=\"make_payment_btn\">\n      <a href=\"/order-summary\">Make Payment</a>\n  </div> -->\n</div>\n"
 
 /***/ }),
 
@@ -700,6 +702,9 @@ module.exports = "<div class=\"select_delivery_address_wrapper\">\n  <div class=
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeliveryComponent", function() { return DeliveryComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -710,10 +715,63 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var DeliveryComponent = /** @class */ (function () {
-    function DeliveryComponent() {
+    function DeliveryComponent(router, formBuilder, http) {
+        this.router = router;
+        this.formBuilder = formBuilder;
+        this.http = http;
+        this.submitted = false;
+        this.name = "";
+        this.surName = "";
+        this.area = "";
+        this.address = "";
+        this.phone = "";
+        this.postalCode = "";
+        this.data = {};
     }
     DeliveryComponent.prototype.ngOnInit = function () {
+        this.deliveryForm = this.formBuilder.group({
+            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            area: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            surName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            address: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            phone: ['', [
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(10),
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('[0-9]+') // validates input is digit
+                ]],
+            postalCode: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('^[0-9]{6}(?:-[0-9]{4})?$')]],
+        });
+    };
+    Object.defineProperty(DeliveryComponent.prototype, "f", {
+        // convenience getter for easy access to form fields
+        get: function () { return this.deliveryForm.controls; },
+        enumerable: true,
+        configurable: true
+    });
+    DeliveryComponent.prototype.onSubmit = function () {
+        this.submitted = true;
+        // stop here if form is invalid
+        if (this.deliveryForm.invalid) {
+            return;
+        }
+        this.data = {
+            name: this.f.name.value,
+            surName: this.f.surName.value,
+            area: this.f.area.value,
+            address: this.f.address.value,
+            phoneNumber: this.f.phone.value,
+            postalCode: this.f.postalCode.value
+        };
+        this.http.post('http:9191//api/order/createOrder', this.data).subscribe(function (data) {
+            console.log(data);
+        }, function (err) {
+            console.log(err);
+        });
+        //this.http('', )
     };
     DeliveryComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -721,7 +779,7 @@ var DeliveryComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./delivery.component.html */ "./src/app/delivery/delivery.component.html"),
             styles: [__webpack_require__(/*! ./delivery.component.css */ "./src/app/delivery/delivery.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
     ], DeliveryComponent);
     return DeliveryComponent;
 }());
@@ -1042,6 +1100,11 @@ var ManageSubscriptionComponent = /** @class */ (function () {
         // }
     }
     ManageSubscriptionComponent.prototype.ngOnInit = function () {
+        this.http.get('http://localhost:9191/api/order/getMyorders').subscribe(function (resData) {
+            console.log('loll', resData);
+        }, function (error) {
+            console.log('error', 'Allow Signup', 'Server Error');
+        });
     };
     ManageSubscriptionComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1394,7 +1457,7 @@ module.exports = ".signin_page_wrapper {\r\n    display: flex;\r\n    margin-top
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"signin_page_wrapper\">\n    <div class=\"signin_page_first_box\">\n        <img src=\"../assets/a.png\" />\n    </div>\n    <div class=\"signin_box\">\n        <div class=\"signin_box_content\">\n            <h2>Welcome to Munchies!</h2>\n            <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n                <div class=\"invalid-feedback\" *ngIf=\"!success\">{{error}}</div>\n                <input class=\"border_bottom\" type=\"email\" formControlName=\"username\" name=\"username\" [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\" placeholder=\"Email ID\" required />\n                <div *ngIf=\"submitted && (f.username.errors || f.username.invalid)\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.username.errors.required\">Username is required</div>\n                    <div *ngIf=\"f.username.errors.email\">Email must be a valid email address</div>\n                </div>\n                <input class=\"border_bottom\" formControlName=\"password\" type=\"password\" name=\"password\" [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" placeholder=\"Password\" required />\n                <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.password.errors.required\">Password is required</div>\n                </div>\n                <div class=\"forgot_remember_links\">\n                    <div class=\"remember_me\"><input type=\"checkbox\" name=\"chk\" checked /> <span>Remember Me</span></div>\n                    <div class=\"forgot_password\">Forgot Password</div>\n                </div>\n                <div class=\"sign_in_button\">\n                    <button type=\"submit\">Sign In</button>\n                </div>\n                <div class=\"sign_up_wrapper\">\n                    <div class=\"dont_have_account_text\">Don't have an account?</div>\n                    <div class=\"sign_up_text\"><a href=\"/sign-up\">Sign Up now</a></div>\n                </div>\n                <div class=\"or_login_with\">\n                    <div class=\"or\">or</div>\n                    <div class=\"loginwith\">Log in with</div>\n                </div>\n            </form>\n            <div class=\"facebook_google\">\n                <img src=\"../assets/fb.png\" alt=\"No Image\" (click) = \"fbLogin()\"/>\n                <img src=\"../assets/google_plus.png\" alt=\"No Image\"  (click)=\"googleLogin()\" />\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"signin_page_wrapper\">\n    <div class=\"signin_page_first_box\">\n        <img src=\"../assets/a.png\" />\n    </div>\n    <div class=\"signin_box\">\n        <div class=\"signin_box_content\">\n            <h2>Welcome to Munchies!</h2>\n            <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n                <div class=\"invalid-feedback\" *ngIf=\"!success\">{{error}}</div>\n                <input class=\"border_bottom\" type=\"email\" formControlName=\"username\" name=\"username\" [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\" placeholder=\"Email ID\" required />\n                <div *ngIf=\"submitted && (f.username.errors || f.username.invalid)\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.username.errors.required\">Username is required</div>\n                    <div *ngIf=\"f.username.errors.email\">Email must be a valid email address</div>\n                </div>\n                <input class=\"border_bottom\" formControlName=\"password\" type=\"password\" name=\"password\" [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" placeholder=\"Password\" required />\n                <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.password.errors.required\">Password is required</div>\n                </div>\n                <div class=\"forgot_remember_links\">\n                    <div class=\"remember_me\"><input type=\"checkbox\" name=\"chk\" checked /> <span>Remember Me</span></div>\n                    <div class=\"forgot_password\">Forgot Password</div>\n                </div>\n                <div class=\"sign_in_button\">\n                    <button type=\"submit\">Sign In</button>\n                </div>\n                <div class=\"sign_up_wrapper\">\n                    <div class=\"dont_have_account_text\">Don't have an account?</div>\n                    <div class=\"sign_up_text\"><a routerLink=\"/sign-up\">Sign Up now</a></div>\n                </div>\n                <div class=\"or_login_with\">\n                    <div class=\"or\">or</div>\n                    <div class=\"loginwith\">Log in with</div>\n                </div>\n            </form>\n            <div class=\"facebook_google\">\n                <img src=\"../assets/fb.png\" alt=\"No Image\" (click) = \"fbLogin()\"/>\n                <img src=\"../assets/google_plus.png\" alt=\"No Image\"  (click)=\"googleLogin()\" />\n            </div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -1470,18 +1533,18 @@ var SignInComponent = /** @class */ (function () {
             console.log(this.username + "\n");
             console.log(this.password);
             this.http.post('http://localhost:9191/api/user/login', { 'email': this.username, 'password': this.password }).subscribe(function (data) {
-                console.log("PATCH Request is successful ", data.error);
+                console.log("PATCH Request is successful ", data);
                 _this.success = data.success;
                 _this.error = data.error;
                 if (data.success) {
                     sessionStorage.setItem('isLoggedIn', "true");
                     sessionStorage.setItem('token', _this.username);
                     console.log("gooooddddd");
-                    _this.http.post('http://localhost:9191/api/order/getMyorders', {}).subscribe(function (resData) {
-                        console.log(resData);
-                    }, function (error) {
-                        console.log('error', 'Allow Signup', 'Server Error');
-                    });
+                    // this.http.get('http://localhost:9191/api/order/getMyorders').subscribe(resData => {
+                    //   console.log(resData);
+                    // }, error => {
+                    //   console.log('error', 'Allow Signup', 'Server Error');
+                    // });
                     if (sessionStorage.getItem('isLoggedIn')) {
                         _this.router.navigate(['/manage-subscription']);
                     }
@@ -1731,7 +1794,7 @@ module.exports = ".subscribe_page_wrapper {\r\n    width: 100%;\r\n    height: 1
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"subscribe_page_wrapper\">\n  <div class=\"subscribe_page_content\">\n    <h2>Snacking made simple and convenient!</h2>\n    <h3 class=\"color_none\">Select a Plan</h3>\n    <div class=\"select_plan\">\n      <div class=\"plans\">\n        <div class=\"plan\">\n          <a href=\"/delivery\">\n            <h3>Trial Week</h3>\n            <h2 class=\"rate\">500Rs/bag</h2>\n            <p>Try our snack bag of one week. You'll get one bag with 6 healthy snacks that will take care of your evening hunger pangs.</p>\n          </a>\n        </div>\n        <div class=\"plan\">\n          <a href=\"/delivery\">\n            <h3>For 4 Weeks</h3>\n            <h2 class=\"rate\">500Rs/bag</h2>\n            <p>1 snack bag delivered each week for a period of 1 month</p>\n          </a>\n        </div>\n        <div class=\"plan\">\n          <a href=\"/delivery\">\n            <h3>For 12 Weeks</h3>\n            <h2 class=\"rate\">500Rs/bag</h2>\n            <p>1 snack bag delivered each week for a period of 6 months</p>\n          </a>\n        </div>\n      </div>\n    </div>\n    <div class=\"answer_questions\">\n      <h3 class=\"color_none\">Answer a few simple questions so we know what snacks are best for you</h3>\n      <div class=\"question_wrapper\">\n        <p>Are you allergic to any of the following?</p>\n        <ul>\n          <li><input type=\"radio\" value=\"milk\" name=\"q1\" />Milk</li>\n          <li><input type=\"radio\" value=\"eggs\" name=\"q1\" />EGGS</li>\n          <li><input type=\"radio\" value=\"peanuts\" name=\"q1\" />PEANUTS</li>\n          <li><input type=\"radio\" value=\"other nuts\" name=\"q1\" />OTHER NUTS</li>\n          <li><input type=\"radio\" value=\"wheat\" name=\"q1\" />WHEAT</li>\n          <li><input type=\"radio\" value=\"none\" name=\"q1\" />NONE</li>\n        </ul>\n        <div class=\"product_images first_box\">\n          <img src=\"../../assets/peanut.png\" alt=\"peanut.png\"/>\n          <img src=\"../../assets/chocolate-bar.png\" alt=\"chocolate_bar.png\"/>\n        </div>\n      </div>\n      <div class=\"question_wrapper\">\n        <p>Pick flavours you don't like </p>\n        <ul>\n          <li><input type=\"radio\" value=\"chocolate\" name=\"q2\" />CHOCOLATE</li>\n          <li><input type=\"radio\" value=\"strawberry\" name=\"q2\" />STRAWBERRY</li>\n          <li><input type=\"radio\" value=\"mint\" name=\"q2\" />MINT</li>\n          <li><input type=\"radio\" value=\"tomato\" name=\"q2\" />TOMATO</li>\n          <li><input type=\"radio\" value=\"no preference\" name=\"q2\" />NO PREFERENCE</li>\n        </ul>\n        <div class=\"product_images second_box\">\n          <img src=\"../../assets/harvest.png\" alt=\"banana.png\"/>\n          <img src=\"../../assets/cheese.png\" alt=\"cheese.png\"/>\n        </div>\n      </div>\n      <div class=\"question_wrapper\">\n        <p>Pick fruits you don't like </p>\n        <ul>\n          <li><input type=\"radio\" value=\"banana\" name=\"q3\" />BANANA</li>\n          <li><input type=\"radio\" value=\"apple\" name=\"q3\" />APPLE</li>\n          <li><input type=\"radio\" value=\"pear\" name=\"q3\" />PEAR</li>\n          <li><input type=\"radio\" value=\"guava\" name=\"q3\" />GUAVA</li>\n          <li><input type=\"radio\" value=\"mango\" name=\"q3\" />MANGO</li>\n          <li><input type=\"radio\" value=\"no preference\" name=\"q3\" />NO PREFERENCE</li>\n        </ul>\n        <div class=\"product_images third_box\">\n          <img src=\"../../assets/strawberry.png\" alt=\"strawberry.png\"/>\n        </div>\n      </div>  \n    </div>\n    <div class=\"ok_button\">\n      <a href=\"/delivery\">Ok</a>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"subscribe_page_wrapper\">\n  <div class=\"subscribe_page_content\">\n    <h2>Snacking made simple and convenient!</h2>\n    <h3 class=\"color_none\">Select a Plan</h3>\n    <div class=\"select_plan\">\n      <div class=\"plans\">\n        <div class=\"plan\" *ngFor=\"let item of plan; let i = index\">\n          <div (click)=\"selectedPlan(i+1)\">\n            <h3>{{item.planName}}</h3>\n            <h2 class=\"rate\">{{item.planRate}}</h2>\n            <p>{{item.planText}}</p>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"answer_questions\">\n      <h3 class=\"color_none\">Answer a few simple questions so we know what snacks are best for you</h3>\n      <div class=\"question_wrapper\" *ngFor=\"let q of questions\">\n        <p>{{q.question}}</p>\n        <ul>\n          <li *ngFor=\"let opt of q.options\"><input type=\"radio\" value=\"{{opt.optionText}}\" name=\"{{opt.optName}}\" [(ngModel)]=\"q.selectedOpt\" />{{opt.optionText}}</li>\n        </ul>\n        <div class=\"product_images + {{ q.class}}\" >\n          <img *ngFor=\"let image of q.images\" src=\"{{image.url}}\" alt=\"{{image.alt}}\"/>\n        </div>\n      </div>\n    </div>\n    <div class=\"ok_button\" (click)=\"checkDelivery()\">\n      <a routerLink=\"/delivery\" [queryParams] = \"{selectedPlan: selectedPlanId, question1: questions[0].selectedOpt, question2: questions[1].selectedOpt, question3: questions[2].selectedOpt }\">Ok</a>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1758,8 +1821,160 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var SubscribeComponent = /** @class */ (function () {
     function SubscribeComponent() {
+        this.selectedPlanId = null;
+        this.plan = [{
+                planId: 1,
+                planName: "Trial Week",
+                planRate: "500Rs/bag",
+                planText: "Try our snack bag of one week. You'll get one bag with 6 healthy snacks that will take care of your evening hunger pangs."
+            },
+            {
+                planId: 2,
+                planName: "For 4 Weeks",
+                planRate: "500Rs/bag",
+                planText: "1 snack bag delivered each week for a period of 1 month"
+            },
+            {
+                planId: 3,
+                planName: "For 12 Weeks",
+                planRate: "500Rs/bag",
+                planText: "1 snack bag delivered each week for a period of 6 months"
+            }];
+        this.questions = [{
+                qId: 1,
+                question: "Are you allergic to any of the following?",
+                options: [{
+                        optionId: 1,
+                        optionText: "Milk",
+                        optName: "q1"
+                    },
+                    {
+                        optionId: 2,
+                        optionText: "Eggs",
+                        optName: "q1"
+                    },
+                    {
+                        optionId: 3,
+                        optionText: "Peanuts",
+                        optName: "q1"
+                    },
+                    {
+                        optionId: 4,
+                        optionText: "Other Nuts",
+                        optName: "q1"
+                    },
+                    {
+                        optionId: 5,
+                        optionText: "Wheat",
+                        optName: "q1"
+                    },
+                    {
+                        optionId: 6,
+                        optionText: "none",
+                        optName: "q1"
+                    }],
+                images: [{
+                        url: "../../assets/peanut.png",
+                        alt: "peanut.png"
+                    },
+                    {
+                        url: "../../assets/chocolate-bar.png",
+                        alt: "chocolate_bar.png"
+                    }],
+                class: "first_box",
+                selectedOpt: null
+            },
+            {
+                qId: 2,
+                question: "Pick flavours you don't like",
+                options: [{
+                        optionId: 1,
+                        optionText: "Chocolate",
+                        optName: "q2"
+                    },
+                    {
+                        optionId: 2,
+                        optionText: "Strawberry",
+                        optName: "q2"
+                    },
+                    {
+                        optionId: 3,
+                        optionText: "Mint",
+                        optName: "q2"
+                    },
+                    {
+                        optionId: 4,
+                        optionText: "Tomato",
+                        optName: "q2"
+                    },
+                    {
+                        optionId: 5,
+                        optionText: "No Preference",
+                        optName: "q2"
+                    }],
+                images: [{
+                        url: "../../assets/harvest.png",
+                        alt: "harvest.png"
+                    },
+                    {
+                        url: "../../assets/cheese.png",
+                        alt: "cheese.png"
+                    }],
+                class: "second_box",
+                selectedOpt: null
+            },
+            {
+                qId: 3,
+                question: "Pick fruits you don't like",
+                options: [{
+                        optionId: 1,
+                        optionText: "Banana",
+                        optName: "q3"
+                    },
+                    {
+                        optionId: 2,
+                        optionText: "Apple",
+                        optName: "q3"
+                    },
+                    {
+                        optionId: 3,
+                        optionText: "Pear",
+                        optName: "q3"
+                    },
+                    {
+                        optionId: 4,
+                        optionText: "Guava",
+                        optName: "q3"
+                    },
+                    {
+                        optionId: 5,
+                        optionText: "Mango",
+                        optName: "q3"
+                    },
+                    {
+                        optionId: 6,
+                        optionText: "No Preference",
+                        optName: "q3"
+                    }],
+                images: [{
+                        url: "../../assets/strawberry.png",
+                        alt: "strawberry.png"
+                    }],
+                class: "third_box",
+                selectedOpt: null
+            }
+        ];
     }
     SubscribeComponent.prototype.ngOnInit = function () {
+        console.log("hiiiiii", this.questions);
+    };
+    SubscribeComponent.prototype.selectedPlan = function (selectedPlanId) {
+        console.log("sel", selectedPlanId);
+        this.selectedPlanId = selectedPlanId;
+    };
+    SubscribeComponent.prototype.checkDelivery = function () {
+        console.log("in check delivery");
+        console.log("plan selected", this.selectedPlanId);
     };
     SubscribeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1919,8 +2134,7 @@ var environment = {
     production: false,
     firebase: {
         apiKey: "AIzaSyAXypfKjo32hy1gJ5ygNZ41h7yPU_WyAhU",
-        // authDomain: "ffbauth.firebaseapp.com",
-        authDomain: 'https://dev-munchies.herokuapp.com',
+        authDomain: "ffbauth.firebaseapp.com",
         databaseURL: "https://ffbauth.firebaseio.com",
         projectId: "ffbauth",
         storageBucket: "ffbauth.appspot.com",

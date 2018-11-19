@@ -14,27 +14,27 @@
     font-size: 23px;
     color: #E5663D;
 }
-.delivery_form form .row {
-    width: 100%;
-    float: left;
-    margin-bottom: 15px;
-}
-.delivery_form form .field1 {
+.delivery_form form .row:first-child {
     width: 40%;
     float: left;
-    box-sizing: border-box;
-    padding: 10px;
-    border: 2px solid #e2e2e2;
 }
-.delivery_form form .field2 {
+.delivery_form form .row:nth-child(2) {
     width: 56%;
     float: left;
-    box-sizing: border-box;
     margin-left: 4%;
+}
+.form_control {
+    width: 100%;
     padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
     border: 2px solid #e2e2e2;
-    -webkit-appearance: none;
-    appearance: none;
+}
+.invalid-feedback {    
+    color: red;
+    background-color: antiquewhite;
+    border: 2px solid antiquewhite !important;
+    margin-bottom: 20px;
 }
 .delivery_form p {
     float: left;
@@ -42,28 +42,18 @@
     font-size: 14px;
     color: #E5663D;
 }
-.create_account {   
-    width: 50%;
-    float: left;
-}
-.create_account h2 {
-    color: #E5663D;
-    font-size: 23px;
-    margin-bottom: 30px;
-}
-.create_account form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 2px solid #e2e2e2;
-}
 .make_payment_btn {
-    width: 100%;
-    float: left;
-    padding-left: 30px;
-    padding-bottom: 50px;
+    text-decoration: none;
+    color: rgba(50, 50, 50, 1);
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 25px;
+    border: 2px solid rgba(50, 50, 50, 1);
+    font-weight: bold;
     margin-top: 50px;
+    cursor: pointer;
+    outline: none;
+    float: left;
 }
 .make_payment_btn a {
     text-decoration: none;
@@ -74,7 +64,7 @@
     border: 2px solid rgba(50, 50, 50, 1);
     font-weight: bold;
 }
-.make_payment_btn a:hover {
+.make_payment_btn:hover {
     color: #fff;
     background-color: rgba(50, 50, 50, 1);
     border: 2px solid rgba(50, 50, 50, 1);
