@@ -31,6 +31,9 @@
     line-height: 22px;
     color: #2F2E2E;
 }
+.plan.border_selected {
+    border: 2px solid green;
+}
 .select_plan .plan a {
     text-decoration: none;
 }

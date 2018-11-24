@@ -58,16 +58,14 @@ export class SignInComponent implements OnInit {
         this.success = data.success;
         this.error = data.error;
         if(data.success) {
-          
-          sessionStorage.setItem('isLoggedIn', "true");
-          sessionStorage.setItem('token', this.username);
+          this.authService.setLoggedIn(true);
           console.log("gooooddddd");
           // this.http.get('http://localhost:9191/api/order/getMyorders').subscribe(resData => {
           //   console.log(resData);
           // }, error => {
           //   console.log('error', 'Allow Signup', 'Server Error');
           // });
-          if(sessionStorage.getItem('isLoggedIn')) {
+          if(this.authService.isLoggedIn()) {
             this.router.navigate(['/manage-subscription']);
           }
         }

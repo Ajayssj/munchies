@@ -20,8 +20,10 @@ export class DeliveryComponent implements OnInit {
   phone = "";
   postalCode = "";
   data = {};
+  httpOptions = {};
+  isLoggedIn = sessionStorage.getItem('isLoggedIn');
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient) { }
-
+  
   ngOnInit() {
     this.deliveryForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -35,6 +37,10 @@ export class DeliveryComponent implements OnInit {
       ]],
       postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{6}(?:-[0-9]{4})?$')]],
     });
+    if(!sessionStorage.getItem('isLoggedIn')) {
+      console.log("hiiiiiiiiii");
+      this.router.navigate(['/subscribe']);
+    }
   }
   // convenience getter for easy access to form fields
   get f() { return this.deliveryForm.controls; }
@@ -52,7 +58,13 @@ export class DeliveryComponent implements OnInit {
       phoneNumber: this.f.phone.value,
       postalCode: this.f.postalCode.value
     }
-    this.http.post('http:9191//api/order/createOrder', this.data).subscribe(data=> {
+    // this.httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Cache-Control':  'no-cache'
+    //   })
+    // };
+
+    this.http.post('http://localhost:9191/api/order/createOrder', this.data).subscribe(data=> {
       console.log(data);
     },
     err=> {

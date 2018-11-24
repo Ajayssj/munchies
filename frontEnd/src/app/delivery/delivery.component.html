@@ -53,7 +53,11 @@
                     </div>
               </div>
           <p>*If you can't find you're area, we aren't delivering there yet. But we will be there soon :)</p>
-          <button class="make_payment_btn">Make Payment</button>          
+          <div *ngIf="!isLoggedIn" class="btns">
+             <a routerLink="/signIn" class="btn">Sign In</a>
+             <a routerLink="/sign-up" class="btn">Sign Up</a>
+          </div>
+          <button *ngIf="isLoggedIn" class="btn">Make Payment</button>          
         </form>
       </div>
   </div>

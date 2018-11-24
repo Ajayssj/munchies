@@ -42,7 +42,10 @@
     font-size: 14px;
     color: #E5663D;
 }
-.make_payment_btn {
+.btns .btn:first-child {
+    margin-right: 30px;
+}
+.btn {
     text-decoration: none;
     color: rgba(50, 50, 50, 1);
     padding: 10px 20px;
@@ -55,7 +58,7 @@
     outline: none;
     float: left;
 }
-.make_payment_btn a {
+.btn a {
     text-decoration: none;
     color: rgba(50, 50, 50, 1);
     padding: 10px 20px;
@@ -64,7 +67,7 @@
     border: 2px solid rgba(50, 50, 50, 1);
     font-weight: bold;
 }
-.make_payment_btn:hover {
+.btn:hover {
     color: #fff;
     background-color: rgba(50, 50, 50, 1);
     border: 2px solid rgba(50, 50, 50, 1);

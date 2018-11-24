@@ -13,6 +13,14 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth, private http: HttpClient){
   }
+  
+  isLoggedIn() {
+    return localStorage.getItem("isLoggedIn");
+  }
+  setLoggedIn(value) {
+    console.log(value)
+    localStorage.setItem("isLoggedIn", value);
+  }
     varifyFirebaseToken = function(token, callback) {
     console.log("hiiiiiiiiiii");
     this.http.post('http://localhost:9191/api/user/verifyFirebaseToken', token).subscribe(resData => {

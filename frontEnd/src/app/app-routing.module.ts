@@ -17,6 +17,7 @@ import { PersonalDetailsComponent } from './personal-details/personal-details.co
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { AuthGuard } from './auth/auth.guard';
 import { from } from 'rxjs';
 
 const routes: Routes = [
@@ -28,12 +29,30 @@ const routes: Routes = [
   { path: "sign-up", component: SignUpComponent },
   { path: "subscribe", component: SubscribeComponent },
   { path: "refund-and-cancellation", component: RefundAndCancellationComponent },
-  { path: "delivery", component: DeliveryComponent },
-  { path: "order-summary", component: OrderSummaryComponent },
-  { path: "manage-subscription", component: ManageSubscriptionComponent },
-  { path: "my-orders", component: MyOrdersComponent },
-  { path: "skip-week", component: SkipWeekComponent },
-  { path: "thank-you", component: ThankYouComponent },
+  { path: "delivery", component: DeliveryComponent,
+  canActivate: [
+    AuthGuard
+  ] },
+  { path: "order-summary", component: OrderSummaryComponent,
+  canActivate: [
+    AuthGuard
+  ]  },
+  { path: "manage-subscription", component: ManageSubscriptionComponent,
+  canActivate: [
+    AuthGuard
+  ]  },
+  { path: "my-orders", component: MyOrdersComponent,
+  canActivate: [
+    AuthGuard
+  ]  },
+  { path: "skip-week", component: SkipWeekComponent,
+  canActivate: [
+    AuthGuard
+  ]  },
+  { path: "thank-you", component: ThankYouComponent,
+  canActivate: [
+    AuthGuard
+  ] },
   { path: "personal-details", component: PersonalDetailsComponent },
   { path: "change-password", component: ChangePasswordComponent },
   { path: "refund-and-cancellation", component: RefundAndCancellationComponent },
@@ -43,6 +62,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    AuthGuard
+  ]
 })
 export class AppRoutingModule { }
