@@ -12,7 +12,10 @@
                     <li><a routerLink="/collaborate">Collaborate</a></li>
                     <li><a routerLink="/help">Help</a></li>
                     <li><a routerLink="/contact">Contact</a></li>
-                    <li><a routerLink="/signIn">Sign In</a></li>
+                    <li>
+                        <a *ngIf="!isLoggedIn" routerLink="/signIn">Sign In</a>
+                        <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+                    </li>
                     <li><a routerLink="/subscribe">Get the Bag</a></li>
                 </ul>
                 <div class="overlay" id="overlay"></div>
