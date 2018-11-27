@@ -1,0 +1,256 @@
+.signin_page_wrapper {
+    display: flex;
+    margin-top: 80px;
+}
+.signin_page_first_box {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-color: rgba(131, 167, 155, 1);
+    margin: 40px 0px 40px -35px;
+}
+.signin_page_first_box img {
+    margin: 180px 0 0 170px;
+}
+.signin_box {
+    width: 500px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: relative;
+    right: -180px;
+    top: -30px;
+}
+.signin_box_content {
+    width: 100%;
+    display: block;
+}
+.signin_box_content h2 {
+    margin: 40px 0px 0px 115px;
+    color: #DE6B48;
+    font-size: 30px;
+}
+.signin_box_content input[type="email"], .signin_box_content input[type="password"] {
+    padding: 15px;
+    border: 0px;
+    width: 53%;
+    margin: 0px 0px 15px 70px;
+    color: rgba(63,124,172,1);
+}
+.signin_box_content input.border_bottom {
+    border-bottom: 2px solid rgba(63,124,172,1);
+}
+.forgot_remember_links, .sign_up_wrapper {
+    width: 100%;
+    display: block;
+}
+.remember_me {
+    margin: 20px 85px 20px 70px;
+    display: inline-block;
+    font-size: 16px;
+    color: #DE6B48;
+}
+.forgot_password {
+    display: inline-block;
+    color: #DE6B48;
+}
+.sign_in_button {
+    display: block;
+    margin: 20px 0px 35px 70px;
+}
+.sign_in_button button {
+    text-decoration: none;
+    padding: 10px 145px;
+    background: #fff;
+    color: #3F7CAC;
+    cursor: pointer;
+    border: 2px solid;
+    border-color: #3F7CAC;
+    box-shadow: -0.42px 1.96px 4px 0px rgba(0,0,0,0.6);
+    transition: border-color 0.4s ease 0s, color 0.4s ease 0s;
+}
+.sign_in_button a:hover {
+    color: #000;
+    border-color: #fff; 
+}
+.dont_have_account_text {
+    font-size: 16px;
+    display: inline-block;
+    float: left;
+    margin: 0px 70px 20px 68px;
+    color: #DE6B48;
+}
+.sign_up_text {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+}
+.sign_up_text a {
+    text-decoration: none;
+    color: #2F2E2E;
+}
+.or_login_with {
+    margin-bottom: 10px;
+}
+.or {
+    width: 45%;
+    text-align: right;
+    color: #DE6B48;
+}
+.loginwith {
+    width: 58%;
+    text-align: right;
+    margin-top: 10px;
+    color: #DE6B48;
+}
+.facebook_google {
+    width: 60%;
+    text-align: right;
+}
+.facebook_google img {
+    cursor: pointer;
+}
+.facebook_google img:first-child {
+    margin-right: 22px;
+}
+.invalid-feedback {
+    margin-left: 70px;
+    color: red;
+    padding: 10px;
+    background-color: antiquewhite;
+    width: 55%;
+    border-radius: 5px;
+}
+
+@media screen and (min-width: 300px) {
+    .signin_page_first_box {
+        margin: 40px 0px 40px 40px;
+        display: none;
+    }
+    .signin_page_first_box img {
+        height: 200px;
+        margin: 250px 0 0px 180px;
+    }
+    .signin_box {
+        top: 0px;
+        right: 0px;
+        width: 600px;
+        height: 600px;
+    }
+    .signin_box_content h2 {
+        font-size: 26px;
+        margin: 40px 0px 25px 28px;
+    }
+    .signin_box_content input[type="email"], .signin_box_content input[type="password"] {
+        width: 73%;
+        margin: 0px 0px 15px 28px;
+    }
+    .invalid-feedback {
+        margin: 0px 0px 15px 28px;
+        width: 77%;
+    }
+    .remember_me {
+        margin: 20px 15px 20px 30px;
+    }
+    .sign_in_button {
+        margin: 20px 0px 35px 34px;
+    }
+    .sign_in_button button {
+        padding: 10px 105px;
+    }
+    .sign_up_text {
+        margin-left: 100px;
+        margin-bottom: 20px;
+    }
+    .facebook_google {
+        width: 63%;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .contact_information .email_id {
+        padding-top: 0;
+        margin-top: 70px;
+        margin-left: 40px;
+    
+    }
+    .signin_box_content input[type="email"], .signin_box_content input[type="password"] {
+        width: 63%;
+        margin: 0px 0px 15px 70px;
+    }
+    .invalid-feedback {
+        width: 63%;
+        margin: 0px 0px 15px 70px;
+    }
+    .signin_box {
+        top: 0px;
+        right: 0px;
+        width: 500px;
+        height: 500px;
+    }
+    .signin_box_content h2 {
+        font-size: 26px;
+        margin: 40px 0px 0px 115px;
+    }
+    .remember_me {
+        margin: 20px 85px 20px 70px;
+    }
+    .sign_in_button {
+        margin: 20px 0px 35px 70px;
+    }
+    .sign_in_button button {
+        padding: 10px 143px;
+    }
+    .sign_up_text {
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+    .facebook_google {
+        width: 61%;
+    }
+}
+@media screen and (min-width: 768px) {
+    .signin_page_first_box {
+        width: 300px;
+        height: 300px;
+        margin: 40px 0px 40px -35px;
+        display: block;
+    }
+    .signin_page_first_box img {
+        margin: 160px 0 0 110px;
+        height: 200px;
+    }
+    .signin_box {
+        right: -10px;
+        top: -30px;
+    }
+    .signin_box_content h2 {
+        font-size: 30px;
+        margin: 10px 0px 30px 115px;
+    }
+}
+@media screen and (min-width: 992px) {
+    .signin_box {
+        right: -90px;
+    }
+    
+}
+@media screen and (min-width: 1024px) {
+    .signin_box {
+        right: -90px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .signin_page_first_box {
+        width: 400px;
+        height: 400px;
+    }
+    .signin_page_first_box img {
+        margin: 180px 0 0 170px;
+        height: auto;
+    }
+    .signin_box {
+        right: -180px;
+    }
+}

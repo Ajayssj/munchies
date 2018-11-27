@@ -1,0 +1,65 @@
+.order_summary_wrapper {
+    box-sizing: border-box;
+}
+.order_summary_payment {
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.order_summary {
+    padding: 10px 20px;
+    width: 25%;
+    box-sizing: border-box;
+}
+.order_summary .plan {
+    margin-bottom: 40px;
+}
+.order_summary h2 {
+    font-size: 23px;
+    color: #E5663D;
+}
+.order_summary .heading {
+    margin-bottom: 15px;
+    color: #E5663D;
+    font-size: 14px;
+}
+.order_summary .heading span:first-child {
+    margin-right: 25px;
+}
+.order_summary .week_plan {
+    font-size: 14px;
+    font-weight: bold;
+}
+.order_summary .plan .selected_product {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.sub_total_shipment {
+    margin-top: 60px;
+    color: #E5663D;
+}
+.sub_total_shipment .block {
+    margin-bottom: 10px;
+}
+.sub_total_shipment .block span:first-child {
+    width: 73%;
+    display: inline-block;
+}
+.payment {
+    box-sizing: border-box;
+    flex: 1;
+    text-align: right;
+    padding: 22px 100px;
+}
+.payment a {
+    font-size: 23px;    
+    font-weight: bold;
+    color: #E5663D;
+    text-decoration: none;
+    cursor: pointer;
+}
+.order_summary_wrapper p {
+    text-align: center;
+    color: #E5663D;
+    width: 100%;
+}

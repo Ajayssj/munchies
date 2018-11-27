@@ -1,0 +1,53 @@
+
+h2.faq {
+    font-size: 30px;
+    color: #E5663D;
+    text-align: center;
+    margin-top: 50px;
+    letter-spacing: 2px;
+}
+ol {
+    margin-top: 80px;
+    counter-reset: item;
+}
+ol li {
+    line-height: 22px;
+    font-size: 18px;
+    color: #605E5E;
+    margin-bottom: 20px;
+    list-style-type:none;
+    counter-increment:item;
+}
+ol li::before {
+    display:inline-block;
+    font-weight:bold;
+    content:counter(item) ".";
+}
+ol li span {
+    font-weight: bold;
+    margin-left: 8px;
+}
+ol li p {
+    margin: 5px;
+    text-indent: 23px;
+}
+ol li p a {
+    color: #605E5E;
+}
+
+@media screen and (min-width: 300px) {
+    h2.faq {
+        margin-top: 120px;
+    }
+    ol {
+        margin-top: 35px;
+    }
+}
+@media screen and (min-width: 768px) {
+    h2.faq {
+        margin-top: 50px;
+    }
+    ol {
+        margin-top: 80px;
+    }
+}

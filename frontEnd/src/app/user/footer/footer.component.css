@@ -1,0 +1,105 @@
+
+@font-face {
+    font-family: 'Brandon-Grot-W01-Light';
+     src:url("../../../assets/font/e00ba30a-0bf3-4c76-9392-8641fa237a92.eot") format("eot"),
+	 url("../../../assets/font/69b40392-453a-438a-a121-a49e5fbc92131.woff2") format("woff2"),
+	 url("../../../assets/font/9362bca5-b362-4543-a051-2129e2def911.woff") format("woff"),
+	 url("../../../assets/font/85060878-ca6c-43cc-ac31-7edccfdca71b.ttf") format("truetype");
+  }
+header, .content, footer .content {
+    width: 72%;
+    margin: 0 auto;
+    left: 189px;
+    background-color: rgb(240, 238, 235);
+}
+footer {
+    font-family: 'Brandon-Grot-W01-Light' !important;
+    min-height: 120px;
+    background-color: #fe938c;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+footer .content {
+    background: transparent;
+}
+.social_media_icons {    
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.social_media_icons a:first-child img {
+    margin-right: 10px;
+}
+.footer_line {
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.footer_line div {
+    text-align: center;
+    display: inline-block;
+    padding-right: 55px;
+    flex: auto;
+}
+.copy_right {
+    letter-spacing: 1px;
+}
+.copy_right span {
+    margin-right: 10px;
+}
+.footer_line div a {
+    color: #fff;
+    text-decoration: none;
+}
+@media screen and (min-width: 300px) {
+    .footer_line {
+        flex-direction: column;
+    }
+    .social_media_icons {
+        text-align: center;
+    }
+    .footer_line div {
+        margin-right: 0px; 
+        margin-bottom: 10px;
+        text-align: center;
+        padding-right: 0px;
+        display: block; 
+    }
+    
+    footer .content {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 480px) {
+
+}
+@media screen and (min-width: 768px) {
+    .footer_line div {
+        padding-right: 0px;
+        margin-bottom: 0px;
+        text-align: left;
+        padding-right: 10px;
+        display: inline-block; 
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    .footer_line {
+        flex-direction: row;
+    }
+    .social_media_icons {
+        text-align: center;
+    }
+}
+@media screen and (min-width: 992px) {
+
+    footer .content {
+        width: 72%;
+    }
+}
+@media screen and (min-width: 1024px) {
+
+}
+@media screen and (min-width: 1280px) {
+}

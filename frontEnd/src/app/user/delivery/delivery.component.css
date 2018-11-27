@@ -1,0 +1,74 @@
+.select_delivery_address_wrapper {
+    width: 60%;
+    margin: 0 auto;
+    padding: 60px 0px;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+}
+.delivery_content {
+    width: 100%;
+    float: left;
+}
+.select_delivery_address_wrapper h3 {
+    font-size: 23px;
+    color: #E5663D;
+}
+.delivery_form form .row:first-child {
+    width: 40%;
+    float: left;
+}
+.delivery_form form .row:nth-child(2) {
+    width: 56%;
+    float: left;
+    margin-left: 4%;
+}
+.form_control {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border: 2px solid #e2e2e2;
+}
+.invalid-feedback {    
+    color: red;
+    background-color: antiquewhite;
+    border: 2px solid antiquewhite !important;
+    margin-bottom: 20px;
+}
+.delivery_form p {
+    float: left;
+    margin-top: 0;
+    font-size: 14px;
+    color: #E5663D;
+}
+.btns .btn:first-child {
+    margin-right: 30px;
+}
+.btn {
+    text-decoration: none;
+    color: rgba(50, 50, 50, 1);
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 25px;
+    border: 2px solid rgba(50, 50, 50, 1);
+    font-weight: bold;
+    margin-top: 50px;
+    cursor: pointer;
+    outline: none;
+    float: left;
+}
+.btn a {
+    text-decoration: none;
+    color: rgba(50, 50, 50, 1);
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 25px;
+    border: 2px solid rgba(50, 50, 50, 1);
+    font-weight: bold;
+}
+.btn:hover {
+    color: #fff;
+    background-color: rgba(50, 50, 50, 1);
+    border: 2px solid rgba(50, 50, 50, 1);
+}

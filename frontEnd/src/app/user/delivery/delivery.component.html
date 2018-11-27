@@ -1,0 +1,75 @@
+<div class="select_delivery_address_wrapper">
+  <div class="delivery_content">
+      <h3>Munchies bag to this address</h3>
+      <div class="delivery_form">
+          <form [formGroup] = "deliveryForm" (ngSubmit) = "onSubmit()">
+              <div class="row">
+                  <div class="fields">
+                      <div>
+                        <input class="form_control" formControlName="name" type="text" name="name" placeholder="Name" />
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback form_control">
+                            <div *ngIf="submitted && f.name.errors.required">Name is required</div>
+                        </div>
+                      </div>
+                      <div>
+                        <input class="form_control" type="text" formControlName="surName" name="surName" placeholder="Surname" />
+                        <div *ngIf="submitted && f.surName.errors" class="invalid-feedback form_control">
+                            <div *ngIf="submitted && f.surName.errors.required">SurName is required</div>
+                        </div>
+                      </div>
+                      <div>
+                        <input class="form_control" type="text" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
+                        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback form_control">
+                            <div *ngIf="submitted && f.phone.errors.required">Phone Number is required</div>
+                            <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>
+                            <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid Phone Number</div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                    <div class="fields">
+                        <div>
+                            <select class="form_control" formControlName="area" name="area" placeholder="Area">
+                                <option value="Area of Delivery">Area of Delivery</option>
+                            </select>
+                            <div *ngIf="submitted && f.area.errors" class="invalid-feedback form_control">
+                                <div *ngIf="submitted && f.area.errors.required">Area is required</div>
+                            </div>
+                        </div>
+                        <div>
+                            <input class="form_control" type="text" formControlName="address" name="address" placeholder="Address..." />
+                            <div *ngIf="submitted && f.address.errors" class="invalid-feedback form_control">
+                                <div *ngIf="submitted && f.address.errors.required">Address is required</div>
+                            </div>
+                        </div>
+                        <div>
+                            <input class="form_control" type="text" formControlName="postalCode" name="postalCode" placeholder="Postal Code" />
+                            <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback form_control">
+                                <div *ngIf="submitted && f.postalCode.errors.required">Postal Code is required</div>
+                                <div *ngIf="submitted && f.postalCode.errors.pattern">Please Enter Valid postal Code</div>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+          <p>*If you can't find you're area, we aren't delivering there yet. But we will be there soon :)</p>
+          <div *ngIf="!isLoggedIn" class="btns">
+             <a routerLink="/signIn" class="btn">Sign In</a>
+             <a routerLink="/sign-up" class="btn">Sign Up</a>
+          </div>
+          <button *ngIf="isLoggedIn" class="btn">Make Payment</button>          
+        </form>
+      </div>
+  </div>
+  <!-- <div class="create_account">
+      <h2>Create an account</h2>
+      <form [formGroup] = "createAccount" (ngSubmit) = "onSubmit()">
+          <input type="email" name="email" placeholder="Email" />
+          <input type="password" name="createPassword" placeholder="Create Password" />
+          <input type="password" name="confirmPassword" placeholder="Confirm Password" />
+      </form>
+  </div> -->
+  <!-- <div class="make_payment_btn">
+      <a href="/order-summary">Make Payment</a>
+  </div> -->
+</div>
