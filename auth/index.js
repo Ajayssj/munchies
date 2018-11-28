@@ -6,7 +6,7 @@ module.exports = {
         if(user){
             next();
         }else{
-            res.json('You are not logged In!')
+            res.json({success : false, error : 'You are not logged In!'})
             // res.redirect('/login');
         }
     }
