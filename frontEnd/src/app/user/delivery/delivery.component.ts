@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 import { first } from 'rxjs/operators';
 import { from } from 'rxjs';
 
@@ -21,8 +22,8 @@ export class DeliveryComponent implements OnInit {
   postalCode = "";
   data = {};
   httpOptions = {};
-  isLoggedIn = sessionStorage.getItem('isLoggedIn');
-  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient) { }
+  isLoggedIn = this.auth.isLoggedIn();
+  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private auth: AuthService) { }
   
   ngOnInit() {
     this.deliveryForm = this.formBuilder.group({
@@ -37,10 +38,6 @@ export class DeliveryComponent implements OnInit {
       ]],
       postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{6}(?:-[0-9]{4})?$')]],
     });
-    if(!sessionStorage.getItem('isLoggedIn')) {
-      console.log("hiiiiiiiiii");
-      this.router.navigate(['/subscribe']);
-    }
   }
   // convenience getter for easy access to form fields
   get f() { return this.deliveryForm.controls; }
@@ -58,14 +55,14 @@ export class DeliveryComponent implements OnInit {
       phoneNumber: this.f.phone.value,
       postalCode: this.f.postalCode.value
     }
-    // this.httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Cache-Control':  'no-cache'
-    //   })
-    // };
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Cache-Control':  'no-cache'
+      })
+    };
 
-    this.http.post('http://localhost:9191/api/order/createOrder', this.data).subscribe(data=> {
-      console.log(data);
+    this.http.post('http://localhost:9191/api/order/createOrder', this.data, this.httpOptions).subscribe(data=> {
+      console.log("order created",data);
     },
     err=> {
       console.log(err);

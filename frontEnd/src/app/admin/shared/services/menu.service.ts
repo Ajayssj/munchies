@@ -42,6 +42,7 @@ export class menuService {
   }
 
   protected creatRouterLink(nodeId: any) {
+  //  debugger;
     this.node = null;
     this.parent_node = null;
     const menuObj = this.queryParentNode(MENU_ITEM, nodeId);
@@ -62,7 +63,7 @@ export class menuService {
       } else {
         this.path_item = [index.path];
         index.routerLink = this.creatRouterLink(index.path);
-        index.routerLink.unshift('/', 'pages');
+        index.routerLink.unshift('', 'pages');
       }
     })
   }
