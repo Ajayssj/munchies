@@ -14,15 +14,15 @@ export class ManageSubscriptionComponent implements OnInit {
     // if(sessionStorage.getItem('isLoggedIn') == 'false') {
     //   this.router.navigate(['/signIn']);
     // }
-   }
+  }
 
   ngOnInit() {
-    
-          this.http.get('http://localhost:9191/api/order/getMyorders').subscribe(resData => {
-            console.log('loll',resData);
-          }, error => {
-            console.log('error', 'Allow Signup', 'Server Error');
-          });
+
+    this.http.get('https://dev-munchies.herokuapp.com/api/order/getMyorders').subscribe(resData => {
+      console.log('loll', resData);
+    }, error => {
+      console.log('error', 'Allow Signup', 'Server Error');
+    });
   }
   // logout() {
   //   sessionStorage.setItem('isLoggedIn', "false");

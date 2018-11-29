@@ -67,7 +67,7 @@ export class SignUpComponent implements OnInit {
           'password': this.password
         }
         console.log(this.data);
-        this.http.post('http://localhost:9191/api/user/register', this.data).subscribe( (data:SignUpRes) => {
+        this.http.post('https://dev-munchies.herokuapp.com/api/user/register', this.data).subscribe( (data:SignUpRes) => {
             console.log("success", data.success);
             this.success = data.success;
             this.error = data.error;

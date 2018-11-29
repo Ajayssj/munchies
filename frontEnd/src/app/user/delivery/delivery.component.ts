@@ -24,7 +24,7 @@ export class DeliveryComponent implements OnInit {
   httpOptions = {};
   isLoggedIn = this.auth.isLoggedIn();
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private auth: AuthService) { }
-  
+
   ngOnInit() {
     this.deliveryForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -57,16 +57,16 @@ export class DeliveryComponent implements OnInit {
     }
     this.httpOptions = {
       headers: new HttpHeaders({
-        'Cache-Control':  'no-cache'
+        'Cache-Control': 'no-cache'
       })
     };
 
-    this.http.post('http://localhost:9191/api/order/createOrder', this.data, this.httpOptions).subscribe(data=> {
-      console.log("order created",data);
+    this.http.post('https://dev-munchies.herokuapp.com/api/order/createOrder', this.data, this.httpOptions).subscribe(data => {
+      console.log("order created", data);
     },
-    err=> {
-      console.log(err);
-    });
+      err => {
+        console.log(err);
+      });
     //this.http('', )
   }
 

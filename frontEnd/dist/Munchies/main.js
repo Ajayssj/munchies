@@ -2833,7 +2833,7 @@ var AuthService = /** @class */ (function () {
         this.http = http;
         this.varifyFirebaseToken = function (token, callback) {
             console.log("hiiiiiiiiiii");
-            this.http.post('http://localhost:9191/api/user/verifyFirebaseToken', token).subscribe(function (resData) {
+            this.http.post('https://dev-munchies.herokuapp.com//api/user/verifyFirebaseToken', token).subscribe(function (resData) {
                 console.log(resData);
                 callback(resData);
             }, function (error) {
@@ -3300,7 +3300,7 @@ var DeliveryComponent = /** @class */ (function () {
         //     'Cache-Control':  'no-cache'
         //   })
         // };
-        this.http.post('http://localhost:9191/api/order/createOrder', this.data).subscribe(function (data) {
+        this.http.post('https://dev-munchies.herokuapp.com//api/order/createOrder', this.data).subscribe(function (data) {
             console.log(data);
         }, function (err) {
             console.log(err);
@@ -3655,7 +3655,7 @@ var ManageSubscriptionComponent = /** @class */ (function () {
         // }
     }
     ManageSubscriptionComponent.prototype.ngOnInit = function () {
-        this.http.get('http://localhost:9191/api/order/getMyorders').subscribe(function (resData) {
+        this.http.get('https://dev-munchies.herokuapp.com//api/order/getMyorders').subscribe(function (resData) {
             console.log('loll', resData);
         }, function (error) {
             console.log('error', 'Allow Signup', 'Server Error');
@@ -4087,14 +4087,14 @@ var SignInComponent = /** @class */ (function () {
             this.password = this.loginForm.get('password').value;
             console.log(this.username + "\n");
             console.log(this.password);
-            this.http.post('http://localhost:9191/api/user/login', { 'email': this.username, 'password': this.password }).subscribe(function (data) {
+            this.http.post('https://dev-munchies.herokuapp.com//api/user/login', { 'email': this.username, 'password': this.password }).subscribe(function (data) {
                 console.log("PATCH Request is successful ", data);
                 _this.success = data.success;
                 _this.error = data.error;
                 if (data.success) {
                     _this.authService.setLoggedIn(true);
                     console.log("gooooddddd");
-                    // this.http.get('http://localhost:9191/api/order/getMyorders').subscribe(resData => {
+                    // this.http.get('https://dev-munchies.herokuapp.com//api/order/getMyorders').subscribe(resData => {
                     //   console.log(resData);
                     // }, error => {
                     //   console.log('error', 'Allow Signup', 'Server Error');
@@ -4235,7 +4235,7 @@ var SignUpComponent = /** @class */ (function () {
                     'password': this.password
                 };
                 console.log(this.data);
-                this.http.post('http://localhost:9191/api/user/register', this.data).subscribe(function (data) {
+                this.http.post('https://dev-munchies.herokuapp.com//api/user/register', this.data).subscribe(function (data) {
                     console.log("success", data.success);
                     _this.success = data.success;
                     _this.error = data.error;
