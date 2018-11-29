@@ -30,7 +30,21 @@ const deleteCustomPlans = (activePlanId) => {
             console.error(err);
         })
 }
-
+const getNextMondayDate = function(date){
+    return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
+}
+// -- getActiveWeek(startDate,generateLastWeekDate(startDate,numOfWeeks));
+const generateLastWeekDate = function(startDate,numOfWeeks){
+return startDate.setDate(startDate.getDate() + (numOfWeeks * 7));
+}
+const getActiveWeek = (startDate,endDate) => {
+const start = new Date(startDate);
+const end = new Date(endDate);
+return Math.ceil(Math.abs(Math.floor(( start - end ) / 86400000)) / 7);
+}
+const extendOneWeek = (date) => {
+return date.setDate(date.getDate() + 7);
+}
 const activateDeactivatePlan = (activePlanId,status = true) => {
    return new Promise((success, error) =>  {
     ActivePlan.updateOne({_id : db.toObjectID(activePlanId)},{$set : { isActive : status}}).then(success).catch(error)
