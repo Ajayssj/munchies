@@ -39,6 +39,7 @@ const activateDeactivatePlan = (activePlanId,status = true) => {
 module.exports = {
    getActivePlans : (req,res) => {
     const userId = req.params.userId;
+    if(!userId) userId = req.session.user._id.toString();
     ActivePlan.aggregate(
             [
                 {
@@ -162,6 +163,25 @@ module.exports = {
                 }else
                     res.json({success : false, error : 'Active Plan Not Found!'});
             })
+   },
+   skipActivePlanWeek : (req,res) => {
+    const activePlanId = req.params.activePlanId;
+    const userId = req.session.user._id;
+    const week = req.params.week;
+    if(userId && activePlanId && Numberl.isNaN(Number(week,10))){
+        ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
+        {
+            $push : {skipedWeeks : week },
+            $inc: { weeks : 1}
+        }).then(plan => {
+            if(plan.result.nModified == 1)
+                res.json({success : true, message : 'Week Skipped Successfully!'})
+            else
+                res.json({success : false, error : 'Plan not found to be edited!'})
+        }).catch(err => res.json({success : false, error : err}));
+    }else{
+        res.json({success : false, error : 'Invalid Request Data!'})
+    }
    },
    addCorePlan : (req,res) => {
     const planObj = {  
