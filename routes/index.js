@@ -15,16 +15,25 @@ module.exports = {
         app.use('/api', ordrApi)
         app.use(express.static('client'));
         app.get('/*', (req, res) => res.sendFile(__baseUrl + '/client/'));
+
     },
     bindMiddleware: function (app) {
+
         app.use(function (req, res, next) {
-           res.header("Access-Control-Allow-Origin", "*");
-           res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-           next();
-       });
+            // res.header('Access-Control-Allow-Credentials', true);
+            res.header('Access-Control-Allow-Origin', "*");
+            res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+            res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')
+            next();
+        });
         var bodyParser = require('body-parser');
         var session = require('express-session');
-        app.use(session({ secret: CREDENTIALS.SESSION_SECRET_KEY, resave: false, saveUninitialized: true }));
+        app.use(session({
+            secret: CREDENTIALS.SESSION_SECRET_KEY, resave: false, saveUninitialized: true,
+            cookie: {
+                maxAge: 1000 * 60 * 24 // 24 hours
+            },
+        }));
         app.use(bodyParser.json());
     },
     bindAuth: function (app) {

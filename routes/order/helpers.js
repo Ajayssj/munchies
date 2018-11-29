@@ -14,8 +14,9 @@ module.exports = {
             const customerId = db.toObjectID(req.session.user._id);
             const orderObj = {
                 customerData: {
-                    name: req.body.name,
-                    phoneNumber: req.body.phoneNumber,
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    phoneNo: req.body.phoneNo,
                     custId: customerId
                 },
                 planId: req.body.planId,

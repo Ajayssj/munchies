@@ -53,18 +53,13 @@ export class SignInComponent implements OnInit {
       this.password = this.loginForm.get('password').value;
       console.log(this.username + "\n");
       console.log(this.password);
-      this.http.post('https://dev-munchies.herokuapp.com/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: SignInRes) => {
+      this.http.post('http://localhost:9191/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: SignInRes) => {
         console.log("PATCH Request is successful ", data);
         this.success = data.success;
         this.error = data.error;
         if (data.success) {
           this.authService.setLoggedIn(true);
           console.log("gooooddddd");
-          // this.http.get('https://dev-munchies.herokuapp.com/api/order/getMyorders').subscribe(resData => {
-          //   console.log(resData);
-          // }, error => {
-          //   console.log('error', 'Allow Signup', 'Server Error');
-          // });
           if (this.authService.isLoggedIn()) {
             this.router.navigate(['/manage-subscription']);
           }

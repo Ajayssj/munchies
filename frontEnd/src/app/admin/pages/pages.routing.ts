@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { PagesComponent } from './pages.component';
-import { LoginComponent } from './login/login.component';
+import { SignInComponent } from './../../user/sign-in/sign-in.component';
 import { AdminComponent } from '../admin.component';
 import { AuthGuard } from './../auth.guard';
 
@@ -9,10 +9,10 @@ export const childRoutes: Routes = [
         path: 'admin',
         component: AdminComponent,
         children: [
-            {
-                path: 'login',
-                component: LoginComponent,
-            },
+            // {
+            //     path: 'login',
+            //     component: LoginComponent,
+            // },
             {
                 path: 'pages',
                 component: PagesComponent,
@@ -29,11 +29,8 @@ export const childRoutes: Routes = [
                     { path: 'table', loadChildren: './table/table.module#TableModule' },
                     { path: 'menu-levels', loadChildren: './menu-levels/menu-levels.module#MenuLevelsModule' },
                 ]
-            },
-            {
-                path: '**',
-                component: LoginComponent
             }
+
         ]
     }
 ];

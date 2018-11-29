@@ -1,12 +1,32 @@
 <div class="manage_subscription_page_wrapper">
-  <div class="manage_subscription">
-      <div class="block">
-          <h3><a href="/my-orders">My Orders</a></h3>
-          <p>See your order history</p>
-      </div>
-      <div class="block">
-          <h3><a href="/skip-week">Skip the coming weeks bag</a></h3>
-          <p>you can skip a week's bag just give us a 2 day head's up</p>
-      </div>
-  </div>
+    <div class="manage_subscription">
+        <div class="block">
+            <h3><a href="/my-orders">My Orders</a></h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Plan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td>{{order.date | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{order.customerData.name}}</td>
+                        <td>{{order.customerData.phoneNumber}}</td>
+                        <td>{{order.address}}</td>
+                        <td>{{order.planId}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="block">
+            <h3><a href="/skip-week">Skip the coming weeks bag</a></h3>
+            <p>you can skip a week's bag just give us a 2 day head's up</p>
+        </div>
+    </div>
 </div>
