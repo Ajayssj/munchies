@@ -1,0 +1,139 @@
+<div class="company_wrapper">
+  <div class="container-fluid">
+    <ul class="nav nav-tabs">
+      <li [ngClass]="{'active': view == 'company'}" (click)="changeView('company')"><a>Company</a></li>
+      <li [ngClass]="{'active': view == 'types'}" (click)="changeView('types')"><a>Types</a></li>
+      <li [ngClass]="{'active': view == 'product'}" (click)="changeView('product')"><a>Product</a></li>
+    </ul>
+  </div>
+
+  <div class="container-fluid content">
+    <div *ngIf="view == 'company'">
+      <div class="row">
+        <button class="btn btn-primary" style="margin:20px">Add Company</button>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Company Name</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Charlie</td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Bareball</td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Whistle</td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="view == 'types'">
+      <div class="row">
+        <button class="btn btn-primary" style="margin:20px">Add Product Type</button>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Product Type</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Laadu</td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Makhana</td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Enery Bars</td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="view == 'product'">
+      <div class="row">
+        <button class="btn btn-primary" style="margin:20px">Add Product Type</button>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Product Name</th>
+            <th>Type</th>
+            <th>Company</th>
+            <th>Quantity</th>
+            <th>MRP</th>
+            <th>KCAL</th>
+            <th>Use in Week</th>
+            <th>Rate</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>The Muscle</td>
+            <td>Makhana</td>
+            <td>Bareball</td>
+            <td>35gm</td>
+            <td>70</td>
+            <td>81</td>
+            <td>3</td>
+            <td>34</td>
+            <td><button class="btn btn-danger">Edit</button></td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>The Brain</td>
+            <td>Laadu</td>
+            <td>Charlie</td>
+            <td>35gm</td>
+            <td>70</td>
+            <td>81</td>
+            <td>3</td>
+            <td>34</td>
+            <td><button class="btn btn-danger">Edit</button></td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Tough Nut Bar</td>
+            <td>Energy Bar</td>
+            <td>Eighty20</td>
+            <td>35gm</td>
+            <td>70</td>
+            <td>81</td>
+            <td>3</td>
+            <td>34</td>
+            <td><button class="btn btn-danger">Edit</button></td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

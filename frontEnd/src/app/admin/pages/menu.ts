@@ -5,6 +5,21 @@ export let MENU_ITEM = [
         icon: 'dashboard'
     },
     {
+        path: 'customer',
+        title: 'Customer',
+        icon: 'user'
+    },
+    {
+        path: 'company',
+        title: 'products',
+        icon: 'building'
+    },
+    {
+        path: 'snacks',
+        title: 'Snacks',
+        icon: 'cutlery'
+    },
+    {
         path: 'editor',
         title: 'Pell Editor',
         icon: 'pencil'

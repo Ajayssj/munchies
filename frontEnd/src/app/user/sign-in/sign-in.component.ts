@@ -53,7 +53,7 @@ export class SignInComponent implements OnInit {
       this.password = this.loginForm.get('password').value;
       console.log(this.username + "\n");
       console.log(this.password);
-      this.http.post('http://localhost:9191/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: SignInRes) => {
+      this.http.post(this.authService.getDomainName() + '/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: SignInRes) => {
         console.log("PATCH Request is successful ", data);
         this.success = data.success;
         this.error = data.error;

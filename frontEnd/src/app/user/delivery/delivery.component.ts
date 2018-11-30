@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
-import { first } from 'rxjs/operators';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-delivery',
@@ -23,7 +21,15 @@ export class DeliveryComponent implements OnInit {
   data = {};
   httpOptions = {};
   isLoggedIn = this.auth.isLoggedIn();
-  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private auth: AuthService) { }
+
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private auth: AuthService,
+    private route: ActivatedRoute
+
+  ) { }
 
   ngOnInit() {
     this.deliveryForm = this.formBuilder.group({
@@ -53,15 +59,17 @@ export class DeliveryComponent implements OnInit {
       area: this.f.area.value,
       address: this.f.address.value,
       phoneNumber: this.f.phone.value,
-      postalCode: this.f.postalCode.value
+      postalCode: this.f.postalCode.value,
+      planId: this.route.snapshot.queryParamMap.get('selectedPlan')
     }
     this.httpOptions = {
       headers: new HttpHeaders({
         'Cache-Control': 'no-cache'
       })
     };
+    console.log("route params", this.data)
 
-    this.http.post('https://dev-munchies.herokuapp.com/api/order/createOrder', this.data, this.httpOptions).subscribe(data => {
+    this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data, this.httpOptions).subscribe(data => {
       console.log("order created", data);
     },
       err => {

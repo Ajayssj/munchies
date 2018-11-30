@@ -16,6 +16,11 @@ export class AuthService {
   isLoggedIn() {
     return localStorage.getItem("isLoggedIn");
   }
+
+  getDomainName() {
+    return "http://localhost:9191";
+  }
+
   setLoggedIn(value) {
     console.log(value)
     localStorage.setItem("isLoggedIn", value);

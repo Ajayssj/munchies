@@ -4,10 +4,10 @@
     <h3 class="color_none">Select a Plan</h3>
     <div class="select_plan">
       <div class="plans">
-        <div class="plan" *ngFor="let item of plan; let i = index" (click)="selectedPlan(i+1)">
-            <h3>{{item.planName}}</h3>
-            <h2 class="rate">{{item.planRate}}</h2>
-            <p>{{item.planText}}</p>
+        <div class="plan" *ngFor="let item of plan; let i = index" (click)="selectedPlan(item.planId)">
+          <h3>{{item.planName}}</h3>
+          <h2 class="rate">{{item.planRate}}</h2>
+          <p>{{item.planText}}</p>
         </div>
       </div>
     </div>
@@ -18,13 +18,13 @@
         <ul>
           <li *ngFor="let opt of q.options"><input type="radio" value="{{opt.optionText}}" name="{{opt.optName}}" [(ngModel)]="q.selectedOpt" />{{opt.optionText}}</li>
         </ul>
-        <div class="product_images + {{ q.class}}" >
-          <img *ngFor="let image of q.images" src="{{image.url}}" alt="{{image.alt}}"/>
+        <div class="product_images + {{ q.class}}">
+          <img *ngFor="let image of q.images" src="{{image.url}}" alt="{{image.alt}}" />
         </div>
       </div>
     </div>
     <div class="ok_button" (click)="checkDelivery()">
-      <a routerLink="/delivery" [queryParams] = "{selectedPlan: selectedPlanId, question1: questions[0].selectedOpt, question2: questions[1].selectedOpt, question3: questions[2].selectedOpt }">Ok</a>
+      <a routerLink="/delivery" [queryParams]="{selectedPlan: selectedPlanId, question1: questions[0].selectedOpt, question2: questions[1].selectedOpt, question3: questions[2].selectedOpt }">Ok</a>
     </div>
   </div>
 </div>

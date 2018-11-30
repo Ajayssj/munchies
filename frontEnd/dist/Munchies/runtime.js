@@ -63,7 +63,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"components-levels-1-levels-1-module":"components-levels-1-levels-1-module","default~charts-charts-module~index-index-module":"default~charts-charts-module~index-index-module","charts-charts-module":"charts-charts-module","index-index-module":"index-index-module","editor-editor-module":"editor-editor-module","form-form-module":"form-form-module","icon-icon-module":"icon-icon-module","menu-levels-menu-levels-module":"menu-levels-menu-levels-module","profile-profile-module":"profile-profile-module","table-table-module":"table-table-module","ui-ui-module":"ui-ui-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"company-company-module":"company-company-module","components-levels-1-levels-1-module":"components-levels-1-levels-1-module","customer-customer-module":"customer-customer-module","default~charts-charts-module~index-index-module":"default~charts-charts-module~index-index-module","charts-charts-module":"charts-charts-module","index-index-module":"index-index-module","editor-editor-module":"editor-editor-module","form-form-module":"form-form-module","icon-icon-module":"icon-icon-module","menu-levels-menu-levels-module":"menu-levels-menu-levels-module","profile-profile-module":"profile-profile-module","snacks-snacks-module":"snacks-snacks-module","table-table-module":"table-table-module","ui-ui-module":"ui-ui-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

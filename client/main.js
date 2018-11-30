@@ -13,9 +13,17 @@ var map = {
 		"default~charts-charts-module~index-index-module",
 		"charts-charts-module"
 	],
+	"./company/company.module": [
+		"./src/app/admin/pages/company/company.module.ts",
+		"company-company-module"
+	],
 	"./components/levels-1/levels-1.module": [
 		"./src/app/admin/pages/menu-levels/components/levels-1/levels-1.module.ts",
 		"components-levels-1-levels-1-module"
+	],
+	"./customer/customer.module": [
+		"./src/app/admin/pages/customer/customer.module.ts",
+		"customer-customer-module"
 	],
 	"./editor/editor.module": [
 		"./src/app/admin/pages/editor/editor.module.ts",
@@ -41,6 +49,10 @@ var map = {
 	"./profile/profile.module": [
 		"./src/app/admin/pages/profile/profile.module.ts",
 		"profile-profile-module"
+	],
+	"./snacks/snacks.module": [
+		"./src/app/admin/pages/snacks/snacks.module.ts",
+		"snacks-snacks-module"
 	],
 	"./table/table.module": [
 		"./src/app/admin/pages/table/table.module.ts",
@@ -70,57 +82,6 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 };
 webpackAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 module.exports = webpackAsyncContext;
-
-/***/ }),
-
-/***/ "./src/app/admin/admin-auth.service.ts":
-/*!*********************************************!*\
-  !*** ./src/app/admin/admin-auth.service.ts ***!
-  \*********************************************/
-/*! exports provided: AdminAuthService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminAuthService", function() { return AdminAuthService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var AdminAuthService = /** @class */ (function () {
-    function AdminAuthService() {
-    }
-    Object.defineProperty(AdminAuthService.prototype, "isLoggedIn", {
-        get: function () {
-            return localStorage.getItem("isLoggedIn") &&
-                localStorage.getItem("isLoggedIn") == 'true' &&
-                localStorage.getItem("isAdmin") &&
-                localStorage.getItem("isAdmin") == 'true';
-        },
-        enumerable: true,
-        configurable: true
-    });
-    AdminAuthService.prototype.setLoggedIn = function (value) {
-        console.log("admin setLoggedIn ", value);
-        localStorage.setItem("isLoggedIn", value);
-    };
-    AdminAuthService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [])
-    ], AdminAuthService);
-    return AdminAuthService;
-}());
-
-
 
 /***/ }),
 
@@ -240,57 +201,6 @@ var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRo
 
 /***/ }),
 
-/***/ "./src/app/admin/auth.guard.ts":
-/*!*************************************!*\
-  !*** ./src/app/admin/auth.guard.ts ***!
-  \*************************************/
-/*! exports provided: AuthGuard */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _admin_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-auth.service */ "./src/app/admin/admin-auth.service.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var AuthGuard = /** @class */ (function () {
-    function AuthGuard(adminAuth, router) {
-        this.adminAuth = adminAuth;
-        this.router = router;
-    }
-    AuthGuard.prototype.canActivate = function (next, state) {
-        if (this.adminAuth.isLoggedIn) {
-            return true;
-        }
-        else {
-            this.router.navigate(['/admin/login']);
-        }
-    };
-    AuthGuard = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [_admin_auth_service__WEBPACK_IMPORTED_MODULE_2__["AdminAuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
-    ], AuthGuard);
-    return AuthGuard;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/admin/pages/login/login.component.html":
 /*!********************************************************!*\
   !*** ./src/app/admin/pages/login/login.component.html ***!
@@ -369,6 +279,21 @@ var MENU_ITEM = [
         path: 'index',
         title: 'Dashboard',
         icon: 'dashboard'
+    },
+    {
+        path: 'customer',
+        title: 'Customer',
+        icon: 'user'
+    },
+    {
+        path: 'company',
+        title: 'products',
+        icon: 'building'
+    },
+    {
+        path: 'snacks',
+        title: 'Snacks',
+        icon: 'cutlery'
     },
     {
         path: 'editor',
@@ -583,6 +508,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 /* components */
 
 
+//import { CompanyComponent } from './company/company.component';
+//import { SnacksComponent } from './snacks/snacks.component';
+// import { CustomerComponent } from './customer/customer.component';
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -596,7 +524,7 @@ var PagesModule = /** @class */ (function () {
             ],
             declarations: [
                 _pages_component__WEBPACK_IMPORTED_MODULE_5__["PagesComponent"],
-                _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"]
+                _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"],
             ]
         })
     ], PagesModule);
@@ -620,29 +548,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routing", function() { return routing; });
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _pages_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages.component */ "./src/app/admin/pages/pages.component.ts");
-/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login/login.component */ "./src/app/admin/pages/login/login.component.ts");
-/* harmony import */ var _admin_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../admin.component */ "./src/app/admin/admin.component.ts");
-/* harmony import */ var _auth_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../auth.guard */ "./src/app/admin/auth.guard.ts");
-
-
+/* harmony import */ var _admin_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../admin.component */ "./src/app/admin/admin.component.ts");
 
 
 
 var childRoutes = [
     {
         path: 'admin',
-        component: _admin_component__WEBPACK_IMPORTED_MODULE_3__["AdminComponent"],
+        component: _admin_component__WEBPACK_IMPORTED_MODULE_2__["AdminComponent"],
         children: [
-            {
-                path: 'login',
-                component: _login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"],
-            },
+            // {
+            //     path: 'login',
+            //     component: LoginComponent,
+            // },
             {
                 path: 'pages',
                 component: _pages_component__WEBPACK_IMPORTED_MODULE_1__["PagesComponent"],
-                canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]],
+                // canActivate: [AuthGuard],
                 children: [
                     { path: '', redirectTo: 'index', pathMatch: 'full' },
+                    { path: 'customer', loadChildren: './customer/customer.module#CustomerModule' },
+                    { path: 'company', loadChildren: './company/company.module#CompanyModule' },
+                    { path: 'snacks', loadChildren: './snacks/snacks.module#SnacksModule' },
                     { path: 'index', loadChildren: './index/index.module#IndexModule' },
                     { path: 'editor', loadChildren: './editor/editor.module#EditorModule' },
                     { path: 'icon', loadChildren: './icon/icon.module#IconModule' },
@@ -653,10 +580,6 @@ var childRoutes = [
                     { path: 'table', loadChildren: './table/table.module#TableModule' },
                     { path: 'menu-levels', loadChildren: './menu-levels/menu-levels.module#MenuLevelsModule' },
                 ]
-            },
-            {
-                path: '**',
-                component: _login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"]
             }
         ]
     }
@@ -2955,6 +2878,9 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.isLoggedIn = function () {
         return localStorage.getItem("isLoggedIn");
     };
+    AuthService.prototype.getDomainName = function () {
+        return "http://localhost:9191";
+    };
     AuthService.prototype.setLoggedIn = function (value) {
         console.log(value);
         localStorage.setItem("isLoggedIn", value);
@@ -3355,11 +3281,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var DeliveryComponent = /** @class */ (function () {
-    function DeliveryComponent(router, formBuilder, http, auth) {
+    function DeliveryComponent(router, formBuilder, http, auth, route) {
         this.router = router;
         this.formBuilder = formBuilder;
         this.http = http;
         this.auth = auth;
+        this.route = route;
         this.submitted = false;
         this.name = "";
         this.surName = "";
@@ -3403,14 +3330,16 @@ var DeliveryComponent = /** @class */ (function () {
             area: this.f.area.value,
             address: this.f.address.value,
             phoneNumber: this.f.phone.value,
-            postalCode: this.f.postalCode.value
+            postalCode: this.f.postalCode.value,
+            planId: this.route.snapshot.queryParamMap.get('selectedPlan')
         };
         this.httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
                 'Cache-Control': 'no-cache'
             })
         };
-        this.http.post('https://dev-munchies.herokuapp.com/api/order/createOrder', this.data, this.httpOptions).subscribe(function (data) {
+        console.log("route params", this.data);
+        this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data, this.httpOptions).subscribe(function (data) {
             console.log("order created", data);
         }, function (err) {
             console.log(err);
@@ -3423,7 +3352,11 @@ var DeliveryComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./delivery.component.html */ "./src/app/user/delivery/delivery.component.html"),
             styles: [__webpack_require__(/*! ./delivery.component.css */ "./src/app/user/delivery/delivery.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"],
+            _auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
     ], DeliveryComponent);
     return DeliveryComponent;
 }());
@@ -3743,6 +3676,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth.service */ "./src/app/user/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3755,10 +3689,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ManageSubscriptionComponent = /** @class */ (function () {
-    function ManageSubscriptionComponent(http, router) {
+    function ManageSubscriptionComponent(http, router, auth) {
         this.http = http;
         this.router = router;
+        this.auth = auth;
         // console.log(sessionStorage.getItem('isLoggedIn') == 'false');
         // if(sessionStorage.getItem('isLoggedIn') == 'false') {
         //   this.router.navigate(['/signIn']);
@@ -3766,7 +3702,7 @@ var ManageSubscriptionComponent = /** @class */ (function () {
     }
     ManageSubscriptionComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.http.get('http://localhost:9191/api/order/getMyorders').subscribe(function (resData) {
+        this.http.get(this.auth.getDomainName() + '/api/plan/active/null').subscribe(function (resData) {
             console.log('loll', resData);
             _this.orders = resData.orderData;
         }, function (error) {
@@ -3779,7 +3715,7 @@ var ManageSubscriptionComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./manage-subscription.component.html */ "./src/app/user/manage-subscription/manage-subscription.component.html"),
             styles: [__webpack_require__(/*! ./manage-subscription.component.css */ "./src/app/user/manage-subscription/manage-subscription.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
     ], ManageSubscriptionComponent);
     return ManageSubscriptionComponent;
 }());
@@ -4199,18 +4135,13 @@ var SignInComponent = /** @class */ (function () {
             this.password = this.loginForm.get('password').value;
             console.log(this.username + "\n");
             console.log(this.password);
-            this.http.post('http://localhost:9191/api/user/login', { 'email': this.username, 'password': this.password }).subscribe(function (data) {
+            this.http.post(this.authService.getDomainName() + '/api/user/login', { 'email': this.username, 'password': this.password }).subscribe(function (data) {
                 console.log("PATCH Request is successful ", data);
                 _this.success = data.success;
                 _this.error = data.error;
                 if (data.success) {
                     _this.authService.setLoggedIn(true);
                     console.log("gooooddddd");
-                    // this.http.get('https://dev-munchies.herokuapp.com/api/order/getMyorders').subscribe(resData => {
-                    //   console.log(resData);
-                    // }, error => {
-                    //   console.log('error', 'Allow Signup', 'Server Error');
-                    // });
                     if (_this.authService.isLoggedIn()) {
                         _this.router.navigate(['/manage-subscription']);
                     }
@@ -4460,7 +4391,7 @@ module.exports = ".subscribe_page_wrapper {\r\n    width: 100%;\r\n    height: 1
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"subscribe_page_wrapper\">\n  <div class=\"subscribe_page_content\">\n    <h2>Snacking made simple and convenient!</h2>\n    <h3 class=\"color_none\">Select a Plan</h3>\n    <div class=\"select_plan\">\n      <div class=\"plans\">\n        <div class=\"plan\" *ngFor=\"let item of plan; let i = index\" (click)=\"selectedPlan(i+1)\">\n            <h3>{{item.planName}}</h3>\n            <h2 class=\"rate\">{{item.planRate}}</h2>\n            <p>{{item.planText}}</p>\n        </div>\n      </div>\n    </div>\n    <div class=\"answer_questions\">\n      <h3 class=\"color_none\">Answer a few simple questions so we know what snacks are best for you</h3>\n      <div class=\"question_wrapper\" *ngFor=\"let q of questions\">\n        <p>{{q.question}}</p>\n        <ul>\n          <li *ngFor=\"let opt of q.options\"><input type=\"radio\" value=\"{{opt.optionText}}\" name=\"{{opt.optName}}\" [(ngModel)]=\"q.selectedOpt\" />{{opt.optionText}}</li>\n        </ul>\n        <div class=\"product_images + {{ q.class}}\" >\n          <img *ngFor=\"let image of q.images\" src=\"{{image.url}}\" alt=\"{{image.alt}}\"/>\n        </div>\n      </div>\n    </div>\n    <div class=\"ok_button\" (click)=\"checkDelivery()\">\n      <a routerLink=\"/delivery\" [queryParams] = \"{selectedPlan: selectedPlanId, question1: questions[0].selectedOpt, question2: questions[1].selectedOpt, question3: questions[2].selectedOpt }\">Ok</a>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"subscribe_page_wrapper\">\n  <div class=\"subscribe_page_content\">\n    <h2>Snacking made simple and convenient!</h2>\n    <h3 class=\"color_none\">Select a Plan</h3>\n    <div class=\"select_plan\">\n      <div class=\"plans\">\n        <div class=\"plan\" *ngFor=\"let item of plan; let i = index\" (click)=\"selectedPlan(item.planId)\">\n          <h3>{{item.planName}}</h3>\n          <h2 class=\"rate\">{{item.planRate}}</h2>\n          <p>{{item.planText}}</p>\n        </div>\n      </div>\n    </div>\n    <div class=\"answer_questions\">\n      <h3 class=\"color_none\">Answer a few simple questions so we know what snacks are best for you</h3>\n      <div class=\"question_wrapper\" *ngFor=\"let q of questions\">\n        <p>{{q.question}}</p>\n        <ul>\n          <li *ngFor=\"let opt of q.options\"><input type=\"radio\" value=\"{{opt.optionText}}\" name=\"{{opt.optName}}\" [(ngModel)]=\"q.selectedOpt\" />{{opt.optionText}}</li>\n        </ul>\n        <div class=\"product_images + {{ q.class}}\">\n          <img *ngFor=\"let image of q.images\" src=\"{{image.url}}\" alt=\"{{image.alt}}\" />\n        </div>\n      </div>\n    </div>\n    <div class=\"ok_button\" (click)=\"checkDelivery()\">\n      <a routerLink=\"/delivery\" [queryParams]=\"{selectedPlan: selectedPlanId, question1: questions[0].selectedOpt, question2: questions[1].selectedOpt, question3: questions[2].selectedOpt }\">Ok</a>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -4489,19 +4420,19 @@ var SubscribeComponent = /** @class */ (function () {
     function SubscribeComponent() {
         this.selectedPlanId = null;
         this.plan = [{
-                planId: 1,
+                planId: "5bda9417e54a4134c021d769",
                 planName: "Trial Week",
                 planRate: "500Rs/bag",
                 planText: "Try our snack bag of one week. You'll get one bag with 6 healthy snacks that will take care of your evening hunger pangs."
             },
             {
-                planId: 2,
+                planId: "5bd9418790e4ca11e070f31a",
                 planName: "For 4 Weeks",
                 planRate: "500Rs/bag",
                 planText: "1 snack bag delivered each week for a period of 1 month"
             },
             {
-                planId: 3,
+                planId: "5bd941b790e4ca11e070f31b",
                 planName: "For 12 Weeks",
                 planRate: "500Rs/bag",
                 planText: "1 snack bag delivered each week for a period of 6 months"

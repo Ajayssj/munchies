@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { OrdersType } from './orders-interface';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-manage-subscription',
@@ -11,7 +12,7 @@ import { OrdersType } from './orders-interface';
 
 export class ManageSubscriptionComponent implements OnInit {
   orders: [OrdersType];
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private auth: AuthService) {
     // console.log(sessionStorage.getItem('isLoggedIn') == 'false');
     // if(sessionStorage.getItem('isLoggedIn') == 'false') {
     //   this.router.navigate(['/signIn']);
@@ -20,7 +21,7 @@ export class ManageSubscriptionComponent implements OnInit {
 
   ngOnInit() {
 
-    this.http.get('http://localhost:9191/api/order/getMyorders').subscribe((resData: any) => {
+    this.http.get(this.auth.getDomainName() + '/api/plan/active/null').subscribe((resData: any) => {
       console.log('loll', resData);
       this.orders = resData.orderData;
     }, error => {

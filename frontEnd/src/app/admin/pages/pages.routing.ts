@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { PagesComponent } from './pages.component';
-import { SignInComponent } from './../../user/sign-in/sign-in.component';
+import { CustomerComponent } from './customer/customer.component';
 import { AdminComponent } from '../admin.component';
 import { AuthGuard } from './../auth.guard';
 
@@ -16,9 +16,13 @@ export const childRoutes: Routes = [
             {
                 path: 'pages',
                 component: PagesComponent,
-                canActivate: [AuthGuard],
+                // canActivate: [AuthGuard],
                 children: [
                     { path: '', redirectTo: 'index', pathMatch: 'full' },
+                    { path: 'customer', loadChildren: './customer/customer.module#CustomerModule' },
+                    { path: 'company', loadChildren: './company/company.module#CompanyModule' },
+                    { path: 'snacks', loadChildren: './snacks/snacks.module#SnacksModule' },
+
                     { path: 'index', loadChildren: './index/index.module#IndexModule' },
                     { path: 'editor', loadChildren: './editor/editor.module#EditorModule' },
                     { path: 'icon', loadChildren: './icon/icon.module#IconModule' },
