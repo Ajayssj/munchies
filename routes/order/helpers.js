@@ -4,6 +4,58 @@ const db = require('../../database');
 const Order = db.getCollection('order');
 
 module.exports = {
+    getAllOrders : (req,res) => {
+        Order.aggregate(
+ 
+            // Pipeline
+            [
+                // Stage 1
+                {
+                    $lookup: {
+                        "from" : "user",
+                        "localField" : "customerData.custId",
+                        "foreignField" : "_id",
+                        "as" : "user"
+                    }
+                },
+ 
+                // Stage 2
+                {
+                    $lookup: {
+                        "from" : "activePlans",
+                        "localField" : "customerData.custId",
+                        "foreignField" : "userId",
+                        "as" : "planInfo"
+                    }
+                },
+ 
+                // Stage 3
+                {
+                    $unwind: {
+                        path : "$user",
+                        includeArrayIndex : "arrayIndex", // optional
+                        preserveNullAndEmptyArrays : false // optional
+                    }
+                },
+ 
+                // Stage 4
+                {
+                    $unwind: {
+                        path : "$planInfo",
+                        includeArrayIndex : "arrayIndex", // optional
+                        preserveNullAndEmptyArrays : false // optional
+                    }
+                },
+ 
+            ]
+ 
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+ 
+        ).toArray().then(orders => {
+            res.json({success : true, data : orders})
+        }).catch(err => res.json({success : false, error : err}))
+ 
+    },
     createOrder: (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

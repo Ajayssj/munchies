@@ -26,6 +26,14 @@ const isEmailExists = function (email) {
 }
 
 module.exports = {
+    getAllUsers : (req,res) => {
+        User.find().toArray()
+        .then(users => {
+            console.log("users", users);
+            
+            res.json({success : true, data : users})
+        }).catch(err => res.json({success : false, error : err}))
+    },
     login: (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

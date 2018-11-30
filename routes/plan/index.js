@@ -14,4 +14,9 @@ routes.get('/plan/core/',helpers.getCorePlans);
 routes.delete('/plan/core/delete',helpers.deleteCorePlan);
 routes.post('/plan/core/edit',helpers.editCorePlan);
 
+routes.post('/plan/active/:planId/product/:productId/week/:week',helpers.addProductInPlan);
+routes.delete('/plan/active/:planId/product/:productId/week/:week',helpers.deleteProductFromPlan);
+routes.post('/plan/core/:planId/product/:productId/week/:week',helpers.addProductInPlan);
+routes.delete('/plan/core/:planId/product/:productId/week/:week',helpers.deleteProductFromPlan);
+
 module.exports = routes;

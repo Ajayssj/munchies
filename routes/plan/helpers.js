@@ -51,6 +51,52 @@ const activateDeactivatePlan = (activePlanId,status = true) => {
    })
 }
 module.exports = {
+    addProductInPlan : (req,res)=>{
+        /*
+            if 'active' found in route then update flag
+         */
+        const planId = req.params.planId;
+        const productId = req.params.productId;
+        var planType = 'activePlanId', isCustom = true;
+        let week = req.params.week;
+        week = Number(week);
+        if(planId && productId && !isNaN(week)){
+            if(req.originalUrl.indexOf('core') > -1){ planType = 'planId';isCustom = false};
+              CustomPlan.updateOne(
+                  {[planType] : db.toObjectID(planId), week : week},
+                  { $push : { products : productId}, $set : { isCustom : isCustom }}
+                ).then(plan => {
+                    if(plan.result.nModified == 1){
+                        res.json({success : true});
+                    }else
+                        res.json({success : false, error : 'No Plan Found!'})
+                }).catch(err => res.json({success : false, error : err}))
+        }else
+            res.json({success : false, error : 'Invalid Request Paramerts'})
+    },
+    deleteProductFromPlan : (req,res)=>{
+        const planId = req.params.planId;
+        const productId = req.params.productId;
+        var planType = 'activePlanId', isCustom = true;
+        let week = req.params.week;
+        week = Number(week);
+        if(planId && productId && !isNaN(week)){
+            if(req.originalUrl.indexOf('core') > -1){ planType = 'planId';isCustom = false};
+                CustomPlan.updateOne(
+                {[[planType]] : db.toObjectID(planId),
+                    week :  week
+                },
+                {
+                    $pull : { 'products' : db.toObjectID(productId)}     
+                }).then(plan => {
+                    if(plan.modifiedCount >= 1){
+                        res.json({success : true});
+                    }else
+                        res.json({success : false, error : 'No Plan Found!'})
+                }).catch(err => res.json({success : false, error : err}))
+        }else
+            res.json({success : false, error : 'Invalid Request Paramerts'})
+    },
    getActivePlans : (req,res) => {
     const userId = req.params.userId;
     if(!userId) userId = req.session.user._id.toString();
