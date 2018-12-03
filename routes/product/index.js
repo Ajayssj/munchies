@@ -6,4 +6,5 @@ routes.post('/product/add',validation.addProduct,helpers.addProduct);
 routes.get('/product/:productId',helpers.getProduct);
 routes.post('/product/edit',helpers.editProduct);
 routes.delete('/product/delete',helpers.deleteProduct);
+routes.get('/product',helpers.getProducts);
 module.exports = routes;

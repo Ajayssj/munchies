@@ -25,8 +25,8 @@ export class CustomerdetailsComponent implements OnInit {
     });
   }
 
-  viewUserWeek(userId, planId, weekNo) {
-    console.log(userId, planId, weekNo);
+  viewUserWeek(userId, planId, weekNo, actpId) {
+    console.log(userId, planId, weekNo, actpId);
     this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+planId+'/week/'+weekNo);
   }
   viewUserPlan(userId, planId) {

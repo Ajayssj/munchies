@@ -19,6 +19,14 @@ const isProductExists = (productId) => {
 }
 
 module.exports = {
+    getProducts : (req,res) =>{
+        Product.find().toArray()
+            .then(products => {
+                res.json({success : true, data : products});
+            }).catch(err => {
+                res.json({success : false, error : err });
+            })
+    },
     addProduct : (req,res) => {
         const errors = validationResult(req);
         console.log(req.body);

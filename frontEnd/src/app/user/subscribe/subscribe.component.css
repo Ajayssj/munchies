@@ -18,14 +18,22 @@
     
 }
 .select_plan .plans {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     
     
 }
 .select_plan .plan {
-    box-sizing: border-box;
-    flex: 1 0 21%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 0 21%;
+            flex: 1 0 21%;
     padding: 10px 22px;
     background-color: rgb(125, 187, 195);
     min-height: 270px;
@@ -186,7 +194,8 @@
         left: 60px;
     }
     .select_plan .plan {
-        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
         
 
         background-color: rgb(125, 187, 195);
@@ -199,7 +208,8 @@
 
 @media screen and (max-width: 640px) {
     .plans {
-        flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
         
     }
     .plans .plan {
@@ -210,4 +220,3 @@
         
     }
 }
-

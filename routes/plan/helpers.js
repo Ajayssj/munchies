@@ -63,8 +63,8 @@ module.exports = {
         if(planId && productId && !isNaN(week)){
             if(req.originalUrl.indexOf('core') > -1){ planType = 'planId';isCustom = false};
               CustomPlan.updateOne(
-                  {[planType] : db.toObjectID(planId), week : week},
-                  { $push : { products : productId}, $set : { isCustom : isCustom }}
+                  {[planType] : db.toObjectID(planId), weeks : week},
+                  { $push : { products : db.toObjectID(productId)}, $set : { isCustom : isCustom }}
                 ).then(plan => {
                     if(plan.result.nModified == 1){
                         res.json({success : true});
@@ -84,7 +84,7 @@ module.exports = {
             if(req.originalUrl.indexOf('core') > -1){ planType = 'planId';isCustom = false};
                 CustomPlan.updateOne(
                 {[[planType]] : db.toObjectID(planId),
-                    week :  week
+                    weeks :  week
                 },
                 {
                     $pull : { 'products' : db.toObjectID(productId)}     
