@@ -52,6 +52,14 @@ module.exports = {
                 })
         }
     },
+	getProducts : (req,res) =>{
+		Product.find().toArray()
+		.then(products => {
+		res.json({success : true, data : products});
+		}).catch(err => {
+		res.json({success : false, error : err });
+		})
+	},
     getProduct : (req,res) =>{
         const productId = req.params.productId;
         isProductExists(productId)

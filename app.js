@@ -1,7 +1,7 @@
 var app = require('express')();
 const env = require('./config/env');
-var cors = require('cors');
-app.use(cors());
+//var cors = require('cors');
+//app.use(cors());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -15,7 +15,7 @@ const server = app.listen(env.SERVER_PORT, function () {
     database.connectDB(err => {
         if (!err) {
             console.info('Mongodb Connected Successfully!');
-            app.use(cors());
+           // app.use(cors());
             require('./routes').bindAPI(app);
         } else {
             console.error('Mongodb Connection Failed!', err);

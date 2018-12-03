@@ -4,6 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routing } from './company.routing';
 import { SharedModule } from '../../shared/shared.module';
 import { CompanyComponent } from './company.component';
+import { ModalModule } from 'ngx-modal';
+import { SelectModule } from 'ng2-select';
+import { ModalsComponent } from '../ui/components/modals/modals.component';
+import { FormComponent } from '../form/form.component';
+import { FormInputsComponent } from '../form/components/form-inputs/form-inputs.component';
+import { Ng2SelectComponent } from '../form/components/ng2-select/ng2-select.component';
+import { SingleSelectComponent } from '../form/components/ng2-select/single-select/single-select.component';
 
 @NgModule({
     imports: [
@@ -11,10 +18,16 @@ import { CompanyComponent } from './company.component';
         FormsModule,
         ReactiveFormsModule,
         SharedModule,
-        routing
+        routing,
+        ModalModule,
+        SelectModule
     ],
     declarations: [
-        CompanyComponent
+        CompanyComponent,
+        ModalsComponent,
+        FormComponent,
+        FormInputsComponent,
+        SingleSelectComponent
     ]
 })
 export class CompanyModule { }

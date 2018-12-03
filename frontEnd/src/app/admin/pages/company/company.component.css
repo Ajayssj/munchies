@@ -1,3 +1,16 @@
 .company_wrapper {
   padding-right: 40px;
 }
+.mr-20 {
+  margin-right: 20px;
+}
+select.form-control {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: rgba(0,0,0,.1);
+  transition: all 1s;
+  -o-transition: all 1s;
+  -moz-transition: all 1s;
+  -webkit-transition: all 1s;
+}

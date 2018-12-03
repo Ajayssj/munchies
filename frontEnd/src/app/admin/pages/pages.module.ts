@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 /* components */
 import { PagesComponent } from './pages.component';
 import { LoginComponent } from './login/login.component';
+
 //import { CompanyComponent } from './company/company.component';
 //import { SnacksComponent } from './snacks/snacks.component';
 // import { CustomerComponent } from './customer/customer.component';
@@ -21,7 +22,10 @@ import { LoginComponent } from './login/login.component';
     ],
     declarations: [
         PagesComponent,
-        LoginComponent,
+        LoginComponent
+    ],
+    providers: [
+        
     ]
 })
 export class PagesModule { }

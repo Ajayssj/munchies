@@ -6,35 +6,91 @@
       <li [ngClass]="{'active': view == 'product'}" (click)="changeView('product')"><a>Product</a></li>
     </ul>
   </div>
-
+  <modal #addModal [closeOnEscape]="false" [closeOnOutsideClick]="false">
+    <modal-header>
+      <h3>modal that cannot be simply closed</h3>
+    </modal-header>
+    <modal-content>
+      <form *ngIf="view=='company'" [formGroup]="addProductCompanyForm" (ngSubmit)="onSubmit(addModal, 'company')">
+        <div class="form-group">
+          <label class="control-label">Company</label>
+          <input type="text" class="form-control" formControlName="productCompany" placeholder="Enter Product Company" />
+        </div>
+        <button class="btn btn-primary">Add Company</button>
+      </form>
+      <form *ngIf="view=='types'" [formGroup]="addProductTypeForm" (ngSubmit)="onSubmit(addModal, 'type')">
+        <div class="form-group">
+          <label class="control-label">Select Company</label>
+          <!-- <ng-select [items]="companyName" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+            (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+          </ng-select> -->
+          <select formControlName="selectedCompany" class="form-control">
+            <option *ngFor="let company of productCompanies" value="{{company._id}}">{{company.company}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Type</label>
+          <input type="text" class="form-control" formControlName="pType" placeholder="Enter Product Type" />
+        </div>
+        <button class="btn btn-primary">Add Product Type</button>
+      </form>
+      </modal-content>
+    <!-- <modal-footer>
+    </modal-footer> -->
+  </modal>
+  
+  <modal #editModal [closeOnEscape]="false" [closeOnOutsideClick]="false">
+      <modal-header>
+        <h3>modal that cannot be simply closed</h3>
+      </modal-header>
+      <modal-content>
+        <form *ngIf="view=='company'" [formGroup]="editProductCompanyForm" (ngSubmit)="editOnSubmit(editModal, 'company', selectedCompanyObj._id)">
+          <div class="form-group">
+            <label class="control-label">Company</label>
+            <input type="text" class="form-control" formControlName="productCompany" value="{{selectedCompanyObj.company}}" />
+          </div>
+          <button class="btn btn-primary">Edit Company</button>
+        </form>
+        <form *ngIf="view=='types'" [formGroup]="editProductTypeForm" (ngSubmit)="editOnSubmit(editModal, 'type', selectedTypeObj._id)">
+          <div class="form-group">
+            <label class="control-label">Select Company</label>
+            <!-- <ng-select [items]="companyName" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
+              (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+            </ng-select> -->
+            <select formControlName="selectedCompany" class="form-control">
+              <option *ngFor="let companyItem of productCompanies" value="{{companyItem._id}}">{{companyItem.company}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Type</label>
+            <input type="text" class="form-control" formControlName="pType" value="{{selectedTypeObj.type}}" />
+          </div>
+          <button class="btn btn-primary">Edit Product Type</button>
+        </form>
+        </modal-content>
+      <!-- <modal-footer>
+      </modal-footer> -->
+    </modal>
   <div class="container-fluid content">
     <div *ngIf="view == 'company'">
       <div class="row">
-        <button class="btn btn-primary" style="margin:20px">Add Company</button>
+        <button class="btn btn-primary" (click)="addModal.open()" style="margin:20px">Add Company</button>
       </div>
       <table class="table table-bordered">
         <thead>
           <tr>
             <th>No</th>
             <th>Company Name</th>
-            <th>Delete</th>
+            <th>Edit/Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Charlie</td>
-            <td><button class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Bareball</td>
-            <td><button class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Whistle</td>
-            <td><button class="btn btn-danger">Delete</button></td>
+          <tr *ngFor="let pCompany of productCompanies, let i=index">
+            <td>{{i+1}}</td>
+            <td>{{pCompany.company}}</td>
+            <td>
+              <button (click)="editModal.open();selectedCompanyObj=pCompany" class="btn btn-success mr-20">Edit</button>
+              <button class="btn btn-danger">Delete</button></td>
           </tr>
         </tbody>
       </table>
@@ -42,23 +98,28 @@
 
     <div *ngIf="view == 'types'">
       <div class="row">
-        <button class="btn btn-primary" style="margin:20px">Add Product Type</button>
+        <button class="btn btn-primary" (click)="addModal.open()" style="margin:20px">Add Product Type</button>
       </div>
       <table class="table table-bordered">
         <thead>
           <tr>
             <th>No</th>
+            <th>Product Company</th>
             <th>Product Type</th>
-            <th>Delete</th>
+            <th>Edit/Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Laadu</td>
-            <td><button class="btn btn-danger">Delete</button></td>
+          <tr *ngFor="let pType of productTypes, let i=index">
+            <td>{{i+1}}</td>
+            <td>{{(pType.companies && pType.companies.length > 0) ? (pType.companies[0] && pType.companies[0].company ? pType.companies[0] && pType.companies[0].company : "") : ''}}</td>
+            <td>{{pType.type}}</td>
+            <td>
+              <button (click)="editModal.open();selectedTypeObj=pType" class="btn btn-success mr-20">Edit</button>
+              <button class="btn btn-danger">Delete</button>
+            </td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>2</td>
             <td>Makhana</td>
             <td><button class="btn btn-danger">Delete</button></td>
@@ -67,7 +128,7 @@
             <td>3</td>
             <td>Enery Bars</td>
             <td><button class="btn btn-danger">Delete</button></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -86,27 +147,21 @@
             <th>Quantity</th>
             <th>MRP</th>
             <th>KCAL</th>
-            <th>Use in Week</th>
-            <th>Rate</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Edit/Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>The Muscle</td>
+          <tr *ngFor="let product of products, let i=index">
+            <td>{{i+1}}</td>
+            <td>{{product.name}}</td>
             <td>Makhana</td>
-            <td>Bareball</td>
-            <td>35gm</td>
-            <td>70</td>
-            <td>81</td>
-            <td>3</td>
-            <td>34</td>
-            <td><button class="btn btn-danger">Edit</button></td>
-            <td><button class="btn btn-danger">Delete</button></td>
+            <td>{{product.company}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.kcal}}</td>
+            <td><button class="btn btn-success mr-20">Edit</button><button (click)="deleteProduct(product._id)" class="btn btn-danger">Delete</button></td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>2</td>
             <td>The Brain</td>
             <td>Laadu</td>
@@ -131,7 +186,7 @@
             <td>34</td>
             <td><button class="btn btn-danger">Edit</button></td>
             <td><button class="btn btn-danger">Delete</button></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
