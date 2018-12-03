@@ -62,14 +62,14 @@ export class SubscribeComponent implements OnInit {
       url: "../../assets/peanut.png",
       alt: "peanut.png"
     },
-    {
+    /*{
       url: "../../assets/chocolate-bar.png",
       alt: "chocolate_bar.png"
-    }],
+    }*/],
     class: "first_box",
     selectedOpt: null
   },
-  {
+ /* {
     qId: 2,
     question: "Pick flavours you don't like",
     options: [{
@@ -107,9 +107,9 @@ export class SubscribeComponent implements OnInit {
     }],
     class: "second_box",
     selectedOpt: null
-  },
+  },*/
   {
-    qId: 3,
+    qId: 2,
     question: "Pick fruits you don't like",
     options: [{
       optionId: 1,
@@ -160,6 +160,7 @@ export class SubscribeComponent implements OnInit {
   selectedPlan(selectedPlanId) {
     console.log("sel", selectedPlanId);
     this.selectedPlanId = selectedPlanId;
+    
   }
   checkDelivery() {
     console.log("in check delivery");

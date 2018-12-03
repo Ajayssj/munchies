@@ -4,7 +4,7 @@
     <h3 class="color_none">Select a Plan</h3>
     <div class="select_plan">
       <div class="plans">
-        <div class="plan" *ngFor="let item of plan; let i = index" (click)="selectedPlan(item.planId)">
+        <div class="plan" [ngClass]="{'active':selectedPlanId == item.planId}" *ngFor="let item of plan; let i = index" (cl0ick)="selectedPlan(item.planId)">
           <h3>{{item.planName}}</h3>
           <h2 class="rate">{{item.planRate}}</h2>
           <p>{{item.planText}}</p>
@@ -23,8 +23,11 @@
         </div>
       </div>
     </div>
-    <div class="ok_button" (click)="checkDelivery()">
-      <a routerLink="/delivery" [queryParams]="{selectedPlan: selectedPlanId, question1: questions[0].selectedOpt, question2: questions[1].selectedOpt, question3: questions[2].selectedOpt }">Ok</a>
+    
+   <!-- <div (click)="checkDelivery()">
+        <button class="ok_button"  (click)="checkDelivery()">ok</button> -->
+ <div class="ok_button" (click)="checkDelivery()">
+      <a routerLink="/delivery" [queryParams]="{selectedPlan: selectedPlanId, question1: questions[0].selectedOpt, question2: questions[1].selectedOpt }">Ok</a> 
     </div>
   </div>
 </div>
