@@ -27,7 +27,8 @@ import { SingleSelectComponent } from '../form/components/ng2-select/single-sele
         ModalsComponent,
         FormComponent,
         FormInputsComponent,
-        SingleSelectComponent
+        SingleSelectComponent,
+        Ng2SelectComponent
     ]
 })
 export class CompanyModule { }

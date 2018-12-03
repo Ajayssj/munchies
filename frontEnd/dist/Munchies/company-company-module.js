@@ -243,13 +243,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_components_modals_modals_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ui/components/modals/modals.component */ "./src/app/admin/pages/ui/components/modals/modals.component.ts");
 /* harmony import */ var _form_form_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../form/form.component */ "./src/app/admin/pages/form/form.component.ts");
 /* harmony import */ var _form_components_form_inputs_form_inputs_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../form/components/form-inputs/form-inputs.component */ "./src/app/admin/pages/form/components/form-inputs/form-inputs.component.ts");
-/* harmony import */ var _form_components_ng2_select_single_select_single_select_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../form/components/ng2-select/single-select/single-select.component */ "./src/app/admin/pages/form/components/ng2-select/single-select/single-select.component.ts");
+/* harmony import */ var _form_components_ng2_select_ng2_select_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../form/components/ng2-select/ng2-select.component */ "./src/app/admin/pages/form/components/ng2-select/ng2-select.component.ts");
+/* harmony import */ var _form_components_ng2_select_single_select_single_select_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../form/components/ng2-select/single-select/single-select.component */ "./src/app/admin/pages/form/components/ng2-select/single-select/single-select.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -281,7 +283,8 @@ var CompanyModule = /** @class */ (function () {
                 _ui_components_modals_modals_component__WEBPACK_IMPORTED_MODULE_8__["ModalsComponent"],
                 _form_form_component__WEBPACK_IMPORTED_MODULE_9__["FormComponent"],
                 _form_components_form_inputs_form_inputs_component__WEBPACK_IMPORTED_MODULE_10__["FormInputsComponent"],
-                _form_components_ng2_select_single_select_single_select_component__WEBPACK_IMPORTED_MODULE_11__["SingleSelectComponent"]
+                _form_components_ng2_select_single_select_single_select_component__WEBPACK_IMPORTED_MODULE_12__["SingleSelectComponent"],
+                _form_components_ng2_select_ng2_select_component__WEBPACK_IMPORTED_MODULE_11__["Ng2SelectComponent"]
             ]
         })
     ], CompanyModule);
