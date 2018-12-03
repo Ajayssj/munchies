@@ -8,11 +8,15 @@ module.exports = {
         const productApi = require('./product');
         const planApi = require('./plan');
         const ordrApi = require('./order');
+		const typeApi = require('./type');
+		const companyApi = require('./company');
 
         app.use('/api', userApi);
         app.use('/api', productApi);
         app.use('/api', planApi);
-        app.use('/api', ordrApi)
+        app.use('/api', ordrApi);
+		app.use('/api',typeApi);
+		app.use('/api',companyApi);
         app.use(express.static('client'));
         app.get('/*', (req, res) => res.sendFile(__baseUrl + '/client/'));
 
@@ -39,8 +43,8 @@ module.exports = {
     bindAuth: function (app) {
         const auth = require('../auth');
         const isAdmin = require('../permissions');
-        // app.all(PERMISSIONS.AUTH_URLs, auth.isLoggedIn);
-        // app.all(PERMISSIONS.ADMIN_URLs, isAdmin);
+        //app.all(PERMISSIONS.AUTH_URLs, auth.isLoggedIn);
+        //app.all(PERMISSIONS.ADMIN_URLs, isAdmin);
     },
     bindAPI: function (app) {
         this.bindMiddleware(app);
