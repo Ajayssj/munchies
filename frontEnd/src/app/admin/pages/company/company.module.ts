@@ -8,7 +8,6 @@ import { ModalModule } from 'ngx-modal';
 import { ModalsComponent } from '../ui/components/modals/modals.component';
 import { FormComponent } from '../form/form.component';
 import { FormInputsComponent } from '../form/components/form-inputs/form-inputs.component';
-import { CompanyTabComponent } from './company-tab/company-tab.component';
 
 @NgModule({
     imports: [
@@ -23,8 +22,7 @@ import { CompanyTabComponent } from './company-tab/company-tab.component';
         CompanyComponent,
         ModalsComponent,
         FormComponent,
-        FormInputsComponent,
-        CompanyTabComponent
+        FormInputsComponent
     ]
 })
 export class CompanyModule { }
