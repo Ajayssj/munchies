@@ -59,7 +59,9 @@ export class SignInComponent implements OnInit {
         this.error = data.error;
         if (data.success) {
           this.authService.setLoggedIn(true);
-          console.log("gooooddddd");
+          this.authService.setUserName(this.username);
+          console.log(this.authService.getUserName());
+          console.log(this.username);
           if (this.authService.isLoggedIn()) {
             this.router.navigate(['/manage-subscription']);
           }

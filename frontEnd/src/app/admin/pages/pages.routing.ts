@@ -22,7 +22,7 @@ export const childRoutes: Routes = [
                     { path: 'customer', loadChildren: './customer/customer.module#CustomerModule' },
                     { path: 'company', loadChildren: './company/company.module#CompanyModule' },
                     { path: 'snacks', loadChildren: './snacks/snacks.module#SnacksModule' },
-
+                    { path: 'plan-management', loadChildren: './plan-management/plan-management.module#PlanManagementModule' },
                     { path: 'index', loadChildren: './index/index.module#IndexModule' },
                     { path: 'editor', loadChildren: './editor/editor.module#EditorModule' },
                     { path: 'icon', loadChildren: './icon/icon.module#IconModule' },
@@ -31,7 +31,7 @@ export const childRoutes: Routes = [
                     { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
                     { path: 'ui', loadChildren: './ui/ui.module#UIModule' },
                     { path: 'table', loadChildren: './table/table.module#TableModule' },
-                    { path: 'menu-levels', loadChildren: './menu-levels/menu-levels.module#MenuLevelsModule' },
+                    { path: 'menu-levels', loadChildren: './menu-levels/menu-levels.module#MenuLevelsModule' }
                 ]
             }
 

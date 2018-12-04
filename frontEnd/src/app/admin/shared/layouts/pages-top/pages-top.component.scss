@@ -21,6 +21,7 @@
     min-height: 50px;
     @include transition(all .4s);
     .avatar {
+        display: none;
         width: 50px;
         height: 50px;
         border-radius: 5px;
@@ -79,6 +80,7 @@
 }
 
 .search-group {
+    display: none;
     position: absolute;
     top: 50%;
     right: 170px;
@@ -124,7 +126,7 @@
 }
 
 .msg-tips-wrap {
-    display: flex;
+    display: none;
     flex-wrap: nowrap;
     position: absolute;
     top: 50%;

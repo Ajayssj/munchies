@@ -1,21 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
+import { AuthService } from '../../../../user/auth.service';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'pages-top',
   templateUrl: './pages-top.component.html',
   styleUrls: ['./pages-top.component.scss'],
 })
-export class PagesTopComponent {
+export class PagesTopComponent implements OnInit {
   avatarImgSrc: string = 'assets/images/avatar.png';
-  userName: string = 'Folisise Chosielie';
-  userPost: string = 'Musician, Player';
+  userName: string;
+  //userPost: string = 'Musician, Player';
 
 
   sidebarToggle: boolean = true;
   tip = { ring: true, email: true };
 
-  constructor(private _globalService: GlobalService) { }
+  constructor(private _globalService: GlobalService, private auth: AuthService) { }
+  
+  
+  ngOnInit() {
+    this.userName = this.auth.getUserName();
+    console.log(this.userName);
+  }
 
   public _sidebarToggle() {
     /* this._globalService.sidebarToggle$.subscribe(sidebarToggle => {

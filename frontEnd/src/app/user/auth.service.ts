@@ -16,18 +16,21 @@ export class AuthService {
   isLoggedIn() {
     return localStorage.getItem("isLoggedIn");
   }
-
+  getUserName() {
+    return localStorage.getItem('username');
+  }
   getDomainName() {
     // return "http://dev-munchies.herokuapp.com";
     return "http://localhost:9191";
   }
 
   setLoggedIn(value) {
-    console.log(value)
     localStorage.setItem("isLoggedIn", value);
   }
+  setUserName(value) {
+    localStorage.setItem('username', value);
+  }
   varifyFirebaseToken = function (token, callback) {
-    console.log("hiiiiiiiiiii");
     this.http.post('https://dev-munchies.herokuapp.com/api/user/verifyFirebaseToken', token).subscribe(resData => {
       console.log(resData);
       callback(resData);
@@ -36,7 +39,6 @@ export class AuthService {
     });
   }
   doFacebookLogin() {
-    console.log("in do fb login");
     return new Promise<any>((resolve, reject) => {
       let provider = new firebase.auth.FacebookAuthProvider();
       provider.addScope('email');
@@ -49,7 +51,6 @@ export class AuthService {
           reject(error);
         });
       this.afAuth.auth.currentUser.getIdToken(true).then(idToken => {
-        console.log("loginwithFacebook==>idToken", idToken);
         this.varifyFirebaseToken(idToken, function (result) {
           console.log(result.data);
           if (result.success) {
