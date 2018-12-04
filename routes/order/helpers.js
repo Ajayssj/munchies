@@ -87,26 +87,55 @@ module.exports = {
 
         }
     },
-    getMyorders: (req, res) => {
-        const customerId = db.toObjectID(req.session.user._id);
-        var query = {}
-        query = {
-            'customerData.custId': customerId
-        }
-        console.log("query==>", query);
+    getMyorders : (req, res) => {
+        const customerId = req.session.user._id;
+        // const customerId = "5bfbdcc51efad521746223ae";
+        Order.aggregate(
 
-        Order.find(query).toArray()
+            // Pipeline
+            [
+                // Stage 1
+                {
+                    $match: {
+                       'customerData.custId' : db.toObjectID(customerId)
+                    }
+                },
+
+                // Stage 2
+                {
+                    $lookup: {
+                        "from" : "activePlans",
+                        "localField" : "planId",
+                        "foreignField" : "_id",
+                        "as" : "activePlan"
+                    }
+                },
+
+                // Stage 3
+                {
+                    $unwind: {
+                        path : "$activePlan",
+                        includeArrayIndex : "arrayIndex", // optional
+                        preserveNullAndEmptyArrays : false // optional
+                    }
+                },
+
+            ]
+
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+
+        ).toArray()
             .then(order => {
-                if (order) {
-                    console.log("OrderData==>", order);
+                if(order){
+                    console.log("OrderData==>",order);
 
-                    res.json({ success: true, orderData: order });
-                } else {
-                    res.json({ success: false, error: 'customer Id is not found!' });
+                        res.json({success : true,orderData:order});
+                }else{
+                    res.json({success : false, error : 'customer Id is not found!'});
                 }
 
             }).catch(err => {
-                res.json({ success: false, error: 'Database Error : ' + err });
+                res.json({success : false, error : 'Database Error : ' + err});
             })
 
     },

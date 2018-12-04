@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -19,7 +20,7 @@ import { AdminModule } from './admin/admin.module';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   
   ],
   providers: [],

@@ -91,9 +91,11 @@ export class CustomerplanweekComponent implements OnInit {
 
   closeModal(modal) {
     modal.close();
+    window.location.reload();
   }
 
   onClose() {
+    window.location.reload();
     swal({
       type: 'success',
       title: 'Success!',

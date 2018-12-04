@@ -8,7 +8,6 @@ import { CustomerComponent } from './customer.component';
 import { CustomerplanComponent } from './customerplan/customerplan.component';
 import { CustomerplanweekComponent } from './customerplanweek/customerplanweek.component';
 import { CustomerdetailsComponent } from './customerdetails/customerdetails.component';
-import { ModalsComponent } from '../ui/components/modals/modals.component';
 
 
 @NgModule({
@@ -24,8 +23,7 @@ import { ModalsComponent } from '../ui/components/modals/modals.component';
         CustomerComponent,
         CustomerdetailsComponent,
         CustomerplanweekComponent,
-        CustomerplanComponent,
-        ModalsComponent
+        CustomerplanComponent
     ]
 })
 export class CustomerModule { }

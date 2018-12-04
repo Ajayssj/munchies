@@ -30,6 +30,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../../environments/environment';
 import { AuthService} from './auth.service';
 import { AuthGuard } from './auth/auth.guard';
+import {ModalModule} from "ngx-modal";
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AuthGuard } from './auth/auth.guard';
     AngularFireModule.initializeApp(environment.firebase, "myApp"),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    ModalModule
   ],
   providers: [AuthGuard, AuthService],
   bootstrap: [UserComponent]

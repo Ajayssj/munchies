@@ -3,6 +3,7 @@ const helpers = require('./helpers');
 
 routes.get('/plan/active/:userId',helpers.getActivePlans);
 routes.put('/plan/active/:activePlanId/skip-week/:week',helpers.skipActivePlanWeek);
+routes.put('/plan/active/:activePlanId/undo-skip-week/:skippedWeek',helpers.undoSkippedActivePlanWeek);
 routes.get('/plan/customize/:activePlanId',helpers.getCustmoizedPlan);
 routes.get('/plan/customize/:activePlanId/week/:week',helpers.getCustmoizedPlanByWeek);
 routes.get('/plan/deactivate/:activePlanId',helpers.deactivatePlan);
@@ -18,5 +19,6 @@ routes.post('/plan/active/:planId/product/:productId/week/:week',helpers.addProd
 routes.delete('/plan/active/:planId/product/:productId/week/:week',helpers.deleteProductFromPlan);
 routes.post('/plan/core/:planId/product/:productId/week/:week',helpers.addProductInPlan);
 routes.delete('/plan/core/:planId/product/:productId/week/:week',helpers.deleteProductFromPlan);
+
 
 module.exports = routes;

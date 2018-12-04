@@ -97,10 +97,10 @@ module.exports = {
         }else
             res.json({success : false, error : 'Invalid Request Paramerts'})
     },
-   getActivePlans : (req,res) => {
-    const userId = req.params.userId;
-    if(!userId) userId = req.session.user._id.toString();
-    ActivePlan.aggregate(
+    getActivePlans : (req,res) => {
+        const userId = req.params.userId;
+        if(!userId) userId = req.session.user._id.toString();
+        ActivePlan.aggregate(
             [
                 {
                     $match: {
@@ -116,6 +116,14 @@ module.exports = {
                     }
                 },
                 {
+                    $lookup: {
+                        "from" : "user",
+                        "localField" : "userId",
+                        "foreignField" : "_id",
+                        "as" : "user"
+                    }
+                },
+                {
                     $unwind: {
                         path : "$plans",
                         includeArrayIndex : "arrayIndex", // optional
@@ -123,11 +131,11 @@ module.exports = {
                     }
                 },
             ]).toArray().then(activePlans => {
-                 res.json({success : true, data : activePlans});
+                    res.json({success : true, data : activePlans});
             }).catch(err =>{
                 res.json({success : false, error : err });
             })
-   },
+    },
    getCustmoizedPlan : (req,res) => {
     const activePlanId = req.params.activePlanId;
     CustomPlan.aggregate(
@@ -227,16 +235,25 @@ module.exports = {
    skipActivePlanWeek : (req,res) => {
     const activePlanId = req.params.activePlanId;
     const userId = req.session.user._id;
-    const week = req.params.week;
-    if(userId && activePlanId && Numberl.isNaN(Number(week,10))){
+    // const userId = "5bfbdcc51efad521746223ae";
+    let week = req.params.week;
+    week = Number(week,10)
+    if(userId && activePlanId && !Number.isNaN(week)){
         ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
         {
             $push : {skipedWeeks : week },
             $inc: { weeks : 1}
         }).then(plan => {
-            if(plan.result.nModified == 1)
-                res.json({success : true, message : 'Week Skipped Successfully!'})
-            else
+            if(plan.result.nModified == 1){
+                CustomPlan.updateMany(
+                    {activePlanId : db.toObjectID(activePlanId), week : { $gte: week } },
+                    {
+                    $inc : {week : 1}
+                    }).then(result =>{
+                        res.json({success : true, message : 'Week Skipped Successfully!'})
+                    }).catch(err => res.json({success : false, error : err}))
+ 
+            }else
                 res.json({success : false, error : 'Plan not found to be edited!'})
         }).catch(err => res.json({success : false, error : err}));
     }else{
@@ -296,4 +313,33 @@ module.exports = {
                     res.json({success : false, error : 'Plan not found to be edited!'})
             }).catch(err => res.json({success : false, error : err}));
    },
+   undoSkippedActivePlanWeek : (req,res) =>{
+    const activePlanId = req.params.activePlanId;
+    const userId = req.session.user._id;
+    // const userId = "5bfbdcc51efad521746223ae";
+    let week = req.params.skippedWeek;
+    week = Number(week,10);
+    console.log('Week Type : ',typeof week);
+    if(userId && activePlanId && !Number.isNaN(week)){
+        ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
+        {
+            $pull : { 'skipedWeeks' : week},
+            $inc: { weeks : -1}
+        }).then(plan => {
+            if(plan.result.nModified == 1){
+                CustomPlan.updateMany(
+                    {activePlanId : db.toObjectID(activePlanId), week : { $gte: week } },
+                    {
+                    $inc : {week : -1}
+                    }).then(result =>{
+                        res.json({success : true, message : 'Week Skipped Successfully!'})
+                    }).catch(err => res.json({success : false, error : err}))
+ 
+            }else
+                res.json({success : false, error : 'Plan not found to be edited!'})
+        }).catch(err => res.json({success : false, error : err}));
+    }else{
+        res.json({success : false, error : 'Invalid Request Data!'})
+    }
+   }
 }

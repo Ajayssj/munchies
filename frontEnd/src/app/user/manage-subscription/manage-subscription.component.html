@@ -10,16 +10,27 @@
                         <th>Phone</th>
                         <th>Address</th>
                         <th>Plan</th>
+                        <th>ActiveWeek</th>
+                        <th>SkipWeek</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let order of orders">
-                        <td>{{order.date | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{order.customerData.name}}</td>
-                        <td>{{order.customerData.phoneNumber}}</td>
-                        <td>{{order.address}}</td>
-                        <td>{{order.planId}}</td>
-
+                        <td>{{order.activatedDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{order.user[0].firstName}} {{order.user[0].lastName}}</td>
+                        <td>{{order.user[0].phone}}</td>
+                        <td>{{order.user[0].address}}</td>
+                        <td>{{order.plans.title}}</td>
+                        <td>{{getActiveWeek(order.startDate,order.weeks)}}</td>
+                        <td>
+                            <button *ngFor="let skipWeekItem of getWeekArray(order.weeks);let skipWeekIndex = index"
+                                (click)="skipWeekAction(order,skipWeekIndex+1,alertModal)"
+                                [class]="isSkip(order.skipedWeeks,skipWeekIndex+1) ? 'btn btn-success':'btn btn-danger'"> 
+                                <i [class]="isSkip(order.skipedWeeks,skipWeekIndex+1) ? 'fa fa-undo fa-fw':'fa fa-trash fa-fw'"></i>
+                                {{skipWeekIndex+1}} {{isSkip(order.skipedWeeks,skipWeekIndex+1) ? 'Undo':'Skip'}}
+                            </button>
+                        </td>
+                        <!-- <td><button (click)="skipWeek(order._id,order.weeks)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>{{this.isSkiped(order.skipedWeeks)}}</button></td> -->
                     </tr>
                 </tbody>
             </table>
@@ -30,3 +41,16 @@
         </div>
     </div>
 </div>
+
+<modal #alertModal modalClass="modal-sm">
+    <modal-header>
+        <h3>Week Skip Action</h3>
+    </modal-header>
+    <modal-content>
+        {{alertText}}
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-primary" (click)="closeModal(alertModal)">close</button>
+    </modal-footer>
+</modal>
+
