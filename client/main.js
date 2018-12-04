@@ -2905,8 +2905,8 @@ var AuthService = /** @class */ (function () {
         return localStorage.getItem('username');
     };
     AuthService.prototype.getDomainName = function () {
-        // return "http://dev-munchies.herokuapp.com";
-        return "http://localhost:9191";
+        return "http://dev-munchies.herokuapp.com";
+        //return "http://localhost:9191";
     };
     AuthService.prototype.setLoggedIn = function (value) {
         localStorage.setItem("isLoggedIn", value);
