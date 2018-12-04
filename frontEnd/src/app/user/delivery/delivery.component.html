@@ -57,7 +57,7 @@
              <a routerLink="/signIn" class="btn">Sign In</a>
              <a routerLink="/sign-up" class="btn">Sign Up</a>
           </div>
-          <button *ngIf="isLoggedIn" class="btn">Make Payment</button>          
+          <button *ngIf="isLoggedIn" class="btn" (click)="showOrderConfirmAlert=true">Make Payment</button>          
         </form>
       </div>
   </div>
@@ -72,4 +72,19 @@
   <!-- <div class="make_payment_btn">
       <a href="/order-summary">Make Payment</a>
   </div> -->
+  <div>
+   <!-- <button (click)="showOrderConfirmAlert=true">Open Modal</button> -->
 </div>
+<div *ngIf="showOrderConfirmAlert" class="alertModal">
+    <div class="backgroundBlack"></div>
+    <div class="content">
+        <h4>Thank You for Payment!</h4>
+        <div class="okbtn">
+        <a routerLink="home" >ok</a>
+    </div>
+       <!-- <button class="okbtn">ok</button> -->
+
+    </div>
+</div>
+</div>
+

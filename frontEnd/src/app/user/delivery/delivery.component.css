@@ -86,6 +86,7 @@
         margin-left: 0px;
         width: 100%;
     }
+  
     
 }
 @media screen and (min-width: 768px){
@@ -101,14 +102,70 @@
         float: left;
          margin-left: 5px;
     }
+   
     
 }
 @media only screen and (max-width: 500px){
     .select_delivery_address_wrapper {
         width: 90%;
     }
+    .alertModal .content{
+        left: 5% !important;
+        right: 5% !important;
+
+    }
 }
 
 .dd_custom{
     margin-bottom: 18px;
+}
+
+.alertModal .backgroundBlack  {
+    position:fixed;
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    background-color: black;
+    opacity: 0.9;
+}
+
+.alertModal {
+position: relative;
+top:100px;
+background-color:rgba(141, 121, 121, 0.4);
+color: black;
+max-width: 600px;   
+height: 150px;
+width: 100%;
+}
+
+.alertModal .content {
+      
+    height: 150px;
+    position: fixed;
+    z-index: 9999;
+    top: 100px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    left: 40%;
+    right:40%;
+    
+}
+.content .okbtn {
+
+    border-radius: 25px!important;
+    border: 2px solid red !important;
+    font-weight: bold  !important;
+    cursor: pointer  !important;
+    width: 100px  !important;
+    margin-top: 30px  !important;
+    margin-left: 70px;
+
+}
+.okbtn a{
+    text-decoration: none;
+    
 }

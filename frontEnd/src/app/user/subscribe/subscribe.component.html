@@ -4,7 +4,7 @@
     <h3 class="color_none">Select a Plan</h3>
     <div class="select_plan">
       <div class="plans">
-        <div class="plan" [ngClass]="{'active':selectedPlanId == item.planId}" *ngFor="let item of plan; let i = index" (cl0ick)="selectedPlan(item.planId)">
+        <div class="plan" [ngClass]="{'active':selectedPlanId == item.planId}" *ngFor="let item of plan; let i = index" (click)="selectedPlan(item.planId)">
           <h3>{{item.planName}}</h3>
           <h2 class="rate">{{item.planRate}}</h2>
           <p>{{item.planText}}</p>
