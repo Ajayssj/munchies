@@ -21,9 +21,6 @@
       <form *ngIf="view=='types'" [formGroup]="addProductTypeForm" (ngSubmit)="onSubmit(addModal, 'type')">
         <div class="form-group">
           <label class="control-label">Select Company</label>
-          <!-- <ng-select [items]="companyName" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
-            (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
-          </ng-select> -->
           <select formControlName="selectedCompany" class="form-control">
             <option *ngFor="let company of productCompanies" value="{{company._id}}">{{company.company}}</option>
           </select>
@@ -34,9 +31,34 @@
         </div>
         <button class="btn btn-primary">Add Product Type</button>
       </form>
+      <form *ngIf="view=='product'" [formGroup]="addProductForm" (ngSubmit)="onSubmit(addModal, 'product')">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input type="text" class="form-control" formControlName="productName" placeholder="Enter Product Name" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Type</label>
+          <input type="text" class="form-control" formControlName="productType" placeholder="Enter Product Type" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Company</label>
+          <input type="text" class="form-control" formControlName="productCompanyName" placeholder="Enter Product Company" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Quantity</label>
+          <input type="text" class="form-control" formControlName="productQuantity" placeholder="Enter Product Quantity" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">MRP</label>
+          <input type="text" class="form-control" formControlName="productMrp" placeholder="Enter Product MRP" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Kcal</label>
+          <input type="text" class="form-control" formControlName="productKcal" placeholder="Enter Product KCal" />
+        </div>
+        <button class="btn btn-primary">Add Product</button>
+      </form>
       </modal-content>
-    <!-- <modal-footer>
-    </modal-footer> -->
   </modal>
   
   <modal #editModal [closeOnEscape]="false" [closeOnOutsideClick]="false">
@@ -44,32 +66,54 @@
         <h3>modal that cannot be simply closed</h3>
       </modal-header>
       <modal-content>
-        <form *ngIf="view=='company'" [formGroup]="editProductCompanyForm" (ngSubmit)="editOnSubmit(editModal, 'company', selectedCompanyObj._id)">
+        <div *ngIf="view=='company'">
           <div class="form-group">
-            <label class="control-label">Company</label>
-            <input type="text" class="form-control" formControlName="productCompany" value="{{selectedCompanyObj.company}}" />
+            <label class="control-label">Company{{selectedCompanyObj | json }}</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedCompanyObj.company" />
           </div>
-          <button class="btn btn-primary">Edit Company</button>
-        </form>
-        <form *ngIf="view=='types'" [formGroup]="editProductTypeForm" (ngSubmit)="editOnSubmit(editModal, 'type', selectedTypeObj._id)">
+          <button class="btn btn-primary" (click)="editCompany(editModal, selectedCompanyObj)">Edit Company</button>
+        </div>
+        <div *ngIf="view=='types'">
           <div class="form-group">
             <label class="control-label">Select Company</label>
-            <!-- <ng-select [items]="companyName" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)"
-              (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
-            </ng-select> -->
-            <select formControlName="selectedCompany" class="form-control">
+            <select  [(ngModel)]="selectCompanyId" name="selectedCompany" class="form-control">
               <option *ngFor="let companyItem of productCompanies" value="{{companyItem._id}}">{{companyItem.company}}</option>
             </select>
           </div>
           <div class="form-group">
             <label class="control-label">Type</label>
-            <input type="text" class="form-control" formControlName="pType" value="{{selectedTypeObj.type}}" />
+            <input type="text" name="productType" class="form-control" [(ngModel)]="selectedTypeObj.type" />
           </div>
-          <button class="btn btn-primary">Edit Product Type</button>
-        </form>
+          <button class="btn btn-primary" (click)="editType(editModal, selectedTypeObj)">Edit Product Type</button>
+        </div>
+        <div *ngIf="view=='product'" >
+          <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" class="form-control"  [(ngModel)]="selectedProductObj.name" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Type</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedProductObj.type" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Company</label>
+            <input type="text" class="form-control"  [(ngModel)]="selectedProductObj.company" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Quantity</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedProductObj.quantity" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">MRP</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedProductObj.price" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Kcal</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedProductObj.kcal" />
+          </div>
+          <button class="btn btn-primary" (click)="editProduct(editModal, selectedProductObj)">Edit Product</button>
+        </div>
         </modal-content>
-      <!-- <modal-footer>
-      </modal-footer> -->
     </modal>
   <div class="container-fluid content">
     <div *ngIf="view == 'company'">
@@ -90,7 +134,7 @@
             <td>{{pCompany.company}}</td>
             <td>
               <button (click)="editModal.open();selectedCompanyObj=pCompany" class="btn btn-success mr-20">Edit</button>
-              <button class="btn btn-danger">Delete</button></td>
+              <button (click)="deleteItem(pCompany._id, 'company')" class="btn btn-danger">Delete</button></td>
           </tr>
         </tbody>
       </table>
@@ -116,26 +160,16 @@
             <td>{{pType.type}}</td>
             <td>
               <button (click)="editModal.open();selectedTypeObj=pType" class="btn btn-success mr-20">Edit</button>
-              <button class="btn btn-danger">Delete</button>
+              <button (click)="deleteItem(pType._id, 'type')" class="btn btn-danger">Delete</button>
             </td>
           </tr>
-          <!-- <tr>
-            <td>2</td>
-            <td>Makhana</td>
-            <td><button class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Enery Bars</td>
-            <td><button class="btn btn-danger">Delete</button></td>
-          </tr> -->
         </tbody>
       </table>
     </div>
 
     <div *ngIf="view == 'product'">
       <div class="row">
-        <button class="btn btn-primary" style="margin:20px">Add Product Type</button>
+        <button (click)="addModal.open()" class="btn btn-primary" style="margin:20px">Add Product</button>
       </div>
       <table class="table table-bordered">
         <thead>
@@ -154,39 +188,16 @@
           <tr *ngFor="let product of products, let i=index">
             <td>{{i+1}}</td>
             <td>{{product.name}}</td>
-            <td>Makhana</td>
+            <td>{{product.type}}</td>
             <td>{{product.company}}</td>
             <td>{{product.quantity}}</td>
             <td>{{product.price}}</td>
             <td>{{product.kcal}}</td>
-            <td><button class="btn btn-success mr-20">Edit</button><button (click)="deleteProduct(product._id)" class="btn btn-danger">Delete</button></td>
+            <td>
+              <button (click)="editModal.open();selectedProductObj=product" class="btn btn-success mr-20">Edit</button>
+              <button (click)="deleteItem(product._id, 'product')" class="btn btn-danger">Delete</button>
+            </td>
           </tr>
-          <!-- <tr>
-            <td>2</td>
-            <td>The Brain</td>
-            <td>Laadu</td>
-            <td>Charlie</td>
-            <td>35gm</td>
-            <td>70</td>
-            <td>81</td>
-            <td>3</td>
-            <td>34</td>
-            <td><button class="btn btn-danger">Edit</button></td>
-            <td><button class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Tough Nut Bar</td>
-            <td>Energy Bar</td>
-            <td>Eighty20</td>
-            <td>35gm</td>
-            <td>70</td>
-            <td>81</td>
-            <td>3</td>
-            <td>34</td>
-            <td><button class="btn btn-danger">Edit</button></td>
-            <td><button class="btn btn-danger">Delete</button></td>
-          </tr> -->
         </tbody>
       </table>
     </div>

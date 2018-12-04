@@ -20,27 +20,47 @@ export class CompanyComponent implements OnInit {
   data = {};
   modalEl;
   pType = []; 
+  selectedTypeId = '';
+  selectCompanyId = '';
   productTypes;
-  pCompany;
+  pCompany =[];
   productCompanies;
   productCompany = "";
+  selectedCompanyId: any;
   companyName = [];
   companyId: any;
   selectedCompany = "No Selected Company";
   selectedCompanyName = "";
   addProductTypeForm: FormGroup;
   addProductCompanyForm: FormGroup;
-  editProductCompanyForm: FormGroup;
-  editProductTypeForm: FormGroup;
+  addProductForm: FormGroup;
   selectedCompanyObj= {};
   selectedTypeObj= {};
+  // product Tab var
+  addProductArray = {};
+  editProductArray = {};
+  selectedProductObj = {};
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private auth: AuthService) { }
   
   ngOnInit() {
+    this.addProductTypeForm = this.formBuilder.group({
+      pType: ['', Validators.required],
+      selectedCompany: ['', Validators.required]
+    });
+    this.addProductCompanyForm = this.formBuilder.group({
+      productCompany: ['', Validators.required]
+    });
+    this.addProductForm = this.formBuilder.group({
+      productName: ['', Validators.required],
+      productType: ['', Validators.required],
+      productCompanyName: ['', Validators.required],
+      productQuantity: ['', Validators.required],
+      productMrp: ['', Validators.required],
+      productKcal: ['', Validators.required]
+    });
     console.log("hiiiiiiiiiiiii", this.auth.getDomainName());
-    this.http.get(this.auth.getDomainName() + '/api/product').subscribe((res: productRes) => {
-      console.log(res.data);
-      this.products = res.data;
+    this.http.get(this.auth.getDomainName() + '/api/product').subscribe((res: any) => {
+      this.products = JSON.parse(JSON.stringify(res.data));
     },
     err=> {
       console.log(err);
@@ -67,30 +87,14 @@ export class CompanyComponent implements OnInit {
     err=> {
       console.log(err);
     });
-    this.addProductTypeForm = this.formBuilder.group({
-      pType: ['', Validators.required],
-      selectedCompany: ['', Validators.required]
-    });
-    this.addProductCompanyForm = this.formBuilder.group({
-      productCompany: ['', Validators.required]
-    });
-    this.editProductCompanyForm = this.formBuilder.group({
-      productCompany: ['', Validators.required]
-    });
-    this.editProductTypeForm = this.formBuilder.group({
-      pType: ['', Validators.required],
-      selectedCompany: ['', Validators.required]
-    });
   }
-  editProduct(pid, mid) {
-    console.log("edit product", pid);
-  }
-  deleteProduct(pid) {
+//Delete code
+  deleteItem(pid, tabName) {
     this.data = {
       productId: pid
     }
     console.log(this.data);
-    this.http.delete(this.auth.getDomainName() + '/api/product/delete/', this.data).subscribe((res: productRes)=> {
+    this.http.delete(this.auth.getDomainName() + '/api/' + tabName + '/delete', this.data).subscribe((res: productRes)=> {
       console.log(res.success);
         this.deleteMessage = res.message; 
     },
@@ -98,6 +102,7 @@ export class CompanyComponent implements OnInit {
       console.log(err);
     })
   }
+  //Modal code
   openModal(modal) {
     modal.open();
   }
@@ -116,13 +121,13 @@ export class CompanyComponent implements OnInit {
   openCompanyEditModal() {
     console.log();
   }
-
+  //change view code
   changeView(view) {
     this.view = view;
   }
+  //Add Company, Type and Product code
   onSubmit(modal, view) {
     this.companyId = this.addProductTypeForm.get("selectedCompany").value;
-    console.log("hiiiiiiiiiii", this.companyId);
     if(view == "type") {
     this.pType = this.addProductTypeForm.get('pType').value;
     this.http.post(this.auth.getDomainName() + '/api/type/add', {type: this.pType, companyId: this.companyId}).subscribe((data:any)=>{
@@ -142,51 +147,67 @@ export class CompanyComponent implements OnInit {
       console.log(err);
     });
   }
+  else if(view == "product") {
+    this.addProductArray = {
+      name: this.addProductForm.get('productName').value,
+      type: this.addProductForm.get('productType').value,
+      quantity: this.addProductForm.get('productQuantity').value,
+      company: this.addProductForm.get('productCompanyName').value,
+      price: this.addProductForm.get('productMrp').value,
+      kcal: this.addProductForm.get('productKcal').value
+    }
+    this.http.post(this.auth.getDomainName() + '/api/product/add', this.addProductArray).subscribe(data=>{
+      console.log(data);
+    }, 
+    err=> {
+      console.log(err);
+    });
+  }
     this.closeModal(modal);
   }
-  editOnSubmit(modal, view, id) {
-    this.companyId = this.editProductTypeForm.get("selectedCompany").value;
-    console.log("hiiiiiiiiiii", this.companyId);
-    if(view == "type") {
-    this.pType = this.editProductTypeForm.get('pType').value;
-    this.http.put(this.auth.getDomainName() + '/api/type/edit', {type: this.pType, typeId: id, companyId: this.companyId}).subscribe((data:any)=>{
+  //edit Compnay code
+  editCompany(modal, selectedCompany) {
+    this.selectedCompanyId = selectedCompany._id;
+    this.productCompany = selectedCompany.company;
+    this.http.put(this.auth.getDomainName() + '/api/company/edit', {company: this.productCompany, companyId: this.selectedCompanyId}).subscribe(data=>{
+      console.log(data);
+    }, 
+    err=> {
+      console.log(err);
+    });
+    this.closeModal(modal);
+  }
+  //edit Type code
+  editType(modal, selectedType) {
+    this.pType = selectedType.type;
+    this.selectedTypeId = selectedType._id;
+    this.companyId = this.selectCompanyId;
+    this.http.put(this.auth.getDomainName() + '/api/type/edit', {type: this.pType, typeId: this.selectedTypeId, companyId: this.companyId}).subscribe((data:any)=>{
       console.log(data);
       // if(data && data.success) { this.productTypes.push(data) }
     }, 
     err=> {
       console.log(err);
     });
+    this.closeModal(modal);
   }
-  else if(view == "company") {
-    this.productCompany = this.editProductCompanyForm.get('productCompany').value;
-    this.http.put(this.auth.getDomainName() + '/api/company/edit', {company: this.productCompany, companyId: id}).subscribe(data=>{
+  //edit Product code
+  editProduct(modal,selectedProduct) {
+    this.editProductArray = {
+      name: selectedProduct.name,
+      type: selectedProduct.type,
+      quantity: selectedProduct.quantity,
+      company: selectedProduct.company,
+      price: selectedProduct.price,
+      kcal: selectedProduct.kcal,
+      productId: selectedProduct._id
+    }
+    this.http.put(this.auth.getDomainName() + '/api/product/edit', this.editProductArray).subscribe(data=>{
       console.log(data);
     }, 
     err=> {
       console.log(err);
     });
-  }
     this.closeModal(modal);
   }
-
-  public value: any = {};
-  public _disabledV: string = '0';
-  public disabled: boolean = false;
-  
-  public selectedCompanyDetails(value: any): void {
-    console.log('Selected value is: ', value);
-  }
-
-  public removed(value: any): void {
-    console.log('Removed value is: ', value);
-  }
-
-  public typed(value: any): void {
-    console.log('New search input: ', value);
-  }
-
-  public refreshValue(value: any): void {
-    this.value = value;
-  }
-
 }

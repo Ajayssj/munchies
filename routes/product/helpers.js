@@ -35,6 +35,7 @@ module.exports = {
         }else{
             var productObj = {
                 name : req.body.name,
+                type : req.body.type,
                 quantity : req.body.quantity,
                 unit : req.body.unit,
                 company : req.body.company,

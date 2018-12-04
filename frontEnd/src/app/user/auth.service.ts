@@ -18,7 +18,8 @@ export class AuthService {
   }
 
   getDomainName() {
-    return "http://dev-munchies.herokuapp.com";
+    // return "http://dev-munchies.herokuapp.com";
+    return "http://localhost:9191";
   }
 
   setLoggedIn(value) {

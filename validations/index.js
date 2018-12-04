@@ -17,9 +17,9 @@ module.exports = {
        addProduct : [
            check('name').isAlphanumeric().withMessage('Invalid Product Name'),
            check('company').isAlpha().withMessage('Invalid Company Name'),
-           check('quantity').isNumeric().withMessage('Invalid Quantity'),
+        //    check('quantity').isNumeric().withMessage('Invalid Quantity'),
            check('price').isNumeric().withMessage('Invalid Price'),
-           check('unit').isAlpha().withMessage('Invalid Unit'),
+        //    check('unit').isAlpha().withMessage('Invalid Unit'),
         ]
    },
 //    order : {

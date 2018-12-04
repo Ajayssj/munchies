@@ -85,7 +85,7 @@ module.exports = {
         const companyId = req.body.companyId;
         Type.updateOne({ _id: db.toObjectID(typeId) },
             {
-                $set: { type: type, companyId: companyId }
+                $set: { type: type, companyId:  db.toObjectID(companyId) }
             }).then(type => {
                 if (type.result.nModified == 1)
                     res.json({ success: true, message: 'Type Edited Successfully!' })
