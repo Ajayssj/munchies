@@ -21,8 +21,7 @@ export class PagesTopComponent implements OnInit {
   
   
   ngOnInit() {
-    this.userName = this.auth.getUserName();
-    console.log(this.userName);
+    this.userName = this.auth.getUserName() || 'Xyz@gmail.com';
   }
 
   public _sidebarToggle() {

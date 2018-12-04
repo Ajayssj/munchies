@@ -1,68 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["company-company-module"],{
 
-/***/ "./src/app/admin/pages/company/company-tab/company-tab.component.css":
-/*!***************************************************************************!*\
-  !*** ./src/app/admin/pages/company/company-tab/company-tab.component.css ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FkbWluL3BhZ2VzL2NvbXBhbnkvY29tcGFueS10YWIvY29tcGFueS10YWIuY29tcG9uZW50LmNzcyJ9 */"
-
-/***/ }),
-
-/***/ "./src/app/admin/pages/company/company-tab/company-tab.component.html":
-/*!****************************************************************************!*\
-  !*** ./src/app/admin/pages/company/company-tab/company-tab.component.html ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  company-tab works!\n</p>\n"
-
-/***/ }),
-
-/***/ "./src/app/admin/pages/company/company-tab/company-tab.component.ts":
-/*!**************************************************************************!*\
-  !*** ./src/app/admin/pages/company/company-tab/company-tab.component.ts ***!
-  \**************************************************************************/
-/*! exports provided: CompanyTabComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompanyTabComponent", function() { return CompanyTabComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var CompanyTabComponent = /** @class */ (function () {
-    function CompanyTabComponent() {
-    }
-    CompanyTabComponent.prototype.ngOnInit = function () {
-    };
-    CompanyTabComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-company-tab',
-            template: __webpack_require__(/*! ./company-tab.component.html */ "./src/app/admin/pages/company/company-tab/company-tab.component.html"),
-            styles: [__webpack_require__(/*! ./company-tab.component.css */ "./src/app/admin/pages/company/company-tab/company-tab.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], CompanyTabComponent);
-    return CompanyTabComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/admin/pages/company/company.component.css":
 /*!***********************************************************!*\
   !*** ./src/app/admin/pages/company/company.component.css ***!
@@ -331,14 +268,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_components_modals_modals_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../ui/components/modals/modals.component */ "./src/app/admin/pages/ui/components/modals/modals.component.ts");
 /* harmony import */ var _form_form_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../form/form.component */ "./src/app/admin/pages/form/form.component.ts");
 /* harmony import */ var _form_components_form_inputs_form_inputs_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../form/components/form-inputs/form-inputs.component */ "./src/app/admin/pages/form/components/form-inputs/form-inputs.component.ts");
-/* harmony import */ var _company_tab_company_tab_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./company-tab/company-tab.component */ "./src/app/admin/pages/company/company-tab/company-tab.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -366,8 +301,7 @@ var CompanyModule = /** @class */ (function () {
                 _company_component__WEBPACK_IMPORTED_MODULE_5__["CompanyComponent"],
                 _ui_components_modals_modals_component__WEBPACK_IMPORTED_MODULE_7__["ModalsComponent"],
                 _form_form_component__WEBPACK_IMPORTED_MODULE_8__["FormComponent"],
-                _form_components_form_inputs_form_inputs_component__WEBPACK_IMPORTED_MODULE_9__["FormInputsComponent"],
-                _company_tab_company_tab_component__WEBPACK_IMPORTED_MODULE_10__["CompanyTabComponent"]
+                _form_components_form_inputs_form_inputs_component__WEBPACK_IMPORTED_MODULE_9__["FormInputsComponent"]
             ]
         })
     ], CompanyModule);
