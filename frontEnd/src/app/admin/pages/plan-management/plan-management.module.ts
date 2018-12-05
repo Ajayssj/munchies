@@ -4,6 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routing } from './plan-management.routing';
 import { SharedModule } from '../../shared/shared.module';
 import { PlanManagementComponent } from './plan-management.component';
+import { ModalModule } from 'ngx-modal';
+import { AccordionModule } from 'ngx-accordion';
+// import { AccordionGroupComponent } from './accordian/accordion-group.component';
+// import { AccordionComponent } from './accordian/accordion.component';
 
 @NgModule({
     imports: [
@@ -11,7 +15,9 @@ import { PlanManagementComponent } from './plan-management.component';
         FormsModule,
         ReactiveFormsModule,
         SharedModule,
-        routing
+        routing,
+        ModalModule,
+        AccordionModule
     ],
     declarations: [
         PlanManagementComponent

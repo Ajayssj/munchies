@@ -20,8 +20,8 @@ export class AuthService {
     return localStorage.getItem('username');
   }
   getDomainName() {
-     return "http://dev-munchies.herokuapp.com";
-    //return "http://localhost:9191";
+    return "https://dev-munchies.herokuapp.com";
+    // return "http://localhost:9191";
   }
 
   setLoggedIn(value) {
@@ -31,7 +31,7 @@ export class AuthService {
     localStorage.setItem('username', value);
   }
   varifyFirebaseToken = function (token, callback) {
-    this.http.post('https://dev-munchies.herokuapp.com/api/user/verifyFirebaseToken', token).subscribe(resData => {
+    this.http.post(this.getDomainName() + '/api/user/verifyFirebaseToken', token).subscribe(resData => {
       console.log(resData);
       callback(resData);
     }, error => {
