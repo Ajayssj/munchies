@@ -90,11 +90,15 @@ export class CompanyComponent implements OnInit {
   }
 //Delete code
   deleteItem(pid, tabName) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      productId: pid
+    };
     this.data = {
       productId: pid
     }
     console.log(this.data);
-    this.http.delete(this.auth.getDomainName() + '/api/' + tabName + '/delete', this.data).subscribe((res: productRes)=> {
+    this.http.delete(this.auth.getDomainName() + '/api/' + tabName + '/delete', httpOptions).subscribe((res: productRes)=> {
       console.log(res.success);
         this.deleteMessage = res.message; 
     },

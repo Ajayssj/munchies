@@ -8,7 +8,9 @@
   </div>
   <modal #addModal [closeOnEscape]="false" [closeOnOutsideClick]="false">
     <modal-header>
-      <h3>modal that cannot be simply closed</h3>
+      <h3 *ngIf="view=='company'">Add Company</h3>
+      <h3 *ngIf="view=='types'">Add Type</h3>
+      <h3 *ngIf="view=='product'">Add Product</h3>
     </modal-header>
     <modal-content>
       <form *ngIf="view=='company'" [formGroup]="addProductCompanyForm" (ngSubmit)="onSubmit(addModal, 'company')">
@@ -63,12 +65,14 @@
   
   <modal #editModal [closeOnEscape]="false" [closeOnOutsideClick]="false">
       <modal-header>
-        <h3>modal that cannot be simply closed</h3>
+      <h3 *ngIf="view=='company'">Edit Company</h3>
+      <h3 *ngIf="view=='types'">Edit Type</h3>
+      <h3 *ngIf="view=='product'">Edit Product</h3>
       </modal-header>
       <modal-content>
         <div *ngIf="view=='company'">
           <div class="form-group">
-            <label class="control-label">Company{{selectedCompanyObj | json }}</label>
+            <label class="control-label">Company</label>
             <input type="text" class="form-control" [(ngModel)]="selectedCompanyObj.company" />
           </div>
           <button class="btn btn-primary" (click)="editCompany(editModal, selectedCompanyObj)">Edit Company</button>

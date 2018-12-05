@@ -300,13 +300,12 @@ var MENU_ITEM = [
         path: 'company',
         title: 'products',
         icon: 'building'
+    },
+    {
+        path: 'plan-management',
+        title: 'Plan Management',
+        icon: 'cutlery'
     }
-    // ,
-    // {
-    //     path: 'plan-management',
-    //     title: 'Plan Management',
-    //     icon: 'cutlery'
-    // }
     // ,
     // {
     //     path: 'editor',
@@ -2890,7 +2889,7 @@ var AuthService = /** @class */ (function () {
         this.afAuth = afAuth;
         this.http = http;
         this.varifyFirebaseToken = function (token, callback) {
-            this.http.post('https://dev-munchies.herokuapp.com/api/user/verifyFirebaseToken', token).subscribe(function (resData) {
+            this.http.post(this.getDomainName() + '/api/user/verifyFirebaseToken', token).subscribe(function (resData) {
                 console.log(resData);
                 callback(resData);
             }, function (error) {

@@ -61,14 +61,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customerplan_customerplan_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./customerplan/customerplan.component */ "./src/app/admin/pages/customer/customerplan/customerplan.component.ts");
 /* harmony import */ var _customerplanweek_customerplanweek_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./customerplanweek/customerplanweek.component */ "./src/app/admin/pages/customer/customerplanweek/customerplanweek.component.ts");
 /* harmony import */ var _customerdetails_customerdetails_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./customerdetails/customerdetails.component */ "./src/app/admin/pages/customer/customerdetails/customerdetails.component.ts");
-/* harmony import */ var _ui_components_modals_modals_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../ui/components/modals/modals.component */ "./src/app/admin/pages/ui/components/modals/modals.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -96,8 +94,7 @@ var CustomerModule = /** @class */ (function () {
                 _customer_component__WEBPACK_IMPORTED_MODULE_6__["CustomerComponent"],
                 _customerdetails_customerdetails_component__WEBPACK_IMPORTED_MODULE_9__["CustomerdetailsComponent"],
                 _customerplanweek_customerplanweek_component__WEBPACK_IMPORTED_MODULE_8__["CustomerplanweekComponent"],
-                _customerplan_customerplan_component__WEBPACK_IMPORTED_MODULE_7__["CustomerplanComponent"],
-                _ui_components_modals_modals_component__WEBPACK_IMPORTED_MODULE_10__["ModalsComponent"]
+                _customerplan_customerplan_component__WEBPACK_IMPORTED_MODULE_7__["CustomerplanComponent"]
             ]
         })
     ], CustomerModule);
@@ -256,7 +253,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\n  custplan works!\n</p> -->\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Plan Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>Week</th>\n            <th>PlanType</th>\n            <th>Status</th>\n            <th>Action</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let plan of plans, let i=index\">\n            <td>{{plan.weeks}}</td>\n            <td>{{plan}}</td>\n            <td>{{plan}}</td>\n            <td><button (click)=\"editPlan(plan.activePlanId, plan.weeks)\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>Edit</button></td>\n          </tr>\n          <!-- <tr>\n            <td>4</td>\n            <td></td>\n            <td></td>\n            <td><button class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>Edit</button></td>\n          </tr> -->\n        </tbody>\n      </table>\n    </card>\n  </div>\n</div>"
+module.exports = "<!-- <p>\n  custplan works!\n</p> -->\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Plan Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>Week</th>\n            <th>WeekType</th>\n            <!-- <th>Status</th> -->\n            <th>Action</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let plan of plans, let i=index\">\n            <td>{{plan.weeks}}</td>\n            <td>{{plan.isCustom ? 'Custom' : 'Default'}}</td>\n            <!-- <td>{{plan}}</td> -->\n            <td><button (click)=\"editPlan(plan.activePlanId, plan.weeks)\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>Edit</button></td>\n          </tr>\n        </tbody>\n      </table>\n    </card>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -455,8 +452,10 @@ var CustomerplanweekComponent = /** @class */ (function () {
     };
     CustomerplanweekComponent.prototype.closeModal = function (modal) {
         modal.close();
+        window.location.reload();
     };
     CustomerplanweekComponent.prototype.onClose = function () {
+        window.location.reload();
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()({
             type: 'success',
             title: 'Success!',
