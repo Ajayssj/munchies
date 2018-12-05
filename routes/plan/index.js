@@ -11,7 +11,7 @@ routes.get('/plan/activate/:activePlanId',helpers.activatePlan);
 routes.get('/plan/delete/:activePlanId',helpers.deletePlan);
 
 routes.post('/plan/core/add',helpers.addCorePlan);
-routes.get('/plan/core/',helpers.getCorePlans);
+routes.get('/plan/core',helpers.getCorePlans);
 routes.delete('/plan/core/delete',helpers.deleteCorePlan);
 routes.post('/plan/core/edit',helpers.editCorePlan);
 

@@ -74,7 +74,7 @@ module.exports = {
             })
     },
     deleteProduct : (req,res) => {
-        const productId = req.body.productId;
+        const productId = req.params.productId;
         Product.findOneAndDelete({_id : db.toObjectID(productId)})
             .then(product => {
                 if(product){
