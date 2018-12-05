@@ -19,7 +19,7 @@
             <td>{{weekprod}}</td>
             <td>{{weekprod.name}}</td>
             <td>{{weekprod.price}}</td>
-            <td><button (click)="deleteWeekProd(weekprod._id)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button></td>
+            <td><button (click)="deleteWeekProd(weekprod._id, alertModal)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button></td>
           </tr>
         </tbody>
       </table>
@@ -47,12 +47,24 @@
           <td>{{prod}}</td>
           <td>{{prod.name}}</td>
           <td>{{prod.price}}</td>
-          <td><button (click)="addProd(prod._id)" class="btn btn-success"><i class="fa fa-check fa-fw"></i>Add</button></td>
+          <td><button (click)="addProd(prod._id, alertModal)" class="btn btn-success"><i class="fa fa-check fa-fw"></i>Add</button></td>
         </tr>
       </tbody>
     </table>
   </modal-content>
   <modal-footer>
     <button class="btn btn-primary" (click)="closeModal(thirdModal)">close</button>
+  </modal-footer>
+</modal>
+
+<modal #alertModal modalClass="modal-sm">
+  <modal-header>
+      <h3>Product Action</h3>
+  </modal-header>
+  <modal-content>
+      {{alertText}}
+  </modal-content>
+  <modal-footer>
+      <button class="btn btn-primary" (click)="closeAlertModal(alertModal)">close</button>
   </modal-footer>
 </modal>

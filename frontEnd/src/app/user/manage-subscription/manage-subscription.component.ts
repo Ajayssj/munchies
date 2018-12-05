@@ -76,17 +76,6 @@ export class ManageSubscriptionComponent implements OnInit {
     }
   }
 
-  getActiveWeek(startDate,numOfWeeks){
-    console.log("startDate,numOfWeeks",startDate,numOfWeeks);
-    var start:any = new Date(startDate);
-    var end:any = new Date(this.generateLastWeekDate(start,numOfWeeks));
-    return Math.ceil(Math.abs(Math.floor(( start - end ) / 86400000)) / 7);
-  }
-
-  generateLastWeekDate(startDate,numOfWeeks){
-    return startDate.setDate(startDate.getDate() + (numOfWeeks * 7));
-  }
-
   skeepWeekBtns(orderId, skipedWeeks, numOfWeeks){
     
     var swStr = "";
@@ -102,10 +91,6 @@ export class ManageSubscriptionComponent implements OnInit {
     console.log(swStr);
     return swStr;
   }
-
-  // getWeekNummber() {
-
-  // }
 
   skipWeek(param){
     console.log("skweek",param);
@@ -132,6 +117,60 @@ export class ManageSubscriptionComponent implements OnInit {
       title: 'Success!',
       text: 'close it!',
     });
+  }
+
+  getNextMondayDate(date) {
+    return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
+  }
+
+  getActiveWeek(startDate,numOfWeeks){
+    console.log("startDate,numOfWeeks",startDate,numOfWeeks);
+    var end;
+    var start;
+    end = this.generateLastWeekDate(startDate,numOfWeeks);
+    start = new Date(startDate);
+    console.log("start,end",start, end);
+    // return Math.ceil(Math.abs(Math.floor(( start - end ) / 86400000)) / 7);
+    return this.getWeeksArrayForActiveWeek(start, end);
+  }
+
+  generateLastWeekDate(startDate,numOfWeeks){
+    startDate = new Date(startDate);
+    return new Date(startDate.setDate(startDate.getDate() + (numOfWeeks * 7)));
+  }
+
+  getMonday(){
+    var d = new Date();
+    var day = d.getDay(),
+    diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+    return new Date(d.setDate(diff));
+  }
+
+  getWeeksArrayForActiveWeek(start, end) {
+    var sDate;
+    var eDate;
+    var dateArr = [];
+    while(start <= end){
+      if (start.getDay() == 1 || (dateArr.length == 0 && !sDate)){
+        sDate = new Date(start.getTime());
+      }
+      if ((sDate && start.getDay() == 0) || start.getTime() == end.getTime()){
+            eDate = new Date(start.getTime());
+      }
+      if(sDate && eDate){
+        dateArr.push({'startDate': sDate, 'endDate': eDate});
+        sDate = undefined;
+        eDate = undefined;
+      }
+      start.setDate(start.getDate() + 1);
+    }
+    var currentMonday = this.getMonday();
+    for (let da = 0; da < dateArr.length; da++) {
+      const strd = dateArr[da].startDate;
+      if (currentMonday.toUTCString().split(' ', 4).join(' ') == strd.toUTCString().split(' ', 4).join(' ')) {
+        return da+1;
+      }
+    }
   }
 
 }

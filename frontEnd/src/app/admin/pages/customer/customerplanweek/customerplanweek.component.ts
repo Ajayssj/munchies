@@ -21,6 +21,7 @@ export class CustomerplanweekComponent implements OnInit {
   products = [];
   deleteMessage = '';
   data = {};
+  alertText: String;
   constructor(private http: HttpClient, private auth: AuthService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -31,7 +32,6 @@ export class CustomerplanweekComponent implements OnInit {
       if (res.data && res.data.length) {
         this.weeks = res.data[0].products;
       }
-      
     },
       err=> {
       console.log(err);
@@ -47,32 +47,40 @@ export class CustomerplanweekComponent implements OnInit {
 
   }
 
-  deleteWeekProd(prodId) {
+  deleteWeekProd(prodId, alertModal) {
     console.log(prodId);
     const routeParams = this.activeRoute.snapshot.params;
     console.log(routeParams);
     this.http.delete(this.auth.getDomainName() + '/api/plan/active/'+routeParams.planid+'/product/'+prodId+'/week/'+routeParams.weekid,{}).subscribe((res: any) => {
       console.log("deleteProd ",res);
       if (res.success) {
-        alert('Product Deleted Successfully!');
+        // alert('Product Deleted Successfully!');
+        this.alertText = "Product Deleted Successfully!";
+        this.openModal(alertModal);
       } else if (res.error) {
-        alert(res.error);
+        // alert(res.error);
+          this.alertText = res.error;
+          this.openModal(alertModal);
       }
     },
       err=> {
       console.log("deleteProd err",err);
     });
   }
-  addProd(prodId) {
+  addProd(prodId, alertModal) {
     console.log(prodId);
     const routeParams = this.activeRoute.snapshot.params;
     console.log(routeParams);
     this.http.post(this.auth.getDomainName() + '/api/plan/active/'+routeParams.planid+'/product/'+prodId+'/week/'+routeParams.weekid,{}).subscribe((res: any) => {
       console.log("addProd",res);
       if (res.success) {
-        alert('Product Added Successfully!');
+        // alert('Product Added Successfully!');
+        this.alertText = "Product Added Successfully!";
+        this.openModal(alertModal);
       } else if (res.error) {
-        alert(res.error);
+        // alert(res.error);
+          this.alertText = res.error;
+          this.openModal(alertModal);
       }
     },
       err=> {
@@ -92,6 +100,10 @@ export class CustomerplanweekComponent implements OnInit {
   closeModal(modal) {
     modal.close();
     window.location.reload();
+  }
+
+  closeAlertModal(modal) {
+    modal.close();
   }
 
   onClose() {
