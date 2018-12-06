@@ -23,10 +23,10 @@ export class ManageSubscriptionComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.http.get(this.auth.getDomainName() + '/api/order/getMyOrders').subscribe((resData: any) => {
-    this.http.get(this.auth.getDomainName() + '/api/plan/active/5bfbdcc51efad521746223ae').subscribe((resData: any) => {
-      console.log('loll', resData);
-      this.orders = resData.data;
+    this.http.get(this.auth.getDomainName() + '/api/order/getMyOrders').subscribe((resData: any) => {
+    // this.http.get(this.auth.getDomainName() + '/api/plan/active/5bfbdcc51efad521746223ae').subscribe((resData: any) => {
+      console.log('loll', resData.orderData);
+      this.orders = resData.orderData;
     }, error => {
       console.log('error', 'Allow Signup', 'Server Error');
     });
@@ -36,67 +36,90 @@ export class ManageSubscriptionComponent implements OnInit {
   //   sessionStorage.removeItem('token');
   //   this.router.navigate(['/signIn']);
   // }
-  skipWeekAction(order, index, alertModal) {
-    var actpId = order._id;
-    var weekNo = order.weeks;
-    const isSkipRes = this.isSkip(order.skipedWeeks,index);
+  skipNextWeek(order, index, alertModal) {
+    var actpId = order.plans._id;
+    var weekNo = order.plans.weeks;
+    var actweek = this.getActiveWeek(order.plans.startDate,order.plans.weeks);
     console.log(actpId, weekNo);
-    if (isSkipRes) {
-      this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/undo-skip-week/'+index,{}).subscribe((res: any) => {
-        console.log("skipWeek",res);
-        if (res.success) {
-          this.alertText = "Week Added Successfully!";
-          this.openModal(alertModal);
-          // alert('Week Added Successfully!');
-        } else if (res.error) {
-          // alert(res.error);
-          this.alertText = res.error;
-          this.openModal(alertModal);
-        }
-      },
-        err=> {
-        console.log("skipWeek err",err);
-      });
-    } else {
-      this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/skip-week/'+index,{}).subscribe((res: any) => {
-        console.log("skipWeek",res);
-        if (res.success) {
-          this.alertText = 'Week Skiped Successfully!';
-          this.openModal(alertModal);
-          // alert('Week Skiped Successfully!');
-        } else if (res.error) {
-          // alert(res.error);
-          this.alertText = res.error;
-          this.openModal(alertModal);
-        }
-      },
-        err=> {
-        console.log("skipWeek err",err);
-      });
-    }
+    this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/skip-week/'+index,{}).subscribe((res: any) => {
+      console.log("skipWeek",res);
+      if (res.success) {
+        this.alertText = 'Week Skiped Successfully!';
+        this.openModal(alertModal);
+        // alert('Week Skiped Successfully!');
+      } else if (res.error) {
+        // alert(res.error);
+        this.alertText = res.error;
+        this.openModal(alertModal);
+      }
+    },
+      err=> {
+      console.log("skipWeek err",err);
+    });
   }
 
-  skeepWeekBtns(orderId, skipedWeeks, numOfWeeks){
+  // skipWeekAction(order, index, alertModal) {
+  //   var actpId = order.plans._id;
+  //   var weekNo = order.plans.weeks;
+  //   var actweek = this.getActiveWeek(order.plans.startDate,order.plans.weeks);
+  //   const isSkipRes = this.isSkip(order.plans.skipedWeeks,index);
+  //   console.log(actpId, weekNo);
+  //   if (actweek < index) {
+  //     if (isSkipRes) {
+  //       this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/undo-skip-week/'+index,{}).subscribe((res: any) => {
+  //         console.log("skipWeek",res);
+  //         if (res.success) {
+  //           this.alertText = "Week Added Successfully!";
+  //           this.openModal(alertModal);
+  //           // alert('Week Added Successfully!');
+  //         } else if (res.error) {
+  //           // alert(res.error);
+  //           this.alertText = res.error;
+  //           this.openModal(alertModal);
+  //         }
+  //       },
+  //         err=> {
+  //         console.log("skipWeek err",err);
+  //       });
+  //     } else {
+  //       this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/skip-week/'+index,{}).subscribe((res: any) => {
+  //         console.log("skipWeek",res);
+  //         if (res.success) {
+  //           this.alertText = 'Week Skiped Successfully!';
+  //           this.openModal(alertModal);
+  //           // alert('Week Skiped Successfully!');
+  //         } else if (res.error) {
+  //           // alert(res.error);
+  //           this.alertText = res.error;
+  //           this.openModal(alertModal);
+  //         }
+  //       },
+  //         err=> {
+  //         console.log("skipWeek err",err);
+  //       });
+  //     }
+  //   } else {
+  //     this.alertText = "This week is over!";
+  //     this.openModal(alertModal);
+  //   }
     
-    var swStr = "";
-    for (let nw = 1; nw < numOfWeeks; nw++) {
-      for (let skw = 0; skw < skipedWeeks.length; skw++) {
-        if (nw == skipedWeeks[skw]) {
-          swStr += "";
-        } else {
-          swStr += "<button (click)='skipWeek("+orderId+","+numOfWeeks+")' class='btn btn-success'><i class='fa fa-check fa-fw'></i>"+nw+"</button>";
-        }
+  // }
+
+  // skipWeek(param){
+  //   console.log("skweek",param);
+  // }
+
+  // isSkip = (skipWeek,index) => skipWeek.indexOf(index) > -1;
+  isSkip(skipWeek,index){
+    for (let skw = 0; skw < skipWeek.length; skw++) {
+      // skipWeek[skw].wNo
+      // skipWeek[skw].wId
+      if (skipWeek[skw].wNo == index) {
+        return true;
       }
     }
-    console.log(swStr);
-    return swStr;
+    return false;
   }
-
-  skipWeek(param){
-    console.log("skweek",param);
-  }
-
-  isSkip = (skipWeek,index) => skipWeek.indexOf(index) > -1;
 
   getWeekArray = (weekNo) => new Array(weekNo);
 
@@ -165,12 +188,29 @@ export class ManageSubscriptionComponent implements OnInit {
       start.setDate(start.getDate() + 1);
     }
     var currentMonday = this.getMonday();
+    console.log(currentMonday,dateArr);
     for (let da = 0; da < dateArr.length; da++) {
       const strd = dateArr[da].startDate;
       if (currentMonday.toUTCString().split(' ', 4).join(' ') == strd.toUTCString().split(' ', 4).join(' ')) {
         return da+1;
       }
     }
+    return "Plan will be Activated from next week";
   }
 
+  // skeepWeekBtns(orderId, skipedWeeks, numOfWeeks){
+    
+  //   var swStr = "";
+  //   for (let nw = 1; nw < numOfWeeks; nw++) {
+  //     for (let skw = 0; skw < skipedWeeks.length; skw++) {
+  //       if (nw == skipedWeeks[skw]) {
+  //         swStr += "";
+  //       } else {
+  //         swStr += "<button (click)='skipWeek("+orderId+","+numOfWeeks+")' class='btn btn-success'><i class='fa fa-check fa-fw'></i>"+nw+"</button>";
+  //       }
+  //     }
+  //   }
+  //   console.log(swStr);
+  //   return swStr;
+  // }
 }

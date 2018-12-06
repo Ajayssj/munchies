@@ -1,30 +1,33 @@
 .manage_subscription_page_wrapper {
     display: flex;
+    /* flex-direction: column; */
 }
 .manage_subscription {
     width: 500px;
     height: 500px;
     border-radius: 50%;
-    background-color: #6aa7c4;
+    /* background-color: #6aa7c4; */
+    background-color: #7cbbc2;
     margin: -40px 0px 40px -35px;
 }
-.manage_subscription .block {
+.manage_subscription_page_wrapper .block {
     width: 52%;
     margin: 0 auto;
+    z-index: 509;
 }
-.manage_subscription .block:first-child {
+/* .manage_subscription_page_wrapper .block:first-child {
     margin-top: 100px;
-}
-.manage_subscription .block h3 {
+} */
+.manage_subscription_page_wrapper .block h3 {
     font-size: 17px;
     margin-bottom: 10px;
     font-weight: normal;
 }
-.manage_subscription .block a {
+.manage_subscription_page_wrapper .block a {
     text-decoration: none;
-    color: #fff;
+    color: #db6945;
 }
-.manage_subscription .block p {
+.manage_subscription_page_wrapper .block p {
     line-height: 24px;
     font-size: 16px;
     margin: 0;
@@ -39,3 +42,60 @@
     height: 30px !important;
     margin: 0px 2px;
 }
+.custom_td_skipweek .btn-success{
+    background: linear-gradient(to top right,#2196F3,#2196F3)!important;
+    box-shadow: 0 2px 10px 0 #03A9F4!important;
+    -webkit-box-shadow: 0 2px 10px 0 #2196F3!important;
+}
+.custom_td_skipweek .btn-danger{
+    background: linear-gradient(to top right,#ff5b27,#ff5b27)!important;
+    box-shadow: 0 2px 10px 0 #ff5b27!important;
+    -webkit-box-shadow: 0 2px 10px 0 #ff5b27!important;
+}
+.custom_order_table th, .custom_order_table td{
+    border: unset;
+}
+.custom_order_table th{
+    color: #db6945;
+}
+.myorder_custom{
+    float: right;   
+    font-size: 22px !important;
+}
+.myorder_custom a{
+    color: #db6945;
+}
+.skipweek_text {
+    margin-top: 50px; 
+}
+.manage_subscription_page_wrapper .block .skipweek_text {
+    z-index: 50;
+}
+.manage_subscription_page_wrapper .block p {
+    z-index: 50;
+}
+
+ @media only screen and (max-width:320px){
+    .myorder_custom{
+        margin-right: 30px;
+    }
+    .manage_subscription_page_wrapper .block{
+        width: unset;
+    }
+    .manage_subscription_page_wrapper .block .skipweek_text {
+        margin-left: 15px;
+        width: 100%;
+    }
+    .manage_subscription_page_wrapper .block p {
+        margin-left: 15px;
+        width: 100%;
+    }
+    .manage_subscription_page_wrapper {
+        width: unset;
+        margin-top: 50px;
+    }
+    .manage_subscription {
+        margin: -40px 0px 40px 100px;
+        position: absolute;
+    }
+ }

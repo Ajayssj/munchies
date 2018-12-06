@@ -1,43 +1,30 @@
 <div class="manage_subscription_page_wrapper">
+        <div class="block">
+                <h3 class="myorder_custom"><a href="/my-orders">My Orders</a></h3>
+                <table class="table custom_order_table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Plan</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                            <th>SkipWeek</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of orders">
+                            <td>{{order._id}}</td>
+                            <td>{{order.plans.weeks}} Week</td>
+                            <td>{{order.total}}</td>
+                            <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>
+                            <td><button (click)="skipNextWeek(order,alertModal)" class="btn btn-danger"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3 class="skipweek_text"><a href="/skip-week">Skip the coming weeks bag</a></h3>
+                <p>you can skip a week's bag just give us a 2 day head's up</p>
+            </div>
     <div class="manage_subscription">
-        <div class="block">
-            <h3><a href="/my-orders">My Orders</a></h3>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <!-- <th>Name</th> -->
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Plan</th>
-                        <th>ActiveWeek</th>
-                        <th>SkipWeek <i class='fa fa-trash fa-fw' style="color:#fb8187;"></i>/<i class='fa fa-undo fa-fw' style="color:#31d799;"></i></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let order of orders">
-                        <td>{{order.activatedDate | date: 'dd/MM/yyyy'}}</td>
-                        <!-- <td>{{order.user[0].firstName}} {{order.user[0].lastName}}</td> -->
-                        <td>{{order.user[0].address}}</td>
-                        <td>{{order.user[0].phone}}</td>
-                        <td>{{order.plans.title}}</td>
-                        <td>{{getActiveWeek(order.startDate,order.weeks)}}</td>
-                        <td class="custom_td_skipweek">
-                            <button *ngFor="let skipWeekItem of getWeekArray(order.weeks);let skipWeekIndex = index"
-                                (click)="skipWeekAction(order,skipWeekIndex+1,alertModal)"
-                                [class]="isSkip(order.skipedWeeks,skipWeekIndex+1) ? 'btn btn-success':'btn btn-danger'"> 
-                                <!-- <i [class]="isSkip(order.skipedWeeks,skipWeekIndex+1) ? 'fa fa-undo fa-fw':'fa fa-trash fa-fw'"></i> -->
-                                {{skipWeekIndex+1}}
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="block">
-            <h3><a href="/skip-week">Skip the coming weeks bag</a></h3>
-            <p>you can skip a week's bag just give us a 2 day head's up</p>
-        </div>
     </div>
 </div>
 
@@ -53,3 +40,35 @@
     </modal-footer>
 </modal>
 
+
+<!-- <table class="table custom_order_table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Plan</th>
+                <th>ActiveWeek</th>
+                <th>SkipWeek</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>
+                <td>{{order.userData.firstName}} {{order.userData.lastName}}</td>
+                <td>{{order.address}}</td>
+                <td>{{order.userData.phoneNo}}</td>
+                <td>{{order.planInfo.title}}</td>
+                <td>{{getActiveWeek(order.plans.startDate,order.plans.weeks)}}</td>
+                <td class="custom_td_skipweek">
+                    <button *ngFor="let skipWeekItem of getWeekArray(order.plans.weeks);let skipWeekIndex = index"
+                        data-title=""
+                        (click)="skipWeekAction(order,skipWeekIndex+1,alertModal)"
+                        [class]="isSkip(order.plans.skipedWeeks,skipWeekIndex+1) ? 'btn btn-success':'btn btn-danger'"> 
+                        {{skipWeekIndex+1}}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
