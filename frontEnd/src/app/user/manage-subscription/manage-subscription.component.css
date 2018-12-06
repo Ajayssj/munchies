@@ -30,3 +30,12 @@
     margin: 0;
     color: #292929;
 }
+.custom_td_skipweek{
+    display: flex;
+    border: unset;
+}
+.custom_td_skipweek button{
+    border-radius: 50%;
+    height: 30px !important;
+    margin: 0px 2px;
+}

@@ -88,8 +88,8 @@ module.exports = {
         }
     },
     getMyorders : (req, res) => {
-        const customerId = req.session.user._id;
-        // const customerId = "5bfbdcc51efad521746223ae";
+        // const customerId = req.session.user._id;
+        const customerId = "5bfbdcc51efad521746223ae";
         Order.aggregate(
 
             // Pipeline

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = [[module.i, "\n@import 'http://treesflower.com/ng-pi-admin/styles.55f283e587c284714115.bundle.css';\n/* You can add global styles to this file, and also import other style files */\nbody, html{\n    margin: 0;\n    background-color: #fff;   \n    font-family: sans-serif;\n    font-size: 16px;   \n    height: 100%; \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQSxvRkFBb0Y7QUFDcEYsK0VBQStFO0FBRS9FO0lBQ0ksVUFBVTtJQUNWLHVCQUF1QjtJQUN2Qix3QkFBd0I7SUFDeEIsZ0JBQWdCO0lBQ2hCLGFBQWE7Q0FDaEIiLCJmaWxlIjoic3JjL3N0eWxlcy5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbkBpbXBvcnQgJ2h0dHA6Ly90cmVlc2Zsb3dlci5jb20vbmctcGktYWRtaW4vc3R5bGVzLjU1ZjI4M2U1ODdjMjg0NzE0MTE1LmJ1bmRsZS5jc3MnO1xuLyogWW91IGNhbiBhZGQgZ2xvYmFsIHN0eWxlcyB0byB0aGlzIGZpbGUsIGFuZCBhbHNvIGltcG9ydCBvdGhlciBzdHlsZSBmaWxlcyAqL1xuXG5ib2R5LCBodG1se1xuICAgIG1hcmdpbjogMDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmOyAgIFxuICAgIGZvbnQtZmFtaWx5OiBzYW5zLXNlcmlmO1xuICAgIGZvbnQtc2l6ZTogMTZweDsgICBcbiAgICBoZWlnaHQ6IDEwMCU7IFxufSJdfQ== */", '', '']]
+module.exports = [[module.i, "\n@import 'https://treesflower.com/ng-pi-admin/styles.55f283e587c284714115.bundle.css';\n/* You can add global styles to this file, and also import other style files */\nbody, html{\n    margin: 0;\n    background-color: #fff;   \n    font-family: sans-serif;\n    font-size: 16px;   \n    height: 100%; \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQSxxRkFBcUY7QUFDckYsK0VBQStFO0FBRS9FO0lBQ0ksVUFBVTtJQUNWLHVCQUF1QjtJQUN2Qix3QkFBd0I7SUFDeEIsZ0JBQWdCO0lBQ2hCLGFBQWE7Q0FDaEIiLCJmaWxlIjoic3JjL3N0eWxlcy5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbkBpbXBvcnQgJ2h0dHBzOi8vdHJlZXNmbG93ZXIuY29tL25nLXBpLWFkbWluL3N0eWxlcy41NWYyODNlNTg3YzI4NDcxNDExNS5idW5kbGUuY3NzJztcbi8qIFlvdSBjYW4gYWRkIGdsb2JhbCBzdHlsZXMgdG8gdGhpcyBmaWxlLCBhbmQgYWxzbyBpbXBvcnQgb3RoZXIgc3R5bGUgZmlsZXMgKi9cblxuYm9keSwgaHRtbHtcbiAgICBtYXJnaW46IDA7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjsgICBcbiAgICBmb250LWZhbWlseTogc2Fucy1zZXJpZjtcbiAgICBmb250LXNpemU6IDE2cHg7ICAgXG4gICAgaGVpZ2h0OiAxMDAlOyBcbn0iXX0= */", '', '']]
 
 /***/ }),
 
@@ -555,7 +555,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Mahesh\munchies-github\munchies.git\trunk\frontEnd\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! E:\svn-repo\munchies\trunk\frontEnd\src\styles.css */"./src/styles.css");
 
 
 /***/ })

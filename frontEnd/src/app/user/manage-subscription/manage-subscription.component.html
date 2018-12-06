@@ -6,31 +6,30 @@
                 <thead>
                     <tr>
                         <th>Date</th>
-                        <th>Name</th>
-                        <th>Phone</th>
+                        <!-- <th>Name</th> -->
                         <th>Address</th>
+                        <th>Phone</th>
                         <th>Plan</th>
                         <th>ActiveWeek</th>
-                        <th>SkipWeek</th>
+                        <th>SkipWeek <i class='fa fa-trash fa-fw' style="color:#fb8187;"></i>/<i class='fa fa-undo fa-fw' style="color:#31d799;"></i></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let order of orders">
                         <td>{{order.activatedDate | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{order.user[0].firstName}} {{order.user[0].lastName}}</td>
-                        <td>{{order.user[0].phone}}</td>
+                        <!-- <td>{{order.user[0].firstName}} {{order.user[0].lastName}}</td> -->
                         <td>{{order.user[0].address}}</td>
+                        <td>{{order.user[0].phone}}</td>
                         <td>{{order.plans.title}}</td>
                         <td>{{getActiveWeek(order.startDate,order.weeks)}}</td>
-                        <td>
+                        <td class="custom_td_skipweek">
                             <button *ngFor="let skipWeekItem of getWeekArray(order.weeks);let skipWeekIndex = index"
                                 (click)="skipWeekAction(order,skipWeekIndex+1,alertModal)"
                                 [class]="isSkip(order.skipedWeeks,skipWeekIndex+1) ? 'btn btn-success':'btn btn-danger'"> 
-                                <i [class]="isSkip(order.skipedWeeks,skipWeekIndex+1) ? 'fa fa-undo fa-fw':'fa fa-trash fa-fw'"></i>
-                                {{skipWeekIndex+1}} {{isSkip(order.skipedWeeks,skipWeekIndex+1) ? 'Undo':'Skip'}}
+                                <!-- <i [class]="isSkip(order.skipedWeeks,skipWeekIndex+1) ? 'fa fa-undo fa-fw':'fa fa-trash fa-fw'"></i> -->
+                                {{skipWeekIndex+1}}
                             </button>
                         </td>
-                        <!-- <td><button (click)="skipWeek(order._id,order.weeks)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>{{this.isSkiped(order.skipedWeeks)}}</button></td> -->
                     </tr>
                 </tbody>
             </table>

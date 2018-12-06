@@ -234,8 +234,8 @@ module.exports = {
    },
    skipActivePlanWeek : (req,res) => {
     const activePlanId = req.params.activePlanId;
-    const userId = req.session.user._id;
-    // const userId = "5bfbdcc51efad521746223ae";
+    // const userId = req.session.user._id;
+    const userId = "5bfbdcc51efad521746223ae";
     let week = req.params.week;
     week = Number(week,10)
     if(userId && activePlanId && !Number.isNaN(week)){
@@ -315,8 +315,8 @@ module.exports = {
    },
    undoSkippedActivePlanWeek : (req,res) =>{
     const activePlanId = req.params.activePlanId;
-    const userId = req.session.user._id;
-    // const userId = "5bfbdcc51efad521746223ae";
+    // const userId = req.session.user._id;
+    const userId = "5bfbdcc51efad521746223ae";
     let week = req.params.skippedWeek;
     week = Number(week,10);
     console.log('Week Type : ',typeof week);
