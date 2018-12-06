@@ -1,7 +1,8 @@
 <div class="plan_management_wrapper">
   <div class="plan_management">
     <div class="select_week_wrapper">
-      <select [(ngModel)]="selectedPlanId" (change)="showWeeks()">
+      <select [(ngModel)]="selectedPlanId" placeholder="Select Plan">
+        <option [value]="default" selected="selected">Select Plan</option>
         <option *ngFor="let plan of allPlans" value="{{plan._id}}">{{plan.title}}</option>
       </select>
     </div>
@@ -48,6 +49,31 @@
                 <accordion-heading>
                     <accordion-toggle>Week 1</accordion-toggle>
                 </accordion-heading>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button (click)="openModal(thirdModal)" class="btn btn-primary" style="margin:20px">Add Product</button>
+                    <card cardTitle="Week 1 Plan Details">
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th>Type</th>
+                            <th>Product</th>
+                            <th>MRP</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td><button (click)="deleteWeekProd(weekprod._id)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </card>
+                  </div>
+                </div>
             </accordion-group>
         </accordion>
         <accordion [showArrows]="false" [closeOthers]="true" [expandAll]="false">
@@ -55,6 +81,31 @@
                 <accordion-heading>
                     <accordion-toggle>Week 2</accordion-toggle>
                 </accordion-heading>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button (click)="openModal(thirdModal)" class="btn btn-primary" style="margin:20px">Add Product</button>
+                    <card cardTitle="Week 2 Plan Details">
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th>Type</th>
+                            <th>Product</th>
+                            <th>MRP</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td><button (click)="deleteWeekProd(weekprod._id)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </card>
+                  </div>
+                </div>
             </accordion-group>
         </accordion>
         <accordion [showArrows]="false" [closeOthers]="true" [expandAll]="false">
