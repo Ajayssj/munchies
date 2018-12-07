@@ -38,6 +38,7 @@ module.exports = {
                 maxAge: 1000 * 60 * 24 // 24 hours
             },
         }));
+        app.use(bodyParser.urlencoded({urlencoded : false}));
         app.use(bodyParser.json());
     },
     bindAuth: function (app) {

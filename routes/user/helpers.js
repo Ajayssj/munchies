@@ -122,8 +122,9 @@ module.exports = {
                 .then(user => {
                     if(user){ 
                         const currentPassword = utils.createHash(req.body.currentPassword.trim());
+                        const newPassword = utils.createHash(req.body.newPassword.trim());
                         if(user.password == currentPassword){
-                            User.updateOne({_id : db.toObjectID(userId)},{$set : { password : password}})
+                            User.updateOne({_id : db.toObjectID(userId)},{$set : { password : newPassword}})
                             .then(passwordSet => {
                              res.json({success : true, message : 'Password changed Successfully!'});
                             }).catch(err => {
