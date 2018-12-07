@@ -27,13 +27,13 @@ module.exports = {
         }else{
             var productObj = {
                 name : req.body.name,
+                type : req.body.type,
                 quantity : req.body.quantity,
-                unit : req.body.unit,
                 company : req.body.company,
                 price : req.body.price,
                 kcal : req.body.kcal,
-                contact : req.body.contact,
-                usedInWeeks : req.body.usedInWeeks
+                allergyDetails : req.body.allergyDetails,
+                cost : req.body.cost
             }
             // TODO : Add new product here..
             Product.insertOne(productObj)
@@ -110,13 +110,13 @@ module.exports = {
             const productId = req.body.productId;
             const productObj = {
                 name : req.body.name,
+                type : req.body.type,
                 quantity : req.body.quantity,
-                unit : req.body.unit,
                 company : req.body.company,
                 price : req.body.price,
                 kcal : req.body.kcal,
-                contact : req.body.contact,
-                usedInWeeks : req.body.usedInWeeks
+                allergyDetails : req.body.allergyDetails,
+                cost : req.body.cost
             }
             Product.updateOne({_id : db.toObjectID(productId)},{ $set : productObj})
                 .then(result => {
