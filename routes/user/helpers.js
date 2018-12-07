@@ -113,6 +113,32 @@ module.exports = {
                 })
         }
     },
+    changePassword : (req,res) => {
+        
+        const userId = req.body.userId;
+        const currentPassword = req.body.currentPassword;
+        const newPassword = req.body.newPassword;
+        User.findOne({_id : db.toObjectID(userId)})
+                .then(user => {
+                    if(user){ 
+                        const currentPassword = utils.createHash(req.body.currentPassword.trim());
+                        if(user.password == currentPassword){
+                            User.updateOne({_id : db.toObjectID(userId)},{$set : { password : password}})
+                            .then(passwordSet => {
+                             res.json({success : true, message : 'Password changed Successfully!'});
+                            }).catch(err => {
+                                res.json({success : false, error : err});
+                            })
+                        }else{
+                            res.json({success : false, error : 'Current Password is Wrong!'});
+                        }
+                    }else{
+                        res.json({success : false, error : 'Sorry User Not Found'});
+                    }
+                }).catch(err => {
+                    res.json({success : false, error : err});
+                })
+    },
     changepassword : (req,res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
