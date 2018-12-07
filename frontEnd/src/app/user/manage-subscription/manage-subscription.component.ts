@@ -41,21 +41,21 @@ export class ManageSubscriptionComponent implements OnInit {
     var weekNo = order.plans.weeks;
     var actweek = this.getActiveWeek(order.plans.startDate,order.plans.weeks);
     console.log(actpId, weekNo);
-    this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/skip-week/'+index,{}).subscribe((res: any) => {
-      console.log("skipWeek",res);
-      if (res.success) {
-        this.alertText = 'Week Skiped Successfully!';
-        this.openModal(alertModal);
-        // alert('Week Skiped Successfully!');
-      } else if (res.error) {
-        // alert(res.error);
-        this.alertText = res.error;
-        this.openModal(alertModal);
-      }
-    },
-      err=> {
-      console.log("skipWeek err",err);
-    });
+    // this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/skip-week/'+index,{}).subscribe((res: any) => {
+    //   console.log("skipWeek",res);
+    //   if (res.success) {
+    //     this.alertText = 'Week Skiped Successfully!';
+    //     this.openModal(alertModal);
+    //     // alert('Week Skiped Successfully!');
+    //   } else if (res.error) {
+    //     // alert(res.error);
+    //     this.alertText = res.error;
+    //     this.openModal(alertModal);
+    //   }
+    // },
+    //   err=> {
+    //   console.log("skipWeek err",err);
+    // });
   }
 
   // skipWeekAction(order, index, alertModal) {

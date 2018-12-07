@@ -122,7 +122,12 @@
     width: 55%;
     border-radius: 5px;
 }
-
+.forgot_password_modal_btn {
+    padding: 15px;
+    border: 0px;
+    color: rgba(63,124,172,1);
+    border-bottom: 2px solid rgba(63,124,172,1);
+}
 @media screen and (min-width: 300px) {
     .signin_page_first_box {
         margin: 40px 0px 40px 40px;

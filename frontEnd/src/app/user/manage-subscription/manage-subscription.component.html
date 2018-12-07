@@ -17,7 +17,8 @@
                             <td>{{order.plans.weeks}} Week</td>
                             <td>{{order.total}}</td>
                             <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>
-                            <td><button (click)="skipNextWeek(order,alertModal)" class="btn btn-danger"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td>
+                            <!-- <td><button (click)="skipNextWeek(order,alertModal)" class="btn btn-danger"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td> -->
+                            <td (click)="skipNextWeek(order,alertModal)" style="cursor: pointer;">Skip Next Week</td>
                         </tr>
                     </tbody>
                 </table>

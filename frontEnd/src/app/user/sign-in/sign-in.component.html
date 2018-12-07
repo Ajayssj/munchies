@@ -18,7 +18,7 @@
                 </div>
                 <div class="forgot_remember_links">
                     <div class="remember_me"><input type="checkbox" name="chk" checked /> <span>Remember Me</span></div>
-                    <div class="forgot_password">Forgot Password</div>
+                    <div class="forgot_password" (click)="openModal(forgetPasswordMailModal)">Forgot Password</div>
                 </div>
                 <div class="sign_in_button">
                     <button type="submit">Sign In</button>
@@ -39,3 +39,15 @@
         </div>
     </div>
 </div>
+
+<modal #forgetPasswordMailModal modalClass="modal-sm">
+    <modal-header>
+        <h3>Forget Password</h3>
+    </modal-header>
+    <modal-content>
+        <input class="border_bottom forgot_password_modal_btn" type="email" [(ngModel)]="forgetPasswordMail" placeholder="Email ID" />
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-primary" (click)="sendForgetPasswordMail(forgetPasswordMail,forgetPasswordMailModal)">Send</button>
+    </modal-footer>
+</modal>

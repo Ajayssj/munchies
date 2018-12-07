@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
 import { from } from 'rxjs';
 import { Subject } from "rxjs/Subject";
 import { first } from 'rxjs/operators';
+import swal from 'sweetalert2';
 interface SignInRes {
   success: boolean;
   error: string;
@@ -23,6 +24,7 @@ export class SignInComponent implements OnInit {
   error = '';
   username = '';
   password = '';
+  forgetPasswordMail = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -77,6 +79,38 @@ export class SignInComponent implements OnInit {
       );
     }
 
+  }
+
+  sendForgetPasswordMail(forgetPasswordMail, forgetPasswordMailModal){
+    console.log("forgetPasswordMail", forgetPasswordMail);
+    
+
+    // this.http.post(this.authService.getDomainName() + '/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: SignInRes) => {
+    //   console.log("is successful ", data);
+    // },
+    //   err => {
+    //     console.log("Err", err);
+    //   }
+    // );
+  }
+
+  openModal(modal) {
+    modal.open();
+  }
+
+  closeModal(modal) {
+    modal.close();
+    window.location.reload();
+    // this.router.navigate(['/manage-subscription']);
+  }
+
+  onClose() {
+    window.location.reload();
+    swal({
+      type: 'success',
+      title: 'Success!',
+      text: 'close it!',
+    });
   }
 
 }
