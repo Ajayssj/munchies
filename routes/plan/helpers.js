@@ -470,13 +470,15 @@ module.exports = {
     }
   },
    deleteCorePlan : (req,res) => {
-        const adminId =  db.toObjectID(req.session.user._id);
+        // const adminId =  db.toObjectID(req.session.user._id);
         const planId = db.toObjectID(req.body.planId);
-        Plan.findOneAndDelete({ _id : planId,adminId : adminId })
+        Plan.findOneAndDelete({ _id : planId})
             .then(plan => {
-                PlansExtended.findAndDelete({planId : planId,})
-                if(plan && plan.value)
+                if(plan && plan.value){   
+                    PlansExtended.deleteMany({planId : planId});
+                    ActivePlan.updateMany({planId : planId},{$set : {isDeleted : true}});
                     res.json({success : true, message : 'Plan Deleted Successfully!'})
+                }
                 else
                     res.json({success : false, error : 'Plan not found to be deleted!'})
             }).catch(err => res.json({success : false, error : err}));
