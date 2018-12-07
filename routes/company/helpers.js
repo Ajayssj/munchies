@@ -8,7 +8,7 @@ const isCompanyExists = function(companyName){
 }
 module.exports = {
     addCompany : (company) => {
-         Company.updateOne({company : company},{upsert : true})
+         Company.updateOne({company : company},{$set : { company : company}},{upsert : true})
                 .then(result => {
                     console.log("Company Inserted!");
                 }).catch(err =>{
@@ -28,12 +28,7 @@ module.exports = {
             })
     },
     getCompanies : (req,res) =>{
-        Company.find().toArray()
-            .then(companies => {
-                res.json({success : true, data : companies});
-            }).catch(err => {
-                res.json({success : false, error : err });
-            })
+        return Company.find({},{ company : 1}).toArray()
     },
     deleteCompany : (req,res) => {
         const companyId = req.body.companyId;

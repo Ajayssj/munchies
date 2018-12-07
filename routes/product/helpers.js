@@ -38,7 +38,7 @@ module.exports = {
             // TODO : Add new product here..
             Product.insertOne(productObj)
                 .then(product => {
-                    companyModule.addCompany(productObj.company.trim());
+                    companyModule.addCompany(productObj.company.trim().toLowerCase());
                     res.json({success : true, message : 'Product Added Successfully!'})
                 }).catch(err => {
                     res.json({success : false, error : err})
@@ -86,7 +86,9 @@ module.exports = {
         
         ).toArray()
             .then(products => {
-                res.json({success : true, data : products});
+                companyModule.getCompanies().then(companies => {
+                    res.json({success : true, data : {products, companies}});
+                }).catch(err => res.json({success : false, error : err }));
             }).catch(err => {
                 res.json({success : false, error : err });
             })
