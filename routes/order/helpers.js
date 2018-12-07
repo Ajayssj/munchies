@@ -234,70 +234,57 @@ module.exports = {
 
     },
     deleteMyorder : (req, res) => {
-        console.log("Req to delete==>",req.body,req.query);
-        
-        const customerId = db.toObjectID(req.session.user._id);
-        const orderId= db.toObjectID(req.body.orderId);
-        var query={}
-        query={
-            $and:[
-                {'customerData.custId':customerId},
-                {_id:orderId}
-            ]     
-        }
-        
-        Order.findOneAndDelete(query)
-            .then(order => {
-                if(order){ 
-                    if(order.lastErrorObject.n == 1)
-                    res.json({success : true,orderData:order});                    
-                    else
-                    res.json({success : false,orderData:'Order Not found'});                    
-                                  
-                }else{
-                    res.json({success : false, error : 'customer Id or order Id is not found!'});
-                }
+        const userId = req.session.user._id;
+        const orderId = req.body.orderId;
+        if(orderId){
+            Order.findOneAndDelete({ userId:db.toObjectID(userId), _id: db.toObjectID(orderId)})
+                .then(order => {
+                    if(order){ 
+                        if(order.lastErrorObject.n == 1)
+                            res.json({success : true,orderData:order});                    
+                        else
+                            res.json({success : false,orderData:'Order Not found'});          
+                    }else{
+                        res.json({success : false, error : 'customer Id or order Id is not found!'});
+                    }
 
-            }).catch(err => {
-                res.json({success : false, error : 'Database Error : ' + err});
-            })    
+                }).catch(err => {
+                    res.json({success : false, error : 'Database Error : ' + err});
+                })  
+        }else{
+            res.json({success : false,error : 'Invalid Order Id'});
+        }
+       
          
     },
     editOrder : (req,res) => {
-        const customerId =  db.toObjectID(req.session.user._id);
-        const orderId = db.toObjectID(req.body.orderId);
-        // var date=Date.now();
-        // var firstName=(req.body.firstName)
-        var query={}
-        query={
-            $and:[
-                {'customerData.custId':customerId},
-                {_id:orderId}
-            ]          
-        }
+        const userId = req.session.user._id;
+        const orderId = req.body.orderId;
         
         const orderObj = {
             customerData:{
                 firstName : req.body.firstName,
                 lastName : req.body.lastName,
                 phoneNo:req.body.phoneNo,
-                custId:customerId
             },
+            userId : userId,
             planId:req.body.planId,
-            // date:date,
             total:req.body.total,
             shippingCost:0,
             Area_of_delivery:req.body.Area_of_delivery,
             address:req.body.address,
             postalCode:req.body.postalCode
         }
-
-        Order.updateOne(query, { $set : orderObj})
+        if(orderId){
+            Order.updateOne({ userId:db.toObjectID(userId), _id: db.toObjectID(orderId)}, { $set : orderObj})
             .then(order => {     
                 if(order.result.nModified == 1)
                     res.json({success : true, message : 'order Edited Successfully!'})
                 else
                     res.json({success : false, error : 'order not found to be edited!'})
             }).catch(err => res.json({success : false, error : err}));
-   },
+        }else{
+            res.json({success : false, error : 'Invalid Order Id!'})
+        }
+   }
 }

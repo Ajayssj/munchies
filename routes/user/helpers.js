@@ -193,21 +193,21 @@ module.exports = {
     },
     verifyFirebaseToken : (req,res) => {
         const errors = validationResult(req);
-        console.log("verifyFirebaseToken Req==>",req.body);
+        // console.log("verifyFirebaseToken Req==>",req.body);
      
             var token=req.body.token;
             console.log("toten from Client",token);
             
             admin.auth().verifyIdToken(token)
         .then(function (decodedToken) {
-            console.log("verifyIdToken==>",decodedToken);
+            // console.log("verifyIdToken==>",decodedToken);
     
             User.findOne({email : decodedToken.email})
             .then(user => {
                 if(user){
                         req.session.user = user;
                         res.json({success : true});
-                        console.log("Session user==>",req.session.user);
+                        // console.log("Session user==>",req.session.user);
                         
                  
                 }else{
@@ -221,7 +221,7 @@ module.exports = {
                             email : decodedToken.email,
                             password : utils.createHash(password)
                         }
-                        console.log("user Not registered Password Created==>",password);
+                        // console.log("user Not registered Password Created==>",password);
                         
                          User.insertOne(userObj).then(user => {
                             // req.session.user = user;
@@ -241,7 +241,7 @@ module.exports = {
                                 email:decodedToken.email,
                                 password:password
                             }
-                            console.log("DataObj==>",dataObj);
+                            // console.log("DataObj==>",dataObj);
                             
                             utils.sendRegistrationEmail(dataObj,
                                 result =>{

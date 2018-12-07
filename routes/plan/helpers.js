@@ -440,6 +440,16 @@ module.exports = {
             res.json({success : false, error : err});
         })
    },
+   getCorePlan : (req,res) => {
+    // const adminId = db.toObjectID(req.session.user._id);
+    const planId = req.params.planId;
+    PlansExtended.find({ planId : db.toObjectID(planId)}).sort({week : 1}).toArray()
+       .then(plans => {
+            res.json({success : true, data : plans});
+       }).catch(err => {
+           res.json({success : false, error : err});
+       })
+  },
    getCorePlans : (req,res) => {
     //  const adminId = db.toObjectID(req.session.user._id);
      Plan.find().toArray()
