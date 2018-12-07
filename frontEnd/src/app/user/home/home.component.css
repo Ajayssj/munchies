@@ -22,7 +22,7 @@
 }
 .watch_video + h2 {
     text-align: center;
-    color: #3F7CAC;
+    color: #de6b48;
     font-size: 38px;
     font-weight: bold;
 }
@@ -31,8 +31,8 @@
     height: 0;
     border-top: 30px solid transparent;
     border-bottom: 30px solid transparent;
-    border-left: 50px solid rgb(63, 124, 172);
-    margin: 0 auto;
+    border-left: 50px solid #e3c567;
+    margin: 30px auto 0px;
 }
 .content_box {
     background-color: #fff;
@@ -58,12 +58,12 @@
     color: #2F2E2E;
 }
 .content_box_wrapper .content_box:nth-child(1) {
-    background-color: rgba(125, 187, 195, 1);
+    background-color: #9ebc9e;
     margin-bottom: 0px;
 }
 .content_box_wrapper .content_box:nth-child(2) {
     padding: 80px 0px 80px 15px;
-    background-color: rgba(125, 187, 195, 1);
+    background-color: #9ebc9e;
     margin-bottom: 50px;
 }
 .content_box_wrapper > h2, .munchers_have_spoken_text {
@@ -82,7 +82,7 @@
     flex-wrap: wrap;
 }
 .boxes .box {
-    background-color: rgba(125, 187, 195, 0.85);
+    background-color: #e3c567;
     margin-right: 10px;
     padding: 10px 15px;
     min-height: 475px;
@@ -114,12 +114,12 @@
 }
 .subscribe_btn2 a {
     border: 4px solid;
-    border-color: rgba(63, 124, 172, 1);
+    border-color: #de6b48;
     padding: 5px 30px;
     text-decoration: none;
     letter-spacing: 1px;
     color: #fff;
-    background-color: rgba(63, 124, 172, 1);
+    background-color: #de6b48;
     font-size: 23px;
     transition: border-color 0.4s ease 0s, background-color 0.4s ease 0s;
 }
@@ -161,6 +161,7 @@
     margin-left: 90px;
     font-size: 23px;
     color: #E5663D;
+    margin-bottom: 35px;
 }
 .list {
     width: 100%;
@@ -190,11 +191,12 @@
 .munchers_have_spoken_box_wrapper {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 60px;
 }
 .munchers_have_spoken_box {
     width: 30%;
     height: 250px;
-    background-color: rgb(125, 187, 195);
+    background-color: #9ebc9e;
     border-radius: 40px;
     padding: 30px;
     box-sizing: border-box;
@@ -208,8 +210,8 @@
 .munchers_have_spoken_box span {
     position: absolute;
     width: 0;
-    border-top: 60px solid rgb(125, 187, 195);
-    border-left: 60px solid rgb(125, 187, 195);
+    border-top: 60px solid #9ebc9e;
+    border-left: 60px solid #9ebc9e;
     bottom: -55px;
     border-bottom: 100px solid transparent;
 }

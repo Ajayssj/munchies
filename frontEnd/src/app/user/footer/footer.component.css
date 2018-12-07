@@ -14,8 +14,8 @@ header, .content, footer .content {
 }
 footer {
     font-family: 'Brandon-Grot-W01-Light' !important;
-    min-height: 120px;
-    background-color: #fe938c;
+    min-height: 50px;
+    background-color: #De6b48;
     padding: 10px;
     box-sizing: border-box;
     position: relative;

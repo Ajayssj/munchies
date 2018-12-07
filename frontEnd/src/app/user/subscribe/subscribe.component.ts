@@ -62,10 +62,10 @@ export class SubscribeComponent implements OnInit {
       url: "../../assets/peanut.png",
       alt: "peanut.png"
     },
-    /*{
+    {
       url: "../../assets/chocolate-bar.png",
       alt: "chocolate_bar.png"
-    }*/],
+    }],
     class: "first_box",
     selectedOpt: null
   },
@@ -142,8 +142,13 @@ export class SubscribeComponent implements OnInit {
       optName: "q3"
     }],
     images: [{
-      url: "../../assets/strawberry.png",
-      alt: "strawberry.png"
+      url: "../../assets/harvest.png",
+      alt: "harvest.png"
+    },
+   
+    {
+      url: "../../assets/cheese.png",
+      alt: "cheese.png"
     }],
     class: "third_box",
     selectedOpt: null

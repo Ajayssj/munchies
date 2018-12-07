@@ -35,7 +35,7 @@
         -ms-flex: 1 0 21%;
             flex: 1 0 21%;
     padding: 10px 22px;
-    background-color: rgb(125, 187, 195);
+    background-color: #9ebc9e;
     min-height: 270px;
     letter-spacing: 1px;
     line-height: 22px;
@@ -56,6 +56,7 @@
     color: #2F2E2E;
     margin: 0px;
     font-weight: normal;
+    padding-bottom: 25px;
 }
 .select_plan .plan p {
     color: #2F2E2E;
@@ -75,11 +76,13 @@
 .question_wrapper {
     width: 100%;
     float: left;
-    margin-bottom: 50px;
-	padding:10px;
+    margin-bottom: 0px;
+    padding:8px;
+    position: relative;
+    padding-bottom: 90px;
 }
 .question_wrapper p {
-    margin-left: 30px;
+    margin-left: 20px;
     margin-bottom: 8px;
     color: #E5663D;
     font-size: 18px;
@@ -90,7 +93,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 40%;
+    width: 100%;
     float: left;
 }
 .question_wrapper ul li {
@@ -104,7 +107,7 @@
 }
 .question_wrapper .product_images {
     position: absolute;
-    left: 45%;
+    left: 35%;
 }
 .question_wrapper .product_images img {
     height: 120px;
@@ -112,7 +115,7 @@
 }
 .question_wrapper .product_images.first_box img:first-child {
     position: absolute;
-    top: -30px;
+    left: 107px;
 }
 .question_wrapper .product_images.first_box img:last-child {
     position: absolute;
@@ -120,10 +123,10 @@
     left: 200px;
     height: 120px;
 }
-.question_wrapper .product_images.second_box img:first-child {
+/*.question_wrapper .product_images.second_box img:first-child {
     position: absolute;
     top: 140px;
-}
+}*/
 
 .question_wrapper .product_images.second_box img:last-child {
     position: absolute;
@@ -133,7 +136,12 @@
 .question_wrapper .product_images.third_box img:first-child {
     position: absolute;
     top: 70px;
-    left: 150px;
+    
+}
+.question_wrapper .product_images.third_box img:last-child {
+    position: absolute;
+    left: 296px;
+    top: 100px;
 }
 .ok_button {
     display: block;
@@ -162,19 +170,69 @@
     border: 2px solid rgba(50, 50, 50, 1);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
     .question_wrapper .product_images.first_box img:first-child {
         position: absolute;
-        top: -30px;
-        left: 95px;
+        top: 0px;
+        left: 96px;
+        width: 99px;
+        height: 100px;
     }
-    .question_wrapper .product_images.second_box img:last-child {
+    /*.question_wrapper .product_images.second_box img:last-child {
         position: absolute;
-        top: 140px;
-        left: 300px;
+        top:80px;
+        left: 54px;
+    }*/
+    .question_wrapper .product_images.first_box img:last-child {
+        position: absolute;
+        top: 90px;
+        left: 30px;
+    
     }
+    .question_wrapper .product_images.third_box img:first-child {
+        position: absolute;
+        top: 0px;
+        
+    }
+    .question_wrapper .product_images.third_box img:last-child {
+        position: absolute;
+        left: 90px;
+        top: 100px;
+        width: 90px;
+    }
+  
+    .select_plan .plan {
+        -webkit-box-sizing: border-box;
+         box-sizing: border-box;
+        letter-spacing: 1px;
+        line-height: 22px;
+        color: #2F2E2E;
+    }
+    .plans {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        
+    }
+    .plans .plan {
+        min-width:400px;
+        margin-top:10px;
+        margin-bottom:10px;
+        
+        
+    }
+    .question_wrapper ul {
+        list-style: none;
+        width: 40%;
+        float: left;
+    }
+    .ok_button {
+        display: block;
+        margin-top: 50px;
+        margin-left:15px;
+    }    
+
 }
-@media screen and (min-width: 300px) {
+/*@media screen and (max-width: 600px) {
     .question_wrapper .product_images.first_box img:first-child {
         position: absolute;
         left: 0px;
@@ -183,25 +241,24 @@
     
     .question_wrapper .product_images.first_box img:last-child {
         position: absolute;
-        
-        left: 26px;
-        height: 80px;
-		width:80px;
+        left: 100px;
+    
     }
     .question_wrapper .product_images.third_box img:first-child {
         position: absolute;
-        
-        left: 30px;
-		height:80px;
-		width:90px;
+        left: -51px;
+        top: 109px;
+		
     }
+    .question_wrapper .product_images.third_box img:last-child {
+        position: absolute;
+        left: 296px;
+        top: 100px;
+    }
+    
     .select_plan .plan {
         -webkit-box-sizing: border-box;
-                box-sizing: border-box;
-        
-
-        background-color: rgb(125, 187, 195);
-    
+         box-sizing: border-box;
         letter-spacing: 1px;
         line-height: 22px;
         color: #2F2E2E;
@@ -253,4 +310,4 @@
     text-transform: uppercase;
 	width:max-content;
 }
-}
+}*/
