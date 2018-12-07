@@ -204,6 +204,7 @@ module.exports = {
             startDate : getNextMondayDate(new Date()),
             isCustom :  false,
             skipedWeeks : [],
+            customWeeks : [],
             weeks : Number(numOfWeeks),
             isActive : true
         }
@@ -275,34 +276,44 @@ module.exports = {
         [
             {
                 $match: {
-                    activePlanId : db.toObjectID(activePlanId)
+                    _id : db.toObjectID(activePlanId)
                 }
             },
             {
-                "from" : "products",
-                "localField" : "customWeeks.products",
-                "foreignField" : "_id",
-                "as" : "customWeekProducts"
+                $lookup : {
+                    "from" : "products",
+                    "localField" : "customWeeks.products",
+                    "foreignField" : "_id",
+                    "as" : "customWeekProducts"
+                }
             },
             {
-                customWeeks: 0,
-                skipedWeeks : 0
+                $project : {
+                    customWeeks: 0,
+                    skipedWeeks : 0
+                }
             },
             {
-                "from" : "plansExtended",
-                "localField" : "planId",
-                "foreignField" : "planId",
-                "as" : "plans"
+                $lookup : {
+                    "from" : "plansExtended",
+                    "localField" : "planId",
+                    "foreignField" : "planId",
+                    "as" : "plans"
+                }
             },
             {
-                "from" : "products",
-                "localField" : "plans.products",
-                "foreignField" : "_id",
-                "as" : "defaultWeekProducts"
+                $lookup : {
+                    "from" : "products",
+                    "localField" : "plans.products",
+                    "foreignField" : "_id",
+                    "as" : "defaultWeekProducts"
+                }
             },
             {
-                plans : 0,
-                customWeeks : 0
+               $project : {
+                    plans : 0,
+                    customWeeks : 0
+               }
             }
     
         ]).toArray()
