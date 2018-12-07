@@ -5,9 +5,11 @@ import { routing } from './company.routing';
 import { SharedModule } from '../../shared/shared.module';
 import { CompanyComponent } from './company.component';
 import { ModalModule } from 'ngx-modal';
+import { SelectModule } from 'ng2-select';
 import { ModalsComponent } from '../ui/components/modals/modals.component';
 import { FormComponent } from '../form/form.component';
 import { FormInputsComponent } from '../form/components/form-inputs/form-inputs.component';
+import { MultipleSelectComponent } from '../form/components/ng2-select/multiple-select/multiple-select.component';
 
 @NgModule({
     imports: [
@@ -16,13 +18,15 @@ import { FormInputsComponent } from '../form/components/form-inputs/form-inputs.
         ReactiveFormsModule,
         SharedModule,
         routing,
-        ModalModule
+        ModalModule,
+        SelectModule
     ],
     declarations: [
         CompanyComponent,
         ModalsComponent,
         FormComponent,
-        FormInputsComponent
+        FormInputsComponent,
+        MultipleSelectComponent
     ]
 })
 export class CompanyModule { }

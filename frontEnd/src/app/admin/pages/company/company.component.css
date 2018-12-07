@@ -13,4 +13,37 @@ select.form-control {
   -o-transition: all 1s;
   -moz-transition: all 1s;
   -webkit-transition: all 1s;
+  appearance: caret;
+  -webkit-appearance: caret;
+  -moz-appearance: caret;
+}
+ng-select {
+  margin-top: 10px;
+}
+button {
+  margin-bottom: 10px;
+}
+.dropdown-menu {
+  max-height: 200px;
+  height: 200px;
+  overflow-y: scroll;
+}
+.dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+}
+.dropdown-menu li:hover {
+  text-decoration: none;
+  color: #262626;
+  background-color: #f5f5f5;
+}
+.selectedWeeks {
+  text-align: left; 
+  margin-right: 10px;
+}
+.card-content {
+  background: rgba(0,0,0,.1);
+  border: 1px solid transparent;
+  padding: 5px;
+  margin-bottom: 5px;
 }

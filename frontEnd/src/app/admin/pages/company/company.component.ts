@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../../user/auth.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
+import { element } from 'protractor';
 interface productRes {
   success: boolean,
   data: object,
@@ -22,7 +22,7 @@ export class CompanyComponent implements OnInit {
   pType = []; 
   selectedTypeId = '';
   selectCompanyId = '';
-  productTypes;
+  productTypes = [];
   pCompany =[];
   productCompanies;
   productCompany = "";
@@ -31,64 +31,102 @@ export class CompanyComponent implements OnInit {
   companyId: any;
   selectedCompany = "No Selected Company";
   selectedCompanyName = "";
-  addProductTypeForm: FormGroup;
-  addProductCompanyForm: FormGroup;
-  addProductForm: FormGroup;
   selectedCompanyObj= {};
   selectedTypeObj= {};
+  addCompanyName: string;
+  addCompanyOnType: any;
+  addType: any;
+  addPname: any;
+  addPtype: any;
+  addPcompany: any;
+  addPquantity: any;
+  addPcost: any;
+  addPmrp: any;
+  addPallergyDetails: any;
+  addPkcal: any;
   // product Tab var
   addProductArray = {};
   editProductArray = {};
   selectedProductObj = {};
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private auth: AuthService) { }
-  
-  ngOnInit() {
-    this.addProductTypeForm = this.formBuilder.group({
-      pType: ['', Validators.required],
-      selectedCompany: ['', Validators.required]
-    });
-    this.addProductCompanyForm = this.formBuilder.group({
-      productCompany: ['', Validators.required]
-    });
-    this.addProductForm = this.formBuilder.group({
-      productName: ['', Validators.required],
-      productType: ['', Validators.required],
-      productCompanyName: ['', Validators.required],
-      productQuantity: ['', Validators.required],
-      productMrp: ['', Validators.required],
-      productKcal: ['', Validators.required]
-    });
+  selectedWeeks = [];
+  weeks = [];
+  allergyDetails: Array<string>;
+  public weekArray: Array<Object> = [{id: 1, text: 'Week 1'}, {id: 2, text: 'Week 2'}, {id: 3, text: 'Week 3'},
+   {id: 4, text: 'Week 4'}, {id: 5, text: 'Week 5'}, {id: 6, text: 'Week 6'}, {id: 7, text: 'Week 7'}, 
+   {id: 8, text: 'Week 8'}, {id: 9, text: 'Week 9'}, {id: 10, text: 'Week 10'}, {id: 11, text: 'Week 11'},
+    {id: 12, text: 'Week 12'}];
+  constructor(private http: HttpClient, private auth: AuthService) { }
+  ngOnInit() { 
     console.log("hiiiiiiiiiiiii", this.auth.getDomainName());
+    this.productTypes = ['Laadu', 'Makhana', 'Energy Bars', 'Cookies', 
+    'Khakra', 'Drink', 'Nut Mix', 'Crisps', 'Grain Pops', 
+    'Vegetable', 'Chips', 'Fruity', 'honey sachet', 'tea bags', 'fresh fruit'];
+
+    this.allergyDetails = ['Wheat', 'Milk', 'Eggs', 'Peanuts', 'Other nuts', 'none'];
+
     this.http.get(this.auth.getDomainName() + '/api/product').subscribe((res: any) => {
-      this.products = JSON.parse(JSON.stringify(res.data));
+      this.products = res.data.products;
+      this.products.forEach((element,index)=> {
+        var uniqArr=[];
+        element.weeks.forEach(item => {
+          if(!(uniqArr.indexOf(item.week) > -1)) {
+            uniqArr.push(item.week)
+          }
+        })
+        this.products[index].weeks = uniqArr;
+      })
+      console.log(this.products);
+      
     },
     err=> {
       console.log(err);
     });
     
-    this.http.get(this.auth.getDomainName() + '/api/type').subscribe((res: productRes) => {
-      console.log(res.data);
-      // companies[{ _id , company}]
-      this.productTypes = res.data;
-    },
-    err=> {
-      console.log(err);
-    });
+    
+
+    // this.http.get(this.auth.getDomainName() + '/api/type').subscribe((res: productRes) => {
+    //   console.log(res.data);
+    //    companies[{ _id , company}]
+    //   this.productTypes = res.data;
+    // },
+    // err=> {
+    //   console.log(err);
+    // });
     this.http.get(this.auth.getDomainName() + '/api/company').subscribe((res: any) => {
-      console.log(res);
+      console.log(res.data);
       this.productCompanies = res.data;
-      console.log(this.productCompanies);
-      // this.productCompanies.forEach(element => {
-      //   console.log(element);
-      //   this.companyId.push(element._id);
-      //   this.companyName.push(element.company);
-      // });
+      this.productCompanies.forEach(element => {
+        console.log(element);
+        this.companyName.push(element.company);
+      });
     },
     err=> {
       console.log(err);
     });
   }
 //Delete code
+
+  addWeekInProduct(weekItem,weekNo, productId) {
+    console.log("weekItem,weekNo",weekItem,weekNo);
+    if(!(weekItem.indexOf(weekNo) > -1)) {
+      console.log("weekNo",weekItem)
+      weekItem.push(weekNo)
+    }
+    this.http.post(this.auth.getDomainName() + '/api/plan/core/product/' + productId + '/week/' + weekNo, {}).subscribe(data=> {
+      console.log(data);
+    });
+  } 
+  removeWeekInProduct(weekItem,productId, weekId) {
+    if(weekItem.indexOf(weekId) > -1) {
+      let indexOfItem = weekItem.indexOf(weekId);
+      weekItem.splice(indexOfItem,1);
+    }
+    console.log(this.auth.getDomainName() + '/api/plan/core/product/' + productId + '/week/' + weekId);
+    this.http.delete(this.auth.getDomainName() + '/api/plan/core/product/' + productId + '/week/' + weekId, {}).subscribe(data=> {
+      console.log(data);
+    });
+  }
+
   deleteItem(pid, tabName) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -98,13 +136,18 @@ export class CompanyComponent implements OnInit {
       productId: pid
     }
     console.log(this.data);
-    this.http.delete(this.auth.getDomainName() + '/api/' + tabName + '/delete', httpOptions).subscribe((res: productRes)=> {
+    this.http.delete(this.auth.getDomainName() + '/api/' + tabName + '/delete/' + pid, {}).subscribe((res: productRes)=> {
       console.log(res.success);
         this.deleteMessage = res.message; 
     },
     err=> {
       console.log(err);
     })
+  }
+
+  //Auto complete functionality
+  onKeyPress(event) {
+    
   }
   //Modal code
   openModal(modal) {
@@ -130,35 +173,77 @@ export class CompanyComponent implements OnInit {
     this.view = view;
   }
   //Add Company, Type and Product code
-  onSubmit(modal, view) {
-    this.companyId = this.addProductTypeForm.get("selectedCompany").value;
-    if(view == "type") {
-    this.pType = this.addProductTypeForm.get('pType').value;
-    this.http.post(this.auth.getDomainName() + '/api/type/add', {type: this.pType, companyId: this.companyId}).subscribe((data:any)=>{
-      console.log(data);
-      // if(data && data.success) { this.productTypes.push(data) }
-    }, 
-    err=> {
-      console.log(err);
-    });
-  }
-  else if(view == "company") {
-    this.productCompany = this.addProductCompanyForm.get('productCompany').value;
-    this.http.post(this.auth.getDomainName() + '/api/company/add', {company: this.productCompany}).subscribe(data=>{
-      console.log(data);
-    }, 
-    err=> {
-      console.log(err);
-    });
-  }
-  else if(view == "product") {
+  // onSubmit(modal, view) {
+  //   this.companyId = this.addProductTypeForm.get("selectedCompany").value;
+  //   if(view == "type") {
+  //   this.pType = this.addProductTypeForm.get('pType').value;
+  //   this.http.post(this.auth.getDomainName() + '/api/type/add', {type: this.pType, companyId: this.companyId}).subscribe((data:any)=>{
+  //     console.log(data);
+  //      if(data && data.success) { this.productTypes.push(data) }
+  //   }, 
+  //   err=> {
+  //     console.log(err);
+  //   });
+  // }
+  // else if(view == "company") {
+  //   this.productCompany = this.addProductCompanyForm.get('productCompany').value;
+  //   this.http.post(this.auth.getDomainName() + '/api/company/add', {company: this.productCompany}).subscribe(data=>{
+  //     console.log(data);
+  //   }, 
+  //   err=> {
+  //     console.log(err);
+  //   });
+  // }
+  // else if(view == "product") {
+  //   this.addProductArray = {
+  //     name: this.addProductForm.get('productName').value,
+  //     type: this.addProductForm.get('productType').value,
+  //     quantity: this.addProductForm.get('productQuantity').value,
+  //     company: this.addProductForm.get('productCompanyName').value,
+  //     price: this.addProductForm.get('productMrp').value,
+  //     kcal: this.addProductForm.get('productKcal').value
+  //   }
+  //   this.http.post(this.auth.getDomainName() + '/api/product/add', this.addProductArray).subscribe(data=>{
+  //     console.log(data);
+  //   }, 
+  //   err=> {
+  //     console.log(err);
+  //   });
+  // }
+  //   this.closeModal(modal);
+  // }
+//   addCompany(modal) {
+//       this.productCompany = this.addCompanyName;
+//       this.http.post(this.auth.getDomainName() + '/api/company/add', {company: this.productCompany}).subscribe(data=>{
+//         console.log(data);
+//       }, 
+//       err=> {
+//         console.log(err);
+//       });
+//       this.closeModal(modal);
+//   }
+//   addTypes(modal) {
+//     this.productCompany = this.addCompanyOnType;
+//     console.log("add type ", {type: this.addType, company: this.productCompany})
+//     this.http.post(this.auth.getDomainName() + '/api/type/add', {type: this.addType, companyId: this.productCompany}).subscribe(data=>{
+//       console.log(data);
+//     }, 
+//     err=> {
+//       console.log(err);
+//     });
+//     this.closeModal(modal);
+// }
+addProduct(modal) {
+  
     this.addProductArray = {
-      name: this.addProductForm.get('productName').value,
-      type: this.addProductForm.get('productType').value,
-      quantity: this.addProductForm.get('productQuantity').value,
-      company: this.addProductForm.get('productCompanyName').value,
-      price: this.addProductForm.get('productMrp').value,
-      kcal: this.addProductForm.get('productKcal').value
+      name: this.addPname,
+      type: this.addPtype,
+      quantity: this.addPquantity,
+      company: this.addPcompany,
+      cost: this.addPcost,
+      price: this.addPmrp,
+      allergyDetails: this.addPallergyDetails,
+      kcal: this.addPkcal
     }
     this.http.post(this.auth.getDomainName() + '/api/product/add', this.addProductArray).subscribe(data=>{
       console.log(data);
@@ -166,7 +251,6 @@ export class CompanyComponent implements OnInit {
     err=> {
       console.log(err);
     });
-  }
     this.closeModal(modal);
   }
   //edit Compnay code
@@ -182,19 +266,19 @@ export class CompanyComponent implements OnInit {
     this.closeModal(modal);
   }
   //edit Type code
-  editType(modal, selectedType) {
-    this.pType = selectedType.type;
-    this.selectedTypeId = selectedType._id;
-    this.companyId = this.selectCompanyId;
-    this.http.put(this.auth.getDomainName() + '/api/type/edit', {type: this.pType, typeId: this.selectedTypeId, companyId: this.companyId}).subscribe((data:any)=>{
-      console.log(data);
-      // if(data && data.success) { this.productTypes.push(data) }
-    }, 
-    err=> {
-      console.log(err);
-    });
-    this.closeModal(modal);
-  }
+  // editType(modal, selectedType) {
+  //   this.pType = selectedType.type;
+  //   this.selectedTypeId = selectedType._id;
+  //   this.companyId = this.selectCompanyId;
+  //   this.http.put(this.auth.getDomainName() + '/api/type/edit', {type: this.pType, typeId: this.selectedTypeId, companyId: this.companyId}).subscribe((data:any)=>{
+  //     console.log(data);
+  //      if(data && data.success) { this.productTypes.push(data) }
+  //   }, 
+  //   err=> {
+  //     console.log(err);
+  //   });
+  //   this.closeModal(modal);
+  // }
   //edit Product code
   editProduct(modal,selectedProduct) {
     this.editProductArray = {
@@ -202,16 +286,56 @@ export class CompanyComponent implements OnInit {
       type: selectedProduct.type,
       quantity: selectedProduct.quantity,
       company: selectedProduct.company,
+      cost: selectedProduct.cost,
       price: selectedProduct.price,
+      allergyDetails: selectedProduct.allergyDetails,
       kcal: selectedProduct.kcal,
       productId: selectedProduct._id
     }
-    this.http.put(this.auth.getDomainName() + '/api/product/edit', this.editProductArray).subscribe(data=>{
+    this.http.post(this.auth.getDomainName() + '/api/product/edit', this.editProductArray).subscribe(data=>{
       console.log(data);
     }, 
     err=> {
       console.log(err);
     });
     this.closeModal(modal);
+  }
+  // Multiple select
+  
+  // public items: Array<string> = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 
+  // 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'];
+
+  public value: any = ['Athens'];
+  public id: any = ['1'];
+  public _disabledV: string = '0';
+  public disabled: boolean = false;
+
+  public selected(value: any, productId): void {
+    console.log('Selected value is: ', value);
+    var weekId = value.id;
+    this.http.post(this.auth.getDomainName() + '/api/plan/core/product/' + productId + '/week/' + weekId, {}).subscribe(data=> {
+      console.log(data);
+    });
+  }
+
+  public removed(value: any, productId): void {
+    console.log('Removed value is: ', value);
+    console.log('Removed value is: ', productId);
+    console.log('removed value is: ', JSON.parse(value.id));
+    var weekId = value.id;
+    this.http.delete(this.auth.getDomainName() + '/api/plan/core/product/' + productId + '/week/' + weekId, {}).subscribe(data=> {
+      console.log(data);
+    });
+  }
+
+  public refreshValue(value: any): void {
+    this.value = value;
+  }
+
+  public itemsToString(value: Array<any> = []): string {
+    return value
+      .map((item: any) => {
+        return item.text;
+      }).join(',');
   }
 }
