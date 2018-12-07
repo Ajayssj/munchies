@@ -57,7 +57,33 @@ module.exports = {
             })
     },
     getProducts : (req,res) =>{
-        Product.find().toArray()
+        Product.aggregate(
+            // Pipeline
+            [
+                // Stage 1
+                {
+                    $lookup: {
+                        "from" : "plansExtended",
+                        "localField" : "_id",
+                        "foreignField" : "products",
+                        "as" : "weeks"
+                    }
+                },
+        
+                // Stage 2
+                {
+                    $project: {
+                        "weeks.products" : 0,
+                        "weeks.planId" : 0,
+                        "weeks._id" : 0
+                    }
+                },
+        
+            ]
+        
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+        
+        ).toArray()
             .then(products => {
                 res.json({success : true, data : products});
             }).catch(err => {

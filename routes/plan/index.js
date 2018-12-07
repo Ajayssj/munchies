@@ -31,6 +31,9 @@ routes.delete('/plan/core/product/:productId/week/:week',helpers.deleteProductsF
 routes.post('/plan/core/:planId/product/:productId/week/:week',helpers.addProductsInCorePlan);
 //  delete product from core plan and week
 routes.delete('/plan/core/:planId/product/:productId/week/:week',helpers.deleteProductFromCorePlan)
+// 
+/* routes.post('/plan/core/') */
+
 
 routes.delete('/plan/core/delete',helpers.deleteCorePlan);
 routes.put('/plan/core/edit',helpers.editCorePlan);
