@@ -107,7 +107,7 @@ module.exports = {
                     if(plan.result.nModified > 0){
                         res.json({success : true});
                     }else
-                        res.json({success : false, error : 'No Plan Found!'})
+                        res.json({success : false, error : 'No Week Found!'})
                 }).catch(err => res.json({success : false, error : err}))
         }else
             res.json({success : false, error : 'Invalid Request Paramerts'})
@@ -192,6 +192,7 @@ module.exports = {
     }else
         res.json({success : false, error : 'Invalid Request Paramerts'})
    },
+   // 
    addActivePlan : (req,res) => {
     const planId = req.body.planId;
     const userId = req.body.userId;
@@ -337,35 +338,44 @@ module.exports = {
                     }
                 },
                 {
-                    "from" : "products",
-                    "localField" : "customWeeks.products",
-                    "foreignField" : "_id",
-                    "as" : "customWeekProducts"
+                    $lookup : {
+                        "from" : "products",
+                        "localField" : "customWeeks.products",
+                        "foreignField" : "_id",
+                        "as" : "customWeekProducts"
+                    }
                 },
                 {
-                    customWeeks: 0,
-                    skipedWeeks : 0
+                   $project : {
+                        customWeeks: 0,
+                        skipedWeeks : 0
+                   }
                 },
                 {
-                    "from" : "plansExtended",
-                    "localField" : "planId",
-                    "foreignField" : "planId",
-                    "as" : "plans"
+                    $lookup : {
+                        "from" : "plansExtended",
+                        "localField" : "planId",
+                        "foreignField" : "planId",
+                        "as" : "plans"
+                    }
                 },
                 {
-                    "from" : "products",
-                    "localField" : "plans.products",
-                    "foreignField" : "_id",
-                    "as" : "defaultWeekProducts"
+                    $lookup : {
+                        "from" : "products",
+                        "localField" : "plans.products",
+                        "foreignField" : "_id",
+                        "as" : "defaultWeekProducts"
+                    }
                 },
                 {
-                    plans : 0,
-                    customWeeks : 0
+                   $project : {
+                        plans : 0,
+                        customWeeks : 0
+                   }
                 }
         
             ]).toArray()
                 .then(customizedPlansProducts => {
-                    console.log('Data : ', customizedPlansProducts);
                     res.json({success : true, data : customizedPlansProducts});
                 }).catch(err => {
                     res.json({success : false, error : err});
@@ -404,8 +414,8 @@ module.exports = {
         ActivePlan.findOneAndDelete({_id : db.toObjectID(activePlanId)})
             .then(activePlan =>{
                 if(activePlan){
-                    if(activePlan.isCustom)
-                        deleteCustomPlans(productId)
+                    /* if(activePlan.isCustom)
+                        deleteCustomPlans(productId) */
                     res.json({success : true, message : 'Active Plan Deleted Successfully!'});
                 }else
                     res.json({success : false, error : 'Active Plan Not Found!'});
@@ -439,16 +449,6 @@ module.exports = {
             res.json({success : false, error : err});
         })
    },
-   getCorePlan : (req,res) => {
-    // const adminId = db.toObjectID(req.session.user._id);
-    const planId = req.params.planId;
-    PlansExtended.find({ planId : db.toObjectID(planId)}).sort({week : 1}).toArray()
-       .then(plans => {
-            res.json({success : true, data : plans});
-       }).catch(err => {
-           res.json({success : false, error : err});
-       })
-  },
   getCorePlanProducts : (req,res) => {
     const planId = req.params.planId;
     let week = req.params.week;
@@ -502,12 +502,22 @@ module.exports = {
             "title" : req.body.title, 
             "pricePerBag" : req.body.price, 
             "numOfWeeks" : req.body.numOfWeeks, 
-            "description" : req.body.description
-        }
+            "description" : req.body.description,
+            "addWeek" : req.body.addWeek
+        }   
         Plan.updateOne({ _id : planId,adminId }, { $set : planObj})
             .then(plan => {
-                if(plan.result.nModified == 1)
-                    res.json({success : true, message : 'Plan Edited Successfully!'})
+                if(plan.result.nModified == 1){
+                    /* createWeekByPlans(Number(planObj.addWeek),planId)
+                    .then(result => {
+                        ActivePlan.updateOne({planId : planId},{$inc : {weeks : Number(planObj.addWeek)}})
+                            .then(plan => {
+                                res.json({success : true, message : 'Plan Added Successfully!'});
+                            }).catch(err => res.json({success : false, error : err}))
+                    }).catch(err => res.json({success : false, error : err})) */
+                    
+                    res.json({success : true, message : 'Plan Added Successfully!'});
+                }
                 else
                     res.json({success : false, error : 'Plan not found to be edited!'})
             }).catch(err => res.json({success : false, error : err}));
