@@ -9,7 +9,7 @@ var generator = require('generate-password');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://ffbauth.firebaseio.com"
+  databaseURL: "https://munchpak-1.firebaseio.com"
 });
 
 console.log("serviceAccount",serviceAccount);
