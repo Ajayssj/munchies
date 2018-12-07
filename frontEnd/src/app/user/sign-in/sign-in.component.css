@@ -24,6 +24,7 @@
 .signin_box_content {
     width: 100%;
     display: block;
+    padding-left: 10px;
 }
 .signin_box_content h2 {
     margin: 40px 0px 0px 115px;
@@ -56,11 +57,11 @@
 }
 .sign_in_button {
     display: block;
-    margin: 20px 0px 35px 70px;
+    margin: 20px 5px 35px 70px;
 }
 .sign_in_button button {
     text-decoration: none;
-    padding: 10px 145px;
+    padding: 10px 135px;
     background: #fff;
     color: #3F7CAC;
     cursor: pointer;
@@ -76,7 +77,7 @@
 .dont_have_account_text {
     font-size: 16px;
     display: inline-block;
-    float: left;
+    /*float: left; */
     margin: 0px 70px 20px 68px;
     color: #DE6B48;
 }
@@ -156,7 +157,7 @@
         margin: 20px 0px 35px 34px;
     }
     .sign_in_button button {
-        padding: 10px 105px;
+        padding: 10px 93px;
     }
     .sign_up_text {
         margin-left: 100px;
@@ -199,7 +200,7 @@
         margin: 20px 0px 35px 70px;
     }
     .sign_in_button button {
-        padding: 10px 143px;
+        padding: 10px 135px;
     }
     .sign_up_text {
         margin-left: 0px;
@@ -226,7 +227,7 @@
     }
     .signin_box_content h2 {
         font-size: 30px;
-        margin: 10px 0px 30px 115px;
+        margin: 10px 0px 30px 90px;
     }
 }
 @media screen and (min-width: 992px) {
