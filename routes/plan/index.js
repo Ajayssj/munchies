@@ -12,8 +12,8 @@ routes.delete('/plan/delete/:activePlanId',helpers.deletePlan);
 /*
     when added succesfully update isCustom flag to true
  */
-routes.post('/plan/active/:planId/product/:productId/week/:week',helpers.addProductInPlan) 
-routes.delete('/plan/active/:planId/product/:productId/week/:week',helpers.deleteProductFromPlan)
+routes.post('/plan/active/:planId/product/:productId/week/:weekId',helpers.addProductInPlan) 
+routes.delete('/plan/active/:planId/product/:productId/week/:weekId',helpers.deleteProductFromPlan)
 
 
 routes.post('/plan/core/add',helpers.addCorePlan);
@@ -37,8 +37,4 @@ routes.delete('/plan/core/:planId/product/:productId/week/:week',helpers.deleteP
 
 routes.delete('/plan/core/delete',helpers.deleteCorePlan);
 routes.put('/plan/core/edit',helpers.editCorePlan);
-
-routes.post('/plan/core/:planId/product/:productId/week/:week',helpers.addProductInPlan);
-routes.delete('/plan/core/:planId/product/:productId/week/:week',helpers.deleteProductFromPlan);
-
 module.exports = routes;

@@ -3,16 +3,17 @@ const { validationResult } = require('express-validator/check');
 const db = require('../../database');
 const Company = db.getCollection('companies');
 
-
+const isCompanyExists = function(companyName){
+    return Company.findOne({company : companyName});
+}
 module.exports = {
-    addCompany : (req,res) => {
-        const company = req.body.company;
-        Company.insertOne({company : company})
-            .then(result => {
-                res.json({success : true, message : 'Company Added Successfully!'})
-            }).catch(err => {
-                res.json({success : false, error : err})
-            })
+    addCompany : (company) => {
+         Company.updateOne({company : company},{upsert : true})
+                .then(result => {
+                    console.log("Company Inserted!");
+                }).catch(err =>{
+                    console.log('Company Error : ',err);
+                });
     },
     getCompany : (req,res) =>{
         const companyId = req.params.companyId;

@@ -64,19 +64,34 @@ module.exports = {
    addProductInPlan : (req,res)=>{
     const planId = req.params.planId;
     const productId = req.params.productId;
-    let week = req.params.week;
     const weekId = req.params.weekId;
-    week = Number(week);
-    if(planId && productId && !isNaN(week)){
-          ActivePlan.updateOne(
-              { activePlanId : db.toObjectID(planId), week : week,},
-              { $push : { products : {wId : db.toObjectID(weekId), }}, $set : { isCustom : isCustom }}
-            ).then(plan => {
-                if(plan.result.nModified == 1){
-                    res.json({success : true});
-                }else
-                    res.json({success : false, error : 'No Plan Found!'})
-            }).catch(err => res.json({success : false, error : err}))
+    if(planId && productId && weekId){
+        ActivePlan.findOne({_id : db.toObjectID(planId)}, {"customWeeks.wId" : db.toObjectID(weekId)})
+            .then(found => {
+                if(found && found.customWeeks.length){
+                    ActivePlan.updateOne(
+                        { _id : db.toObjectID(planId), "customWeeks.wId" : db.toObjectID(weekId)},
+                        { $push : { "customWeeks.$.products" :db.toObjectID(productId)}}
+                      ).then(plan => {
+                          if(plan.result.nModified == 1){
+                              res.json({success : true});
+                          }else
+                              res.json({success : false, error : 'No Plan Found!'})
+                      }).catch(err => res.json({success : false, error : err}))
+                }else{
+                    ActivePlan.updateOne(
+                        { _id : db.toObjectID(planId)},
+                        { $push : { customWeeks : { wId : db.toObjectID(weekId),products :[db.toObjectID(productId)]}}}
+                      ).then(plan => {
+                          if(plan.result.nModified == 1){
+                              res.json({success : true});
+                          }else
+                              res.json({success : false, error : 'No Plan Found!'})
+                      }).catch(err => res.json({success : false, error : err}))
+                }
+            }).catch(err => {
+                res.json({success : false, error : err})
+            })
     }else
         res.json({success : false, error : 'Invalid Request Paramerts'})
    },
@@ -118,17 +133,15 @@ module.exports = {
    deleteProductFromPlan : (req,res)=>{
     const planId = req.params.planId;
     const productId = req.params.productId;
-    var planType = 'activePlanId', isCustom = true;
-    let week = req.params.week;
-    week = Number(week);
-    if(planId && productId && !isNaN(week)){
-        if(req.originalUrl.indexOf('core') > -1){ planType = 'planId';isCustom = false};
-          CustomPlan.updateOne(
-            {[[planType]] : db.toObjectID(planId), 
-              week :  week
+    let weekId = req.params.weekId;
+    if(planId && productId && weekId){
+          ActivePlan.updateOne(
+            {
+                _id : db.toObjectID(planId), 
+                "customWeeks.wId" : db.toObjectID(weekId)
             },
             {
-             $pull : { 'products' : db.toObjectID(productId)} 	
+             $pull : { 'customWeeks.$.products' : db.toObjectID(productId)} 	
             }).then(plan => {
                 if(plan.modifiedCount >= 1){
                     res.json({success : true});

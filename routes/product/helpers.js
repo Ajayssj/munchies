@@ -3,7 +3,7 @@ const { validationResult } = require('express-validator/check');
 const db = require('../../database');
 const Product = db.getCollection('products');
 const utils = require('../../utils');
-
+const companyModule = require('../company/helpers');
 const isProductExists = (productId) => {
     return new Promise((success,error) => {
         Product.findOne({_id : db.toObjectID(productId)})
@@ -38,6 +38,7 @@ module.exports = {
             // TODO : Add new product here..
             Product.insertOne(productObj)
                 .then(product => {
+                    companyModule.addCompany(productObj.company.trim());
                     res.json({success : true, message : 'Product Added Successfully!'})
                 }).catch(err => {
                     res.json({success : false, error : err})
