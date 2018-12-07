@@ -7,4 +7,5 @@ routes.get('/type/:typeId',helpers.getType);
 routes.get('/type',helpers.getTypes);
 routes.put('/type/edit',helpers.editType);
 routes.delete('/type/delete',helpers.deleteType);
+routes.get('/type/company/:companyId',helpers.getCompanyTypes);
 module.exports = routes;

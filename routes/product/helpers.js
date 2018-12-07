@@ -19,14 +19,6 @@ const isProductExists = (productId) => {
 }
 
 module.exports = {
-    getProducts : (req,res) =>{
-        Product.find().toArray()
-            .then(products => {
-                res.json({success : true, data : products});
-            }).catch(err => {
-                res.json({success : false, error : err });
-            })
-    },
     addProduct : (req,res) => {
         const errors = validationResult(req);
         console.log(req.body);
@@ -35,7 +27,6 @@ module.exports = {
         }else{
             var productObj = {
                 name : req.body.name,
-                type : req.body.type,
                 quantity : req.body.quantity,
                 unit : req.body.unit,
                 company : req.body.company,
@@ -53,14 +44,6 @@ module.exports = {
                 })
         }
     },
-	getProducts : (req,res) =>{
-		Product.find().toArray()
-		.then(products => {
-		res.json({success : true, data : products});
-		}).catch(err => {
-		res.json({success : false, error : err });
-		})
-	},
     getProduct : (req,res) =>{
         const productId = req.params.productId;
         isProductExists(productId)
@@ -69,6 +52,14 @@ module.exports = {
                     res.json({success : true, data : product.product});
                 else
                     res.json({success : false, error : 'Product Not Found!' });
+            }).catch(err => {
+                res.json({success : false, error : err });
+            })
+    },
+    getProducts : (req,res) =>{
+        Product.find().toArray()
+            .then(products => {
+                res.json({success : true, data : products});
             }).catch(err => {
                 res.json({success : false, error : err });
             })

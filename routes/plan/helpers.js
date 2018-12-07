@@ -4,6 +4,7 @@ const db = require('../../database');
 const Plan = db.getCollection('plans');
 const ActivePlan = db.getCollection('activePlans');
 const CustomPlan = db.getCollection('customPlans');
+const PlansExtended = db.getCollection('plansExtended');
 const utils = require('../../utils');
 
 const isProductExists = (productId) => {
@@ -31,82 +32,187 @@ const deleteCustomPlans = (activePlanId) => {
         })
 }
 const getNextMondayDate = function(date){
-    return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
+        return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
 }
 // -- getActiveWeek(startDate,generateLastWeekDate(startDate,numOfWeeks));
 const generateLastWeekDate = function(startDate,numOfWeeks){
-return startDate.setDate(startDate.getDate() + (numOfWeeks * 7));
+    return startDate.setDate(startDate.getDate() + (numOfWeeks * 7));
 }
 const getActiveWeek = (startDate,endDate) => {
-const start = new Date(startDate);
-const end = new Date(endDate);
-return Math.ceil(Math.abs(Math.floor(( start - end ) / 86400000)) / 7);
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+   return Math.ceil(Math.abs(Math.floor(( start - end ) / 86400000)) / 7);
 }
 const extendOneWeek = (date) => {
-return date.setDate(date.getDate() + 7);
+    return date.setDate(date.getDate() + 7);
 }
 const activateDeactivatePlan = (activePlanId,status = true) => {
    return new Promise((success, error) =>  {
     ActivePlan.updateOne({_id : db.toObjectID(activePlanId)},{$set : { isActive : status}}).then(success).catch(error)
    })
 }
+const createWeekByPlans = function(weeks,planId){
+    let objArr = [];
+    for(var i = 0; i < weeks; i++){
+        const obj = {products : [],planId, week : i + 1}
+        objArr.push(obj);
+    }
+    return PlansExtended.insertMany(objArr);
+        
+}
 module.exports = {
-    addProductInPlan : (req,res)=>{
-        /*
-            if 'active' found in route then update flag
-         */
-        const planId = req.params.planId;
+   addProductInPlan : (req,res)=>{
+    const planId = req.params.planId;
+    const productId = req.params.productId;
+    let week = req.params.week;
+    const weekId = req.params.weekId;
+    week = Number(week);
+    if(planId && productId && !isNaN(week)){
+          ActivePlan.updateOne(
+              { activePlanId : db.toObjectID(planId), week : week,},
+              { $push : { products : {wId : db.toObjectID(weekId), }}, $set : { isCustom : isCustom }}
+            ).then(plan => {
+                if(plan.result.nModified == 1){
+                    res.json({success : true});
+                }else
+                    res.json({success : false, error : 'No Plan Found!'})
+            }).catch(err => res.json({success : false, error : err}))
+    }else
+        res.json({success : false, error : 'Invalid Request Paramerts'})
+   },
+   addProductsInCorePlanWeek : (req,res) => {
         const productId = req.params.productId;
-        var planType = 'activePlanId', isCustom = true;
         let week = req.params.week;
         week = Number(week);
-        if(planId && productId && !isNaN(week)){
-            if(req.originalUrl.indexOf('core') > -1){ planType = 'planId';isCustom = false};
-              CustomPlan.updateOne(
-                  {[planType] : db.toObjectID(planId), weeks : week},
-                  { $push : { products : db.toObjectID(productId)}, $set : { isCustom : isCustom }}
+        if(productId && !isNaN(week)){
+            PlansExtended.updateMany(
+                { week : week},
+                { $push : { products : db.toObjectID(productId)}}
                 ).then(plan => {
-                    if(plan.result.nModified == 1){
+                    if(plan.result.nModified > 0){
                         res.json({success : true});
                     }else
                         res.json({success : false, error : 'No Plan Found!'})
                 }).catch(err => res.json({success : false, error : err}))
         }else
             res.json({success : false, error : 'Invalid Request Paramerts'})
-    },
-    deleteProductFromPlan : (req,res)=>{
-        const planId = req.params.planId;
-        const productId = req.params.productId;
-        var planType = 'activePlanId', isCustom = true;
-        let week = req.params.week;
-        week = Number(week);
-        if(planId && productId && !isNaN(week)){
-            if(req.originalUrl.indexOf('core') > -1){ planType = 'planId';isCustom = false};
-                CustomPlan.updateOne(
-                {[[planType]] : db.toObjectID(planId),
-                    weeks :  week
-                },
-                {
-                    $pull : { 'products' : db.toObjectID(productId)}     
-                }).then(plan => {
-                    if(plan.modifiedCount >= 1){
-                        res.json({success : true});
-                    }else
-                        res.json({success : false, error : 'No Plan Found!'})
-                }).catch(err => res.json({success : false, error : err}))
-        }else
-            res.json({success : false, error : 'Invalid Request Paramerts'})
-    },
-    getActivePlans : (req,res) => {
-        const userId = req.params.userId;
-        if(!userId) userId = req.session.user._id.toString();
-        ActivePlan.aggregate(
+   },
+   addProductsInCorePlan : (req,res) =>{
+    const planId = req.params.planId;
+    const productId = req.params.productId;
+    let week = req.params.week;
+    week = Number(week);
+    if(planId && productId && !isNaN(week)){
+          PlansExtended.updateOne(
+              { planId : db.toObjectID(planId), week : week},
+              { $push : { products : db.toObjectID(productId)}}
+            ).then(plan => {
+                if(plan.result.nModified == 1){
+                    res.json({success : true});
+                }else
+                    res.json({success : false, error : 'No Plan Found!'})
+            }).catch(err => res.json({success : false, error : err}))
+    }else
+        res.json({success : false, error : 'Invalid Request Paramerts'})
+   },
+   deleteProductFromPlan : (req,res)=>{
+    const planId = req.params.planId;
+    const productId = req.params.productId;
+    var planType = 'activePlanId', isCustom = true;
+    let week = req.params.week;
+    week = Number(week);
+    if(planId && productId && !isNaN(week)){
+        if(req.originalUrl.indexOf('core') > -1){ planType = 'planId';isCustom = false};
+          CustomPlan.updateOne(
+            {[[planType]] : db.toObjectID(planId), 
+              week :  week
+            },
+            {
+             $pull : { 'products' : db.toObjectID(productId)} 	
+            }).then(plan => {
+                if(plan.modifiedCount >= 1){
+                    res.json({success : true});
+                }else
+                    res.json({success : false, error : 'No Plan Found!'})
+            }).catch(err => res.json({success : false, error : err}))
+    }else
+        res.json({success : false, error : 'Invalid Request Paramerts'})
+   },
+   deleteProductsFromCorePlanWeek : (req,res) => {
+    const productId = req.params.productId;
+    let week = req.params.week;
+    week = Number(week);
+    if(productId && !isNaN(week)){
+          PlansExtended.updateMany(
+            { 
+              week :  week
+            },
+            {
+             $pull : { 'products' : db.toObjectID(productId)} 	
+            }).then(plan => {
+                if(plan.modifiedCount >= 1){
+                    res.json({success : true});
+                }else
+                    res.json({success : false, error : 'No Plan Found!'})
+            }).catch(err => res.json({success : false, error : err}))
+    }else
+        res.json({success : false, error : 'Invalid Request Paramerts'})
+   },
+   deleteProductFromCorePlan : (req,res) => {
+    const planId = req.params.planId;
+    const productId = req.params.productId;
+    let week = req.params.week;
+    week = Number(week);
+    if(planId && productId && !isNaN(week)){
+        PlansExtended.updateOne(
+            { planId : db.toObjectID(planId), 
+              week :  week
+            },
+            {
+             $pull : { 'products' : db.toObjectID(productId)} 	
+            }).then(plan => {
+                if(plan.modifiedCount >= 1){
+                    res.json({success : true});
+                }else
+                    res.json({success : false, error : 'No Plan Found!'})
+            }).catch(err => res.json({success : false, error : err}));
+    }else
+        res.json({success : false, error : 'Invalid Request Paramerts'})
+   },
+   addActivePlan : (req,res) => {
+    const planId = req.body.planId;
+    const userId = req.body.userId;
+    const numOfWeeks = req.body.numOfWeeks;
+    if(planId && userId){
+        const activePlanObj = { 
+            planId : db.toObjectID(planId), 
+            userId : db.toObjectID(userId),
+            activatedDate : new Date().getTime(),
+            startDate : getNextMondayDate(new Date()),
+            isCustom :  false,
+            skipedWeeks : [],
+            weeks : Number(numOfWeeks),
+            isActive : true
+        }
+        ActivePlan.insertOne(activePlanObj)
+            .then(plan => {
+                res.json({success : true, message : 'Your Plan Activated Successfully!'})
+            }).catch(err => res.json({success : false, error : err}))
+    }else{
+        res.json({success : false, error : 'Invalid Request Data!'})
+    }
+   },
+   getActivePlans : (req,res) => {
+    const userId = req.params.userId;
+    if(!userId) userId = req.session.user._id.toString();
+    ActivePlan.aggregate(
             [
                 {
                     $match: {
                         userId : db.toObjectID(userId)
                     }
                 },
+                
                 {
                     $lookup: {
                         "from" : "plans",
@@ -124,21 +230,35 @@ module.exports = {
                     }
                 },
                 {
+                    $lookup: {
+                        "from" : "order",
+                        "localField" : "planId",
+                        "foreignField" : "planId",
+                        "as" : "order"
+                    }
+                },
+                {
                     $unwind: {
                         path : "$plans",
                         includeArrayIndex : "arrayIndex", // optional
                         preserveNullAndEmptyArrays : false // optional
                     }
                 },
+                {
+                    $project : {
+                         "user.password" : 0, 
+                         "user.role" : 0
+                    }                  
+                }
             ]).toArray().then(activePlans => {
-                    res.json({success : true, data : activePlans});
+                 res.json({success : true, data : activePlans});
             }).catch(err =>{
                 res.json({success : false, error : err });
             })
-    },
+   },
    getCustmoizedPlan : (req,res) => {
     const activePlanId = req.params.activePlanId;
-    CustomPlan.aggregate(
+    ActivePlan.aggregate(
         [
             {
                 $match: {
@@ -146,17 +266,30 @@ module.exports = {
                 }
             },
             {
-                $lookup: {
-                    "from" : "products",
-                    "localField" : "products",
-                    "foreignField" : "_id",
-                    "as" : "products"
-                }
+                "from" : "products",
+                "localField" : "customWeeks.products",
+                "foreignField" : "_id",
+                "as" : "customWeekProducts"
             },
             {
-                $sort: {
-                    weeks : 1
-                }
+                customWeeks: 0,
+                skipedWeeks : 0
+            },
+            {
+                "from" : "plansExtended",
+                "localField" : "planId",
+                "foreignField" : "planId",
+                "as" : "plans"
+            },
+            {
+                "from" : "products",
+                "localField" : "plans.products",
+                "foreignField" : "_id",
+                "as" : "defaultWeekProducts"
+            },
+            {
+                plans : 0,
+                customWeeks : 0
             }
     
         ]).toArray()
@@ -169,31 +302,53 @@ module.exports = {
    },
    getCustmoizedPlanByWeek : (req,res) => {
     const activePlanId = req.params.activePlanId;
-    const week = req.params.week;
-    CustomPlan.aggregate(
-        [
-            {
-                $match: {
-                    activePlanId : db.toObjectID(activePlanId),
-                    weeks : Number(week,10)
-                }
-            },
-            {
-                $lookup: {
+    const weekId = req.params.weekId;
+    if(activePlanId && weekId){
+        ActivePlan.aggregate(
+            [
+                {
+                    $match: {
+                        activePlanId : db.toObjectID(activePlanId),
+                        "customWeeks.wId" :  to.toObjectID(weekId)
+                    }
+                },
+                {
                     "from" : "products",
-                    "localField" : "products",
+                    "localField" : "customWeeks.products",
                     "foreignField" : "_id",
-                    "as" : "products"
+                    "as" : "customWeekProducts"
+                },
+                {
+                    customWeeks: 0,
+                    skipedWeeks : 0
+                },
+                {
+                    "from" : "plansExtended",
+                    "localField" : "planId",
+                    "foreignField" : "planId",
+                    "as" : "plans"
+                },
+                {
+                    "from" : "products",
+                    "localField" : "plans.products",
+                    "foreignField" : "_id",
+                    "as" : "defaultWeekProducts"
+                },
+                {
+                    plans : 0,
+                    customWeeks : 0
                 }
-            }
-    
-        ]).toArray()
-            .then(customizedPlansProducts => {
-                console.log('Data : ', customizedPlansProducts);
-                res.json({success : true, data : customizedPlansProducts});
-            }).catch(err => {
-                res.json({success : false, error : err});
-            })
+        
+            ]).toArray()
+                .then(customizedPlansProducts => {
+                    console.log('Data : ', customizedPlansProducts);
+                    res.json({success : true, data : customizedPlansProducts});
+                }).catch(err => {
+                    res.json({success : false, error : err});
+                })
+        }else{
+            res.json({success : false, error : "Invalid Parameter Data"});
+        }
    },
    deactivatePlan : (req,res) => {
        const activePlanId = req.params.activePlanId;
@@ -232,34 +387,6 @@ module.exports = {
                     res.json({success : false, error : 'Active Plan Not Found!'});
             })
    },
-   skipActivePlanWeek : (req,res) => {
-    const activePlanId = req.params.activePlanId;
-    // const userId = req.session.user._id;
-    const userId = "5bfbdcc51efad521746223ae";
-    let week = req.params.week;
-    week = Number(week,10)
-    if(userId && activePlanId && !Number.isNaN(week)){
-        ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
-        {
-            $push : {skipedWeeks : week },
-            $inc: { weeks : 1}
-        }).then(plan => {
-            if(plan.result.nModified == 1){
-                CustomPlan.updateMany(
-                    {activePlanId : db.toObjectID(activePlanId), week : { $gte: week } },
-                    {
-                    $inc : {week : 1}
-                    }).then(result =>{
-                        res.json({success : true, message : 'Week Skipped Successfully!'})
-                    }).catch(err => res.json({success : false, error : err}))
- 
-            }else
-                res.json({success : false, error : 'Plan not found to be edited!'})
-        }).catch(err => res.json({success : false, error : err}));
-    }else{
-        res.json({success : false, error : 'Invalid Request Data!'})
-    }
-   },
    addCorePlan : (req,res) => {
     const planObj = {  
         title : req.body.title, 
@@ -269,26 +396,72 @@ module.exports = {
         adminId : db.toObjectID(req.session.user._id)
     }
     Plan.insertOne(planObj)
-        .then(result => {
-            res.json({success : true, message : 'Plan Added Successfully!'});
+        .then(planInfo => {
+            createWeekByPlans(Number(planObj.numOfWeeks),planInfo.ops[0]._id)
+                .then(result => {
+                    res.json({success : true, message : 'Plan Added Successfully!'});
+                }).catch(err => res.json({success : false, error : err}))
+           
         }).catch(err => {
             res.json({success : false, error : err});
         })
    },
    getCorePlans : (req,res) => {
-     const adminId = db.toObjectID(req.session.user._id);
-     Plan.find({ adminId : adminId}).toArray()
+    //  const adminId = db.toObjectID(req.session.user._id);
+     Plan.find().toArray()
         .then(plans => {
             res.json({success : true, data : plans});
         }).catch(err => {
             res.json({success : false, error : err});
         })
    },
+   getCorePlan : (req,res) => {
+    // const adminId = db.toObjectID(req.session.user._id);
+    const planId = req.params.planId;
+    PlansExtended.find({ planId : db.toObjectID(planId)}).sort({week : 1}).toArray()
+       .then(plans => {
+            res.json({success : true, data : plans});
+       }).catch(err => {
+           res.json({success : false, error : err});
+       })
+  },
+  getCorePlanProducts : (req,res) => {
+    const planId = req.params.planId;
+    let week = req.params.week;
+    week = Number(week);
+    if(planId && !Number.isNaN(week)){
+        PlansExtended.aggregate(
+            [
+                {
+                    $match: {
+                        planId : db.toObjectID(planId),
+                        week : week
+                    }
+                },
+                {
+                    $lookup: {
+                        "from" : "products",
+                        "localField" : "products",
+                        "foreignField" : "_id",
+                        "as" : "products"
+                    }
+                },
+            ]
+        )
+        .toArray().then(plans => {
+            res.json({success : true, data : plans});
+        }).catch(err => res.json({success : false,error : err}));
+        
+    }else{
+        res.json({success : false,error : 'Invalid PlanId Or Week'})
+    }
+  },
    deleteCorePlan : (req,res) => {
         const adminId =  db.toObjectID(req.session.user._id);
         const planId = db.toObjectID(req.body.planId);
         Plan.findOneAndDelete({ _id : planId,adminId : adminId })
             .then(plan => {
+                PlansExtended.findAndDelete({planId : planId,})
                 if(plan && plan.value)
                     res.json({success : true, message : 'Plan Deleted Successfully!'})
                 else
@@ -313,33 +486,44 @@ module.exports = {
                     res.json({success : false, error : 'Plan not found to be edited!'})
             }).catch(err => res.json({success : false, error : err}));
    },
-   undoSkippedActivePlanWeek : (req,res) =>{
+   skipActivePlanWeek : (req,res) => {
     const activePlanId = req.params.activePlanId;
-    // const userId = req.session.user._id;
-    const userId = "5bfbdcc51efad521746223ae";
-    let week = req.params.skippedWeek;
-    week = Number(week,10);
-    console.log('Week Type : ',typeof week);
-    if(userId && activePlanId && !Number.isNaN(week)){
+    const userId = req.session.user._id;
+    let week = req.params.week;
+    const weekId = req.params.weekId;
+    week = Number(week,10)
+    if(userId && activePlanId && weekId && !Number.isNaN(week)){
         ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
         {
-            $pull : { 'skipedWeeks' : week},
-            $inc: { weeks : -1}
+            $push : {skipedWeeks : {wId : db.toObjectID(weekId), wNo : week} },
+            $inc: { weeks : 1}
         }).then(plan => {
             if(plan.result.nModified == 1){
-                CustomPlan.updateMany(
-                    {activePlanId : db.toObjectID(activePlanId), week : { $gte: week } },
-                    {
-                    $inc : {week : -1}
-                    }).then(result =>{
-                        res.json({success : true, message : 'Week Skipped Successfully!'})
-                    }).catch(err => res.json({success : false, error : err}))
- 
+                res.json({success : true, message : week + ' Week Skipped Successfully!'});   
             }else
                 res.json({success : false, error : 'Plan not found to be edited!'})
         }).catch(err => res.json({success : false, error : err}));
     }else{
         res.json({success : false, error : 'Invalid Request Data!'})
     }
-   }
+   },
+   undoSkippedActivePlanWeek : (req,res) =>{
+    const activePlanId = req.params.activePlanId;
+    const userId = req.session.user._id;
+    const weekId = req.params.weekId;
+    if(userId && activePlanId && weekId){
+        ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
+        {
+            $pull : { skipedWeeks : { wId : db.toObjectID(weekId)} },
+            $inc: { weeks : -1}
+        }).then(plan => {
+            if(plan.modifiedCount == 1){
+                res.json({success : true, message :'Skipped Week Undo Successfully!'});
+            }else
+                res.json({success : false, error : 'Plan not found to be edited!'})
+        }).catch(err => res.json({success : false, error : err}));
+    }else{
+        res.json({success : false, error : 'Invalid Request Data!'})
+    }
+   } 
 }

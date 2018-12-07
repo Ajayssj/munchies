@@ -7,12 +7,12 @@ const Company = db.getCollection('companies');
 module.exports = {
     addCompany : (req,res) => {
         const company = req.body.company;
-        Company.insert({company : company}, function(err,result) {
-            if(err) {
+        Company.insertOne({company : company})
+            .then(result => {
+                res.json({success : true, message : 'Company Added Successfully!'})
+            }).catch(err => {
                 res.json({success : false, error : err})
-            }
-            res.json({success : true, message : 'Company Added Successfully!'})
-        })
+            })
     },
     getCompany : (req,res) =>{
         const companyId = req.params.companyId;

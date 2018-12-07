@@ -4,7 +4,7 @@ const db = require('../../database');
 const Order = db.getCollection('orders');
 const ActivePlan = db.getCollection('activePlans');
 const CustomPlan = db.getCollection('customPlans');
-
+const PlansExtended = db.getCollection('custom')
 const getNextMondayDate = function(date){
     return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
 }
@@ -19,6 +19,7 @@ const addActivePlan = (obj) => {
         startDate : new Date(getNextMondayDate(new Date())),
         isCustom :  false,
         skipedWeeks : [],
+        customWeeks : [],
         weeks : numOfWeeks,
         isActive : true
     }
@@ -27,10 +28,10 @@ const addActivePlan = (obj) => {
 const createWeekByPlans = function(weeks,planId,activePlanId){
     let objArr = [];
     for(var i = 0; i < weeks; i++){
-        const obj = {products : [],activePlanId, week : i + 1,planId,isCustom :false}
+        const obj = {products : [],planId, week : i + 1}
         objArr.push(obj);
     }
-    return CustomPlan.insertMany(objArr);
+    return PlansExtended.insertMany(objArr);
         
 }
 module.exports = {
@@ -91,31 +92,34 @@ module.exports = {
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }else{
-            var date = Date.now();
-            console.log("orderDate==>",date);
-            const customerId = db.toObjectID(req.session.user._id);
+            const userId = db.toObjectID(req.session.user._id);
             let weeks = req.body.weeks;
             weeks = Number(weeks,10);
             const planId = req.body.planId;
-            if(planId && customerId && !Number.isNaN(weeks)){
-                addActivePlan({userId : customerId,planId : planId,numOfWeeks : weeks})
+            if(planId && userId && !Number.isNaN(weeks)){
+                addActivePlan({userId : userId,planId : planId,numOfWeeks : weeks})
                 .then(plan => {
                     const orderObj = {
                         customerData:{
                             firstName :req.body.firstName,
                             lastName : req.body.lastName,
                             phoneNo:req.body.phoneNo,
-                            custId:customerId
                         },
-                        planId:plan.ops[0]._id,
-                        date:date,
+                        userId : userId,
+                        planId:planId,
+                        date: new Date(),
                         total:req.body.total,
                         shippingCost:0,
                         Area_of_delivery:req.body.Area_of_delivery,
                         address:req.body.address,
                         postalCode:req.body.postalCode
                     }
-                    createWeekByPlans(weeks,db.toObjectID(planId),plan.ops[0]._id)
+                    Order.insertOne(orderObj).then(order => {
+                        res.json({success : true, order : order})
+                    }).catch(err => {
+                        res.json({success : false, error : err});
+                    })
+                   /*  createWeekByPlans(weeks,db.toObjectID(planId),plan.ops[0]._id)
                         .then(result => {
                             Order.insertOne(orderObj).then(order => {
                                 res.json({success : true, order : order})
@@ -125,7 +129,7 @@ module.exports = {
 
                         }).catch(err => {
                             res.json({success : false, error : err});
-                        })
+                        }) */
                 })
                 .catch(err => {
                     res.json({success : false, error : err});
@@ -141,8 +145,8 @@ module.exports = {
         }
     },
     getMyorders : (req, res) => {
-        // const userId = req.session.user._id;
-        const userId = "5bd8445e2ee53b2af4b12107";
+        const userId = req.session.user._id;
+        // const userId = "5bd8445e2ee53b2af4b12107";
         Order.aggregate(
             // Pipeline
             [
@@ -209,25 +213,25 @@ module.exports = {
                         "planInfo.title" : 1,
                         "weekIds.week" : 1,
                         "weekIds._id" : 1,
- 
+                         
                     }
                 },
             ]
- 
+        
         ).toArray()
             .then(order => {
                 if(order){
                     console.log("OrderData==>",order);
- 
+
                         res.json({success : true,orderData:order});
                 }else{
                     res.json({success : false, error : 'customer Id is not found!'});
                 }
- 
+
             }).catch(err => {
                 res.json({success : false, error : 'Database Error : ' + err});
             })
- 
+
     },
     deleteMyorder : (req, res) => {
         console.log("Req to delete==>",req.body,req.query);
