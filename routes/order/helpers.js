@@ -44,7 +44,7 @@ module.exports = {
                 {
                     $lookup: {
                         "from" : "user",
-                        "localField" : "customerData.custId",
+                        "localField" : "userId",
                         "foreignField" : "_id",
                         "as" : "user"
                     }
@@ -54,8 +54,8 @@ module.exports = {
                 {
                     $lookup: {
                         "from" : "activePlans",
-                        "localField" : "customerData.custId",
-                        "foreignField" : "userId",
+                        "localField" : "activePlanId",
+                        "foreignField" : "_id",
                         "as" : "planInfo"
                     }
                 },
@@ -107,6 +107,7 @@ module.exports = {
                         },
                         userId : userId,
                         planId:planId,
+                        activePlanId: plan.ops[0]._id,
                         date: new Date(),
                         total:req.body.total,
                         shippingCost:0,
