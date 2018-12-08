@@ -60,7 +60,8 @@ export class DeliveryComponent implements OnInit {
       address: this.f.address.value,
       phoneNumber: this.f.phone.value,
       postalCode: this.f.postalCode.value,
-      planId: this.route.snapshot.queryParamMap.get('selectedPlan')
+      planId: this.route.snapshot.queryParamMap.get('selectedPlan'),
+      weeks : this.route.snapshot.queryParamMap.get('week')
     }
     this.httpOptions = {
       headers: new HttpHeaders({
