@@ -9,15 +9,20 @@
     /* background-color: #6aa7c4; */
     background-color: #7cbbc2;
     margin: -40px 0px 40px -35px;
+    position: absolute;
+    right: 100px;
 }
 .manage_subscription_page_wrapper .block {
-    width: 52%;
     margin: 0 auto;
     z-index: 509;
+    width: 100%;
 }
 /* .manage_subscription_page_wrapper .block:first-child {
     margin-top: 100px;
 } */
+.manage_subscription_page_wrapper .block table {
+    width: 100%;
+}
 .manage_subscription_page_wrapper .block h3 {
     font-size: 17px;
     margin-bottom: 10px;
@@ -54,6 +59,9 @@
 }
 .custom_order_table th, .custom_order_table td{
     border: unset;
+    text-align: center;
+    padding-right: 40px;
+    width: 140px;
 }
 .custom_order_table th{
     color: #db6945;

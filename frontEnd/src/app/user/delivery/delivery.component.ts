@@ -54,11 +54,11 @@ export class DeliveryComponent implements OnInit {
       return;
     }
     this.data = {
-      name: this.f.name.value,
-      surName: this.f.surName.value,
-      area: this.f.area.value,
+      firstName: this.f.name.value,
+      lastName: this.f.surName.value,
+      Area_of_delivery: this.f.area.value,
       address: this.f.address.value,
-      phoneNumber: this.f.phone.value,
+      phoneNo: this.f.phone.value,
       postalCode: this.f.postalCode.value,
       planId: this.route.snapshot.queryParamMap.get('selectedPlan'),
       weeks : this.route.snapshot.queryParamMap.get('week')
@@ -70,7 +70,7 @@ export class DeliveryComponent implements OnInit {
     };
     console.log("route params", this.data)
 
-    this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data, this.httpOptions).subscribe(data => {
+    this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data).subscribe(data => {
       console.log("order created", data);
     },
       err => {

@@ -6,11 +6,11 @@
       <li [ngClass]="{'active': view == 'product'}" (click)="changeView('product')"><a>Product</a></li>
     </ul>
   </div> -->
-  <modal #addModal [closeOnEscape]="false" [closeOnOutsideClick]="false">
+  <modal #addModal [closeOnEscape]="false" [closeOnOutsideClick]="true"  >
     <modal-header>
       <!-- <h3 *ngIf="view=='company'">Add Company</h3>
       <h3 *ngIf="view=='types'">Add Type</h3> -->
-      <h3 *ngIf="view=='product'">Add Product</h3>
+      <h3>Add Product</h3>
     </modal-header>
     <modal-content>
       <!-- <div *ngIf="view=='company'" (keydown.enter)="addCompany(addModal)">
@@ -34,7 +34,7 @@
         </div>
         <button (click)="addTypes(addModal)" class="btn btn-primary">Add Product Type</button>
       </div> -->
-      <div (keydown.enter)="addProduct(addModal)">
+      <div (keydown.enter)="addProduct(addModal)" (click)="liClicked = false">
         <div class="form-group">
           <label class="control-label">Name</label>
           <input type="text" [(ngModel)]="addPname" class="form-control" placeholder="Enter Product Name" />
@@ -48,9 +48,12 @@
         </div>
         <div class="form-group">
           <label class="control-label">Company</label>
-          <input type="text" [(ngModel)]="addPcompany" (keyup)="onKeyPress(addPcompany)" class="form-control" placeholder="Enter Product Company" />
-          <ul>
-            <li *ngFor="let pCompany of productCompany"></li>
+          <input type="text" [(ngModel)]="addPcompany" (keydown)="liClicked=true" class="form-control" placeholder="Enter Product Company" />
+          <ul class="auto_complete_items" [hidden]="!liClicked">
+            <li 
+            *ngFor="let company of companyName" 
+            [ngClass]="{'hidden':(!ifMatchString(addPcompany | lowercase,company  | lowercase))}"
+            (click)="populateCompanyName(company)"><span>{{company}}</span></li>
           </ul>
         </div>
         <div class="form-group">

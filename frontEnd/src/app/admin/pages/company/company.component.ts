@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener,ChangeDetectorRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../../user/auth.service';
 import swal from 'sweetalert2';
@@ -16,6 +16,7 @@ interface productRes {
 export class CompanyComponent implements OnInit {
   view: String = 'company';
   products;
+  productResponse;
   deleteMessage = '';
   data = {};
   modalEl;
@@ -49,13 +50,23 @@ export class CompanyComponent implements OnInit {
   editProductArray = {};
   selectedProductObj = {};
   selectedWeeks = [];
+  matchedCompanyName = [];
+  liClicked: boolean = false;
   weeks = [];
   allergyDetails: Array<string>;
   public weekArray: Array<Object> = [{id: 1, text: 'Week 1'}, {id: 2, text: 'Week 2'}, {id: 3, text: 'Week 3'},
    {id: 4, text: 'Week 4'}, {id: 5, text: 'Week 5'}, {id: 6, text: 'Week 6'}, {id: 7, text: 'Week 7'}, 
    {id: 8, text: 'Week 8'}, {id: 9, text: 'Week 9'}, {id: 10, text: 'Week 10'}, {id: 11, text: 'Week 11'},
     {id: 12, text: 'Week 12'}];
-  constructor(private http: HttpClient, private auth: AuthService) { }
+    @HostListener('document:click', ['$event'])
+    clickout(event) {
+      console.log("click outside",event);
+  
+     this.cdRef.detectChanges();
+    //  this.liClicked = false;
+    }
+
+  constructor(private http: HttpClient, private auth: AuthService,private cdRef:ChangeDetectorRef) { }
   ngOnInit() { 
     console.log("hiiiiiiiiiiiii", this.auth.getDomainName());
     this.productTypes = ['Laadu', 'Makhana', 'Energy Bars', 'Cookies', 
@@ -65,18 +76,24 @@ export class CompanyComponent implements OnInit {
     this.allergyDetails = ['Wheat', 'Milk', 'Eggs', 'Peanuts', 'Other nuts', 'none'];
 
     this.http.get(this.auth.getDomainName() + '/api/product').subscribe((res: any) => {
+      this.productResponse = res.data;
       this.products = res.data.products;
-      this.products.forEach((element,index)=> {
+      this.productResponse.products.forEach((element,index)=> {
         var uniqArr=[];
         element.weeks.forEach(item => {
           if(!(uniqArr.indexOf(item.week) > -1)) {
             uniqArr.push(item.week)
           }
+        });
+        console.log(element);
+        this.productResponse.products[index].weeks = uniqArr;
+      });
+      console.log(this.productResponse);
+      if(this.productResponse.companies.length > 0) {
+        this.productResponse.companies.forEach(companyItem => {
+          this.companyName.push(companyItem.company);
         })
-        this.products[index].weeks = uniqArr;
-      })
-      console.log(this.products);
-      
+      }
     },
     err=> {
       console.log(err);
@@ -146,8 +163,21 @@ export class CompanyComponent implements OnInit {
   }
 
   //Auto complete functionality
-  onKeyPress(event) {
+
+  ifMatchString(name,companyObj) {
     
+    // this.ref.detectChanges();
+    if(name && name.length > 0 && companyObj.includes(name)) {
+      // this.liClicked = false;
+      return true;
+    }
+    return false;
+  }
+
+
+  populateCompanyName(company) {
+    this.addPcompany = company; 
+    this.liClicked = false;
   }
   //Modal code
   openModal(modal) {
@@ -234,7 +264,7 @@ export class CompanyComponent implements OnInit {
 //     this.closeModal(modal);
 // }
 addProduct(modal) {
-  
+    
     this.addProductArray = {
       name: this.addPname,
       type: this.addPtype,
@@ -245,6 +275,13 @@ addProduct(modal) {
       allergyDetails: this.addPallergyDetails,
       kcal: this.addPkcal
     }
+    
+    this.http.post(this.auth.getDomainName() + '/api/company/add', {company: this.addPcompany}).subscribe(data=>{
+      console.log(data);
+    }, 
+    err=> {
+      console.log(err);
+    });
     this.http.post(this.auth.getDomainName() + '/api/product/add', this.addProductArray).subscribe(data=>{
       console.log(data);
     }, 
