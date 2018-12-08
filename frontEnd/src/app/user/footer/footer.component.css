@@ -14,7 +14,7 @@ header, .content, footer .content {
 }
 footer {
     font-family: 'Brandon-Grot-W01-Light' !important;
-    min-height: 50px;
+    
     background-color: #De6b48;
     padding: 10px;
     box-sizing: border-box;
@@ -24,8 +24,8 @@ footer .content {
     background: transparent;
 }
 .social_media_icons {    
-    margin-bottom: 15px;
-    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 .social_media_icons a:first-child img {
     margin-right: 10px;

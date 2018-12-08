@@ -31,7 +31,19 @@
                     <div class="fields">
                         <div>
                             <select class="form_control dd_custom" formControlName="area" name="area" placeholder="Area">
-                                <option value="Area of Delivery">Area of Delivery</option>
+                                <option value="" default="" disabled="" style="display: none;">Area of Delivery</option>
+                                <option value="Cantonment">Cantonment</option>
+                                <option value="Domlur">Domlur</option>
+                                <option value="Indiranagar">Indiranagar</option>
+                                <option value="Ulsoor">Ulsoor</option>
+                                <option value="Vasanth Nagar">Vasanth Nagar</option>
+                                <option value="Electronic city">Electronic city</option>
+                                <option value="HSR layout">HSR Layout</option>
+                                <option value="Koramangala">Koramangala</option>
+                                <option value="Madiwala">Madiwala</option>
+                                <option value="BTM Layout">BTM Layout</option>
+                                <option value="Item 1">Bommanahalli</option>
+                                <option value="Item 2">Item 2</option>
                             </select>
                             <div *ngIf="submitted && f.area.errors" class="invalid-feedback form_control">
                                 <div *ngIf="submitted && f.area.errors.required">Area is required</div>
@@ -57,7 +69,7 @@
              <a routerLink="/signIn" class="btn">Sign In</a>
              <a routerLink="/sign-up" class="btn">Sign Up</a>
           </div>
-          <button *ngIf="isLoggedIn" class="btn" (click)="showOrderConfirmAlert=true">Make Payment</button>          
+          <button *ngIf="isLoggedIn" class="btn" (click)="showOrderConfirmAlert=true">MAKE PAYMENT</button>          
         </form>
       </div>
   </div>

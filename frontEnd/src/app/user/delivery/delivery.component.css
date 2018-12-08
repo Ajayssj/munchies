@@ -8,7 +8,8 @@
 }
 .delivery_content {
     width: 100%;
-    float: left;
+    
+    display: inline-block;
 }
 .select_delivery_address_wrapper h3 {
     font-size: 23px;
@@ -16,13 +17,15 @@
 }
 .delivery_form form .row:first-child {
     width: 40%;
-    float: left;
-    margin-left: 5px;
+    /*float: left;*/
+    margin-left: 0px;
+    display: inline-block!important;
 }
 .delivery_form form .row:nth-child(2) {
-    width: 56%;
-    float: left;
-    margin-left: 4%;
+    width: 59%;
+    /*float: left;*/
+    margin-left: 1%;
+    display: inline-block;
 }
 .form_control {
     width: 100%;
@@ -30,8 +33,12 @@
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     margin-bottom: 20px;
-    border: 2px solid #e2e2e2;
-    
+    border: 2px solid rgba(145, 145, 145, 1);
+    color: black;
+    font-family: din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+    font-size: 16px;
+    background-color: transparent;
+    line-height: 1.4em;
     
 }
 .invalid-feedback {    
@@ -51,32 +58,33 @@
 }
 .btn {
     text-decoration: none;
-    color: rgba(50, 50, 50, 1);
+    /*color: rgba(50, 50, 50, 1);*/
+    color:#323232;
     padding: 10px 20px;
     background-color: #fff;
     border-radius: 25px;
     border: 2px solid rgba(50, 50, 50, 1);
-    font-weight: bold;
     margin-top: 50px;
     cursor: pointer;
     outline: none;
     float: left;
+    font: normal normal normal 16px/1.4em din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif;
 }
 .btn a {
     text-decoration: none;
-    color: rgba(50, 50, 50, 1);
+    color:#323232;
     padding: 10px 20px;
-    background-color: #fff;
-    border-radius: 25px;
+    background-color:transparent;
+    border-radius: 20px;
     border: 2px solid rgba(50, 50, 50, 1);
-    font-weight: bold;
+    
 }
 .btn:hover {
     color: #fff;
     background-color: rgba(50, 50, 50, 1);
     border: 2px solid rgba(50, 50, 50, 1);
 }
-@media screen and (min-width: 300px){
+/*@media screen and (max-width: 7680px){
     .delivery_form form .row:nth-child(2){
     margin-left: 0px;
         width: 100%;
@@ -88,17 +96,17 @@
     }
   
     
-}
-@media screen and (min-width: 768px){
+}*/
+@media screen and (max-width: 768px){
     .delivery_form form .row:nth-child(2){
-         width: 56%;
+         width: 98%;
         float: left;
-        margin-left: 4%;
+        
         
     }
     .delivery_form form .row:first-child {
-        margin-left: 1px;
-        width: 40%;
+        
+        width: 98%;
         float: left;
          margin-left: 5px;
     }
@@ -117,7 +125,7 @@
 }
 
 .dd_custom{
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .alertModal .backgroundBlack  {

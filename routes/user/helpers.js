@@ -3,7 +3,7 @@ const { validationResult } = require('express-validator/check');
 const db = require('../../database');
 const User = db.getCollection('user');
 const utils = require('../../utils');
-var serviceAccount = require("../../constant/ffbauth-firebase.json");
+var serviceAccount = require("../../constant/firebase.json");
 var admin = require("firebase-admin");
 var generator = require('generate-password');
 

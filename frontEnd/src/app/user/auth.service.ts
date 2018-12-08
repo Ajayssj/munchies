@@ -10,7 +10,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class AuthService {
 
-  constructor(private afAuth: AngularFireAuth, private http: HttpClient) {
+  constructor(public afAuth: AngularFireAuth, private http: HttpClient) {
   }
 
   isLoggedIn() {
@@ -20,8 +20,8 @@ export class AuthService {
     return localStorage.getItem('username');
   }
   getDomainName() {
-    return "https://dev-munchies.herokuapp.com";
-    // return "http://localhost:9191";
+  //  return "https://dev-munchies.herokuapp.com";
+     return "http://localhost:9191";
   }
 
   setLoggedIn(value) {
@@ -78,41 +78,43 @@ export class AuthService {
   doGoogleLogin() {
     return new Promise<any>((resolve, reject) => {
       let provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('https://www.googleapis.com/auth/plus.login');
+      provider.addScope('https://www.googleapis.com/auth/plus.profile.emails.read');
+      provider.addScope('email');
       this.afAuth.auth
         .signInWithPopup(provider)
         .then(res => {
           resolve(res);
+          this.afAuth.auth.currentUser.getIdToken(true).then(idToken => {
+            console.log("firbase login idToken==>", idToken);
+    
+            this.varifyFirebaseToken(idToken, function (res) {
+              if (res.success) {
+                var token = {
+                  token: res.data
+                }
+                console.log("varifyFirebaseToken response  ", res);
+              } else {
+                alert(res.data)
+              }
+              console.log(res);
+            })
+    
+    
+          }).catch(function (error) {
+            alert(error)
+            console.log("login Error==>", error);
+    
+          }).catch(function (error) {
+            alert(error)
+            console.log("login Error sign in popup==>", error);
+    
+          });
         }, err => {
           reject(err);
         });
-      provider.addScope('https://www.googleapis.com/auth/plus.login');
-      provider.addScope('https://www.googleapis.com/auth/plus.profile.emails.read');
-      provider.addScope('email');
-      this.afAuth.auth.currentUser.getIdToken(true).then(idToken => {
-        console.log("firbase login idToken==>", idToken);
-
-        this.varifyFirebaseToken(idToken, function (res) {
-          if (res.success) {
-            var token = {
-              token: res.data
-            }
-            console.log("varifyFirebaseToken response  ", res);
-          } else {
-            alert(res.data)
-          }
-          console.log(res);
-        })
-
-
-      }).catch(function (error) {
-        alert(error)
-        console.log("login Error==>", error);
-
-      }).catch(function (error) {
-        alert(error)
-        console.log("login Error sign in popup==>", error);
-
-      });
+      
+      
     });
   }
 
