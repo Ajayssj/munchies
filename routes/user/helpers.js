@@ -94,7 +94,6 @@ module.exports = {
         }else{
             const email = req.body.email;
             console.log("Email to recover==>",email);
-            
             isEmailExists(email)
                 .then(exists => {
                     if(exists){ 
@@ -115,10 +114,13 @@ module.exports = {
     },
     changePassword : (req,res) => {
         
-        const userId = req.body.userId;
-        const currentPassword = req.body.currentPassword;
-        const newPassword = req.body.newPassword;
-        User.findOne({_id : db.toObjectID(userId)})
+        const user = req.session.user;
+        if(user){
+            const userId = user._id;
+            const currentPassword = req.body.currentPassword;
+            const newPassword = req.body.newPassword;
+            if(currentPassword && newPassword){
+                User.findOne({_id : db.toObjectID(userId)})
                 .then(user => {
                     if(user){ 
                         const currentPassword = utils.createHash(req.body.currentPassword.trim());
@@ -139,56 +141,47 @@ module.exports = {
                 }).catch(err => {
                     res.json({success : false, error : err});
                 })
-    },
-    changepassword : (req,res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
+            }else{
+                res.json({success : false, error : 'Invalid Data'});
+            }
         }else{
-            const email = req.body.email;
-
-            isEmailExists(email)
-                .then(exists => {
-                    if(exists){ 
-                        const password = utils.createHash(req.body.password.trim());
-                        User.updateOne({email : email},{$set : { password : password}})
-                            .then(passwordSet => {
-                             res.json({success : true, message : 'Password changed Successfully!'});
-                            }).catch(err => {
-                                res.json({success : false, error : err});
-                            })
-                    }else{
-                        res.json({success : false, error : 'Email ID Doest Exists!'});
-                    }
-                }).catch(err => {
-                    res.json({success : false, error : err});
-                })
+            res.json({success : false, error : 'Your session expired!'});
         }
+       
+      
     },
     passwordReset : (req,res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }else{
-            const cipherEmail = req.params.cipherEmail
-            const email = utils.decrypt(cipherEmail);
-            console.log('Email : ' + email);
-            isEmailExists(email)
-                    .then(exists => {
-                        if(exists){ 
-                            const password = utils.createHash(req.body.password.trim());
-                            User.updateOne({email : email},{$set : { password : password}})
-                                .then(passwordSet => {
-                                    req.json({success : true, message : 'Password Reset Successfully!'});
-                                }).catch(err => {
-                                    req.json({success : false, error : err});
-                                })
-                        }else{
-                            res.json({success : false, error : 'Email ID Doest Exists!'});
-                        }
-                    }).catch(err => {
-                        req.json({success : false, error : err});
-                    })
+            const cipherEmail = req.body.token;
+            let email;
+            try{
+                email = utils.decrypt(cipherEmail);
+                isEmailExists(email)
+                        .then(exists => {
+                            if(exists){ 
+                                const password = utils.createHash(req.body.password.trim());
+                                User.updateOne({email : email},{$set : { password : password}})
+                                    .then(passwordSet => {
+                                      /*   if(passwordSet.result.nModified == 1)
+                                            res.json({success : true, message : 'Password Reset Successfully! Try to login again!'});
+                                        else
+                                            res.json({success : false, error : 'Something went wrong!'}); */
+                                        res.json({success : true, message : 'Password Reset Successfully! Try to login again!'});
+
+                                    }).catch(err => {
+                                    })
+                            }else{
+                                res.json({success : false, error : 'Email ID Doest Exists!'});
+                            }
+                        }).catch(err => {
+                            res.json({success : false, error : err});
+                        })
+            }catch(err){
+                res.json({success : false, error : 'Invalid Token!'});
+            }   
         }
     },
     verifyFirebaseToken : (req,res) => {

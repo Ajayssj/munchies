@@ -10,6 +10,6 @@ routes.post('/user/verifyFirebaseToken',validation.login,user.verifyFirebaseToke
 
 routes.get('/user',user.getAllUsers);
 
-routes.post('/user/password/reset/:cipherEmail',validation.resetPassword,user.passwordReset);
+routes.post('/user/password/reset',user.passwordReset);
 
 module.exports = routes;

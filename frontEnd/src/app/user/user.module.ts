@@ -31,6 +31,8 @@ import { environment } from '../../environments/environment';
 import { AuthService} from './auth.service';
 import { AuthGuard } from './auth/auth.guard';
 import {ModalModule} from "ngx-modal";
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import {ModalModule} from "ngx-modal";
     PersonalDetailsComponent,
     ChangePasswordComponent,
     SignUpComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

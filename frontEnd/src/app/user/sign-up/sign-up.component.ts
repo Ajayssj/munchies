@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 interface SignUpRes {
   success: boolean;
   error: string;
@@ -28,7 +29,8 @@ export class SignUpComponent implements OnInit {
   passwordNotMatch = false;
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router, private http: HttpClient) { }
+    private router: Router, private http: HttpClient,
+    private authService : AuthService) { }
 
   ngOnInit() {
     this.createAccountForm = this.formBuilder.group({
@@ -67,7 +69,7 @@ export class SignUpComponent implements OnInit {
           'password': this.password
         }
         console.log(this.data);
-        this.http.post('https://dev-munchies.herokuapp.com/api/user/register', this.data).subscribe( (data:SignUpRes) => {
+        this.http.post(this.authService.getDomainName() + '/api/user/register', this.data).subscribe( (data:SignUpRes) => {
             console.log("success", data.success);
             this.success = data.success;
             this.error = data.error;

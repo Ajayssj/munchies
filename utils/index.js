@@ -8,7 +8,8 @@ module.exports = {
         return crypto.createHash('md5').update(data).digest('hex')
    },
    createPasswordRecoveryLink : function(cipherEmail){
-     return `${env.HOST_NAME}api/user/password/recover/${cipherEmail}`;
+    //  return `${env.HOST_NAME}api/user/password/recover/${cipherEmail}`;
+     return `${env.HOST_NAME}/reset-password/${cipherEmail}`;
    },
    sendRecoveryPasswordEmail : function(email,callback){
 
@@ -48,10 +49,12 @@ module.exports = {
     });
    },
    encrypt : function(data){
-    return crypto.createCipher('aes-128-cbc',credentionals.CRYPTO_Key).update(data, 'utf8', 'hex')
+    let cipher = crypto.createCipher('aes-128-cbc',credentionals.CRYPTO_Key);
+    return cipher.update(data, 'utf8', 'hex') + cipher.final('hex');
    },
    decrypt : function(cipher){
-    return crypto.createDecipher('aes-128-cbc', credentionals.CRYPTO_Key).update(cipher, 'hex', 'utf8')
+    let decipher = crypto.createDecipher('aes-128-cbc', credentionals.CRYPTO_Key);
+    return decipher.update(cipher, 'hex', 'utf8') + decipher.final('utf8');
    }
 
 }

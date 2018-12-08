@@ -19,6 +19,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { AuthGuard } from './auth/auth.guard';
 import { UserComponent } from './user.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -34,6 +36,8 @@ const routes: Routes = [
   { path: "sign-up", component: SignUpComponent },
   { path: "subscribe", component: SubscribeComponent },
   { path: "refund-and-cancellation", component: RefundAndCancellationComponent },
+  { path : "forgot-password", component : ForgotPasswordComponent },
+  { path : "reset-password/:token", component : ResetPasswordComponent},
   { path: "delivery", component: DeliveryComponent,
   canActivate: [
     AuthGuard
