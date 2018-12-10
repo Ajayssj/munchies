@@ -30,12 +30,29 @@ export class SignInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router, private http: HttpClient, private authService: AuthService) {
   }
-  fbLogin() {
-    this.authService.doFacebookLogin();
+  async fbLogin() {
+   let fbLoginRes = await this.authService.doFacebookLogin();
+   if(fbLoginRes) {
+       this.authService.setLoggedIn(true);
+                  if(fbLoginRes.additionalUserInfo && fbLoginRes.additionalUserInfo.profile&&fbLoginRes.additionalUserInfo.profile.name) {
+                    this.authService.setUserName(fbLoginRes.additionalUserInfo.profile.name);
+                   window.location.pathname = "";
+                  }
+   }
+   console.log("fbLogin",fbLoginRes )
   }
-  googleLogin() {
-    this.authService.doGoogleLogin();
-  }
+  
+  async googleLogin() {
+    let gLoginRes = await this.authService.doGoogleLogin();
+    if(gLoginRes) {
+        this.authService.setLoggedIn(true);
+                   if(gLoginRes.additionalUserInfo && gLoginRes.additionalUserInfo.profile&&gLoginRes.additionalUserInfo.profile.name) {
+                     this.authService.setUserName(gLoginRes.additionalUserInfo.profile.name);
+                    window.location.pathname = "";
+                   }
+    }
+    console.log("fbLogin",gLoginRes )
+   }
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],

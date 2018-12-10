@@ -10,7 +10,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth, private http: HttpClient) {
+  constructor(public afAuth: AngularFireAuth, public http: HttpClient) {
   }
 
   isLoggedIn() {
@@ -30,52 +30,58 @@ export class AuthService {
   setUserName(value) {
     localStorage.setItem('username', value);
   }
-  varifyFirebaseToken = function (token, callback) {
-    this.http.post(this.getDomainName() + '/api/user/verifyFirebaseToken', token).subscribe(resData => {
-      console.log(resData);
+  verifyFirebaseToken = function (token, callback) {
+    this.http.post(this.getDomainName() + '/api/user/verifyFirebaseToken', {token}).subscribe(resData => {
+      console.log("data",resData);
       callback(resData);
     }, error => {
       console.log('error', 'Allow Signup', 'Server Error');
     });
   }
   doFacebookLogin() {
+    const that = this;
     return new Promise<any>((resolve, reject) => {
       let provider = new firebase.auth.FacebookAuthProvider();
       provider.addScope('email');
       this.afAuth.auth
         .signInWithPopup(provider)
         .then(fbres => {
-          console.log(fbres);
-          resolve(fbres);
+          
+          firebase.auth().currentUser.getIdToken(true).then(idToken => {
+            that.verifyFirebaseToken(idToken, function (res) {
+              console.log("res data",res);
+              if (res.success) {
+                var token = {
+                  token: res
+                  }
+                  resolve(fbres)
+                
+                 
+                console.log("verifyFirebaseToken response  ", token);
+              } else {
+                alert("Problem while login");
+                console.log("res",res);
+              }
+              console.log(res);
+            })
+    
+          }).catch(function (error) {
+            alert(error)
+            console.log("login Error==>", error);
+    
+          }).catch(function (error) {
+            alert(error)
+            console.log("login Error sign in popup==>", error);
+    
+          });
         }, error => {
           reject(error);
         });
-      this.afAuth.auth.currentUser.getIdToken(true).then(idToken => {
-        this.varifyFirebaseToken(idToken, function (result) {
-          console.log(result.data);
-          if (result.success) {
-            var token = {
-              token: result.data
-            }
-            console.log("varifyFirebaseToken response  ", result);
-          } else {
-            alert(result.data)
-          }
-          console.log(result);
-        })
-
-      }).catch(function (error) {
-        alert(error)
-        console.log("login Error==>", error);
-
-      }).catch(function (error) {
-        alert(error)
-        console.log("login Error sign in popup==>", error);
-
-      });
+    
     });
   }
   doGoogleLogin() {
+    const that = this;
     return new Promise<any>((resolve, reject) => {
       let provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('https://www.googleapis.com/auth/plus.login');
@@ -83,23 +89,27 @@ export class AuthService {
       provider.addScope('email');
       this.afAuth.auth
         .signInWithPopup(provider)
-        .then(res => {
-          resolve(res);
-          this.afAuth.auth.currentUser.getIdToken(true).then(idToken => {
-            console.log("firbase login idToken==>", idToken);
+        .then(fbres => {
     
-            this.varifyFirebaseToken(idToken, function (res) {
-              if (res.success) {
-                var token = {
-                  token: res.data
+          firebase.auth().currentUser.getIdToken(true).then(idToken => {
+            console.log("firbase login idToken==>", idToken );
+          that.verifyFirebaseToken(idToken, function (res) {
+            console.log("res data",res);
+            if (res.success) {
+              var token = {
+                token: res
                 }
-                console.log("varifyFirebaseToken response  ", res);
-              } else {
-                alert(res.data)
-              }
-              console.log(res);
-            })
-    
+
+                resolve(fbres);
+         
+               
+              console.log("verifyFirebaseToken response  ", token);
+            } else {
+              alert("Problem while login");
+              console.log("res",res);
+            }
+            console.log(res);
+          })
     
           }).catch(function (error) {
             alert(error)
@@ -118,43 +128,5 @@ export class AuthService {
     });
   }
 
-  /* varifyFirebaseToken = function(token, callback) {
-     console.log("hiiiiiiiiiii");
-    this.http.post('/user/varifyFirebaseToken', token).subscibe( data => {
-      console.log("data", data);
-      callback(data);
-    }, error => {
-      console.log("error", error);
-    }
-    );
-  }
-   doFacebookLogin() {
-    console.log("in do fb login");
-    var provider = new firebase.auth.FacebookAuthProvider();
-    provider.addScope('email');
-    provider.setCustomParameters({
-      'display': 'popup'
-    });
   
-    firebase.auth().signInWithPopup(provider).then(function(temp) {
-      firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-        console.log("loginwithFacebook==>idToken",idToken,temp);
-        this.varifyFirebaseToken(idToken, function(res) {
-          if (res.success) {
-            var token = {
-              token: res.data
-            }
-            console.log("varifyFirebaseToken response  ",res);             
-          } else {
-            alert(res.data)
-          }
-          console.log(res);
-        })
-             
-      }).catch(function(error) {
-        // Handle error
-        alert(error)
-      });
-    })
-   } */
 }
