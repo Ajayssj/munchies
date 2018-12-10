@@ -53,6 +53,7 @@ export class CompanyComponent implements OnInit {
   matchedCompanyName = [];
   liClicked: boolean = false;
   weeks = [];
+  errorMessage = '';
   allergyDetails: Array<string>;
   public weekArray: Array<Object> = [{id: 1, text: 'Week 1'}, {id: 2, text: 'Week 2'}, {id: 3, text: 'Week 3'},
    {id: 4, text: 'Week 4'}, {id: 5, text: 'Week 5'}, {id: 6, text: 'Week 6'}, {id: 7, text: 'Week 7'}, 
@@ -129,8 +130,16 @@ export class CompanyComponent implements OnInit {
       console.log("weekNo",weekItem)
       weekItem.push(weekNo)
     }
-    this.http.post(this.auth.getDomainName() + '/api/plan/core/product/' + productId + '/week/' + weekNo, {}).subscribe(data=> {
+    this.http.post(this.auth.getDomainName() + '/api/plan/core/product/' + productId + '/week/' + weekNo, {})
+    .subscribe((data: any)=> {
       console.log(data);
+      if(!data.success) {
+        this.errorMessage = data.error;
+        alert(this.errorMessage);
+      }
+      else {
+        this.errorMessage = '';
+      }
     });
   } 
   removeWeekInProduct(weekItem,productId, weekId) {

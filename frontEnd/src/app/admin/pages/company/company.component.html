@@ -244,7 +244,7 @@
               <button (click)="deleteItem(product._id, 'product')" class="btn btn-danger">Delete</button>
               <div *ngIf="product.weeks.length > 0" class="card-content">
                 <span *ngFor="let weekItem of product.weeks;let weekIndex = index">
-                  <span class="selectedWeeks">
+                  <span class="selectedWeeks" *ngIf="weekItem < 6">
                     <button class="btn btn-warning">{{'Week ' + weekItem}}
                       <i (click)="removeWeekInProduct(product.weeks,product._id, weekItem);" class="fa fa-close"></i></button>
                   </span>

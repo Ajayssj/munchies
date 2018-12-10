@@ -4,11 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { OrdersType } from './orders-interface';
 import { AuthService } from '../auth.service';
 import swal from 'sweetalert2';
+import { log } from 'util';
 
 @Component({
   selector: 'app-manage-subscription',
   templateUrl: './manage-subscription.component.html',
-  styleUrls: ['./manage-subscription.component.css']
+  styleUrls: ['./manage-subscription.component.css'],
 })
 
 export class ManageSubscriptionComponent implements OnInit {
@@ -38,24 +39,17 @@ export class ManageSubscriptionComponent implements OnInit {
       return this.http.put(this.auth.getDomainName() + '/api/plan/active/'+ activePlanId +'/skip-week/'+ weekObj._id + '/' + weekObj.week ,{})
   }
   getCoreDate(date = new Date()){
-    return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
-  }
-  ngOnInit() {
-
-    this.http.get(this.auth.getDomainName() + '/api/order/getMyOrders').subscribe((resData: any) => {
-    // this.http.get(this.auth.getDomainName() + '/api/plan/active/5bfbdcc51efad521746223ae').subscribe((resData: any) => {
-      console.log('loll', resData.orderData);
-      this.orders = resData.orderData;
-    }, error => {
-      console.log('error', 'Allow Signup', 'Server Error');
-    });
+    // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
+    return new Date(date.toLocaleDateString());
   }
   shouldButtonDisabled(order){
     console.log("should disabled",order._id)
     let actweek : number;
     // order.plans.startDate = new Date('12-5-2018')
     let currentDate = this.getCoreDate();
-    let startDate =  this.getCoreDate(order.plans.startDate);
+    let startDate =  this.getCoreDate(new Date(order.plans.startDate));
+    console.log(currentDate + ' : ' + startDate);
+    console.log(currentDate.getTime() +'  > = '+ startDate.getTime());
     if(currentDate.getTime() >= startDate.getTime()){
       actweek = this.getActiveWeek(new Date(order.plans.startDate));
       let nextWeek = actweek + 1;
@@ -77,6 +71,22 @@ export class ManageSubscriptionComponent implements OnInit {
       return {state : true ,label :'Not Started Yet'};
     }
   }
+  ngOnInit() {
+
+    this.http.get(this.auth.getDomainName() + '/api/order/getMyOrders').subscribe((resData: any) => {
+    // this.http.get(this.auth.getDomainName() + '/api/plan/active/5bfbdcc51efad521746223ae').subscribe((resData: any) => {
+     // console.log('loll', resData.orderData);
+      resData.orderData.forEach(item =>{
+         let isDisabled = this.shouldButtonDisabled(item);
+         item.state = isDisabled.state;
+         item.label = isDisabled.label;
+      });
+      this.orders =  resData.orderData
+    }, error => {
+      console.log('error', 'Allow Signup', 'Server Error');
+    });
+  }
+
   // logout() {
   //   sessionStorage.setItem('isLoggedIn', "false");
   //   sessionStorage.removeItem('token');

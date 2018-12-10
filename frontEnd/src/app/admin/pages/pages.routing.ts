@@ -19,6 +19,7 @@ export const childRoutes: Routes = [
                 // canActivate: [AuthGuard],
                 children: [
                     { path: '', redirectTo: 'index', pathMatch: 'full' },
+                    { path: 'admin-analytics', loadChildren: './admin-analytics/admin-analytics.module#AdminAnalyticsModule' },
                     { path: 'customer', loadChildren: './customer/customer.module#CustomerModule' },
                     { path: 'company', loadChildren: './company/company.module#CompanyModule' },
                     { path: 'snacks', loadChildren: './snacks/snacks.module#SnacksModule' },

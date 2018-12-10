@@ -5,6 +5,11 @@ export let MENU_ITEM = [
         icon: 'dashboard'
     },
     {
+        path: 'admin-analytics',
+        title: 'Admin Analytics',
+        icon: 'pie-chart'
+    },
+    {
         path: 'customer',
         title: 'Customer',
         icon: 'user'
@@ -13,12 +18,13 @@ export let MENU_ITEM = [
         path: 'company',
         title: 'products',
         icon: 'building'
-    },
-    {
-        path: 'plan-management',
-        title: 'Plan Management',
-        icon: 'cutlery'
     }
+    // ,
+    // {
+    //     path: 'plan-management',
+    //     title: 'Plan Management',
+    //     icon: 'cutlery'
+    // }
     // ,
     // {
     //     path: 'editor',
