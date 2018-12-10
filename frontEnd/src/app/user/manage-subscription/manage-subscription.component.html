@@ -7,18 +7,20 @@
                             <th>Order ID</th>
                             <th>Plan</th>
                             <th>Total</th>
+                            <th>Current Week</th>
                             <th>Date</th>
                             <th>SkipWeek</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let order of orders">
-                            <td>{{order._id}}</td>
+                        <tr *ngFor="let order of orders; let i = index;">
+                            <td>{{i + 1}}</td>
                             <td>{{order.plans.weeks}} Week</td>
                             <td>{{order.total}}</td>
+                            <td>{{(getActiveWeek(order.plans.startDate))?getActiveWeek(order.plans.startDate):'Not started'}}</td>
                             <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>
                             <!-- <td><button (click)="skipNextWeek(order,alertModal)" class="btn btn-danger"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td> -->
-                            <td (click)="skipNextWeek(order,alertModal)" style="cursor: pointer;">Skip Next Week</td>
+                            <td  style="cursor: pointer;"><button [disabled]='shouldButtonDisabled(order).state' (click)="skipNextWeek(order,alertModal)" class="btn btn-danger"><i class='fa fa-trash fa-fw'></i>{{shouldButtonDisabled(order).label}}</button></td>
                         </tr>
                     </tbody>
                 </table>

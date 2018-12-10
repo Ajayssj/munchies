@@ -106,7 +106,7 @@ module.exports = {
                             phoneNo:req.body.phoneNo,
                         },
                         userId : userId,
-                        planId:planId,
+                        planId:db.toObjectID(planId),
                         activePlanId: plan.ops[0]._id,
                         date: new Date(),
                         total:req.body.total,
@@ -170,8 +170,8 @@ module.exports = {
                 {
                     $lookup: {
                         "from" : "activePlans",
-                        "localField" : "userId",
-                        "foreignField" : "userId",
+                        "localField" : "activePlanId",
+                        "foreignField" : "_id",
                         "as" : "plans"
                     }
                 },
@@ -185,13 +185,13 @@ module.exports = {
                     }
                 },
                 // Stage 5
-                {
+               /*  {
                     $unwind: {
                         path : "$planInfo",
                         includeArrayIndex : "arrayIndex", // optional
                         preserveNullAndEmptyArrays : false // optional
                     }
-                },
+                }, */
                 // Stage 6
                 {
                     $unwind: {

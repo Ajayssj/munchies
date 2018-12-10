@@ -7,23 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscribeComponent implements OnInit {
   selectedPlanId = null;
+  noOfWeeks = 0;
   plan = [{
-    planId: "5bda9417e54a4134c021d769",
+    planId: "5c0e2531cdfb5107849569ea",
     planName: "Trial Week",
     planRate: "500Rs/bag",
-    planText: "Try our snack bag of one week. You'll get one bag with 6 healthy snacks that will take care of your evening hunger pangs."
+    planText: "Try our snack bag of one week. You'll get one bag with 6 healthy snacks that will take care of your evening hunger pangs.",
+    weeks : 4
   },
   {
-    planId: "5bd9418790e4ca11e070f31a",
+    planId: "5c0e2571cdfb5107849569ef",
     planName: "For 4 Weeks",
     planRate: "500Rs/bag",
-    planText: "1 snack bag delivered each week for a period of 1 month"
+    planText: "1 snack bag delivered each week for a period of 1 month",
+    weeks : 4
   },
-  {
-    planId: "5bd941b790e4ca11e070f31b",
+  { 
+    planId: "5c0e258acdfb5107849569f4",
     planName: "For 12 Weeks",
     planRate: "500Rs/bag",
-    planText: "1 snack bag delivered each week for a period of 6 months"
+    planText: "1 snack bag delivered each week for a period of 6 months",
+    weeks : 12
   }];
   questions = [{
     qId: 1,
@@ -162,9 +166,9 @@ export class SubscribeComponent implements OnInit {
     console.log("hiiiiii", this.questions);
   }
 
-  selectedPlan(selectedPlanId) {
-    console.log("sel", selectedPlanId);
-    this.selectedPlanId = selectedPlanId;
+  selectedPlan(itemObj) {
+    this.selectedPlanId = itemObj.planId;
+    this.noOfWeeks = itemObj.weeks;
     
   }
   checkDelivery() {

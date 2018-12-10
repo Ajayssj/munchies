@@ -443,7 +443,7 @@ var MENU_ITEM = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pages-wrap\">\n  <pages-top></pages-top>\n  <link rel=\"stylesheet\" href=\"https://treesflower.com/ng-pi-admin/styles.55f283e587c284714115.bundle.css\" /> \n  <div class=\"pages-body\">\n    <sidebar></sidebar>\n    \n    <div class=\"pages-content\">\n      <link rel=\"stylesheet\" href=\"https://treesflower.com/ng-pi-admin/styles.55f283e587c284714115.bundle.css\"/>\n      <content-top></content-top>\n      <router-outlet></router-outlet>\n      <notification></notification>\n    </div>\n\n    <right-config></right-config>\n  </div>\n</div>\n<loading [loading]=\"false\"></loading>\n"
+module.exports = "<div class=\"pages-wrap\">\n  <pages-top></pages-top>\n  <link rel=\"stylesheet\" href=\"https://treesflower.com/ng-pi-admin/styles.55f283e587c284714115.bundle.css\" /> \n  <div class=\"pages-body\">\n    <sidebar></sidebar>\n    \n    <div class=\"pages-content\">\n      <content-top></content-top>\n      <router-outlet></router-outlet>\n      <notification></notification>\n    </div>\n\n    <right-config></right-config>\n  </div>\n</div>\n<loading [loading]=\"false\"></loading>\n"
 
 /***/ }),
 
@@ -3422,11 +3422,11 @@ var DeliveryComponent = /** @class */ (function () {
             return;
         }
         this.data = {
-            name: this.f.name.value,
-            surName: this.f.surName.value,
-            area: this.f.area.value,
+            firstName: this.f.name.value,
+            lastName: this.f.surName.value,
+            Area_of_delivery: this.f.area.value,
             address: this.f.address.value,
-            phoneNumber: this.f.phone.value,
+            phoneNo: this.f.phone.value,
             postalCode: this.f.postalCode.value,
             planId: this.route.snapshot.queryParamMap.get('selectedPlan'),
             weeks: this.route.snapshot.queryParamMap.get('week')
@@ -3437,7 +3437,7 @@ var DeliveryComponent = /** @class */ (function () {
             })
         };
         console.log("route params", this.data);
-        this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data, this.httpOptions).subscribe(function (data) {
+        this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data).subscribe(function (data) {
             console.log("order created", data);
         }, function (err) {
             console.log(err);
@@ -3865,7 +3865,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".manage_subscription_page_wrapper {\r\n    display: flex;\r\n    /* flex-direction: column; */\r\n}\r\n.manage_subscription {\r\n    width: 500px;\r\n    height: 500px;\r\n    border-radius: 50%;\r\n    /* background-color: #6aa7c4; */\r\n    background-color: #7cbbc2;\r\n    margin: -40px 0px 40px -35px;\r\n}\r\n.manage_subscription_page_wrapper .block {\r\n    width: 52%;\r\n    margin: 0 auto;\r\n    z-index: 509;\r\n}\r\n/* .manage_subscription_page_wrapper .block:first-child {\r\n    margin-top: 100px;\r\n} */\r\n.manage_subscription_page_wrapper .block h3 {\r\n    font-size: 17px;\r\n    margin-bottom: 10px;\r\n    font-weight: normal;\r\n}\r\n.manage_subscription_page_wrapper .block a {\r\n    text-decoration: none;\r\n    color: #db6945;\r\n}\r\n.manage_subscription_page_wrapper .block p {\r\n    line-height: 24px;\r\n    font-size: 16px;\r\n    margin: 0;\r\n    color: #292929;\r\n}\r\n.custom_td_skipweek{\r\n    display: flex;\r\n    border: unset;\r\n}\r\n.custom_td_skipweek button{\r\n    border-radius: 50%;\r\n    height: 30px !important;\r\n    margin: 0px 2px;\r\n}\r\n.custom_td_skipweek .btn-success{\r\n    background: linear-gradient(to top right,#2196F3,#2196F3)!important;\r\n    box-shadow: 0 2px 10px 0 #03A9F4!important;\r\n    -webkit-box-shadow: 0 2px 10px 0 #2196F3!important;\r\n}\r\n.custom_td_skipweek .btn-danger{\r\n    background: linear-gradient(to top right,#ff5b27,#ff5b27)!important;\r\n    box-shadow: 0 2px 10px 0 #ff5b27!important;\r\n    -webkit-box-shadow: 0 2px 10px 0 #ff5b27!important;\r\n}\r\n.custom_order_table th, .custom_order_table td{\r\n    border: unset;\r\n}\r\n.custom_order_table th{\r\n    color: #db6945;\r\n}\r\n.myorder_custom{\r\n    float: right;   \r\n    font-size: 22px !important;\r\n}\r\n.myorder_custom a{\r\n    color: #db6945;\r\n}\r\n.skipweek_text {\r\n    margin-top: 50px; \r\n}\r\n.manage_subscription_page_wrapper .block .skipweek_text {\r\n    z-index: 50;\r\n}\r\n.manage_subscription_page_wrapper .block p {\r\n    z-index: 50;\r\n}\r\n@media only screen and (max-width:320px){\r\n    .myorder_custom{\r\n        margin-right: 30px;\r\n    }\r\n    .manage_subscription_page_wrapper .block{\r\n        width: unset;\r\n    }\r\n    .manage_subscription_page_wrapper .block .skipweek_text {\r\n        margin-left: 15px;\r\n        width: 100%;\r\n    }\r\n    .manage_subscription_page_wrapper .block p {\r\n        margin-left: 15px;\r\n        width: 100%;\r\n    }\r\n    .manage_subscription_page_wrapper {\r\n        width: unset;\r\n        margin-top: 50px;\r\n    }\r\n    .manage_subscription {\r\n        margin: -40px 0px 40px 100px;\r\n        position: absolute;\r\n    }\r\n }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlci9tYW5hZ2Utc3Vic2NyaXB0aW9uL21hbmFnZS1zdWJzY3JpcHRpb24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7SUFDZCw2QkFBNkI7Q0FDaEM7QUFDRDtJQUNJLGFBQWE7SUFDYixjQUFjO0lBQ2QsbUJBQW1CO0lBQ25CLGdDQUFnQztJQUNoQywwQkFBMEI7SUFDMUIsNkJBQTZCO0NBQ2hDO0FBQ0Q7SUFDSSxXQUFXO0lBQ1gsZUFBZTtJQUNmLGFBQWE7Q0FDaEI7QUFDRDs7SUFFSTtBQUNKO0lBQ0ksZ0JBQWdCO0lBQ2hCLG9CQUFvQjtJQUNwQixvQkFBb0I7Q0FDdkI7QUFDRDtJQUNJLHNCQUFzQjtJQUN0QixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0lBQ2hCLFVBQVU7SUFDVixlQUFlO0NBQ2xCO0FBQ0Q7SUFDSSxjQUFjO0lBQ2QsY0FBYztDQUNqQjtBQUNEO0lBQ0ksbUJBQW1CO0lBQ25CLHdCQUF3QjtJQUN4QixnQkFBZ0I7Q0FDbkI7QUFDRDtJQUNJLG9FQUFvRTtJQUNwRSwyQ0FBMkM7SUFDM0MsbURBQW1EO0NBQ3REO0FBQ0Q7SUFDSSxvRUFBb0U7SUFDcEUsMkNBQTJDO0lBQzNDLG1EQUFtRDtDQUN0RDtBQUNEO0lBQ0ksY0FBYztDQUNqQjtBQUNEO0lBQ0ksZUFBZTtDQUNsQjtBQUNEO0lBQ0ksYUFBYTtJQUNiLDJCQUEyQjtDQUM5QjtBQUNEO0lBQ0ksZUFBZTtDQUNsQjtBQUNEO0lBQ0ksaUJBQWlCO0NBQ3BCO0FBQ0Q7SUFDSSxZQUFZO0NBQ2Y7QUFDRDtJQUNJLFlBQVk7Q0FDZjtBQUVBO0lBQ0c7UUFDSSxtQkFBbUI7S0FDdEI7SUFDRDtRQUNJLGFBQWE7S0FDaEI7SUFDRDtRQUNJLGtCQUFrQjtRQUNsQixZQUFZO0tBQ2Y7SUFDRDtRQUNJLGtCQUFrQjtRQUNsQixZQUFZO0tBQ2Y7SUFDRDtRQUNJLGFBQWE7UUFDYixpQkFBaUI7S0FDcEI7SUFDRDtRQUNJLDZCQUE2QjtRQUM3QixtQkFBbUI7S0FDdEI7RUFDSCIsImZpbGUiOiJzcmMvYXBwL3VzZXIvbWFuYWdlLXN1YnNjcmlwdGlvbi9tYW5hZ2Utc3Vic2NyaXB0aW9uLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIge1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIC8qIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47ICovXHJcbn1cclxuLm1hbmFnZV9zdWJzY3JpcHRpb24ge1xyXG4gICAgd2lkdGg6IDUwMHB4O1xyXG4gICAgaGVpZ2h0OiA1MDBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIC8qIGJhY2tncm91bmQtY29sb3I6ICM2YWE3YzQ7ICovXHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjN2NiYmMyO1xyXG4gICAgbWFyZ2luOiAtNDBweCAwcHggNDBweCAtMzVweDtcclxufVxyXG4ubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIgLmJsb2NrIHtcclxuICAgIHdpZHRoOiA1MiU7XHJcbiAgICBtYXJnaW46IDAgYXV0bztcclxuICAgIHotaW5kZXg6IDUwOTtcclxufVxyXG4vKiAubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIgLmJsb2NrOmZpcnN0LWNoaWxkIHtcclxuICAgIG1hcmdpbi10b3A6IDEwMHB4O1xyXG59ICovXHJcbi5tYW5hZ2Vfc3Vic2NyaXB0aW9uX3BhZ2Vfd3JhcHBlciAuYmxvY2sgaDMge1xyXG4gICAgZm9udC1zaXplOiAxN3B4O1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICAgIGZvbnQtd2VpZ2h0OiBub3JtYWw7XHJcbn1cclxuLm1hbmFnZV9zdWJzY3JpcHRpb25fcGFnZV93cmFwcGVyIC5ibG9jayBhIHtcclxuICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxuICAgIGNvbG9yOiAjZGI2OTQ1O1xyXG59XHJcbi5tYW5hZ2Vfc3Vic2NyaXB0aW9uX3BhZ2Vfd3JhcHBlciAuYmxvY2sgcCB7XHJcbiAgICBsaW5lLWhlaWdodDogMjRweDtcclxuICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgIG1hcmdpbjogMDtcclxuICAgIGNvbG9yOiAjMjkyOTI5O1xyXG59XHJcbi5jdXN0b21fdGRfc2tpcHdlZWt7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgYm9yZGVyOiB1bnNldDtcclxufVxyXG4uY3VzdG9tX3RkX3NraXB3ZWVrIGJ1dHRvbntcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIGhlaWdodDogMzBweCAhaW1wb3J0YW50O1xyXG4gICAgbWFyZ2luOiAwcHggMnB4O1xyXG59XHJcbi5jdXN0b21fdGRfc2tpcHdlZWsgLmJ0bi1zdWNjZXNze1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIHRvcCByaWdodCwjMjE5NkYzLCMyMTk2RjMpIWltcG9ydGFudDtcclxuICAgIGJveC1zaGFkb3c6IDAgMnB4IDEwcHggMCAjMDNBOUY0IWltcG9ydGFudDtcclxuICAgIC13ZWJraXQtYm94LXNoYWRvdzogMCAycHggMTBweCAwICMyMTk2RjMhaW1wb3J0YW50O1xyXG59XHJcbi5jdXN0b21fdGRfc2tpcHdlZWsgLmJ0bi1kYW5nZXJ7XHJcbiAgICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQodG8gdG9wIHJpZ2h0LCNmZjViMjcsI2ZmNWIyNykhaW1wb3J0YW50O1xyXG4gICAgYm94LXNoYWRvdzogMCAycHggMTBweCAwICNmZjViMjchaW1wb3J0YW50O1xyXG4gICAgLXdlYmtpdC1ib3gtc2hhZG93OiAwIDJweCAxMHB4IDAgI2ZmNWIyNyFpbXBvcnRhbnQ7XHJcbn1cclxuLmN1c3RvbV9vcmRlcl90YWJsZSB0aCwgLmN1c3RvbV9vcmRlcl90YWJsZSB0ZHtcclxuICAgIGJvcmRlcjogdW5zZXQ7XHJcbn1cclxuLmN1c3RvbV9vcmRlcl90YWJsZSB0aHtcclxuICAgIGNvbG9yOiAjZGI2OTQ1O1xyXG59XHJcbi5teW9yZGVyX2N1c3RvbXtcclxuICAgIGZsb2F0OiByaWdodDsgICBcclxuICAgIGZvbnQtc2l6ZTogMjJweCAhaW1wb3J0YW50O1xyXG59XHJcbi5teW9yZGVyX2N1c3RvbSBhe1xyXG4gICAgY29sb3I6ICNkYjY5NDU7XHJcbn1cclxuLnNraXB3ZWVrX3RleHQge1xyXG4gICAgbWFyZ2luLXRvcDogNTBweDsgXHJcbn1cclxuLm1hbmFnZV9zdWJzY3JpcHRpb25fcGFnZV93cmFwcGVyIC5ibG9jayAuc2tpcHdlZWtfdGV4dCB7XHJcbiAgICB6LWluZGV4OiA1MDtcclxufVxyXG4ubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIgLmJsb2NrIHAge1xyXG4gICAgei1pbmRleDogNTA7XHJcbn1cclxuXHJcbiBAbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6MzIwcHgpe1xyXG4gICAgLm15b3JkZXJfY3VzdG9te1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogMzBweDtcclxuICAgIH1cclxuICAgIC5tYW5hZ2Vfc3Vic2NyaXB0aW9uX3BhZ2Vfd3JhcHBlciAuYmxvY2t7XHJcbiAgICAgICAgd2lkdGg6IHVuc2V0O1xyXG4gICAgfVxyXG4gICAgLm1hbmFnZV9zdWJzY3JpcHRpb25fcGFnZV93cmFwcGVyIC5ibG9jayAuc2tpcHdlZWtfdGV4dCB7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDE1cHg7XHJcbiAgICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgICB9XHJcbiAgICAubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIgLmJsb2NrIHAge1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiAxNXB4O1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgfVxyXG4gICAgLm1hbmFnZV9zdWJzY3JpcHRpb25fcGFnZV93cmFwcGVyIHtcclxuICAgICAgICB3aWR0aDogdW5zZXQ7XHJcbiAgICAgICAgbWFyZ2luLXRvcDogNTBweDtcclxuICAgIH1cclxuICAgIC5tYW5hZ2Vfc3Vic2NyaXB0aW9uIHtcclxuICAgICAgICBtYXJnaW46IC00MHB4IDBweCA0MHB4IDEwMHB4O1xyXG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIH1cclxuIH0iXX0= */"
+module.exports = ".manage_subscription_page_wrapper {\r\n    display: flex;\r\n    /* flex-direction: column; */\r\n}\r\n.manage_subscription {\r\n    width: 500px;\r\n    height: 500px;\r\n    border-radius: 50%;\r\n    /* background-color: #6aa7c4; */\r\n    background-color: #7cbbc2;\r\n    margin: -40px 0px 40px -35px;\r\n    position: absolute;\r\n    right: 100px;\r\n}\r\n.manage_subscription_page_wrapper .block {\r\n    margin: 0 auto;\r\n    z-index: 509;\r\n    width: 100%;\r\n}\r\n/* .manage_subscription_page_wrapper .block:first-child {\r\n    margin-top: 100px;\r\n} */\r\n.manage_subscription_page_wrapper .block table {\r\n    width: 100%;\r\n}\r\n.manage_subscription_page_wrapper .block h3 {\r\n    font-size: 17px;\r\n    margin-bottom: 10px;\r\n    font-weight: normal;\r\n}\r\n.manage_subscription_page_wrapper .block a {\r\n    text-decoration: none;\r\n    color: #db6945;\r\n}\r\n.manage_subscription_page_wrapper .block p {\r\n    line-height: 24px;\r\n    font-size: 16px;\r\n    margin: 0;\r\n    color: #292929;\r\n}\r\n.custom_td_skipweek{\r\n    display: flex;\r\n    border: unset;\r\n}\r\n.custom_td_skipweek button{\r\n    border-radius: 50%;\r\n    height: 30px !important;\r\n    margin: 0px 2px;\r\n}\r\n.custom_td_skipweek .btn-success{\r\n    background: linear-gradient(to top right,#2196F3,#2196F3)!important;\r\n    box-shadow: 0 2px 10px 0 #03A9F4!important;\r\n    -webkit-box-shadow: 0 2px 10px 0 #2196F3!important;\r\n}\r\n.custom_td_skipweek .btn-danger{\r\n    background: linear-gradient(to top right,#ff5b27,#ff5b27)!important;\r\n    box-shadow: 0 2px 10px 0 #ff5b27!important;\r\n    -webkit-box-shadow: 0 2px 10px 0 #ff5b27!important;\r\n}\r\n.custom_order_table th, .custom_order_table td{\r\n    border: unset;\r\n    text-align: center;\r\n    padding-right: 40px;\r\n    width: 140px;\r\n}\r\n.custom_order_table th{\r\n    color: #db6945;\r\n}\r\n.myorder_custom{\r\n    float: right;   \r\n    font-size: 22px !important;\r\n}\r\n.myorder_custom a{\r\n    color: #db6945;\r\n}\r\n.skipweek_text {\r\n    margin-top: 50px; \r\n}\r\n.manage_subscription_page_wrapper .block .skipweek_text {\r\n    z-index: 50;\r\n}\r\n.manage_subscription_page_wrapper .block p {\r\n    z-index: 50;\r\n}\r\n@media only screen and (max-width:320px){\r\n    .myorder_custom{\r\n        margin-right: 30px;\r\n    }\r\n    .manage_subscription_page_wrapper .block{\r\n        width: unset;\r\n    }\r\n    .manage_subscription_page_wrapper .block .skipweek_text {\r\n        margin-left: 15px;\r\n        width: 100%;\r\n    }\r\n    .manage_subscription_page_wrapper .block p {\r\n        margin-left: 15px;\r\n        width: 100%;\r\n    }\r\n    .manage_subscription_page_wrapper {\r\n        width: unset;\r\n        margin-top: 50px;\r\n    }\r\n    .manage_subscription {\r\n        margin: -40px 0px 40px 100px;\r\n        position: absolute;\r\n    }\r\n }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlci9tYW5hZ2Utc3Vic2NyaXB0aW9uL21hbmFnZS1zdWJzY3JpcHRpb24uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7SUFDZCw2QkFBNkI7Q0FDaEM7QUFDRDtJQUNJLGFBQWE7SUFDYixjQUFjO0lBQ2QsbUJBQW1CO0lBQ25CLGdDQUFnQztJQUNoQywwQkFBMEI7SUFDMUIsNkJBQTZCO0lBQzdCLG1CQUFtQjtJQUNuQixhQUFhO0NBQ2hCO0FBQ0Q7SUFDSSxlQUFlO0lBQ2YsYUFBYTtJQUNiLFlBQVk7Q0FDZjtBQUNEOztJQUVJO0FBQ0o7SUFDSSxZQUFZO0NBQ2Y7QUFDRDtJQUNJLGdCQUFnQjtJQUNoQixvQkFBb0I7SUFDcEIsb0JBQW9CO0NBQ3ZCO0FBQ0Q7SUFDSSxzQkFBc0I7SUFDdEIsZUFBZTtDQUNsQjtBQUNEO0lBQ0ksa0JBQWtCO0lBQ2xCLGdCQUFnQjtJQUNoQixVQUFVO0lBQ1YsZUFBZTtDQUNsQjtBQUNEO0lBQ0ksY0FBYztJQUNkLGNBQWM7Q0FDakI7QUFDRDtJQUNJLG1CQUFtQjtJQUNuQix3QkFBd0I7SUFDeEIsZ0JBQWdCO0NBQ25CO0FBQ0Q7SUFDSSxvRUFBb0U7SUFDcEUsMkNBQTJDO0lBQzNDLG1EQUFtRDtDQUN0RDtBQUNEO0lBQ0ksb0VBQW9FO0lBQ3BFLDJDQUEyQztJQUMzQyxtREFBbUQ7Q0FDdEQ7QUFDRDtJQUNJLGNBQWM7SUFDZCxtQkFBbUI7SUFDbkIsb0JBQW9CO0lBQ3BCLGFBQWE7Q0FDaEI7QUFDRDtJQUNJLGVBQWU7Q0FDbEI7QUFDRDtJQUNJLGFBQWE7SUFDYiwyQkFBMkI7Q0FDOUI7QUFDRDtJQUNJLGVBQWU7Q0FDbEI7QUFDRDtJQUNJLGlCQUFpQjtDQUNwQjtBQUNEO0lBQ0ksWUFBWTtDQUNmO0FBQ0Q7SUFDSSxZQUFZO0NBQ2Y7QUFFQTtJQUNHO1FBQ0ksbUJBQW1CO0tBQ3RCO0lBQ0Q7UUFDSSxhQUFhO0tBQ2hCO0lBQ0Q7UUFDSSxrQkFBa0I7UUFDbEIsWUFBWTtLQUNmO0lBQ0Q7UUFDSSxrQkFBa0I7UUFDbEIsWUFBWTtLQUNmO0lBQ0Q7UUFDSSxhQUFhO1FBQ2IsaUJBQWlCO0tBQ3BCO0lBQ0Q7UUFDSSw2QkFBNkI7UUFDN0IsbUJBQW1CO0tBQ3RCO0VBQ0giLCJmaWxlIjoic3JjL2FwcC91c2VyL21hbmFnZS1zdWJzY3JpcHRpb24vbWFuYWdlLXN1YnNjcmlwdGlvbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm1hbmFnZV9zdWJzY3JpcHRpb25fcGFnZV93cmFwcGVyIHtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAvKiBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyAqL1xyXG59XHJcbi5tYW5hZ2Vfc3Vic2NyaXB0aW9uIHtcclxuICAgIHdpZHRoOiA1MDBweDtcclxuICAgIGhlaWdodDogNTAwcHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICAvKiBiYWNrZ3JvdW5kLWNvbG9yOiAjNmFhN2M0OyAqL1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzdjYmJjMjtcclxuICAgIG1hcmdpbjogLTQwcHggMHB4IDQwcHggLTM1cHg7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICByaWdodDogMTAwcHg7XHJcbn1cclxuLm1hbmFnZV9zdWJzY3JpcHRpb25fcGFnZV93cmFwcGVyIC5ibG9jayB7XHJcbiAgICBtYXJnaW46IDAgYXV0bztcclxuICAgIHotaW5kZXg6IDUwOTtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcbi8qIC5tYW5hZ2Vfc3Vic2NyaXB0aW9uX3BhZ2Vfd3JhcHBlciAuYmxvY2s6Zmlyc3QtY2hpbGQge1xyXG4gICAgbWFyZ2luLXRvcDogMTAwcHg7XHJcbn0gKi9cclxuLm1hbmFnZV9zdWJzY3JpcHRpb25fcGFnZV93cmFwcGVyIC5ibG9jayB0YWJsZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG4ubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIgLmJsb2NrIGgzIHtcclxuICAgIGZvbnQtc2l6ZTogMTdweDtcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbiAgICBmb250LXdlaWdodDogbm9ybWFsO1xyXG59XHJcbi5tYW5hZ2Vfc3Vic2NyaXB0aW9uX3BhZ2Vfd3JhcHBlciAuYmxvY2sgYSB7XHJcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgICBjb2xvcjogI2RiNjk0NTtcclxufVxyXG4ubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIgLmJsb2NrIHAge1xyXG4gICAgbGluZS1oZWlnaHQ6IDI0cHg7XHJcbiAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICBtYXJnaW46IDA7XHJcbiAgICBjb2xvcjogIzI5MjkyOTtcclxufVxyXG4uY3VzdG9tX3RkX3NraXB3ZWVre1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGJvcmRlcjogdW5zZXQ7XHJcbn1cclxuLmN1c3RvbV90ZF9za2lwd2VlayBidXR0b257XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBoZWlnaHQ6IDMwcHggIWltcG9ydGFudDtcclxuICAgIG1hcmdpbjogMHB4IDJweDtcclxufVxyXG4uY3VzdG9tX3RkX3NraXB3ZWVrIC5idG4tc3VjY2Vzc3tcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byB0b3AgcmlnaHQsIzIxOTZGMywjMjE5NkYzKSFpbXBvcnRhbnQ7XHJcbiAgICBib3gtc2hhZG93OiAwIDJweCAxMHB4IDAgIzAzQTlGNCFpbXBvcnRhbnQ7XHJcbiAgICAtd2Via2l0LWJveC1zaGFkb3c6IDAgMnB4IDEwcHggMCAjMjE5NkYzIWltcG9ydGFudDtcclxufVxyXG4uY3VzdG9tX3RkX3NraXB3ZWVrIC5idG4tZGFuZ2Vye1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIHRvcCByaWdodCwjZmY1YjI3LCNmZjViMjcpIWltcG9ydGFudDtcclxuICAgIGJveC1zaGFkb3c6IDAgMnB4IDEwcHggMCAjZmY1YjI3IWltcG9ydGFudDtcclxuICAgIC13ZWJraXQtYm94LXNoYWRvdzogMCAycHggMTBweCAwICNmZjViMjchaW1wb3J0YW50O1xyXG59XHJcbi5jdXN0b21fb3JkZXJfdGFibGUgdGgsIC5jdXN0b21fb3JkZXJfdGFibGUgdGR7XHJcbiAgICBib3JkZXI6IHVuc2V0O1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgcGFkZGluZy1yaWdodDogNDBweDtcclxuICAgIHdpZHRoOiAxNDBweDtcclxufVxyXG4uY3VzdG9tX29yZGVyX3RhYmxlIHRoe1xyXG4gICAgY29sb3I6ICNkYjY5NDU7XHJcbn1cclxuLm15b3JkZXJfY3VzdG9te1xyXG4gICAgZmxvYXQ6IHJpZ2h0OyAgIFxyXG4gICAgZm9udC1zaXplOiAyMnB4ICFpbXBvcnRhbnQ7XHJcbn1cclxuLm15b3JkZXJfY3VzdG9tIGF7XHJcbiAgICBjb2xvcjogI2RiNjk0NTtcclxufVxyXG4uc2tpcHdlZWtfdGV4dCB7XHJcbiAgICBtYXJnaW4tdG9wOiA1MHB4OyBcclxufVxyXG4ubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIgLmJsb2NrIC5za2lwd2Vla190ZXh0IHtcclxuICAgIHotaW5kZXg6IDUwO1xyXG59XHJcbi5tYW5hZ2Vfc3Vic2NyaXB0aW9uX3BhZ2Vfd3JhcHBlciAuYmxvY2sgcCB7XHJcbiAgICB6LWluZGV4OiA1MDtcclxufVxyXG5cclxuIEBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDozMjBweCl7XHJcbiAgICAubXlvcmRlcl9jdXN0b217XHJcbiAgICAgICAgbWFyZ2luLXJpZ2h0OiAzMHB4O1xyXG4gICAgfVxyXG4gICAgLm1hbmFnZV9zdWJzY3JpcHRpb25fcGFnZV93cmFwcGVyIC5ibG9ja3tcclxuICAgICAgICB3aWR0aDogdW5zZXQ7XHJcbiAgICB9XHJcbiAgICAubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIgLmJsb2NrIC5za2lwd2Vla190ZXh0IHtcclxuICAgICAgICBtYXJnaW4tbGVmdDogMTVweDtcclxuICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgIH1cclxuICAgIC5tYW5hZ2Vfc3Vic2NyaXB0aW9uX3BhZ2Vfd3JhcHBlciAuYmxvY2sgcCB7XHJcbiAgICAgICAgbWFyZ2luLWxlZnQ6IDE1cHg7XHJcbiAgICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgICB9XHJcbiAgICAubWFuYWdlX3N1YnNjcmlwdGlvbl9wYWdlX3dyYXBwZXIge1xyXG4gICAgICAgIHdpZHRoOiB1bnNldDtcclxuICAgICAgICBtYXJnaW4tdG9wOiA1MHB4O1xyXG4gICAgfVxyXG4gICAgLm1hbmFnZV9zdWJzY3JpcHRpb24ge1xyXG4gICAgICAgIG1hcmdpbjogLTQwcHggMHB4IDQwcHggMTAwcHg7XHJcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgfVxyXG4gfSJdfQ== */"
 
 /***/ }),
 
@@ -3876,7 +3876,7 @@ module.exports = ".manage_subscription_page_wrapper {\r\n    display: flex;\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"manage_subscription_page_wrapper\">\n        <div class=\"block\">\n                <h3 class=\"myorder_custom\"><a href=\"/my-orders\">My Orders</a></h3>\n                <table class=\"table custom_order_table\">\n                    <thead>\n                        <tr>\n                            <th>Order ID</th>\n                            <th>Plan</th>\n                            <th>Total</th>\n                            <th>Date</th>\n                            <th>SkipWeek</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr *ngFor=\"let order of orders\">\n                            <td>{{order._id}}</td>\n                            <td>{{order.plans.weeks}} Week</td>\n                            <td>{{order.total}}</td>\n                            <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>\n                            <!-- <td><button (click)=\"skipNextWeek(order,alertModal)\" class=\"btn btn-danger\"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td> -->\n                            <td (click)=\"skipNextWeek(order,alertModal)\" style=\"cursor: pointer;\">Skip Next Week</td>\n                        </tr>\n                    </tbody>\n                </table>\n                <h3 class=\"skipweek_text\"><a href=\"/skip-week\">Skip the coming weeks bag</a></h3>\n                <p>you can skip a week's bag just give us a 2 day head's up</p>\n            </div>\n    <div class=\"manage_subscription\">\n    </div>\n</div>\n\n<modal #alertModal modalClass=\"modal-sm\">\n    <modal-header>\n        <h3>Week Skip Action</h3>\n    </modal-header>\n    <modal-content>\n        {{alertText}}\n    </modal-content>\n    <modal-footer>\n        <button class=\"btn btn-primary\" (click)=\"closeModal(alertModal)\">close</button>\n    </modal-footer>\n</modal>\n\n\n<!-- <table class=\"table custom_order_table\">\n        <thead>\n            <tr>\n                <th>Date</th>\n                <th>Name</th>\n                <th>Address</th>\n                <th>Phone</th>\n                <th>Plan</th>\n                <th>ActiveWeek</th>\n                <th>SkipWeek</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr *ngFor=\"let order of orders\">\n                <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>\n                <td>{{order.userData.firstName}} {{order.userData.lastName}}</td>\n                <td>{{order.address}}</td>\n                <td>{{order.userData.phoneNo}}</td>\n                <td>{{order.planInfo.title}}</td>\n                <td>{{getActiveWeek(order.plans.startDate,order.plans.weeks)}}</td>\n                <td class=\"custom_td_skipweek\">\n                    <button *ngFor=\"let skipWeekItem of getWeekArray(order.plans.weeks);let skipWeekIndex = index\"\n                        data-title=\"\"\n                        (click)=\"skipWeekAction(order,skipWeekIndex+1,alertModal)\"\n                        [class]=\"isSkip(order.plans.skipedWeeks,skipWeekIndex+1) ? 'btn btn-success':'btn btn-danger'\"> \n                        {{skipWeekIndex+1}}\n                    </button>\n                </td>\n            </tr>\n        </tbody>\n    </table> -->\n"
+module.exports = "<div class=\"manage_subscription_page_wrapper\">\n        <div class=\"block\">\n                <h3 class=\"myorder_custom\"><a href=\"/my-orders\">My Orders</a></h3>\n                <table class=\"table custom_order_table\">\n                    <thead>\n                        <tr>\n                            <th>Order ID</th>\n                            <th>Plan</th>\n                            <th>Total</th>\n                            <th>Current Week</th>\n                            <th>Date</th>\n                            <th>SkipWeek</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr *ngFor=\"let order of orders; let i = index;\">\n                            <td>{{i + 1}}</td>\n                            <td>{{order.plans.weeks}} Week</td>\n                            <td>{{order.total}}</td>\n                            <td>{{(getActiveWeek(order.plans.startDate))?getActiveWeek(order.plans.startDate):'Not started'}}</td>\n                            <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>a\n                            <!-- <td><button (click)=\"skipNextWeek(order,alertModal)\" class=\"btn btn-danger\"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td> -->\n                            <td  style=\"cursor: pointer;\"><button [disabled]='shouldButtonDisabled(order)' (click)=\"skipNextWeek(order,alertModal)\" class=\"btn btn-danger\"><i class='fa fa-trash fa-fw'></i>{{shouldButtonDisabled(order)}}</button></td>\n                        </tr>\n                    </tbody>\n                </table>\n                <h3 class=\"skipweek_text\"><a href=\"/skip-week\">Skip the coming weeks bag</a></h3>\n                <p>you can skip a week's bag just give us a 2 day head's up</p>\n            </div>\n    <div class=\"manage_subscription\">\n    </div>\n</div>\n\n<modal #alertModal modalClass=\"modal-sm\">\n    <modal-header>\n        <h3>Week Skip Action</h3>\n    </modal-header>\n    <modal-content>\n        {{alertText}}\n    </modal-content>\n    <modal-footer>\n        <button class=\"btn btn-primary\" (click)=\"closeModal(alertModal)\">close</button>\n    </modal-footer>\n</modal>\n\n\n<!-- <table class=\"table custom_order_table\">\n        <thead>\n            <tr>\n                <th>Date</th>\n                <th>Name</th>\n                <th>Address</th>\n                <th>Phone</th>\n                <th>Plan</th>\n                <th>ActiveWeek</th>\n                <th>SkipWeek</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr *ngFor=\"let order of orders\">\n                <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>\n                <td>{{order.userData.firstName}} {{order.userData.lastName}}</td>\n                <td>{{order.address}}</td>\n                <td>{{order.userData.phoneNo}}</td>\n                <td>{{order.planInfo.title}}</td>\n                <td>{{getActiveWeek(order.plans.startDate,order.plans.weeks)}}</td>\n                <td class=\"custom_td_skipweek\">\n                    <button *ngFor=\"let skipWeekItem of getWeekArray(order.plans.weeks);let skipWeekIndex = index\"\n                        data-title=\"\"\n                        (click)=\"skipWeekAction(order,skipWeekIndex+1,alertModal)\"\n                        [class]=\"isSkip(order.plans.skipedWeeks,skipWeekIndex+1) ? 'btn btn-success':'btn btn-danger'\"> \n                        {{skipWeekIndex+1}}\n                    </button>\n                </td>\n            </tr>\n        </tbody>\n    </table> -->\n"
 
 /***/ }),
 
@@ -3915,12 +3915,32 @@ var ManageSubscriptionComponent = /** @class */ (function () {
         this.http = http;
         this.router = router;
         this.auth = auth;
+        this.NOT_STARTED_YET = 1;
+        this.SKIPED = 2;
+        this.LAST_WEEK = 3;
+        this.WEEK_NOT_FOUND = 4;
         this.getWeekArray = function (weekNo) { return new Array(weekNo); };
         // console.log(sessionStorage.getItem('isLoggedIn') == 'false');
         // if(sessionStorage.getItem('isLoggedIn') == 'false') {
         //   this.router.navigate(['/signIn']);
         // }
     }
+    // endDate = currentDate
+    ManageSubscriptionComponent.prototype.getActiveWeek = function (startDate) {
+        var start = new Date(startDate);
+        var today = new Date();
+        return Math.ceil(Math.abs(Math.floor((start - today) / 86400000)) / 7);
+    };
+    ManageSubscriptionComponent.prototype.getNextWeekId = function (weekNo, weekArray) {
+        return weekArray.find(function (item) { return item.week == weekNo; });
+    };
+    ManageSubscriptionComponent.prototype.skipThisWeek = function (weekObj, activePlanId) {
+        return this.http.put(this.auth.getDomainName() + '/api/plan/active/' + activePlanId + '/skip-week/' + weekObj._id + '/' + weekObj.week, {});
+    };
+    ManageSubscriptionComponent.prototype.getCoreDate = function (date) {
+        if (date === void 0) { date = new Date(); }
+        return (new Date(new Date(new Date(new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)));
+    };
     ManageSubscriptionComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.http.get(this.auth.getDomainName() + '/api/order/getMyOrders').subscribe(function (resData) {
@@ -3931,90 +3951,89 @@ var ManageSubscriptionComponent = /** @class */ (function () {
             console.log('error', 'Allow Signup', 'Server Error');
         });
     };
+    ManageSubscriptionComponent.prototype.shouldButtonDisabled = function (order) {
+        console.log("should disabled", order._id);
+        var actweek;
+        // order.plans.startDate = new Date('12-5-2018')
+        var currentDate = this.getCoreDate();
+        var startDate = this.getCoreDate(order.plans.startDate);
+        if (currentDate.getTime() >= startDate.getTime()) {
+            actweek = this.getActiveWeek(new Date(order.plans.startDate));
+            var nextWeek = actweek + 1;
+            if (this.notLastWeek(nextWeek, order.plans.weeks)) {
+                var weekObj = this.getNextWeekId(nextWeek, order.weekIds);
+                if (weekObj) {
+                    if (!this.isThisWeekSkip(order.plans.skipedWeeks, weekObj._id)) {
+                        return { state: false, label: 'Skip Next Week' };
+                    }
+                    else {
+                        return { state: true, label: 'Already Skiped' };
+                    }
+                }
+                else {
+                    return { state: true, label: 'Not Found' };
+                }
+            }
+            else {
+                return { state: true, label: 'No Next Week' };
+            }
+        }
+        else {
+            return { state: true, label: 'Not Started Yet' };
+        }
+    };
     // logout() {
     //   sessionStorage.setItem('isLoggedIn', "false");
     //   sessionStorage.removeItem('token');
     //   this.router.navigate(['/signIn']);
     // }
     ManageSubscriptionComponent.prototype.skipNextWeek = function (order, index, alertModal) {
-        var actpId = order.plans._id;
-        var weekNo = order.plans.weeks;
-        var actweek = this.getActiveWeek(order.plans.startDate, order.plans.weeks);
-        console.log(actpId, weekNo);
-        // this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/skip-week/'+index,{}).subscribe((res: any) => {
-        //   console.log("skipWeek",res);
-        //   if (res.success) {
-        //     this.alertText = 'Week Skiped Successfully!';
-        //     this.openModal(alertModal);
-        //     // alert('Week Skiped Successfully!');
-        //   } else if (res.error) {
-        //     // alert(res.error);
-        //     this.alertText = res.error;
-        //     this.openModal(alertModal);
-        //   }
-        // },
-        //   err=> {
-        //   console.log("skipWeek err",err);
-        // });
-    };
-    // skipWeekAction(order, index, alertModal) {
-    //   var actpId = order.plans._id;
-    //   var weekNo = order.plans.weeks;
-    //   var actweek = this.getActiveWeek(order.plans.startDate,order.plans.weeks);
-    //   const isSkipRes = this.isSkip(order.plans.skipedWeeks,index);
-    //   console.log(actpId, weekNo);
-    //   if (actweek < index) {
-    //     if (isSkipRes) {
-    //       this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/undo-skip-week/'+index,{}).subscribe((res: any) => {
-    //         console.log("skipWeek",res);
-    //         if (res.success) {
-    //           this.alertText = "Week Added Successfully!";
-    //           this.openModal(alertModal);
-    //           // alert('Week Added Successfully!');
-    //         } else if (res.error) {
-    //           // alert(res.error);
-    //           this.alertText = res.error;
-    //           this.openModal(alertModal);
-    //         }
-    //       },
-    //         err=> {
-    //         console.log("skipWeek err",err);
-    //       });
-    //     } else {
-    //       this.http.put(this.auth.getDomainName() + '/api/plan/active/'+actpId+'/skip-week/'+index,{}).subscribe((res: any) => {
-    //         console.log("skipWeek",res);
-    //         if (res.success) {
-    //           this.alertText = 'Week Skiped Successfully!';
-    //           this.openModal(alertModal);
-    //           // alert('Week Skiped Successfully!');
-    //         } else if (res.error) {
-    //           // alert(res.error);
-    //           this.alertText = res.error;
-    //           this.openModal(alertModal);
-    //         }
-    //       },
-    //         err=> {
-    //         console.log("skipWeek err",err);
-    //       });
-    //     }
-    //   } else {
-    //     this.alertText = "This week is over!";
-    //     this.openModal(alertModal);
-    //   }
-    // }
-    // skipWeek(param){
-    //   console.log("skweek",param);
-    // }
-    // isSkip = (skipWeek,index) => skipWeek.indexOf(index) > -1;
-    ManageSubscriptionComponent.prototype.isSkip = function (skipWeek, index) {
-        for (var skw = 0; skw < skipWeek.length; skw++) {
-            // skipWeek[skw].wNo
-            // skipWeek[skw].wId
-            if (skipWeek[skw].wNo == index) {
-                return true;
+        var actweek;
+        // order.plans.startDate = new Date('12-5-2018')
+        if (this.getCoreDate() >= this.getCoreDate(order.plans.startDate)) {
+            actweek = this.getActiveWeek(new Date(order.plans.startDate));
+            var nextWeek = actweek + 1;
+            if (this.notLastWeek(nextWeek, order.plans.weeks)) {
+                console.log('Active Week : ' + actweek);
+                var weekObj = this.getNextWeekId(nextWeek, order.weekIds);
+                if (weekObj) {
+                    if (!this.isThisWeekSkip(order.plans.skipedWeeks, weekObj._id)) {
+                        this.skipThisWeek(weekObj, order.plans._id).subscribe(function (res) {
+                            if (res.success) {
+                                /* this.alertText = 'Week Skiped Successfully!';
+                                this.openModal(alertModal); */
+                                alert(res.message);
+                            }
+                            else if (res.error) {
+                                alert(res.error);
+                                /*  this.alertText = res.error;
+                                 this.openModal(alertModal); */
+                            }
+                        }, function (err) {
+                            console.log("skipWeek err", err);
+                        });
+                    }
+                    else {
+                        alert('This Week was Skiped Already!');
+                    }
+                }
+                else {
+                    alert('No Week\'s Data Found');
+                }
+            }
+            else {
+                alert('This is last Week!');
             }
         }
-        return false;
+        else {
+            alert('Your Plan Not Activated Yet!');
+        }
+    };
+    ManageSubscriptionComponent.prototype.isThisWeekSkip = function (skipWeeks, weekId) {
+        return skipWeeks.find(function (item) { return item.wId = weekId; });
+    };
+    ManageSubscriptionComponent.prototype.notLastWeek = function (weekNo, maxWeek) {
+        return (maxWeek > weekNo);
     };
     ManageSubscriptionComponent.prototype.openModal = function (modal) {
         modal.open();
@@ -4035,16 +4054,16 @@ var ManageSubscriptionComponent = /** @class */ (function () {
     ManageSubscriptionComponent.prototype.getNextMondayDate = function (date) {
         return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
     };
-    ManageSubscriptionComponent.prototype.getActiveWeek = function (startDate, numOfWeeks) {
-        console.log("startDate,numOfWeeks", startDate, numOfWeeks);
-        var end;
-        var start;
-        end = this.generateLastWeekDate(startDate, numOfWeeks);
-        start = new Date(startDate);
-        console.log("start,end", start, end);
-        // return Math.ceil(Math.abs(Math.floor(( start - end ) / 86400000)) / 7);
-        return this.getWeeksArrayForActiveWeek(start, end);
-    };
+    /*  getActiveWeek(startDate,numOfWeeks){
+       console.log("startDate,numOfWeeks",startDate,numOfWeeks);
+       var end;
+       var start;
+       end = this.generateLastWeekDate(startDate,numOfWeeks);
+       start = new Date(startDate);
+       console.log("start,end",start, end);
+       // return Math.ceil(Math.abs(Math.floor(( start - end ) / 86400000)) / 7);
+       return this.getWeeksArrayForActiveWeek(start, end);
+     } */
     ManageSubscriptionComponent.prototype.generateLastWeekDate = function (startDate, numOfWeeks) {
         startDate = new Date(startDate);
         return new Date(startDate.setDate(startDate.getDate() + (numOfWeeks * 7)));
@@ -4936,7 +4955,7 @@ module.exports = ".subscribe_page_wrapper {\r\n    width: 100%;\r\n    height: 1
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"subscribe_page_wrapper\">\n  <div class=\"subscribe_page_content\">\n    <h2>Snacking made simple and convenient!</h2>\n    <h3 class=\"color_none\">Select a Plan</h3>\n    <div class=\"select_plan\">\n      <div class=\"plans\">\n        <div class=\"plan\" [ngClass]=\"{'active':selectedPlanId == item.planId}\" *ngFor=\"let item of plan; let i = index\" (click)=\"selectedPlan(item.planId)\">\n          <h3>{{item.planName}}</h3>\n          <h2 class=\"rate\">{{item.planRate}}</h2>\n          <p>{{item.planText}}</p>\n        </div>\n      </div>\n    </div>\n    <div class=\"answer_questions\">\n      <h3 class=\"color_none\">Answer a few simple questions so we know what snacks are best for you</h3>\n      <div class=\"question_wrapper\" *ngFor=\"let q of questions\">\n        <p>{{q.question}}</p>\n        <ul>\n          <li *ngFor=\"let opt of q.options\"><input type=\"radio\" value=\"{{opt.optionText}}\" name=\"{{opt.optName}}\" [(ngModel)]=\"q.selectedOpt\" />{{opt.optionText}}</li>\n        </ul>\n        <div class=\"product_images + {{ q.class}}\">\n          <img *ngFor=\"let image of q.images\" src=\"{{image.url}}\" alt=\"{{image.alt}}\" />\n        </div>\n      </div>\n    </div>\n    \n   <!-- <div (click)=\"checkDelivery()\">\n        <button class=\"ok_button\"  (click)=\"checkDelivery()\">ok</button> -->\n <div class=\"ok_button\" (click)=\"checkDelivery()\">\n      <a routerLink=\"/delivery\" [queryParams]=\"{selectedPlan: selectedPlanId, question1: questions[0].selectedOpt, question2: questions[1].selectedOpt }\">Ok</a> \n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"subscribe_page_wrapper\">\n  <div class=\"subscribe_page_content\">\n    <h2>Snacking made simple and convenient!</h2>\n    <h3 class=\"color_none\">Select a Plan</h3>\n    <div class=\"select_plan\">\n      <div class=\"plans\">\n        <div class=\"plan\" [ngClass]=\"{'active':selectedPlanId == item.planId}\" *ngFor=\"let item of plan; let i = index\" (click)=\"selectedPlan(item)\">\n          <h3>{{item.planName}}</h3>\n          <h2 class=\"rate\">{{item.planRate}}</h2>\n          <p>{{item.planText}}</p>\n        </div>\n      </div>\n    </div>\n    <div class=\"answer_questions\">\n      <h3 class=\"color_none\">Answer a few simple questions so we know what snacks are best for you</h3>\n      <div class=\"question_wrapper\" *ngFor=\"let q of questions\">\n        <p>{{q.question}}</p>\n        <ul>\n          <li *ngFor=\"let opt of q.options\"><input type=\"radio\" value=\"{{opt.optionText}}\" name=\"{{opt.optName}}\" [(ngModel)]=\"q.selectedOpt\" />{{opt.optionText}}</li>\n        </ul>\n        <div class=\"product_images + {{ q.class}}\">\n          <img *ngFor=\"let image of q.images\" src=\"{{image.url}}\" alt=\"{{image.alt}}\" />\n        </div>\n      </div>\n    </div>\n    \n   <!-- <div (click)=\"checkDelivery()\">\n        <button class=\"ok_button\"  (click)=\"checkDelivery()\">ok</button> -->\n <div class=\"ok_button\" (click)=\"checkDelivery()\">\n      <a routerLink=\"/delivery\" [queryParams]=\"{selectedPlan: selectedPlanId, week : noOfWeeks,question1: questions[0].selectedOpt, question2: questions[1].selectedOpt }\">Ok</a> \n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -4964,23 +4983,27 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var SubscribeComponent = /** @class */ (function () {
     function SubscribeComponent() {
         this.selectedPlanId = null;
+        this.noOfWeeks = 0;
         this.plan = [{
-                planId: "5bda9417e54a4134c021d769",
+                planId: "5c0e2531cdfb5107849569ea",
                 planName: "Trial Week",
                 planRate: "500Rs/bag",
-                planText: "Try our snack bag of one week. You'll get one bag with 6 healthy snacks that will take care of your evening hunger pangs."
+                planText: "Try our snack bag of one week. You'll get one bag with 6 healthy snacks that will take care of your evening hunger pangs.",
+                weeks: 4
             },
             {
-                planId: "5bd9418790e4ca11e070f31a",
+                planId: "5c0e2571cdfb5107849569ef",
                 planName: "For 4 Weeks",
                 planRate: "500Rs/bag",
-                planText: "1 snack bag delivered each week for a period of 1 month"
+                planText: "1 snack bag delivered each week for a period of 1 month",
+                weeks: 4
             },
             {
-                planId: "5bd941b790e4ca11e070f31b",
+                planId: "5c0e258acdfb5107849569f4",
                 planName: "For 12 Weeks",
                 planRate: "500Rs/bag",
-                planText: "1 snack bag delivered each week for a period of 6 months"
+                planText: "1 snack bag delivered each week for a period of 6 months",
+                weeks: 12
             }];
         this.questions = [{
                 qId: 1,
@@ -5114,9 +5137,9 @@ var SubscribeComponent = /** @class */ (function () {
     SubscribeComponent.prototype.ngOnInit = function () {
         console.log("hiiiiii", this.questions);
     };
-    SubscribeComponent.prototype.selectedPlan = function (selectedPlanId) {
-        console.log("sel", selectedPlanId);
-        this.selectedPlanId = selectedPlanId;
+    SubscribeComponent.prototype.selectedPlan = function (itemObj) {
+        this.selectedPlanId = itemObj.planId;
+        this.noOfWeeks = itemObj.weeks;
     };
     SubscribeComponent.prototype.checkDelivery = function () {
         console.log("in check delivery");
