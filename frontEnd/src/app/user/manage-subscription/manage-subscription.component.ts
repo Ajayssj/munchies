@@ -29,7 +29,10 @@ export class ManageSubscriptionComponent implements OnInit {
   getActiveWeek(startDate) {
     let start : any = new Date(startDate);
     let today : any = new Date();
-    return Math.ceil(Math.abs(Math.floor(( start - today ) / 86400000)) / 7);
+    if( this.getCoreDate() >= this.getCoreDate(start))
+      return Math.ceil(Math.abs(Math.floor(( start - today ) / 86400000)) / 7);
+    else
+      return 0;
   }
   getNextWeekId(weekNo,weekArray){
     return weekArray.find(item => item.week == weekNo);
@@ -38,7 +41,7 @@ export class ManageSubscriptionComponent implements OnInit {
   skipThisWeek(weekObj,activePlanId){
       return this.http.put(this.auth.getDomainName() + '/api/plan/active/'+ activePlanId +'/skip-week/'+ weekObj._id + '/' + weekObj.week ,{})
   }
-  getCoreDate(date = new Date()){
+  getCoreDate(date = new Date(new Date().toUTCString())){
     // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
     return new Date(date.toLocaleDateString());
   }
@@ -95,7 +98,7 @@ export class ManageSubscriptionComponent implements OnInit {
   skipNextWeek(order, index, alertModal) {
     let actweek : number;
     // order.plans.startDate = new Date('12-5-2018')
-    if(this.getCoreDate() >=  this.getCoreDate(order.plans.startDate)){
+    if(this.getCoreDate() >=  this.getCoreDate(new Date(order.plans.startDate))){
       actweek = this.getActiveWeek(new Date(order.plans.startDate));
       let nextWeek = actweek + 1;
       if(this.notLastWeek(nextWeek,order.plans.weeks)){
@@ -108,6 +111,7 @@ export class ManageSubscriptionComponent implements OnInit {
                 /* this.alertText = 'Week Skiped Successfully!';
                 this.openModal(alertModal); */
                 alert(res.message);
+                window.location.reload();
               } else if (res.error) {
                 alert(res.error);
                /*  this.alertText = res.error;

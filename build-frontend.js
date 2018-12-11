@@ -1,7 +1,7 @@
 const exec = require('child_process').exec;
 const fs = require('fs');
 var copydir = require('copy-dir');
-
+var mkdirp = require('mkdirp');
 const dest = __dirname+'/frontEnd/dist/Munchies';
 
 const testscript = exec("cd frontEnd/ && ng build");

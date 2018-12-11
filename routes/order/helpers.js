@@ -108,7 +108,7 @@ module.exports = {
                         userId : userId,
                         planId:db.toObjectID(planId),
                         activePlanId: plan.ops[0]._id,
-                        date: new Date(),
+                        date: new Date(new Date().toUTCString()),
                         total:req.body.total,
                         shippingCost:0,
                         Area_of_delivery:req.body.Area_of_delivery,

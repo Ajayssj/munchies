@@ -8,9 +8,15 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./admin-analytics/admin-analytics.module": [
+		"./src/app/admin/pages/admin-analytics/admin-analytics.module.ts",
+		"default~admin-analytics-admin-analytics-module~charts-charts-module~index-index-module",
+		"common",
+		"admin-analytics-admin-analytics-module"
+	],
 	"./charts/charts.module": [
 		"./src/app/admin/pages/charts/charts.module.ts",
-		"default~charts-charts-module~index-index-module",
+		"default~admin-analytics-admin-analytics-module~charts-charts-module~index-index-module",
 		"common",
 		"charts-charts-module"
 	],
@@ -44,7 +50,7 @@ var map = {
 	],
 	"./index/index.module": [
 		"./src/app/admin/pages/index/index.module.ts",
-		"default~charts-charts-module~index-index-module",
+		"default~admin-analytics-admin-analytics-module~charts-charts-module~index-index-module",
 		"common",
 		"index-index-module"
 	],
@@ -292,6 +298,11 @@ var MENU_ITEM = [
         icon: 'dashboard'
     },
     {
+        path: 'admin-analytics',
+        title: 'Admin Analytics',
+        icon: 'pie-chart'
+    },
+    {
         path: 'customer',
         title: 'Customer',
         icon: 'user'
@@ -300,12 +311,13 @@ var MENU_ITEM = [
         path: 'company',
         title: 'products',
         icon: 'building'
-    },
-    {
-        path: 'plan-management',
-        title: 'Plan Management',
-        icon: 'cutlery'
     }
+    // ,
+    // {
+    //     path: 'plan-management',
+    //     title: 'Plan Management',
+    //     icon: 'cutlery'
+    // }
     // ,
     // {
     //     path: 'editor',
@@ -584,6 +596,7 @@ var childRoutes = [
                 // canActivate: [AuthGuard],
                 children: [
                     { path: '', redirectTo: 'index', pathMatch: 'full' },
+                    { path: 'admin-analytics', loadChildren: './admin-analytics/admin-analytics.module#AdminAnalyticsModule' },
                     { path: 'customer', loadChildren: './customer/customer.module#CustomerModule' },
                     { path: 'company', loadChildren: './company/company.module#CompanyModule' },
                     { path: 'snacks', loadChildren: './snacks/snacks.module#SnacksModule' },
@@ -728,7 +741,7 @@ module.exports = "<div class=\"card animated fadeIn\">\n  <div class=\"card-head
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "body {\n  background: #fff; }\n\n.bg-default {\n  background: linear-gradient(to top right, #999999, #b3b2b2);\n  background: -webkit-linear-gradient(to top right, #999999, #b3b2b2); }\n\n.bg-primary {\n  background: linear-gradient(to top right, #fca400, #ffd17c);\n  background: -webkit-linear-gradient(to top right, #fca400, #ffd17c); }\n\n.bg-success {\n  background: linear-gradient(to top right, #16be9a, #42e697);\n  background: -webkit-linear-gradient(to top right, #16be9a, #42e697); }\n\n.bg-danger {\n  background: linear-gradient(to top right, #fa5167, #fda09c);\n  background: -webkit-linear-gradient(to top right, #fa5167, #fda09c); }\n\n.bg-warning {\n  background: linear-gradient(to top right, #ff7403, #fac980);\n  background: -webkit-linear-gradient(to top right, #ff7403, #fac980); }\n\n.bg-info {\n  background: linear-gradient(to top right, #2cc3ff, #15f8bf);\n  background: -webkit-linear-gradient(to top right, #2cc3ff, #15f8bf); }\n\n.card-header {\n  width: 100%;\n  height: 40px;\n  padding: 0 10px;\n  display: flex;\n  justify-content: space-between; }\n\n.card-header .card-title {\n    display: inline-block;\n    margin: 0;\n    line-height: 40px;\n    font-size: 15px;\n    font-weight: 700;\n    text-transform: uppercase; }\n\n.collapse-btn {\n  position: relative;\n  right: 0;\n  top: 5px;\n  background: transparent;\n  outline: none;\n  border: none;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  font-size: 16px;\n  color: rgba(38, 37, 60, 0.5);\n  letter-spacing: -16px; }\n\n.collapse-btn:hover {\n    color: #fca400; }\n\n.collapse-off {\n  transition: all 0.5s;\n  -o-transition: all 0.5s;\n  -moz-transition: all 0.5s;\n  -webkit-transition: all 0.5s;\n  transform: scale(0);\n  -o-transform: scale(0);\n  -moz-transform: scale(0);\n  -webkit-transform: scale(0);\n  width: 0; }\n\n.collapse-on {\n  transition: all 0.5s;\n  -o-transition: all 0.5s;\n  -moz-transition: all 0.5s;\n  -webkit-transition: all 0.5s;\n  transform: scale(1);\n  -o-transform: scale(1);\n  -moz-transform: scale(1);\n  -webkit-transform: scale(1); }\n\n.content-wrap {\n  height: auto;\n  overflow: hidden; }\n\n.card-content {\n  padding: 10px;\n  height: auto;\n  overflow-x: hidden; }\n\n.card-footer {\n  width: 100%;\n  height: auto;\n  min-height: 45px;\n  line-height: 45px;\n  border: none;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 0 10px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYWRtaW4vc2hhcmVkL2NvbXBvbmVudHMvY2FyZC9FOlxcc3ZuLXJlcG9cXFNWTlxcbWFuY2hpZXMtZ2l0XFxtdW5jaGllcy5naXRcXHRydW5rXFxmcm9udEVuZC9zcmNcXGFwcFxcYWRtaW5cXHNoYXJlZFxcdGhlbWVcXGNvbG9yLXNjaGVtZXNcXF9kZWZhdWx0LnNjc3MiLCJzcmMvYXBwL2FkbWluL3NoYXJlZC9jb21wb25lbnRzL2NhcmQvRTpcXHN2bi1yZXBvXFxTVk5cXG1hbmNoaWVzLWdpdFxcbXVuY2hpZXMuZ2l0XFx0cnVua1xcZnJvbnRFbmQvc3JjXFxhcHBcXGFkbWluXFxzaGFyZWRcXHRoZW1lXFxtaXhpbi5zY3NzIiwic3JjL2FwcC9hZG1pbi9zaGFyZWQvY29tcG9uZW50cy9jYXJkL0U6XFxzdm4tcmVwb1xcU1ZOXFxtYW5jaGllcy1naXRcXG11bmNoaWVzLmdpdFxcdHJ1bmtcXGZyb250RW5kL3NyY1xcYXBwXFxhZG1pblxcc2hhcmVkXFxjb21wb25lbnRzXFxjYXJkXFxjYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQW1CQTtFQUNJLGlCQWhCUyxFQWlCWjs7QUFFRDtFQ01JLDREQUFtQztFQUduQyxvRUFBMkMsRURQOUM7O0FBRUQ7RUNFSSw0REFBbUM7RUFHbkMsb0VBQTJDLEVESDlDOztBQUVEO0VDRkksNERBQW1DO0VBR25DLG9FQUEyQyxFREM5Qzs7QUFFRDtFQ05JLDREQUFtQztFQUduQyxvRUFBMkMsRURLOUM7O0FBRUQ7RUNWSSw0REFBbUM7RUFHbkMsb0VBQTJDLEVEUzlDOztBQUVEO0VDZEksNERBQW1DO0VBR25DLG9FQUEyQyxFRGE5Qzs7QUU1Q0Q7RUFDSSxZQUFXO0VBQ1gsYUFBWTtFQUNaLGdCQUFlO0VBQ2YsY0FBYTtFQUNiLCtCQUE4QixFQVNqQzs7QUFkRDtJQU9RLHNCQUFxQjtJQUNyQixVQUFTO0lBQ1Qsa0JBQWlCO0lBQ2pCLGdCQUEwQjtJQUMxQixpQkFBZ0I7SUFDaEIsMEJBQXlCLEVBQzVCOztBQUdMO0VBQ0ksbUJBQWtCO0VBQ2xCLFNBQVE7RUFDUixTQUFRO0VBQ1Isd0JBQXVCO0VBQ3ZCLGNBQWE7RUFDYixhQUFZO0VEbUJaLFlDbEJvQjtFRG1CcEIsYUNuQjBCO0VEb0IxQixtQkFBa0I7RUFDbEIsa0JDckIwQjtFQUMxQixnQkZ0QlM7RUV1QlQsNkJGYmdCO0VFY2hCLHNCRnhCUyxFRTRCWjs7QUFkRDtJQVlRLGVGZlEsRUVnQlg7O0FBR0w7RURYSSxxQkNZMkI7RURYM0Isd0JDVzJCO0VEVjNCLDBCQ1UyQjtFRFQzQiw2QkNTMkI7RURuQjNCLG9CQ29CMkI7RURuQjNCLHVCQ21CMkI7RURsQjNCLHlCQ2tCMkI7RURqQjNCLDRCQ2lCMkI7RUFDM0IsU0FBUSxFQUNYOztBQUVEO0VEakJJLHFCQ2tCMkI7RURqQjNCLHdCQ2lCMkI7RURoQjNCLDBCQ2dCMkI7RURmM0IsNkJDZTJCO0VEekIzQixvQkMwQjJCO0VEekIzQix1QkN5QjJCO0VEeEIzQix5QkN3QjJCO0VEdkIzQiw0QkN1QjJCLEVBQzlCOztBQUVEO0VBQ0ksYUFBWTtFQUNaLGlCQUFnQixFQUNuQjs7QUFFRDtFQUNJLGNBQWE7RUFDYixhQUFZO0VBQ1osbUJBQWtCLEVBQ3JCOztBQUVEO0VBQ0ksWUFBVztFQUNYLGFBQVk7RUFDWixpQkFBZ0I7RUFDaEIsa0JBQWlCO0VBQ2pCLGFBQVk7RUFDWix5Q0ZuRE87RUVvRFAsZ0JBQWUsRUFDbEIiLCJmaWxlIjoic3JjL2FwcC9hZG1pbi9zaGFyZWQvY29tcG9uZW50cy9jYXJkL2NhcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0ICcuLi9taXhpbic7XG4kZGVmYXVsdC10ZXh0OjE0cHg7XG4kc20tdGV4dDoxMnB4O1xuJGxnLXRleHQ6MTZweDtcbiRib2R5LWJnOiNmZmY7XG4kc2lkZWJhci1iZzojNDY1Mjk0O1xuJHNpZGViYXItZm9udHMtY29sb3I6I2ZmZjtcbiRjYXJkLWJnOiNmZmY7XG4kY2FyZC1ib3JkZXI6I2U0ZTNlMztcbiR3aGl0ZTojZmZmO1xuJGJsYWNrOiMwMDA7XG4kYm9yZGVyLWNvbG9yOnJnYmEoJGJsYWNrLCAuMSk7XG4kdGFibGUtYm9yZGVyLWNvbG9yOiNlNmU2ZTY7XG4kZm9udHMtY29sb3I6IzI2MjUzYztcbiRwcmltYXJ5OiNmY2E0MDA7XG4kc3VjY2VzczojMTZiZTlhO1xuJGRhbmdlcjojZmE1MTY3O1xuJHdhcm5pbmc6I2ZmNzQwMztcbiRpbmZvOiMyY2MzZmY7XG5ib2R5IHtcbiAgICBiYWNrZ3JvdW5kOiAkYm9keS1iZztcbn1cblxuLmJnLWRlZmF1bHQge1xuICAgIEBpbmNsdWRlIGxpbmVhci1ncmFkaWVudCh0byB0b3AgcmlnaHQsIGRhcmtlbigkY2FyZC1iZywgNDAlKSwgZGFya2VuKCRjYXJkLWJnLCAzMCUpKTtcbn1cblxuLmJnLXByaW1hcnkge1xuICAgIEBpbmNsdWRlIGxpbmVhci1ncmFkaWVudCh0byB0b3AgcmlnaHQsICRwcmltYXJ5LCAjZmZkMTdjKTtcbn1cblxuLmJnLXN1Y2Nlc3Mge1xuICAgIEBpbmNsdWRlIGxpbmVhci1ncmFkaWVudCh0byB0b3AgcmlnaHQsICRzdWNjZXNzLCAjNDJlNjk3KTtcbn1cblxuLmJnLWRhbmdlciB7XG4gICAgQGluY2x1ZGUgbGluZWFyLWdyYWRpZW50KHRvIHRvcCByaWdodCwgJGRhbmdlciwgI2ZkYTA5Yyk7XG59XG5cbi5iZy13YXJuaW5nIHtcbiAgICBAaW5jbHVkZSBsaW5lYXItZ3JhZGllbnQodG8gdG9wIHJpZ2h0LCAkd2FybmluZywgI2ZhYzk4MCk7XG59XG5cbi5iZy1pbmZvIHtcbiAgICBAaW5jbHVkZSBsaW5lYXItZ3JhZGllbnQodG8gdG9wIHJpZ2h0LCAkaW5mbywgIzE1ZjhiZik7XG59IiwiQG1peGluIGJveC1zaGFkb3coJHNoYWRvdy4uLikge1xuICAgIGJveC1zaGFkb3c6ICRzaGFkb3c7XG4gICAgLW8tYm94LXNoYWRvdzogJHNoYWRvdztcbiAgICAtbW96LWJveC1zaGFkb3c6ICRzaGFkb3c7XG4gICAgLXdlYmtpdC1ib3gtc2hhZG93OiAkc2hhZG93O1xufVxuXG5AbWl4aW4gdGV4dC1zaGFkb3coJHNoYWRvdy4uLikge1xuICAgIHRleHQtc2hhZG93OiAkc2hhZG93O1xuICAgIC1vLXRleHQtc2hhZG93OiAkc2hhZG93O1xuICAgIC1tb3otdGV4dC1zaGFkb3c6ICRzaGFkb3c7XG4gICAgLXdlYmtpdC10ZXh0LXNoYWRvdzogJHNoYWRvdztcbn1cblxuQG1peGluIHRyYW5zZm9ybSgkdHJhbnNmb3JtLi4uKSB7XG4gICAgdHJhbnNmb3JtOiAkdHJhbnNmb3JtO1xuICAgIC1vLXRyYW5zZm9ybTogJHRyYW5zZm9ybTtcbiAgICAtbW96LXRyYW5zZm9ybTogJHRyYW5zZm9ybTtcbiAgICAtd2Via2l0LXRyYW5zZm9ybTogJHRyYW5zZm9ybTtcbn1cblxuQG1peGluIHRyYW5zaXRpb24oJHRyYW5zaXRpb24uLi4pIHtcbiAgICB0cmFuc2l0aW9uOiAkdHJhbnNpdGlvbjtcbiAgICAtby10cmFuc2l0aW9uOiAkdHJhbnNpdGlvbjtcbiAgICAtbW96LXRyYW5zaXRpb246ICR0cmFuc2l0aW9uO1xuICAgIC13ZWJraXQtdHJhbnNpdGlvbjogJHRyYW5zaXRpb247XG59XG5cbkBtaXhpbiBsaW5lYXItZ3JhZGllbnQoJGNvbG9yLi4uKSB7XG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KCRjb2xvcik7XG4gICAgYmFja2dyb3VuZDogLW8tbGluZWFyLWdyYWRpZW50KCRjb2xvcik7XG4gICAgYmFja2dyb3VuZDogLW1vei1saW5lYXItZ3JhZGllbnQoJGNvbG9yKTtcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCgkY29sb3IpO1xufVxuXG5AbWl4aW4gYm9yZGVyLWdyYWRpZW50KCRjb2xvci4uLikge1xuICAgIGJvcmRlci1pbWFnZTogbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAkY29sb3IpIDIgMztcbiAgICBib3JkZXItaW1hZ2U6IC1tb3otbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAkY29sb3IpIDMgMztcbiAgICBib3JkZXItaW1hZ2U6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAkY29sb3IpIDMgMztcbn1cblxuQG1peGluIGNlbnRlcigkd2lkdGgsICRoZWlnaHQpIHtcbiAgICB3aWR0aDogJHdpZHRoO1xuICAgIGhlaWdodDogJGhlaWdodDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgbGluZS1oZWlnaHQ6ICRoZWlnaHQ7XG59IiwiQGltcG9ydCAnLi4vLi4vdGhlbWUvY29uZic7XG4uY2FyZC1oZWFkZXIge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNDBweDtcbiAgICBwYWRkaW5nOiAwIDEwcHg7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IC8vYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICRib3JkZXItY29sb3I7XG4gICAgLmNhcmQtdGl0bGUge1xuICAgICAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDQwcHg7XG4gICAgICAgIGZvbnQtc2l6ZTogJGRlZmF1bHQtdGV4dCsxO1xuICAgICAgICBmb250LXdlaWdodDogNzAwO1xuICAgICAgICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xuICAgIH1cbn1cblxuLmNvbGxhcHNlLWJ0biB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIHJpZ2h0OiAwO1xuICAgIHRvcDogNXB4O1xuICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xuICAgIG91dGxpbmU6IG5vbmU7XG4gICAgYm9yZGVyOiBub25lO1xuICAgIEBpbmNsdWRlIGNlbnRlcigzMHB4LCAzMHB4KTtcbiAgICBmb250LXNpemU6ICRsZy10ZXh0O1xuICAgIGNvbG9yOiByZ2JhKCRmb250cy1jb2xvciwgLjUpO1xuICAgIGxldHRlci1zcGFjaW5nOiAtJGxnLXRleHQ7XG4gICAgJjpob3ZlciB7XG4gICAgICAgIGNvbG9yOiAkcHJpbWFyeTtcbiAgICB9XG59XG5cbi5jb2xsYXBzZS1vZmYge1xuICAgIEBpbmNsdWRlIHRyYW5zaXRpb24oYWxsIC41cyk7XG4gICAgQGluY2x1ZGUgdHJhbnNmb3JtKHNjYWxlKDApKTtcbiAgICB3aWR0aDogMDtcbn1cblxuLmNvbGxhcHNlLW9uIHtcbiAgICBAaW5jbHVkZSB0cmFuc2l0aW9uKGFsbCAuNXMpO1xuICAgIEBpbmNsdWRlIHRyYW5zZm9ybShzY2FsZSgxKSk7XG59XG5cbi5jb250ZW50LXdyYXAge1xuICAgIGhlaWdodDogYXV0bztcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xufVxuXG4uY2FyZC1jb250ZW50IHtcbiAgICBwYWRkaW5nOiAxMHB4O1xuICAgIGhlaWdodDogYXV0bztcbiAgICBvdmVyZmxvdy14OiBoaWRkZW47XG59XG5cbi5jYXJkLWZvb3RlciB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiBhdXRvO1xuICAgIG1pbi1oZWlnaHQ6IDQ1cHg7XG4gICAgbGluZS1oZWlnaHQ6IDQ1cHg7XG4gICAgYm9yZGVyOiBub25lO1xuICAgIGJvcmRlci10b3A6IDFweCBzb2xpZCAkYm9yZGVyLWNvbG9yO1xuICAgIHBhZGRpbmc6IDAgMTBweDtcbn0iXX0= */"
+module.exports = "body {\n  background: #fff; }\n\n.bg-default {\n  background: linear-gradient(to top right, #999999, #b3b2b2);\n  background: -webkit-linear-gradient(to top right, #999999, #b3b2b2); }\n\n.bg-primary {\n  background: linear-gradient(to top right, #fca400, #ffd17c);\n  background: -webkit-linear-gradient(to top right, #fca400, #ffd17c); }\n\n.bg-success {\n  background: linear-gradient(to top right, #16be9a, #42e697);\n  background: -webkit-linear-gradient(to top right, #16be9a, #42e697); }\n\n.bg-danger {\n  background: linear-gradient(to top right, #fa5167, #fda09c);\n  background: -webkit-linear-gradient(to top right, #fa5167, #fda09c); }\n\n.bg-warning {\n  background: linear-gradient(to top right, #ff7403, #fac980);\n  background: -webkit-linear-gradient(to top right, #ff7403, #fac980); }\n\n.bg-info {\n  background: linear-gradient(to top right, #2cc3ff, #15f8bf);\n  background: -webkit-linear-gradient(to top right, #2cc3ff, #15f8bf); }\n\n.card-header {\n  width: 100%;\n  height: 40px;\n  padding: 0 10px;\n  display: none;\n  justify-content: space-between; }\n\n.card-header .card-title {\n    display: inline-block;\n    margin: 0;\n    line-height: 40px;\n    font-size: 15px;\n    font-weight: 700;\n    text-transform: uppercase; }\n\n.collapse-btn {\n  position: relative;\n  right: 0;\n  top: 5px;\n  background: transparent;\n  outline: none;\n  border: none;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  font-size: 16px;\n  color: rgba(38, 37, 60, 0.5);\n  letter-spacing: -16px; }\n\n.collapse-btn:hover {\n    color: #fca400; }\n\n.collapse-off {\n  transition: all 0.5s;\n  -o-transition: all 0.5s;\n  -moz-transition: all 0.5s;\n  -webkit-transition: all 0.5s;\n  transform: scale(0);\n  -o-transform: scale(0);\n  -moz-transform: scale(0);\n  -webkit-transform: scale(0);\n  width: 0; }\n\n.collapse-on {\n  transition: all 0.5s;\n  -o-transition: all 0.5s;\n  -moz-transition: all 0.5s;\n  -webkit-transition: all 0.5s;\n  transform: scale(1);\n  -o-transform: scale(1);\n  -moz-transform: scale(1);\n  -webkit-transform: scale(1); }\n\n.content-wrap {\n  height: auto;\n  overflow: hidden; }\n\n.card-content {\n  padding: 10px;\n  height: auto;\n  overflow-x: hidden; }\n\n.card-footer {\n  width: 100%;\n  height: auto;\n  min-height: 45px;\n  line-height: 45px;\n  border: none;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 0 10px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYWRtaW4vc2hhcmVkL2NvbXBvbmVudHMvY2FyZC9FOlxcc3ZuLXJlcG9cXFNWTlxcbWFuY2hpZXMtZ2l0XFxtdW5jaGllcy5naXRcXHRydW5rXFxmcm9udEVuZC9zcmNcXGFwcFxcYWRtaW5cXHNoYXJlZFxcdGhlbWVcXGNvbG9yLXNjaGVtZXNcXF9kZWZhdWx0LnNjc3MiLCJzcmMvYXBwL2FkbWluL3NoYXJlZC9jb21wb25lbnRzL2NhcmQvRTpcXHN2bi1yZXBvXFxTVk5cXG1hbmNoaWVzLWdpdFxcbXVuY2hpZXMuZ2l0XFx0cnVua1xcZnJvbnRFbmQvc3JjXFxhcHBcXGFkbWluXFxzaGFyZWRcXHRoZW1lXFxtaXhpbi5zY3NzIiwic3JjL2FwcC9hZG1pbi9zaGFyZWQvY29tcG9uZW50cy9jYXJkL0U6XFxzdm4tcmVwb1xcU1ZOXFxtYW5jaGllcy1naXRcXG11bmNoaWVzLmdpdFxcdHJ1bmtcXGZyb250RW5kL3NyY1xcYXBwXFxhZG1pblxcc2hhcmVkXFxjb21wb25lbnRzXFxjYXJkXFxjYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQW1CQTtFQUNJLGlCQWhCUyxFQWlCWjs7QUFFRDtFQ01JLDREQUFtQztFQUduQyxvRUFBMkMsRURQOUM7O0FBRUQ7RUNFSSw0REFBbUM7RUFHbkMsb0VBQTJDLEVESDlDOztBQUVEO0VDRkksNERBQW1DO0VBR25DLG9FQUEyQyxFREM5Qzs7QUFFRDtFQ05JLDREQUFtQztFQUduQyxvRUFBMkMsRURLOUM7O0FBRUQ7RUNWSSw0REFBbUM7RUFHbkMsb0VBQTJDLEVEUzlDOztBQUVEO0VDZEksNERBQW1DO0VBR25DLG9FQUEyQyxFRGE5Qzs7QUU1Q0Q7RUFDSSxZQUFXO0VBQ1gsYUFBWTtFQUNaLGdCQUFlO0VBQ2YsY0FBYTtFQUNiLCtCQUE4QixFQVNqQzs7QUFkRDtJQU9RLHNCQUFxQjtJQUNyQixVQUFTO0lBQ1Qsa0JBQWlCO0lBQ2pCLGdCQUEwQjtJQUMxQixpQkFBZ0I7SUFDaEIsMEJBQXlCLEVBQzVCOztBQUdMO0VBQ0ksbUJBQWtCO0VBQ2xCLFNBQVE7RUFDUixTQUFRO0VBQ1Isd0JBQXVCO0VBQ3ZCLGNBQWE7RUFDYixhQUFZO0VEbUJaLFlDbEJvQjtFRG1CcEIsYUNuQjBCO0VEb0IxQixtQkFBa0I7RUFDbEIsa0JDckIwQjtFQUMxQixnQkZ0QlM7RUV1QlQsNkJGYmdCO0VFY2hCLHNCRnhCUyxFRTRCWjs7QUFkRDtJQVlRLGVGZlEsRUVnQlg7O0FBR0w7RURYSSxxQkNZMkI7RURYM0Isd0JDVzJCO0VEVjNCLDBCQ1UyQjtFRFQzQiw2QkNTMkI7RURuQjNCLG9CQ29CMkI7RURuQjNCLHVCQ21CMkI7RURsQjNCLHlCQ2tCMkI7RURqQjNCLDRCQ2lCMkI7RUFDM0IsU0FBUSxFQUNYOztBQUVEO0VEakJJLHFCQ2tCMkI7RURqQjNCLHdCQ2lCMkI7RURoQjNCLDBCQ2dCMkI7RURmM0IsNkJDZTJCO0VEekIzQixvQkMwQjJCO0VEekIzQix1QkN5QjJCO0VEeEIzQix5QkN3QjJCO0VEdkIzQiw0QkN1QjJCLEVBQzlCOztBQUVEO0VBQ0ksYUFBWTtFQUNaLGlCQUFnQixFQUNuQjs7QUFFRDtFQUNJLGNBQWE7RUFDYixhQUFZO0VBQ1osbUJBQWtCLEVBQ3JCOztBQUVEO0VBQ0ksWUFBVztFQUNYLGFBQVk7RUFDWixpQkFBZ0I7RUFDaEIsa0JBQWlCO0VBQ2pCLGFBQVk7RUFDWix5Q0ZuRE87RUVvRFAsZ0JBQWUsRUFDbEIiLCJmaWxlIjoic3JjL2FwcC9hZG1pbi9zaGFyZWQvY29tcG9uZW50cy9jYXJkL2NhcmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0ICcuLi9taXhpbic7XG4kZGVmYXVsdC10ZXh0OjE0cHg7XG4kc20tdGV4dDoxMnB4O1xuJGxnLXRleHQ6MTZweDtcbiRib2R5LWJnOiNmZmY7XG4kc2lkZWJhci1iZzojNDY1Mjk0O1xuJHNpZGViYXItZm9udHMtY29sb3I6I2ZmZjtcbiRjYXJkLWJnOiNmZmY7XG4kY2FyZC1ib3JkZXI6I2U0ZTNlMztcbiR3aGl0ZTojZmZmO1xuJGJsYWNrOiMwMDA7XG4kYm9yZGVyLWNvbG9yOnJnYmEoJGJsYWNrLCAuMSk7XG4kdGFibGUtYm9yZGVyLWNvbG9yOiNlNmU2ZTY7XG4kZm9udHMtY29sb3I6IzI2MjUzYztcbiRwcmltYXJ5OiNmY2E0MDA7XG4kc3VjY2VzczojMTZiZTlhO1xuJGRhbmdlcjojZmE1MTY3O1xuJHdhcm5pbmc6I2ZmNzQwMztcbiRpbmZvOiMyY2MzZmY7XG5ib2R5IHtcbiAgICBiYWNrZ3JvdW5kOiAkYm9keS1iZztcbn1cblxuLmJnLWRlZmF1bHQge1xuICAgIEBpbmNsdWRlIGxpbmVhci1ncmFkaWVudCh0byB0b3AgcmlnaHQsIGRhcmtlbigkY2FyZC1iZywgNDAlKSwgZGFya2VuKCRjYXJkLWJnLCAzMCUpKTtcbn1cblxuLmJnLXByaW1hcnkge1xuICAgIEBpbmNsdWRlIGxpbmVhci1ncmFkaWVudCh0byB0b3AgcmlnaHQsICRwcmltYXJ5LCAjZmZkMTdjKTtcbn1cblxuLmJnLXN1Y2Nlc3Mge1xuICAgIEBpbmNsdWRlIGxpbmVhci1ncmFkaWVudCh0byB0b3AgcmlnaHQsICRzdWNjZXNzLCAjNDJlNjk3KTtcbn1cblxuLmJnLWRhbmdlciB7XG4gICAgQGluY2x1ZGUgbGluZWFyLWdyYWRpZW50KHRvIHRvcCByaWdodCwgJGRhbmdlciwgI2ZkYTA5Yyk7XG59XG5cbi5iZy13YXJuaW5nIHtcbiAgICBAaW5jbHVkZSBsaW5lYXItZ3JhZGllbnQodG8gdG9wIHJpZ2h0LCAkd2FybmluZywgI2ZhYzk4MCk7XG59XG5cbi5iZy1pbmZvIHtcbiAgICBAaW5jbHVkZSBsaW5lYXItZ3JhZGllbnQodG8gdG9wIHJpZ2h0LCAkaW5mbywgIzE1ZjhiZik7XG59IiwiQG1peGluIGJveC1zaGFkb3coJHNoYWRvdy4uLikge1xuICAgIGJveC1zaGFkb3c6ICRzaGFkb3c7XG4gICAgLW8tYm94LXNoYWRvdzogJHNoYWRvdztcbiAgICAtbW96LWJveC1zaGFkb3c6ICRzaGFkb3c7XG4gICAgLXdlYmtpdC1ib3gtc2hhZG93OiAkc2hhZG93O1xufVxuXG5AbWl4aW4gdGV4dC1zaGFkb3coJHNoYWRvdy4uLikge1xuICAgIHRleHQtc2hhZG93OiAkc2hhZG93O1xuICAgIC1vLXRleHQtc2hhZG93OiAkc2hhZG93O1xuICAgIC1tb3otdGV4dC1zaGFkb3c6ICRzaGFkb3c7XG4gICAgLXdlYmtpdC10ZXh0LXNoYWRvdzogJHNoYWRvdztcbn1cblxuQG1peGluIHRyYW5zZm9ybSgkdHJhbnNmb3JtLi4uKSB7XG4gICAgdHJhbnNmb3JtOiAkdHJhbnNmb3JtO1xuICAgIC1vLXRyYW5zZm9ybTogJHRyYW5zZm9ybTtcbiAgICAtbW96LXRyYW5zZm9ybTogJHRyYW5zZm9ybTtcbiAgICAtd2Via2l0LXRyYW5zZm9ybTogJHRyYW5zZm9ybTtcbn1cblxuQG1peGluIHRyYW5zaXRpb24oJHRyYW5zaXRpb24uLi4pIHtcbiAgICB0cmFuc2l0aW9uOiAkdHJhbnNpdGlvbjtcbiAgICAtby10cmFuc2l0aW9uOiAkdHJhbnNpdGlvbjtcbiAgICAtbW96LXRyYW5zaXRpb246ICR0cmFuc2l0aW9uO1xuICAgIC13ZWJraXQtdHJhbnNpdGlvbjogJHRyYW5zaXRpb247XG59XG5cbkBtaXhpbiBsaW5lYXItZ3JhZGllbnQoJGNvbG9yLi4uKSB7XG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KCRjb2xvcik7XG4gICAgYmFja2dyb3VuZDogLW8tbGluZWFyLWdyYWRpZW50KCRjb2xvcik7XG4gICAgYmFja2dyb3VuZDogLW1vei1saW5lYXItZ3JhZGllbnQoJGNvbG9yKTtcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCgkY29sb3IpO1xufVxuXG5AbWl4aW4gYm9yZGVyLWdyYWRpZW50KCRjb2xvci4uLikge1xuICAgIGJvcmRlci1pbWFnZTogbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAkY29sb3IpIDIgMztcbiAgICBib3JkZXItaW1hZ2U6IC1tb3otbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAkY29sb3IpIDMgMztcbiAgICBib3JkZXItaW1hZ2U6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAkY29sb3IpIDMgMztcbn1cblxuQG1peGluIGNlbnRlcigkd2lkdGgsICRoZWlnaHQpIHtcbiAgICB3aWR0aDogJHdpZHRoO1xuICAgIGhlaWdodDogJGhlaWdodDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgbGluZS1oZWlnaHQ6ICRoZWlnaHQ7XG59IiwiQGltcG9ydCAnLi4vLi4vdGhlbWUvY29uZic7XG4uY2FyZC1oZWFkZXIge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNDBweDtcbiAgICBwYWRkaW5nOiAwIDEwcHg7XG4gICAgZGlzcGxheTogbm9uZTtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IFxuICAgIC5jYXJkLXRpdGxlIHtcbiAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiA0MHB4O1xuICAgICAgICBmb250LXNpemU6ICRkZWZhdWx0LXRleHQrMTtcbiAgICAgICAgZm9udC13ZWlnaHQ6IDcwMDtcbiAgICAgICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcbiAgICB9XG59XG5cbi5jb2xsYXBzZS1idG4ge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICByaWdodDogMDtcbiAgICB0b3A6IDVweDtcbiAgICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcbiAgICBvdXRsaW5lOiBub25lO1xuICAgIGJvcmRlcjogbm9uZTtcbiAgICBAaW5jbHVkZSBjZW50ZXIoMzBweCwgMzBweCk7XG4gICAgZm9udC1zaXplOiAkbGctdGV4dDtcbiAgICBjb2xvcjogcmdiYSgkZm9udHMtY29sb3IsIC41KTtcbiAgICBsZXR0ZXItc3BhY2luZzogLSRsZy10ZXh0O1xuICAgICY6aG92ZXIge1xuICAgICAgICBjb2xvcjogJHByaW1hcnk7XG4gICAgfVxufVxuXG4uY29sbGFwc2Utb2ZmIHtcbiAgICBAaW5jbHVkZSB0cmFuc2l0aW9uKGFsbCAuNXMpO1xuICAgIEBpbmNsdWRlIHRyYW5zZm9ybShzY2FsZSgwKSk7XG4gICAgd2lkdGg6IDA7XG59XG5cbi5jb2xsYXBzZS1vbiB7XG4gICAgQGluY2x1ZGUgdHJhbnNpdGlvbihhbGwgLjVzKTtcbiAgICBAaW5jbHVkZSB0cmFuc2Zvcm0oc2NhbGUoMSkpO1xufVxuXG4uY29udGVudC13cmFwIHtcbiAgICBoZWlnaHQ6IGF1dG87XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuLmNhcmQtY29udGVudCB7XG4gICAgcGFkZGluZzogMTBweDtcbiAgICBoZWlnaHQ6IGF1dG87XG4gICAgb3ZlcmZsb3cteDogaGlkZGVuO1xufVxuXG4uY2FyZC1mb290ZXIge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogYXV0bztcbiAgICBtaW4taGVpZ2h0OiA0NXB4O1xuICAgIGxpbmUtaGVpZ2h0OiA0NXB4O1xuICAgIGJvcmRlcjogbm9uZTtcbiAgICBib3JkZXItdG9wOiAxcHggc29saWQgJGJvcmRlci1jb2xvcjtcbiAgICBwYWRkaW5nOiAwIDEwcHg7XG59Il19 */"
 
 /***/ }),
 
@@ -2899,9 +2912,9 @@ var AuthService = /** @class */ (function () {
     function AuthService(afAuth, http) {
         this.afAuth = afAuth;
         this.http = http;
-        this.varifyFirebaseToken = function (token, callback) {
-            this.http.post(this.getDomainName() + '/api/user/verifyFirebaseToken', token).subscribe(function (resData) {
-                console.log(resData);
+        this.verifyFirebaseToken = function (token, callback) {
+            this.http.post(this.getDomainName() + '/api/user/verifyFirebaseToken', { token: token }).subscribe(function (resData) {
+                console.log("data", resData);
                 callback(resData);
             }, function (error) {
                 console.log('error', 'Allow Signup', 'Server Error');
@@ -2926,42 +2939,44 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.doFacebookLogin = function () {
         var _this = this;
+        var that = this;
         return new Promise(function (resolve, reject) {
             var provider = new firebase_app__WEBPACK_IMPORTED_MODULE_3__["auth"].FacebookAuthProvider();
             provider.addScope('email');
             _this.afAuth.auth
                 .signInWithPopup(provider)
                 .then(function (fbres) {
-                console.log(fbres);
-                resolve(fbres);
+                firebase_app__WEBPACK_IMPORTED_MODULE_3__["auth"]().currentUser.getIdToken(true).then(function (idToken) {
+                    that.verifyFirebaseToken(idToken, function (res) {
+                        console.log("res data", res);
+                        if (res.success) {
+                            var token = {
+                                token: res
+                            };
+                            resolve(fbres);
+                            console.log("verifyFirebaseToken response  ", token);
+                        }
+                        else {
+                            alert("Problem while login");
+                            console.log("res", res);
+                        }
+                        console.log(res);
+                    });
+                }).catch(function (error) {
+                    alert(error);
+                    console.log("login Error==>", error);
+                }).catch(function (error) {
+                    alert(error);
+                    console.log("login Error sign in popup==>", error);
+                });
             }, function (error) {
                 reject(error);
-            });
-            _this.afAuth.auth.currentUser.getIdToken(true).then(function (idToken) {
-                _this.varifyFirebaseToken(idToken, function (result) {
-                    console.log(result.data);
-                    if (result.success) {
-                        var token = {
-                            token: result.data
-                        };
-                        console.log("varifyFirebaseToken response  ", result);
-                    }
-                    else {
-                        alert(result.data);
-                    }
-                    console.log(result);
-                });
-            }).catch(function (error) {
-                alert(error);
-                console.log("login Error==>", error);
-            }).catch(function (error) {
-                alert(error);
-                console.log("login Error sign in popup==>", error);
             });
         });
     };
     AuthService.prototype.doGoogleLogin = function () {
         var _this = this;
+        var that = this;
         return new Promise(function (resolve, reject) {
             var provider = new firebase_app__WEBPACK_IMPORTED_MODULE_3__["auth"].GoogleAuthProvider();
             provider.addScope('https://www.googleapis.com/auth/plus.login');
@@ -2969,19 +2984,21 @@ var AuthService = /** @class */ (function () {
             provider.addScope('email');
             _this.afAuth.auth
                 .signInWithPopup(provider)
-                .then(function (res) {
-                resolve(res);
-                _this.afAuth.auth.currentUser.getIdToken(true).then(function (idToken) {
+                .then(function (fbres) {
+                firebase_app__WEBPACK_IMPORTED_MODULE_3__["auth"]().currentUser.getIdToken(true).then(function (idToken) {
                     console.log("firbase login idToken==>", idToken);
-                    _this.varifyFirebaseToken(idToken, function (res) {
+                    that.verifyFirebaseToken(idToken, function (res) {
+                        console.log("res data", res);
                         if (res.success) {
                             var token = {
-                                token: res.data
+                                token: res
                             };
-                            console.log("varifyFirebaseToken response  ", res);
+                            resolve(fbres);
+                            console.log("verifyFirebaseToken response  ", token);
                         }
                         else {
-                            alert(res.data);
+                            alert("Problem while login");
+                            console.log("res", res);
                         }
                         console.log(res);
                     });
@@ -3876,7 +3893,7 @@ module.exports = ".manage_subscription_page_wrapper {\r\n    display: flex;\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"manage_subscription_page_wrapper\">\n        <div class=\"block\">\n                <h3 class=\"myorder_custom\"><a href=\"/my-orders\">My Orders</a></h3>\n                <table class=\"table custom_order_table\">\n                    <thead>\n                        <tr>\n                            <th>Order ID</th>\n                            <th>Plan</th>\n                            <th>Total</th>\n                            <th>Current Week</th>\n                            <th>Date</th>\n                            <th>SkipWeek</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr *ngFor=\"let order of orders; let i = index;\">\n                            <td>{{i + 1}}</td>\n                            <td>{{order.plans.weeks}} Week</td>\n                            <td>{{order.total}}</td>\n                            <td>{{(getActiveWeek(order.plans.startDate))?getActiveWeek(order.plans.startDate):'Not started'}}</td>\n                            <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>a\n                            <!-- <td><button (click)=\"skipNextWeek(order,alertModal)\" class=\"btn btn-danger\"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td> -->\n                            <td  style=\"cursor: pointer;\"><button [disabled]='shouldButtonDisabled(order)' (click)=\"skipNextWeek(order,alertModal)\" class=\"btn btn-danger\"><i class='fa fa-trash fa-fw'></i>{{shouldButtonDisabled(order)}}</button></td>\n                        </tr>\n                    </tbody>\n                </table>\n                <h3 class=\"skipweek_text\"><a href=\"/skip-week\">Skip the coming weeks bag</a></h3>\n                <p>you can skip a week's bag just give us a 2 day head's up</p>\n            </div>\n    <div class=\"manage_subscription\">\n    </div>\n</div>\n\n<modal #alertModal modalClass=\"modal-sm\">\n    <modal-header>\n        <h3>Week Skip Action</h3>\n    </modal-header>\n    <modal-content>\n        {{alertText}}\n    </modal-content>\n    <modal-footer>\n        <button class=\"btn btn-primary\" (click)=\"closeModal(alertModal)\">close</button>\n    </modal-footer>\n</modal>\n\n\n<!-- <table class=\"table custom_order_table\">\n        <thead>\n            <tr>\n                <th>Date</th>\n                <th>Name</th>\n                <th>Address</th>\n                <th>Phone</th>\n                <th>Plan</th>\n                <th>ActiveWeek</th>\n                <th>SkipWeek</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr *ngFor=\"let order of orders\">\n                <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>\n                <td>{{order.userData.firstName}} {{order.userData.lastName}}</td>\n                <td>{{order.address}}</td>\n                <td>{{order.userData.phoneNo}}</td>\n                <td>{{order.planInfo.title}}</td>\n                <td>{{getActiveWeek(order.plans.startDate,order.plans.weeks)}}</td>\n                <td class=\"custom_td_skipweek\">\n                    <button *ngFor=\"let skipWeekItem of getWeekArray(order.plans.weeks);let skipWeekIndex = index\"\n                        data-title=\"\"\n                        (click)=\"skipWeekAction(order,skipWeekIndex+1,alertModal)\"\n                        [class]=\"isSkip(order.plans.skipedWeeks,skipWeekIndex+1) ? 'btn btn-success':'btn btn-danger'\"> \n                        {{skipWeekIndex+1}}\n                    </button>\n                </td>\n            </tr>\n        </tbody>\n    </table> -->\n"
+module.exports = "<div class=\"manage_subscription_page_wrapper\">\n        <div class=\"block\">\n                <h3 class=\"myorder_custom\"><a routerLink=\"/my-orders\">My Orders</a></h3>\n                <table class=\"table custom_order_table\">\n                    <thead>\n                        <tr>\n                            <th>Order ID</th>\n                            <th>Plan</th>\n                            <th>Total</th>\n                            <th>Current Week</th>\n                            <th>Date</th>\n                            <th>SkipWeek</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr *ngFor=\"let order of orders; let i = index;\">\n                            <td>{{i + 1}}</td>\n                            <td>{{order.plans.weeks}} Week</td>\n                            <td>{{order.total}}</td>\n                            <td>{{(getActiveWeek(order.plans.startDate))?getActiveWeek(order.plans.startDate):'Not started'}}</td>\n                            <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>\n                            <!-- <td><button (click)=\"skipNextWeek(order,alertModal)\" class=\"btn btn-danger\"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td> -->\n                            <td  style=\"cursor: pointer;\">\n                                <button \n                                [disabled]=\"order.state\" \n                                (click)=\"skipNextWeek(order,alertModal)\" \n                                class=\"btn btn-danger\"><i class='fa fa-trash fa-fw'></i>\n                                {{order.label}}\n                            </button></td>\n                        </tr>\n                    </tbody>\n                </table>\n                <h3 class=\"skipweek_text\"><a href=\"/skip-week\">Skip the coming weeks bag</a></h3>\n                <p>you can skip a week's bag just give us a 2 day head's up</p>\n            </div>\n    <div class=\"manage_subscription\">\n    </div>\n</div>\n\n<modal #alertModal modalClass=\"modal-sm\">\n    <modal-header>\n        <h3>Week Skip Action</h3>\n    </modal-header>\n    <modal-content>\n        {{alertText}}\n    </modal-content>\n    <modal-footer>\n        <button class=\"btn btn-primary\" (click)=\"closeModal(alertModal)\">close</button>\n    </modal-footer>\n</modal>\n\n\n<!-- <table class=\"table custom_order_table\">\n        <thead>\n            <tr>\n                <th>Date</th>\n                <th>Name</th>\n                <th>Address</th>\n                <th>Phone</th>\n                <th>Plan</th>\n                <th>ActiveWeek</th>\n                <th>SkipWeek</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr *ngFor=\"let order of orders\">\n                <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>\n                <td>{{order.userData.firstName}} {{order.userData.lastName}}</td>\n                <td>{{order.address}}</td>\n                <td>{{order.userData.phoneNo}}</td>\n                <td>{{order.planInfo.title}}</td>\n                <td>{{getActiveWeek(order.plans.startDate,order.plans.weeks)}}</td>\n                <td class=\"custom_td_skipweek\">\n                    <button *ngFor=\"let skipWeekItem of getWeekArray(order.plans.weeks);let skipWeekIndex = index\"\n                        data-title=\"\"\n                        (click)=\"skipWeekAction(order,skipWeekIndex+1,alertModal)\"\n                        [class]=\"isSkip(order.plans.skipedWeeks,skipWeekIndex+1) ? 'btn btn-success':'btn btn-danger'\"> \n                        {{skipWeekIndex+1}}\n                    </button>\n                </td>\n            </tr>\n        </tbody>\n    </table> -->\n"
 
 /***/ }),
 
@@ -3929,7 +3946,10 @@ var ManageSubscriptionComponent = /** @class */ (function () {
     ManageSubscriptionComponent.prototype.getActiveWeek = function (startDate) {
         var start = new Date(startDate);
         var today = new Date();
-        return Math.ceil(Math.abs(Math.floor((start - today) / 86400000)) / 7);
+        if (this.getCoreDate() >= this.getCoreDate(start))
+            return Math.ceil(Math.abs(Math.floor((start - today) / 86400000)) / 7);
+        else
+            return 0;
     };
     ManageSubscriptionComponent.prototype.getNextWeekId = function (weekNo, weekArray) {
         return weekArray.find(function (item) { return item.week == weekNo; });
@@ -3938,25 +3958,18 @@ var ManageSubscriptionComponent = /** @class */ (function () {
         return this.http.put(this.auth.getDomainName() + '/api/plan/active/' + activePlanId + '/skip-week/' + weekObj._id + '/' + weekObj.week, {});
     };
     ManageSubscriptionComponent.prototype.getCoreDate = function (date) {
-        if (date === void 0) { date = new Date(); }
-        return (new Date(new Date(new Date(new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)));
-    };
-    ManageSubscriptionComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.http.get(this.auth.getDomainName() + '/api/order/getMyOrders').subscribe(function (resData) {
-            // this.http.get(this.auth.getDomainName() + '/api/plan/active/5bfbdcc51efad521746223ae').subscribe((resData: any) => {
-            console.log('loll', resData.orderData);
-            _this.orders = resData.orderData;
-        }, function (error) {
-            console.log('error', 'Allow Signup', 'Server Error');
-        });
+        if (date === void 0) { date = new Date(new Date().toUTCString()); }
+        // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
+        return new Date(date.toLocaleDateString());
     };
     ManageSubscriptionComponent.prototype.shouldButtonDisabled = function (order) {
         console.log("should disabled", order._id);
         var actweek;
         // order.plans.startDate = new Date('12-5-2018')
         var currentDate = this.getCoreDate();
-        var startDate = this.getCoreDate(order.plans.startDate);
+        var startDate = this.getCoreDate(new Date(order.plans.startDate));
+        console.log(currentDate + ' : ' + startDate);
+        console.log(currentDate.getTime() + '  > = ' + startDate.getTime());
         if (currentDate.getTime() >= startDate.getTime()) {
             actweek = this.getActiveWeek(new Date(order.plans.startDate));
             var nextWeek = actweek + 1;
@@ -3982,6 +3995,21 @@ var ManageSubscriptionComponent = /** @class */ (function () {
             return { state: true, label: 'Not Started Yet' };
         }
     };
+    ManageSubscriptionComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.http.get(this.auth.getDomainName() + '/api/order/getMyOrders').subscribe(function (resData) {
+            // this.http.get(this.auth.getDomainName() + '/api/plan/active/5bfbdcc51efad521746223ae').subscribe((resData: any) => {
+            // console.log('loll', resData.orderData);
+            resData.orderData.forEach(function (item) {
+                var isDisabled = _this.shouldButtonDisabled(item);
+                item.state = isDisabled.state;
+                item.label = isDisabled.label;
+            });
+            _this.orders = resData.orderData;
+        }, function (error) {
+            console.log('error', 'Allow Signup', 'Server Error');
+        });
+    };
     // logout() {
     //   sessionStorage.setItem('isLoggedIn', "false");
     //   sessionStorage.removeItem('token');
@@ -3990,7 +4018,7 @@ var ManageSubscriptionComponent = /** @class */ (function () {
     ManageSubscriptionComponent.prototype.skipNextWeek = function (order, index, alertModal) {
         var actweek;
         // order.plans.startDate = new Date('12-5-2018')
-        if (this.getCoreDate() >= this.getCoreDate(order.plans.startDate)) {
+        if (this.getCoreDate() >= this.getCoreDate(new Date(order.plans.startDate))) {
             actweek = this.getActiveWeek(new Date(order.plans.startDate));
             var nextWeek = actweek + 1;
             if (this.notLastWeek(nextWeek, order.plans.weeks)) {
@@ -4003,6 +4031,7 @@ var ManageSubscriptionComponent = /** @class */ (function () {
                                 /* this.alertText = 'Week Skiped Successfully!';
                                 this.openModal(alertModal); */
                                 alert(res.message);
+                                window.location.reload();
                             }
                             else if (res.error) {
                                 alert(res.error);
@@ -4105,7 +4134,7 @@ var ManageSubscriptionComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-manage-subscription',
             template: __webpack_require__(/*! ./manage-subscription.component.html */ "./src/app/user/manage-subscription/manage-subscription.component.html"),
-            styles: [__webpack_require__(/*! ./manage-subscription.component.css */ "./src/app/user/manage-subscription/manage-subscription.component.css")]
+            styles: [__webpack_require__(/*! ./manage-subscription.component.css */ "./src/app/user/manage-subscription/manage-subscription.component.css")],
         }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
     ], ManageSubscriptionComponent);
@@ -4618,6 +4647,41 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 
 
 
@@ -4638,10 +4702,46 @@ var SignInComponent = /** @class */ (function () {
         this.forgetPasswordMail = '';
     }
     SignInComponent.prototype.fbLogin = function () {
-        this.authService.doFacebookLogin();
+        return __awaiter(this, void 0, void 0, function () {
+            var fbLoginRes;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.authService.doFacebookLogin()];
+                    case 1:
+                        fbLoginRes = _a.sent();
+                        if (fbLoginRes) {
+                            this.authService.setLoggedIn(true);
+                            if (fbLoginRes.additionalUserInfo && fbLoginRes.additionalUserInfo.profile && fbLoginRes.additionalUserInfo.profile.name) {
+                                this.authService.setUserName(fbLoginRes.additionalUserInfo.profile.name);
+                                window.location.pathname = "";
+                            }
+                        }
+                        console.log("fbLogin", fbLoginRes);
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     SignInComponent.prototype.googleLogin = function () {
-        this.authService.doGoogleLogin();
+        return __awaiter(this, void 0, void 0, function () {
+            var gLoginRes;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.authService.doGoogleLogin()];
+                    case 1:
+                        gLoginRes = _a.sent();
+                        if (gLoginRes) {
+                            this.authService.setLoggedIn(true);
+                            if (gLoginRes.additionalUserInfo && gLoginRes.additionalUserInfo.profile && gLoginRes.additionalUserInfo.profile.name) {
+                                this.authService.setUserName(gLoginRes.additionalUserInfo.profile.name);
+                                window.location.pathname = "";
+                            }
+                        }
+                        console.log("fbLogin", gLoginRes);
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     SignInComponent.prototype.ngOnInit = function () {
         this.loginForm = this.formBuilder.group({
