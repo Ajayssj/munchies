@@ -4,7 +4,8 @@ const db = require('../../database');
 const Order = db.getCollection('orders');
 const ActivePlan = db.getCollection('activePlans');
 const CustomPlan = db.getCollection('customPlans');
-const PlansExtended = db.getCollection('custom')
+const PlansExtended = db.getCollection('custom');
+const Extra = db.getCollection('extraInfo');
 const getNextMondayDate = function(date){
     return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
 }
@@ -33,6 +34,14 @@ const createWeekByPlans = function(weeks,planId,activePlanId){
     }
     return PlansExtended.insertMany(objArr);
         
+}
+const insertExtraInfo = function(orderId,data){
+    let arrObj = [];
+    data.forEach(obj => {
+        arrObj.push({ type : obj.type, value : obj.value, orderId : orderId });
+    })
+    return Extra.insertMany(arrObj);
+    
 }
 module.exports = {
     getAllOrders : (req,res) => {
@@ -97,6 +106,14 @@ module.exports = {
             weeks = Number(weeks,10);
             const planId = req.body.planId;
             if(planId && userId && !Number.isNaN(weeks)){
+                let extraInfo = req.body.extraInfo;
+                if(extraInfo){ 
+                    try{
+                        extraInfo = JSON.parse(extraInfo);
+                    }catch(err){
+                        console.log('JSON ERROR : ', err);
+                    }
+                }
                 addActivePlan({userId : userId,planId : planId,numOfWeeks : weeks})
                 .then(plan => {
                     const orderObj = {
@@ -116,21 +133,16 @@ module.exports = {
                         postalCode:req.body.postalCode
                     }
                     Order.insertOne(orderObj).then(order => {
-                        res.json({success : true, order : order})
+                        if(extraInfo && Array.isArray(extraInfo) && extraInfo.length){
+                            insertExtraInfo(order.ops[0]._id,extraInfo)
+                            .then(result => {
+                                console.log('Extra Info Inserted Successfully!');
+                            });
+                        }
+                        res.json({success : true, order : order});
                     }).catch(err => {
                         res.json({success : false, error : err});
                     })
-                   /*  createWeekByPlans(weeks,db.toObjectID(planId),plan.ops[0]._id)
-                        .then(result => {
-                            Order.insertOne(orderObj).then(order => {
-                                res.json({success : true, order : order})
-                            }).catch(err => {
-                                res.json({success : false, error : err});
-                            })
-
-                        }).catch(err => {
-                            res.json({success : false, error : err});
-                        }) */
                 })
                 .catch(err => {
                     res.json({success : false, error : err});
@@ -138,11 +150,6 @@ module.exports = {
             }else{
                 res.json({success : false, error : 'Invalid request Data'});
             }
-          
-
-            
-
-        
         }
     },
     getMyorders : (req, res) => {
