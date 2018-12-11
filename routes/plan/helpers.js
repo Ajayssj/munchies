@@ -51,6 +51,29 @@ const activateDeactivatePlan = (activePlanId,status = true) => {
     ActivePlan.updateOne({_id : db.toObjectID(activePlanId)},{$set : { isActive : status}}).then(success).catch(error)
    })
 }
+const getCoreDate = function(date){
+   return new Date(date.toLocaleDateString()).getTime()
+}
+const shouldWeekSkip = function(activePlanId,week,cb){
+     ActivePlan.findOne({_id : db.toObjectID(activePlanId)})   
+        .then(plan => {
+            if(plan){
+                currentDate = new Date(new Date().toUTCString()).addDays(2);
+                weekDate = new Date(plan.startDate).addDays(7 * (week - 1));
+                if( getCoreDate(weekDate) > getCoreDate(currentDate))
+                    cb(true);
+                else
+                    cb(false);
+            }
+            
+        })
+        .catch();
+}
+Date.prototype.addDays = function(days) {
+    this.setDate(this.getDate() + parseInt(days));
+    return this;
+};
+
 const createWeekByPlans = function(weeks,planId){
     let objArr = [];
     for(var i = 0; i < weeks; i++){
@@ -537,18 +560,26 @@ module.exports = {
     const userId = req.session.user._id;
     let week = req.params.week;
     const weekId = req.params.weekId;
-    week = Number(week,10)
+    week = Number(week,10);
     if(userId && activePlanId && weekId && !Number.isNaN(week)){
-        ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
-        {
-            $push : {skipedWeeks : {wId : db.toObjectID(weekId), wNo : week} },
-            $inc: { weeks : 1}
-        }).then(plan => {
-            if(plan.result.nModified == 1){
-                res.json({success : true, message : week + ' Week Skipped Successfully!'});   
-            }else
-                res.json({success : false, error : 'Plan not found to be edited!'})
-        }).catch(err => res.json({success : false, error : err}));
+        shouldWeekSkip(activePlanId,week,function(result){
+            if(result){
+                ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
+                {
+                    $push : {skipedWeeks : {wId : db.toObjectID(weekId), wNo : week} },
+                    $inc: { weeks : 1}
+                }).then(plan => {
+                    if(plan.result.nModified == 1){
+                        res.json({success : true, message : week + ' Week Skipped Successfully!'});   
+                    }else
+                        res.json({success : false, error : 'Plan not found to be edited!'})
+                }).catch(err => res.json({success : false, error : err}));
+            }else{
+                res.json({success : false, error : 'Less than 2 days , can not be skiped!'})
+            }
+
+        })
+       
     }else{
         res.json({success : false, error : 'Invalid Request Data!'})
     }
