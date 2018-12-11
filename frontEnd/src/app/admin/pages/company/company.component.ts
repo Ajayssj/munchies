@@ -1,5 +1,6 @@
 import { Component, OnInit,HostListener,ChangeDetectorRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../user/auth.service';
 import swal from 'sweetalert2';
 import { element } from 'protractor';
@@ -17,7 +18,7 @@ export class CompanyComponent implements OnInit {
   view: String = 'company';
   products;
   productResponse;
-  deleteMessage = '';
+  message = '';
   data = {};
   modalEl;
   pType = []; 
@@ -51,11 +52,10 @@ export class CompanyComponent implements OnInit {
   selectedProductObj = {};
   selectedWeeks = [];
   matchedCompanyName = [];
-  liClicked: boolean = false;
+  hideAutoComplete: boolean = false;
   weeks = [];
   errorMessage = '';
   allergyDetails: Array<string>;
-  hideWeeksDropdown = 0;
   public weekArray: Array<Object> = [{id: 1, text: 'Week 1'}, {id: 2, text: 'Week 2'}, {id: 3, text: 'Week 3'},
    {id: 4, text: 'Week 4'}, {id: 5, text: 'Week 5'}, {id: 6, text: 'Week 6'}, {id: 7, text: 'Week 7'}, 
    {id: 8, text: 'Week 8'}, {id: 9, text: 'Week 9'}, {id: 10, text: 'Week 10'}, {id: 11, text: 'Week 11'},
@@ -63,13 +63,13 @@ export class CompanyComponent implements OnInit {
     @HostListener('document:click', ['$event'])
     clickout(event) {
       console.log("click outside",event);
-      this.hideWeeksDropdown = 0;
   
      this.cdRef.detectChanges();
-    //  this.liClicked = false;
+    //  this.hideAutoComplete = false;
     }
 
-  constructor(private http: HttpClient, private auth: AuthService,private cdRef:ChangeDetectorRef) { }
+  constructor(private http: HttpClient, private auth: AuthService,
+    private cdRef:ChangeDetectorRef, private router: Router) { }
   ngOnInit() { 
     console.log("hiiiiiiiiiiiii", this.auth.getDomainName());
     this.productTypes = ['Laadu', 'Makhana', 'Energy Bars', 'Cookies', 
@@ -144,7 +144,7 @@ export class CompanyComponent implements OnInit {
       }
     });
   } 
-  removeWeekInProduct(weekItem,productId, weekId) {
+  removeWeekInProduct(weekItem,productId, weekId, modal) {
     if(weekItem.indexOf(weekId) > -1) {
       let indexOfItem = weekItem.indexOf(weekId);
       weekItem.splice(indexOfItem,1);
@@ -153,9 +153,10 @@ export class CompanyComponent implements OnInit {
     this.http.delete(this.auth.getDomainName() + '/api/plan/core/product/' + productId + '/week/' + weekId, {}).subscribe(data=> {
       console.log(data);
     });
+    this.closeModal(modal);
   }
 
-  deleteItem(pid, tabName) {
+  deleteItem(pid, modal) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}),
       productId: pid
@@ -164,13 +165,15 @@ export class CompanyComponent implements OnInit {
       productId: pid
     }
     console.log(this.data);
-    this.http.delete(this.auth.getDomainName() + '/api/' + tabName + '/delete/' + pid, {}).subscribe((res: productRes)=> {
+    this.http.delete(this.auth.getDomainName() + '/api/product/delete/' + pid, {}).subscribe((res: productRes)=> {
       console.log(res.success);
-        this.deleteMessage = res.message; 
+        this.message = res.message; 
+        // this.scrollTop();
     },
     err=> {
       console.log(err);
-    })
+    });
+    this.closeModal(modal);
   }
 
   //Auto complete functionality
@@ -179,7 +182,7 @@ export class CompanyComponent implements OnInit {
     
     // this.ref.detectChanges();
     if(name && name.length > 0 && companyObj.includes(name)) {
-      // this.liClicked = false;
+      // this.hideAutoComplete = false;
       return true;
     }
     return false;
@@ -188,7 +191,7 @@ export class CompanyComponent implements OnInit {
 
   populateCompanyName(company) {
     this.addPcompany = company; 
-    this.liClicked = false;
+    this.hideAutoComplete = false;
   }
   //Modal code
   openModal(modal) {
@@ -274,6 +277,16 @@ export class CompanyComponent implements OnInit {
 //     });
 //     this.closeModal(modal);
 // }
+  // scrollTop() {
+  //   var scrollToTop = window.setInterval(function () {
+  //     var pos = window.pageYOffset;
+  //     if (pos > 0) {
+  //         window.scrollTo(0, pos - 20); // how far to scroll on each step
+  //     } else {
+  //         window.clearInterval(scrollToTop);
+  //     }
+  //   }, 16); // how fast to scroll (this equals roughly 60 fps)
+  // }
 addProduct(modal) {
     
     this.addProductArray = {
@@ -293,8 +306,12 @@ addProduct(modal) {
     err=> {
       console.log(err);
     });
-    this.http.post(this.auth.getDomainName() + '/api/product/add', this.addProductArray).subscribe(data=>{
-      console.log(data);
+    this.http.post(this.auth.getDomainName() + '/api/product/add', this.addProductArray).subscribe((response: any)=>{
+      console.log(response);
+      if(response.success) {
+        this.message = response.message;
+        // this.scrollTop();
+      }
     }, 
     err=> {
       console.log(err);

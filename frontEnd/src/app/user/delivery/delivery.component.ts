@@ -53,6 +53,8 @@ export class DeliveryComponent implements OnInit {
     if (this.deliveryForm.invalid) {
       return;
     }
+    var questionInfo = [{type: 'allergic', value: this.route.snapshot.queryParamMap.get('question1')},
+                    {type: 'fruits', value: this.route.snapshot.queryParamMap.get('question2')} ];
     this.data = {
       firstName: this.f.name.value,
       lastName: this.f.surName.value,
@@ -61,7 +63,8 @@ export class DeliveryComponent implements OnInit {
       phoneNo: this.f.phone.value,
       postalCode: this.f.postalCode.value,
       planId: this.route.snapshot.queryParamMap.get('selectedPlan'),
-      weeks : this.route.snapshot.queryParamMap.get('week')
+      weeks : this.route.snapshot.queryParamMap.get('week'),
+      extraInfo: questionInfo
     }
     this.httpOptions = {
       headers: new HttpHeaders({

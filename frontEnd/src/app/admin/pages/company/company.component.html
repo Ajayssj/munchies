@@ -34,7 +34,7 @@
         </div>
         <button (click)="addTypes(addModal)" class="btn btn-primary">Add Product Type</button>
       </div> -->
-      <div (keydown.enter)="addProduct(addModal)" (click)="liClicked = false">
+      <div (keydown.enter)="addProduct(addModal)" (click)="hideAutoComplete = false">
         <div class="form-group">
           <label class="control-label">Name</label>
           <input type="text" [(ngModel)]="addPname" class="form-control" placeholder="Enter Product Name" />
@@ -48,8 +48,8 @@
         </div>
         <div class="form-group">
           <label class="control-label">Company</label>
-          <input type="text" [(ngModel)]="addPcompany" (keydown)="liClicked=true" class="form-control" placeholder="Enter Product Company" />
-          <ul class="auto_complete_items" [hidden]="!liClicked">
+          <input type="text" [(ngModel)]="addPcompany" (keydown)="hideAutoComplete=true" class="form-control" placeholder="Enter Product Company" />
+          <ul class="auto_complete_items" [hidden]="!hideAutoComplete">
             <li 
             *ngFor="let company of companyName" 
             [ngClass]="{'hidden':(!ifMatchString(addPcompany | lowercase,company  | lowercase))}"
@@ -156,6 +156,30 @@
       </div>
     </modal-content>
   </modal>
+  <modal #confirmDeleteModal class="confirmDeleteModal" [closeOnEscape]="false" [closeOnOutsideClick]="true"  >
+    <modal-header>
+      <h3>Confirm Delete</h3>
+    </modal-header>
+    <modal-content>
+      <h4>Are you sure you want to delete Week {{ weekNo}}?</h4>
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-danger" (click)="removeWeekInProduct(productObj.weeks,productObj._id, weekNo, confirmDeleteModal);">Yes</button>
+        <button class="btn btn-success" (click)="closeModal(confirmDeleteModal);">No</button>
+    </modal-footer>
+  </modal>
+  <modal #confirmDeleteProductModal class="confirmDeleteModal" [closeOnEscape]="false" [closeOnOutsideClick]="true"  >
+    <modal-header>
+      <h3>Confirm Delete</h3>
+    </modal-header>
+    <modal-content>
+      <h4>Are you sure you want to delete this product?</h4>
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-danger" (click)="deleteItem(productObj._id, confirmDeleteProductModal);">Yes</button>
+        <button class="btn btn-success" (click)="closeModal(confirmDeleteProductModal);">No</button>
+    </modal-footer>
+  </modal>
   <div class="container-fluid content">
     <!-- <div *ngIf="view == 'company'">
       <div class="row">
@@ -212,6 +236,7 @@
     <div>
       <div class="row">
         <button (click)="addModal.open()" class="btn btn-primary" style="margin:20px">Add Product</button>
+        <span class="success" *ngIf="message!=''">{{message}}</span>
       </div>
       <table class="table table-bordered">
         <thead>
@@ -241,12 +266,12 @@
             <td>{{product.kcal}}</td>
             <td class="selectedWeeks">
               <button (click)="editModal.open();selectedProductObj=product" class="btn btn-success mr-20">Edit</button>
-              <button (click)="deleteItem(product._id, 'product')" class="btn btn-danger">Delete</button>
+              <button (click)="confirmDeleteProductModal.open(); productObj=product;" class="btn btn-danger">Delete</button>
               <div *ngIf="product.weeks.length > 0" class="card-content">
-                <span *ngFor="let weekItem of product.weeks;let weekIndex = index">
+                <span *ngFor="let weekItem of product.weeks;let weekIndex = index;">
                   <span class="selectedWeeks">
                     <button class="btn btn-warning">{{'Week ' + weekItem}}
-                      <i (click)="removeWeekInProduct(product.weeks,product._id, weekItem);" class="fa fa-close"></i></button>
+                      <i (click)="confirmDeleteModal.open(); productObj=product; weekNo=weekItem;" class="fa fa-close"></i></button>
                   </span>
                 </span>
               </div>
@@ -258,7 +283,7 @@
                       {{'Week'}}
                       <span class="caret"></span>
                     </button>
-                    <ul *ngIf="product.selectedWeek || hideWeeksDropdown" class="dropdown-menu">
+                    <ul *ngIf="product.selectedWeek" class="dropdown-menu">
                       <li *ngFor="let week of weekArray" value="{{week.id}}" (click)="addWeekInProduct(product.weeks,week.id, product._id);product.selectedWeek=null">{{week.text}}</li>
                     </ul>
                   </div>

@@ -65,3 +65,24 @@ button {
 .table>tbody>tr>td {
   text-transform: capitalize;
 }
+.confirmDeleteModal .modal-header {
+  padding: 0px 15px;
+}
+.confirmDeleteModal .modal-header .close {
+  margin-top: 10px;
+}
+.confirmDeleteModal modal-header h4 {
+  margin-top: 10px;
+}
+modal-footer button.btn {
+  width: 80px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+}
+.success {
+  width: 75%;
+  display: inline-block;
+  text-align: center;
+  color: #398439;
+  font-size: 18px;
+}

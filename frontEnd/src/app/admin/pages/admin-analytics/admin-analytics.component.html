@@ -8,28 +8,10 @@
   <div class="question_block">
     <h3>Which area has the most delivery?</h3>
     <card cardTitle='Most delivery'>
-      <div class="area">
-        <div class="area_text">Contonment</div>
+      <div *ngFor="let area of areaInfo" class="area">
+        <div class="area_text">{{area.areaName}}</div>
         <div class="pbar_wrapper">
-           <div title="40%" [ngStyle]="{'width.%': 40}" class="pbar"><span>40%</span></div>
-        </div>
-      </div>
-      <div class="area">
-        <div class="area_text">Indira Nagar</div>
-        <div class="pbar_wrapper">
-           <div title="20%" [ngStyle]="{'width.%': 20}" class="pbar"><span>20%</span></div>
-        </div>
-      </div>
-      <div class="area">
-        <div class="area_text">Usmanpur</div>
-        <div class="pbar_wrapper">
-           <div title="50%" [ngStyle]="{'width.%': 50}" class="pbar"><span>50%</span></div>
-        </div>
-      </div>
-      <div class="area">
-        <div class="area_text">Cidco</div>
-        <div class="pbar_wrapper">
-           <div title="80%" [ngStyle]="{'width.%': 80}" class="pbar"><span>80%</span></div>
+           <div title="{{((area.count) * 100 / totalAreaCount)}}%" [ngStyle]="{'width.%': ((area.count) * 100 / totalAreaCount)}" class="pbar"><span> {{((area.count) * 100 / totalAreaCount)}} %</span></div>
         </div>
       </div>
     </card>
@@ -46,10 +28,10 @@
       <div echarts [options]="fruitOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>
   </div>
-  <div class="question_block">
-    <h3>Fruits liked the most?</h3>
+  <!-- <div class="question_block">
+    <h3>Month Wise website traffic</h3>
     <card cardTitle='Line Chart'>
       <div echarts [options]="monthWiseTrafficOption" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>
-  </div>
+  </div> -->
 </div>
