@@ -9,14 +9,16 @@ module.exports = {
         const planApi = require('./plan');
         const ordrApi = require('./order');
 		const typeApi = require('./type');
-		const companyApi = require('./company');
+        const companyApi = require('./company');
+        const analysisApi = require('./analysis');
 
         app.use('/api', userApi);
         app.use('/api', productApi);
         app.use('/api', planApi);
         app.use('/api', ordrApi);
 		app.use('/api',typeApi);
-		app.use('/api',companyApi);
+        app.use('/api',companyApi);
+        app.use('/api',analysisApi);
         app.use(express.static('client'));
         app.get('/*', (req, res) => res.sendFile(__baseUrl + '/client/'));
 
@@ -38,7 +40,7 @@ module.exports = {
                 maxAge: 1000 * 60 * 24 // 24 hours
             },
         }));
-        // app.use(bodyParser.urlencoded({urlencoded : false}));
+        app.use(bodyParser.urlencoded({urlencoded : false}));
         app.use(bodyParser.json());
     },
     bindAuth: function (app) {
