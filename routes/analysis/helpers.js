@@ -62,4 +62,36 @@ module.exports = {
         }).catch(err => res.json({success : false, error : err}));
         
     },
+    getDeliveredArea : (req,res) => {
+        Order.aggregate(
+
+            // Pipeline
+            [
+                // Stage 1
+                {
+                    $group: {
+                       _id : '$Area_of_delivery',
+                        count: {
+                                $sum: 1
+                            }
+                        
+                    }
+                },
+        
+                // Stage 2
+                {
+                    $sort: {
+                        count : -1
+                    }
+                },
+        
+            ]
+        
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+        
+        ).toArray().then(result => {
+            res.json({success : true, data : result});
+        }).catch(err => res.json({success : false, error : err}));
+        
+    },
 }
