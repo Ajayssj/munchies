@@ -368,20 +368,19 @@ module.exports = {
                         "as" : "customWeekProducts"
                     }
                 },
-               /*  {
-                   $project : {
-                        customWeeks: 0,
-                        skipedWeeks : 0
-                   }
-                }, */
                 {
                     $lookup : {
                         "from" : "plansExtended",
-                        "localField" : "planId",
-                        "foreignField" : "planId",
+                        "localField" : "customWeeks.wId",
+                        "foreignField" : "_id",
                         "as" : "plans"
                     }
                 },
+               /*  {
+                    $match : {
+                        "plans._id" : db.toObjectID(weekId)
+                    }
+                },   */
                 {
                     $lookup : {
                         "from" : "products",
@@ -393,12 +392,15 @@ module.exports = {
                 {
                    $project : {
                         plans : 0,
-                        customWeeks : 0
+                        customWeeks : 0,
+                        skipedWeeks : 0
                    }
                 }
         
             ]).toArray()
                 .then(customizedPlansProducts => {
+                    // let defaultWeekProducts = customizedPlansProducts[0].defaultWeekProducts.filter(item => item._id == db.toObjectID(weekId))
+                    // customizedPlansProducts.defaultWeekProducts = defaultWeekProducts;
                     res.json({success : true, data : customizedPlansProducts});
                 }).catch(err => {
                     res.json({success : false, error : err});
