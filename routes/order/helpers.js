@@ -58,6 +58,14 @@ module.exports = {
                         "as" : "user"
                     }
                 },
+                {
+                    $lookup: {
+                        "from" : "plansExtended",
+                        "localField" : "planId",
+                        "foreignField" : "planId",
+                        "as" : "weekIds"
+                    }
+                },
         
                 // Stage 2
                 {

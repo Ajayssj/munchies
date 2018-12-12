@@ -5,7 +5,7 @@ routes.get('/plan/active/:userId',helpers.getActivePlans);
 routes.put('/plan/active/:activePlanId/skip-week/:weekId/:week',helpers.skipActivePlanWeek);
 routes.put('/plan/active/:activePlanId/undo-skip-week/:weekId',helpers.undoSkippedActivePlanWeek);
 routes.get('/plan/customize/:activePlanId',helpers.getCustmoizedPlan);
-routes.get('/plan/customize/:activePlanId/week/:week',helpers.getCustmoizedPlanByWeek);
+routes.get('/plan/customize/:activePlanId/week/:weekId',helpers.getCustmoizedPlanByWeek);
 routes.put('/plan/deactivate/:activePlanId',helpers.deactivatePlan);
 routes.put('/plan/activate/:activePlanId',helpers.activatePlan);
 routes.delete('/plan/delete/:activePlanId',helpers.deletePlan);
