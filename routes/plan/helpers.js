@@ -356,8 +356,8 @@ module.exports = {
             [
                 {
                     $match: {
-                        activePlanId : db.toObjectID(activePlanId),
-                        "customWeeks.wId" :  to.toObjectID(weekId)
+                        _id : db.toObjectID(activePlanId),
+                        "customWeeks.wId" :  db.toObjectID(weekId)
                     }
                 },
                 {
@@ -368,12 +368,12 @@ module.exports = {
                         "as" : "customWeekProducts"
                     }
                 },
-                {
+               /*  {
                    $project : {
                         customWeeks: 0,
                         skipedWeeks : 0
                    }
-                },
+                }, */
                 {
                     $lookup : {
                         "from" : "plansExtended",
