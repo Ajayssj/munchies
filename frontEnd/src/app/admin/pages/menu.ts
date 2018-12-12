@@ -1,9 +1,9 @@
 export let MENU_ITEM = [
-    {
-        path: 'index',
-        title: 'Dashboard',
-        icon: 'dashboard'
-    },
+    // {
+    //     path: 'index',
+    //     title: 'Dashboard',
+    //     icon: 'dashboard'
+    // },
     {
         path: 'admin-analytics',
         title: 'Admin Analytics',

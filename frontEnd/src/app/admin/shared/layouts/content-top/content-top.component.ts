@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ContentTopComponent {
   urlArr = this.router.url.split('/');
-  routeTitle = this.urlArr[this.urlArr.length - 1];
+  routeTitle = this.urlArr[3];
   constructor(
     public _globalService: GlobalService,
     private router: Router,

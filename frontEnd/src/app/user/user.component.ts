@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -10,16 +10,18 @@ import { from } from 'rxjs';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
+    
+    @HostListener('window:resize', ['$event'])
+    onResize(event){
+        this.applyMinHeightToContentElement();
+    }
   title = 'Munchies';
   styles = {};
-  constructor (private router: Router, private location: Location, private http: HttpClient) {
+  constructor (private router: Router, private location: Location, private http: HttpClient,
+    private cdRef:ChangeDetectorRef) {
   }
   ngOnInit() {
-    var browserHeight = window.innerHeight;
-    var contentElementHeight = browserHeight - 120 + 'px';
-    this.styles = {
-      'min-height': contentElementHeight
-    }
+    this.applyMinHeightToContentElement();
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
           return;
@@ -36,6 +38,14 @@ export class UserComponent {
   });
   }
 
+  applyMinHeightToContentElement() {
+    var browserHeight = window.innerHeight;
+    var contentElementHeight = browserHeight - 120 + 'px';
+    this.styles = {
+      'min-height': contentElementHeight
+    }
+    console.log(contentElementHeight);
+  }
 
   ngAfterViewInit(){
   }

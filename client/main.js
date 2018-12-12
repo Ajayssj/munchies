@@ -10,13 +10,13 @@
 var map = {
 	"./admin-analytics/admin-analytics.module": [
 		"./src/app/admin/pages/admin-analytics/admin-analytics.module.ts",
-		"default~admin-analytics-admin-analytics-module~charts-charts-module~index-index-module",
+		"default~admin-analytics-admin-analytics-module~charts-charts-module",
 		"common",
 		"admin-analytics-admin-analytics-module"
 	],
 	"./charts/charts.module": [
 		"./src/app/admin/pages/charts/charts.module.ts",
-		"default~admin-analytics-admin-analytics-module~charts-charts-module~index-index-module",
+		"default~admin-analytics-admin-analytics-module~charts-charts-module",
 		"common",
 		"charts-charts-module"
 	],
@@ -47,12 +47,6 @@ var map = {
 	"./icon/icon.module": [
 		"./src/app/admin/pages/icon/icon.module.ts",
 		"icon-icon-module"
-	],
-	"./index/index.module": [
-		"./src/app/admin/pages/index/index.module.ts",
-		"default~admin-analytics-admin-analytics-module~charts-charts-module~index-index-module",
-		"common",
-		"index-index-module"
 	],
 	"./menu-levels/menu-levels.module": [
 		"./src/app/admin/pages/menu-levels/menu-levels.module.ts",
@@ -292,11 +286,11 @@ var LoginComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MENU_ITEM", function() { return MENU_ITEM; });
 var MENU_ITEM = [
-    {
-        path: 'index',
-        title: 'Dashboard',
-        icon: 'dashboard'
-    },
+    // {
+    //     path: 'index',
+    //     title: 'Dashboard',
+    //     icon: 'dashboard'
+    // },
     {
         path: 'admin-analytics',
         title: 'Admin Analytics',
@@ -595,13 +589,12 @@ var childRoutes = [
                 component: _pages_component__WEBPACK_IMPORTED_MODULE_1__["PagesComponent"],
                 // canActivate: [AuthGuard],
                 children: [
-                    { path: '', redirectTo: 'index', pathMatch: 'full' },
+                    { path: '', redirectTo: 'admin-analytics', pathMatch: 'full' },
                     { path: 'admin-analytics', loadChildren: './admin-analytics/admin-analytics.module#AdminAnalyticsModule' },
                     { path: 'customer', loadChildren: './customer/customer.module#CustomerModule' },
                     { path: 'products', loadChildren: './company/company.module#CompanyModule' },
                     { path: 'snacks', loadChildren: './snacks/snacks.module#SnacksModule' },
                     { path: 'plan-management', loadChildren: './plan-management/plan-management.module#PlanManagementModule' },
-                    { path: 'index', loadChildren: './index/index.module#IndexModule' },
                     { path: 'editor', loadChildren: './editor/editor.module#EditorModule' },
                     { path: 'icon', loadChildren: './icon/icon.module#IconModule' },
                     { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },
@@ -2027,7 +2020,7 @@ var ContentTopComponent = /** @class */ (function () {
         this.router = router;
         this.route = route;
         this.urlArr = this.router.url.split('/');
-        this.routeTitle = this.urlArr[this.urlArr.length - 1];
+        this.routeTitle = this.urlArr[3];
         this.getRouteTitle();
     }
     ContentTopComponent.prototype.getRouteTitle = function () {
@@ -5489,7 +5482,7 @@ module.exports = "/*\r\nThis CSS resource incorporates links to font software wh
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"main_wrapper\">asdsad\n    <app-header></app-header>\n    <div class=\"content content_position\" [ngStyle] = \"styles\">\n        <router-outlet></router-outlet>\n    </div>\n</div>  \n<app-footer></app-footer>"
+module.exports = "\n<div class=\"main_wrapper\" (window:resize)=\"onResize($event)\">asdsad\n    <app-header></app-header>\n    <div class=\"content content_position\" [ngStyle] = \"styles\">\n        <router-outlet></router-outlet>\n    </div>\n</div>  \n<app-footer></app-footer>"
 
 /***/ }),
 
@@ -5521,19 +5514,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var UserComponent = /** @class */ (function () {
-    function UserComponent(router, location, http) {
+    function UserComponent(router, location, http, cdRef) {
         this.router = router;
         this.location = location;
         this.http = http;
+        this.cdRef = cdRef;
         this.title = 'Munchies';
         this.styles = {};
     }
+    UserComponent.prototype.onResize = function (event) {
+        this.applyMinHeightToContentElement();
+    };
     UserComponent.prototype.ngOnInit = function () {
-        var browserHeight = window.innerHeight;
-        var contentElementHeight = browserHeight - 120 + 'px';
-        this.styles = {
-            'min-height': contentElementHeight
-        };
+        this.applyMinHeightToContentElement();
         this.router.events.subscribe(function (evt) {
             if (!(evt instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"])) {
                 return;
@@ -5549,15 +5542,30 @@ var UserComponent = /** @class */ (function () {
             }, 16); // how fast to scroll (this equals roughly 60 fps)
         });
     };
+    UserComponent.prototype.applyMinHeightToContentElement = function () {
+        var browserHeight = window.innerHeight;
+        var contentElementHeight = browserHeight - 120 + 'px';
+        this.styles = {
+            'min-height': contentElementHeight
+        };
+        console.log(contentElementHeight);
+    };
     UserComponent.prototype.ngAfterViewInit = function () {
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"])('window:resize', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], UserComponent.prototype, "onResize", null);
     UserComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'user-root',
             template: __webpack_require__(/*! ./user.component.html */ "./src/app/user/user.component.html"),
             styles: [__webpack_require__(/*! ./user.component.css */ "./src/app/user/user.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["Location"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["Location"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]])
     ], UserComponent);
     return UserComponent;
 }());
