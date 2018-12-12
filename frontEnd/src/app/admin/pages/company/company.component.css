@@ -86,3 +86,6 @@ modal-footer button.btn {
   color: #398439;
   font-size: 18px;
 }
+.selectedWeeks {
+  max-width: 200px;
+}

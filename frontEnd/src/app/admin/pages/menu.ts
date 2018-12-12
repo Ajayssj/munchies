@@ -15,7 +15,7 @@ export let MENU_ITEM = [
         icon: 'user'
     },
     {
-        path: 'company',
+        path: 'products',
         title: 'products',
         icon: 'building'
     }

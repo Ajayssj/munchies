@@ -176,7 +176,7 @@
       <h4>Are you sure you want to delete this product?</h4>
     </modal-content>
     <modal-footer>
-        <button class="btn btn-danger" (click)="deleteItem(productObj._id, confirmDeleteProductModal);">Yes</button>
+        <button class="btn btn-danger" (click)="deleteItem(productObj._id, confirmDeleteProductModal, index);">Yes</button>
         <button class="btn btn-success" (click)="closeModal(confirmDeleteProductModal);">No</button>
     </modal-footer>
   </modal>
@@ -266,7 +266,7 @@
             <td>{{product.kcal}}</td>
             <td class="selectedWeeks">
               <button (click)="editModal.open();selectedProductObj=product" class="btn btn-success mr-20">Edit</button>
-              <button (click)="confirmDeleteProductModal.open(); productObj=product;" class="btn btn-danger">Delete</button>
+              <button (click)="confirmDeleteProductModal.open(); productObj=product; index=i;" class="btn btn-danger">Delete</button>
               <div *ngIf="product.weeks.length > 0" class="card-content">
                 <span *ngFor="let weekItem of product.weeks;let weekIndex = index;">
                   <span class="selectedWeeks">
@@ -278,8 +278,8 @@
               <div>
                 <div class="input-group">
                   <div class="input-group-btn " [ngClass]="{'open':product.selectedWeek}">
-                    <button type="button" data-toggle="dropdown" class="btn btn-success dropdown-toggle" aria-expanded="true"
-                      aria-haspopup="true" (click)="product.selectedWeek=1">
+                    <button type="button" data-toggle="dropdown" class="btn btn-success dropdown-toggle week-dropdown-btn" aria-expanded="true"
+                      aria-haspopup="true" (click)="product.selectedWeek= product.selectedWeek ? null : 1">
                       {{'Week'}}
                       <span class="caret"></span>
                     </button>

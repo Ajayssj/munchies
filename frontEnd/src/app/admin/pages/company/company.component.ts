@@ -56,6 +56,7 @@ export class CompanyComponent implements OnInit {
   weeks = [];
   errorMessage = '';
   allergyDetails: Array<string>;
+  hideWeekDrp = 0;
   public weekArray: Array<Object> = [{id: 1, text: 'Week 1'}, {id: 2, text: 'Week 2'}, {id: 3, text: 'Week 3'},
    {id: 4, text: 'Week 4'}, {id: 5, text: 'Week 5'}, {id: 6, text: 'Week 6'}, {id: 7, text: 'Week 7'}, 
    {id: 8, text: 'Week 8'}, {id: 9, text: 'Week 9'}, {id: 10, text: 'Week 10'}, {id: 11, text: 'Week 11'},
@@ -63,9 +64,14 @@ export class CompanyComponent implements OnInit {
     @HostListener('document:click', ['$event'])
     clickout(event) {
       console.log("click outside",event);
-  
-     this.cdRef.detectChanges();
+      if(!event.target.classList.contains("week-dropdown-btn")) {
+      this.products.forEach(productItem =>{
+        productItem.selectedWeek = null;
+      })
+    }
+      this.cdRef.detectChanges();
     //  this.hideAutoComplete = false;
+
     }
 
   constructor(private http: HttpClient, private auth: AuthService,
@@ -137,6 +143,7 @@ export class CompanyComponent implements OnInit {
       console.log(data);
       if(!data.success) {
         this.errorMessage = data.error;
+        this.products = this.auth.getAllProducts();
         alert(this.errorMessage);
       }
       else {
@@ -156,7 +163,7 @@ export class CompanyComponent implements OnInit {
     this.closeModal(modal);
   }
 
-  deleteItem(pid, modal) {
+  deleteItem(pid, modal, index) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}),
       productId: pid
@@ -168,6 +175,9 @@ export class CompanyComponent implements OnInit {
     this.http.delete(this.auth.getDomainName() + '/api/product/delete/' + pid, {}).subscribe((res: productRes)=> {
       console.log(res.success);
         this.message = res.message; 
+        // this.products = this.auth.getAllProducts();
+        this.products.splice(index, 1);
+        console.log(this.products);
         // this.scrollTop();
     },
     err=> {
@@ -216,77 +226,7 @@ export class CompanyComponent implements OnInit {
   changeView(view) {
     this.view = view;
   }
-  //Add Company, Type and Product code
-  // onSubmit(modal, view) {
-  //   this.companyId = this.addProductTypeForm.get("selectedCompany").value;
-  //   if(view == "type") {
-  //   this.pType = this.addProductTypeForm.get('pType').value;
-  //   this.http.post(this.auth.getDomainName() + '/api/type/add', {type: this.pType, companyId: this.companyId}).subscribe((data:any)=>{
-  //     console.log(data);
-  //      if(data && data.success) { this.productTypes.push(data) }
-  //   }, 
-  //   err=> {
-  //     console.log(err);
-  //   });
-  // }
-  // else if(view == "company") {
-  //   this.productCompany = this.addProductCompanyForm.get('productCompany').value;
-  //   this.http.post(this.auth.getDomainName() + '/api/company/add', {company: this.productCompany}).subscribe(data=>{
-  //     console.log(data);
-  //   }, 
-  //   err=> {
-  //     console.log(err);
-  //   });
-  // }
-  // else if(view == "product") {
-  //   this.addProductArray = {
-  //     name: this.addProductForm.get('productName').value,
-  //     type: this.addProductForm.get('productType').value,
-  //     quantity: this.addProductForm.get('productQuantity').value,
-  //     company: this.addProductForm.get('productCompanyName').value,
-  //     price: this.addProductForm.get('productMrp').value,
-  //     kcal: this.addProductForm.get('productKcal').value
-  //   }
-  //   this.http.post(this.auth.getDomainName() + '/api/product/add', this.addProductArray).subscribe(data=>{
-  //     console.log(data);
-  //   }, 
-  //   err=> {
-  //     console.log(err);
-  //   });
-  // }
-  //   this.closeModal(modal);
-  // }
-//   addCompany(modal) {
-//       this.productCompany = this.addCompanyName;
-//       this.http.post(this.auth.getDomainName() + '/api/company/add', {company: this.productCompany}).subscribe(data=>{
-//         console.log(data);
-//       }, 
-//       err=> {
-//         console.log(err);
-//       });
-//       this.closeModal(modal);
-//   }
-//   addTypes(modal) {
-//     this.productCompany = this.addCompanyOnType;
-//     console.log("add type ", {type: this.addType, company: this.productCompany})
-//     this.http.post(this.auth.getDomainName() + '/api/type/add', {type: this.addType, companyId: this.productCompany}).subscribe(data=>{
-//       console.log(data);
-//     }, 
-//     err=> {
-//       console.log(err);
-//     });
-//     this.closeModal(modal);
-// }
-  // scrollTop() {
-  //   var scrollToTop = window.setInterval(function () {
-  //     var pos = window.pageYOffset;
-  //     if (pos > 0) {
-  //         window.scrollTo(0, pos - 20); // how far to scroll on each step
-  //     } else {
-  //         window.clearInterval(scrollToTop);
-  //     }
-  //   }, 16); // how fast to scroll (this equals roughly 60 fps)
-  // }
+  
 addProduct(modal) {
     
     this.addProductArray = {
@@ -297,7 +237,8 @@ addProduct(modal) {
       cost: this.addPcost,
       price: this.addPmrp,
       allergyDetails: this.addPallergyDetails,
-      kcal: this.addPkcal
+      kcal: this.addPkcal,
+      weeks: []
     }
     
     this.http.post(this.auth.getDomainName() + '/api/company/add', {company: this.addPcompany}).subscribe(data=>{
@@ -310,6 +251,8 @@ addProduct(modal) {
       console.log(response);
       if(response.success) {
         this.message = response.message;
+        console.log(this.addProductArray)
+        this.products.push(this.addProductArray);
         // this.scrollTop();
       }
     }, 

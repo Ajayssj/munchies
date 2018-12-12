@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'content-top',
@@ -7,8 +8,13 @@ import { GlobalService } from '../../services/global.service';
   styleUrls: ['./content-top.component.scss']
 })
 export class ContentTopComponent {
-  routeTitle;
-  constructor(public _globalService: GlobalService) {
+  urlArr = this.router.url.split('/');
+  routeTitle = this.urlArr[this.urlArr.length - 1];
+  constructor(
+    public _globalService: GlobalService,
+    private router: Router,
+    private route: ActivatedRoute
+    ) {
     this.getRouteTitle();
   }
 
@@ -21,7 +27,9 @@ export class ContentTopComponent {
 
     this._globalService.data$.subscribe(data => {
       if (data.ev === 'isActived') {
-        this.routeTitle = data.value.title;
+        console.log(this.router.url)
+        this.routeTitle = data.value.title || this.router.url;
+        console.log(this.routeTitle)
       }
     }, error => {
       console.log('Error: ' + error);

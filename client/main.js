@@ -308,7 +308,7 @@ var MENU_ITEM = [
         icon: 'user'
     },
     {
-        path: 'company',
+        path: 'products',
         title: 'products',
         icon: 'building'
     }
@@ -598,7 +598,7 @@ var childRoutes = [
                     { path: '', redirectTo: 'index', pathMatch: 'full' },
                     { path: 'admin-analytics', loadChildren: './admin-analytics/admin-analytics.module#AdminAnalyticsModule' },
                     { path: 'customer', loadChildren: './customer/customer.module#CustomerModule' },
-                    { path: 'company', loadChildren: './company/company.module#CompanyModule' },
+                    { path: 'products', loadChildren: './company/company.module#CompanyModule' },
                     { path: 'snacks', loadChildren: './snacks/snacks.module#SnacksModule' },
                     { path: 'plan-management', loadChildren: './plan-management/plan-management.module#PlanManagementModule' },
                     { path: 'index', loadChildren: './index/index.module#IndexModule' },
@@ -2008,6 +2008,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContentTopComponent", function() { return ContentTopComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_global_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/global.service */ "./src/app/admin/shared/services/global.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2019,9 +2020,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var ContentTopComponent = /** @class */ (function () {
-    function ContentTopComponent(_globalService) {
+    function ContentTopComponent(_globalService, router, route) {
         this._globalService = _globalService;
+        this.router = router;
+        this.route = route;
+        this.urlArr = this.router.url.split('/');
+        this.routeTitle = this.urlArr[this.urlArr.length - 1];
         this.getRouteTitle();
     }
     ContentTopComponent.prototype.getRouteTitle = function () {
@@ -2033,7 +2039,9 @@ var ContentTopComponent = /** @class */ (function () {
         var _this = this;
         this._globalService.data$.subscribe(function (data) {
             if (data.ev === 'isActived') {
-                _this.routeTitle = data.value.title;
+                console.log(_this.router.url);
+                _this.routeTitle = data.value.title || _this.router.url;
+                console.log(_this.routeTitle);
             }
         }, function (error) {
             console.log('Error: ' + error);
@@ -2049,7 +2057,9 @@ var ContentTopComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./content-top.component.html */ "./src/app/admin/shared/layouts/content-top/content-top.component.html"),
             styles: [__webpack_require__(/*! ./content-top.component.scss */ "./src/app/admin/shared/layouts/content-top/content-top.component.scss")]
         }),
-        __metadata("design:paramtypes", [_services_global_service__WEBPACK_IMPORTED_MODULE_1__["GlobalService"]])
+        __metadata("design:paramtypes", [_services_global_service__WEBPACK_IMPORTED_MODULE_1__["GlobalService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], ContentTopComponent);
     return ContentTopComponent;
 }());
@@ -2920,6 +2930,14 @@ var AuthService = /** @class */ (function () {
             });
         };
     }
+    AuthService.prototype.getAllProducts = function () {
+        this.http.get(this.getDomainName() + '/api/product').subscribe(function (res) {
+            console.log(res.data.products);
+            return res.data.products;
+        }, function (err) {
+            console.log(err);
+        });
+    };
     AuthService.prototype.isLoggedIn = function () {
         return localStorage.getItem("isLoggedIn");
     };
@@ -2927,7 +2945,7 @@ var AuthService = /** @class */ (function () {
         return localStorage.getItem('username');
     };
     AuthService.prototype.getDomainName = function () {
-        //  return "https://dev-munchies.herokuapp.com";
+        //return "https://dev-munchies.herokuapp.com";
         return "http://localhost:9191";
     };
     AuthService.prototype.setLoggedIn = function (value) {
