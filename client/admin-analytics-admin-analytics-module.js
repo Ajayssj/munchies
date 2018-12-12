@@ -340,8 +340,8 @@ var ChartsService = /** @class */ (function () {
             .subscribe(function (res) {
             console.log(res.data);
             res.data.forEach(function (plan) {
-                _this.planSelectedOptions.legend.data.push(plan.planInfo.title);
-                _this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title });
+                _this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
+                _this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
             });
             console.log(_this.planSelectedOptions);
         }, function (err) {
@@ -353,8 +353,8 @@ var ChartsService = /** @class */ (function () {
             .subscribe(function (res) {
             console.log(res.data);
             res.data.forEach(function (allergicItem) {
-                _this.allergyOptions.legend.data.push(allergicItem._id);
-                _this.allergyOptions.series[0].data.push({ value: allergicItem.count, name: allergicItem._id });
+                _this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
+                _this.allergyOptions.series[0].data.push({ value: allergicItem.count, name: allergicItem._id.toUpperCase() });
             });
             console.log(_this.allergyOptions);
         }, function (err) {
@@ -366,8 +366,8 @@ var ChartsService = /** @class */ (function () {
             .subscribe(function (res) {
             console.log(res.data);
             res.data.forEach(function (fruitsItem) {
-                _this.fruitOptions.legend.data.push(fruitsItem._id);
-                _this.fruitOptions.series[0].data.push({ value: fruitsItem.count, name: fruitsItem._id });
+                _this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
+                _this.fruitOptions.series[0].data.push({ value: fruitsItem.count, name: fruitsItem._id.toUpperCase() });
             });
             console.log(_this.fruitOptions);
         }, function (err) {

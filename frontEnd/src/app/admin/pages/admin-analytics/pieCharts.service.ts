@@ -143,8 +143,8 @@ fruitOptions = {
         .subscribe((res: any) => {
             console.log(res.data);
             res.data.forEach(plan => {
-                this.planSelectedOptions.legend.data.push(plan.planInfo.title);
-                this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title });
+                this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
+                this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
             });
             console.log(this.planSelectedOptions)
         },
@@ -157,8 +157,8 @@ fruitOptions = {
         .subscribe((res: any) => {
             console.log(res.data);
             res.data.forEach(allergicItem => {
-                this.allergyOptions.legend.data.push(allergicItem._id);
-                this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id});
+                this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
+                this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id.toUpperCase()});
             });
             console.log(this.allergyOptions)
         },
@@ -171,8 +171,8 @@ fruitOptions = {
         .subscribe((res: any) => {
             console.log(res.data);
             res.data.forEach(fruitsItem => {
-                this.fruitOptions.legend.data.push(fruitsItem._id);
-                this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id});
+                this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
+                this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id.toUpperCase()});
             });
             console.log(this.fruitOptions)
         },

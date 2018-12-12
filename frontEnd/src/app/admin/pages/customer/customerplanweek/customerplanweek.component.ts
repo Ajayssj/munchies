@@ -30,7 +30,10 @@ export class CustomerplanweekComponent implements OnInit {
     this.http.get(this.auth.getDomainName() + '/api/plan/customize/'+routeParams.planid+'/week/'+routeParams.weekid).subscribe((res: any) => {
       console.log("weekProds",res.data);
       if (res.data && res.data.length) {
-        this.weeks = res.data[0].products;
+        // this.weeks = res.data[0].products;
+        this.weeks = [...res.data[0].customWeekProducts,...res.data[0].defaultWeekProducts];
+        console.log("weeksProducts",this.weeks);
+        
       }
     },
       err=> {
@@ -39,7 +42,7 @@ export class CustomerplanweekComponent implements OnInit {
 
     this.http.get(this.auth.getDomainName() + '/api/product').subscribe((res: any) => {
       console.log(res.data);
-      this.products = res.data;
+      this.products = res.data.products;
     },
       err=> {
       console.log(err);

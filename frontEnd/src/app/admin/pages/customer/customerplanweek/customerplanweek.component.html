@@ -16,7 +16,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let weekprod of weeks, let i=index">
-            <td>{{weekprod}}</td>
+            <td>{{weekprod.type}}</td>
             <td>{{weekprod.name}}</td>
             <td>{{weekprod.price}}</td>
             <td><button (click)="deleteWeekProd(weekprod._id, alertModal)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button></td>
@@ -44,7 +44,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let prod of products, let i=index">
-          <td>{{prod}}</td>
+          <td>{{prod.type}}</td>
           <td>{{prod.name}}</td>
           <td>{{prod.price}}</td>
           <td><button (click)="addProd(prod._id, alertModal)" class="btn btn-success"><i class="fa fa-check fa-fw"></i>Add</button></td>

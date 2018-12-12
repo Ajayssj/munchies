@@ -25,9 +25,21 @@ export class CustomerdetailsComponent implements OnInit {
     });
   }
 
-  viewUserWeek(userId, planId, weekNo, actpId) {
-    console.log(userId, planId, weekNo, actpId);
-    this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+planId+'/week/'+weekNo);
+  viewUserWeek(user) {
+    var userId = user.user._id;
+    var planId = user.planInfo.planId;
+    var weekNo = user.planInfo.weeks;
+    var activeplanID = user.planInfo._id;
+    var weekIDArr = user.weekIds;
+    var weekNoId = '';
+    console.log(userId, planId, weekNo, activeplanID, weekIDArr);
+    for (let wid = 0; wid < weekIDArr.length; wid++) {
+      if (weekNo == weekIDArr[wid].week) {
+        weekNoId =weekIDArr[wid]._id;
+        break;
+      }
+    }
+    this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+activeplanID+'/week/'+weekNoId);
   }
   viewUserPlan(userId, planId) {
     console.log(userId, planId);

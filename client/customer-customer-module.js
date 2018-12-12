@@ -159,7 +159,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n    <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n    <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n    <div class=\"col-md-12\">\n      <card cardTitle=\"Customer Details\">\n        <table class=\"table table-bordered table-hover\">\n          <thead>\n            <tr>\n              <th>No</th>\n              <th>Name</th>\n              <th>Address</th>\n              <th>Area of Delivery</th>\n              <th>Preferences</th>\n              <th>Week Number</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let user of users, let i=index\">\n              <td>{{i+1}}</td>\n              <td>{{user.user.firstName}} {{user.user.lastName}}</td>\n              <td>{{user.address}}</td>\n              <td>{{user.Area_of_delivery}}</td>\n              <!-- <td><a routerLink='/admin/pages/customer/cust/3423/plan/123/week/1/' class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n              <td><a routerLink=\"/admin/pages/customer/cust/3423/plan/123\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n              <td><a (click)=\"viewUserWeek(user.user._id,user.planInfo.planId,user.planInfo.weeks,user.planInfo._id)\" class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n              <td><a (click)=\"viewUserPlan(user.user._id,user.planInfo.planId)\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td>\n            </tr>\n           \n          </tbody>\n        </table>\n      </card>\n    </div>\n  </div>"
+module.exports = "<div class=\"row\">\n  <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n  <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Customer Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>No</th>\n            <th>Name</th>\n            <th>Address</th>\n            <th>Area of Delivery</th>\n            <th>Week Number</th>\n            <!-- <th>Plan Detail</th> -->\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let user of users, let i=index\">\n            <td>{{i+1}}</td>\n            <td>{{user.user.firstName}} {{user.user.lastName}}</td>\n            <td>{{user.address}}</td>\n            <td>{{user.Area_of_delivery}}</td>\n            <!-- <td><a routerLink='/admin/pages/customer/cust/3423/plan/123/week/1/' class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            <td><a routerLink=\"/admin/pages/customer/cust/3423/plan/123\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n            <td><a (click)=\"viewUserWeek(user)\" class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            <!-- <td><a (click)=\"viewUserPlan(user.user._id,user.planInfo.planId)\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n          </tr>\n         \n        </tbody>\n      </table>\n    </card>\n  </div>\n</div>\n<!-- <div class=\"row\">\n    <div class=\"col-md-12\">\n      <card cardTitle=\"Customer Details\">\n        <table class=\"table table-bordered table-hover\">\n          <thead>\n            <tr>\n              <th>No</th>\n              <th>Name</th>\n              <th>Address</th>\n              <th>Area of Delivery</th>\n              <th>Week Number</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let user of users, let i=index\">\n              <td>{{i+1}}</td>\n              <td>{{user.user.firstName}} {{user.user.lastName}}</td>\n              <td>{{user.address}}</td>\n              <td>{{user.Area_of_delivery}}</td>\n              <td><a (click)=\"viewUserWeek(user.user._id,user.planInfo.planId,user.planInfo.weeks,user.planInfo._id)\" class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            </tr>\n           \n          </tbody>\n        </table>\n      </card>\n    </div>\n  </div> -->"
 
 /***/ }),
 
@@ -209,9 +209,21 @@ var CustomerdetailsComponent = /** @class */ (function () {
             console.log(err);
         });
     };
-    CustomerdetailsComponent.prototype.viewUserWeek = function (userId, planId, weekNo, actpId) {
-        console.log(userId, planId, weekNo, actpId);
-        this.router.navigateByUrl('/admin/pages/customer/cust/' + userId + '/plan/' + planId + '/week/' + weekNo);
+    CustomerdetailsComponent.prototype.viewUserWeek = function (user) {
+        var userId = user.user._id;
+        var planId = user.planInfo.planId;
+        var weekNo = user.planInfo.weeks;
+        var activeplanID = user.planInfo._id;
+        var weekIDArr = user.weekIds;
+        var weekNoId = '';
+        console.log(userId, planId, weekNo, activeplanID, weekIDArr);
+        for (var wid = 0; wid < weekIDArr.length; wid++) {
+            if (weekNo == weekIDArr[wid].week) {
+                weekNoId = weekIDArr[wid]._id;
+                break;
+            }
+        }
+        this.router.navigateByUrl('/admin/pages/customer/cust/' + userId + '/plan/' + activeplanID + '/week/' + weekNoId);
     };
     CustomerdetailsComponent.prototype.viewUserPlan = function (userId, planId) {
         console.log(userId, planId);
@@ -348,7 +360,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\n  custplanweek works!\n</p> -->\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <button (click)=\"openModal(thirdModal)\" class=\"btn btn-primary\" style=\"margin:20px\">Add Product</button>\n    <card cardTitle=\"Week Plan Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>Type</th>\n            <th>Product</th>\n            <th>MRP</th>\n            <th>Action</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let weekprod of weeks, let i=index\">\n            <td>{{weekprod}}</td>\n            <td>{{weekprod.name}}</td>\n            <td>{{weekprod.price}}</td>\n            <td><button (click)=\"deleteWeekProd(weekprod._id, alertModal)\" class=\"btn btn-danger\"><i class=\"fa fa-trash fa-fw\"></i>Delete</button></td>\n          </tr>\n        </tbody>\n      </table>\n    </card>\n    <!-- <button class=\"btn btn-success\" style=\"margin:20px\">Save</button> -->\n  </div>\n</div>\n\n<modal #thirdModal [closeOnEscape]=\"false\" [closeOnOutsideClick]=\"false\">\n  <modal-header>\n    <h3>Add Products</h3>\n  </modal-header>\n  <modal-content>\n    <table class=\"table table-bordered table-hover\">\n      <thead>\n        <tr>\n          <th>Type</th>\n          <th>Product</th>\n          <th>MRP</th>\n          <th>Action</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let prod of products, let i=index\">\n          <td>{{prod}}</td>\n          <td>{{prod.name}}</td>\n          <td>{{prod.price}}</td>\n          <td><button (click)=\"addProd(prod._id, alertModal)\" class=\"btn btn-success\"><i class=\"fa fa-check fa-fw\"></i>Add</button></td>\n        </tr>\n      </tbody>\n    </table>\n  </modal-content>\n  <modal-footer>\n    <button class=\"btn btn-primary\" (click)=\"closeModal(thirdModal)\">close</button>\n  </modal-footer>\n</modal>\n\n<modal #alertModal modalClass=\"modal-sm\">\n  <modal-header>\n      <h3>Product Action</h3>\n  </modal-header>\n  <modal-content>\n      {{alertText}}\n  </modal-content>\n  <modal-footer>\n      <button class=\"btn btn-primary\" (click)=\"closeAlertModal(alertModal)\">close</button>\n  </modal-footer>\n</modal>"
+module.exports = "<!-- <p>\n  custplanweek works!\n</p> -->\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <button (click)=\"openModal(thirdModal)\" class=\"btn btn-primary\" style=\"margin:20px\">Add Product</button>\n    <card cardTitle=\"Week Plan Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>Type</th>\n            <th>Product</th>\n            <th>MRP</th>\n            <th>Action</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let weekprod of weeks, let i=index\">\n            <td>{{weekprod.type}}</td>\n            <td>{{weekprod.name}}</td>\n            <td>{{weekprod.price}}</td>\n            <td><button (click)=\"deleteWeekProd(weekprod._id, alertModal)\" class=\"btn btn-danger\"><i class=\"fa fa-trash fa-fw\"></i>Delete</button></td>\n          </tr>\n        </tbody>\n      </table>\n    </card>\n    <!-- <button class=\"btn btn-success\" style=\"margin:20px\">Save</button> -->\n  </div>\n</div>\n\n<modal #thirdModal [closeOnEscape]=\"false\" [closeOnOutsideClick]=\"false\">\n  <modal-header>\n    <h3>Add Products</h3>\n  </modal-header>\n  <modal-content>\n    <table class=\"table table-bordered table-hover\">\n      <thead>\n        <tr>\n          <th>Type</th>\n          <th>Product</th>\n          <th>MRP</th>\n          <th>Action</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let prod of products, let i=index\">\n          <td>{{prod.type}}</td>\n          <td>{{prod.name}}</td>\n          <td>{{prod.price}}</td>\n          <td><button (click)=\"addProd(prod._id, alertModal)\" class=\"btn btn-success\"><i class=\"fa fa-check fa-fw\"></i>Add</button></td>\n        </tr>\n      </tbody>\n    </table>\n  </modal-content>\n  <modal-footer>\n    <button class=\"btn btn-primary\" (click)=\"closeModal(thirdModal)\">close</button>\n  </modal-footer>\n</modal>\n\n<modal #alertModal modalClass=\"modal-sm\">\n  <modal-header>\n      <h3>Product Action</h3>\n  </modal-header>\n  <modal-content>\n      {{alertText}}\n  </modal-content>\n  <modal-footer>\n      <button class=\"btn btn-primary\" (click)=\"closeAlertModal(alertModal)\">close</button>\n  </modal-footer>\n</modal>"
 
 /***/ }),
 
@@ -400,14 +412,16 @@ var CustomerplanweekComponent = /** @class */ (function () {
         this.http.get(this.auth.getDomainName() + '/api/plan/customize/' + routeParams.planid + '/week/' + routeParams.weekid).subscribe(function (res) {
             console.log("weekProds", res.data);
             if (res.data && res.data.length) {
-                _this.weeks = res.data[0].products;
+                // this.weeks = res.data[0].products;
+                _this.weeks = res.data[0].customWeekProducts.concat(res.data[0].defaultWeekProducts);
+                console.log("weeksProducts", _this.weeks);
             }
         }, function (err) {
             console.log(err);
         });
         this.http.get(this.auth.getDomainName() + '/api/product').subscribe(function (res) {
             console.log(res.data);
-            _this.products = res.data;
+            _this.products = res.data.products;
         }, function (err) {
             console.log(err);
         });
