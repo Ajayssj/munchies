@@ -3001,14 +3001,6 @@ var AuthService = /** @class */ (function () {
             });
         };
     }
-    AuthService.prototype.getAllProducts = function () {
-        this.http.get(this.getDomainName() + '/api/product').subscribe(function (res) {
-            console.log(res.data.products);
-            return res.data.products;
-        }, function (err) {
-            console.log(err);
-        });
-    };
     AuthService.prototype.isLoggedIn = function () {
         return localStorage.getItem("isLoggedIn");
     };
@@ -3016,8 +3008,8 @@ var AuthService = /** @class */ (function () {
         return localStorage.getItem('username');
     };
     AuthService.prototype.getDomainName = function () {
-        //return "https://dev-munchies.herokuapp.com";
-        return "http://localhost:9191";
+        return "https://dev-munchies.herokuapp.com";
+        //return "http://localhost:9191";
     };
     AuthService.prototype.setLoggedIn = function (value) {
         localStorage.setItem("isLoggedIn", value);

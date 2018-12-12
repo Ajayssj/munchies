@@ -165,7 +165,6 @@ var CompanyComponent = /** @class */ (function () {
             console.log(data);
             if (!data.success) {
                 _this.errorMessage = data.error;
-                _this.products = _this.auth.getAllProducts();
                 alert(_this.errorMessage);
             }
             else {
