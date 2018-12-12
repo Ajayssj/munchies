@@ -20,7 +20,7 @@ export class AuthService {
     return localStorage.getItem('username');
   }
   getDomainName() {
-    return "https://dev-munchies.herokuapp.com";
+    return window.location.origin;
      //return "http://localhost:9191";
   }
 
