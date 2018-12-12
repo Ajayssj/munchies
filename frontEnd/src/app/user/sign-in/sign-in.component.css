@@ -22,7 +22,6 @@
     top: -30px;
 }
 .signin_box_content {
-    width: 100%;
     display: block;
     padding-left: 10px;
 }
@@ -145,10 +144,10 @@
     }
     .signin_box_content h2 {
         font-size: 26px;
-        margin: 40px 0px 25px 28px;
+        margin: 40px 0px 25px 70px;
     }
     .signin_box_content input[type="email"], .signin_box_content input[type="password"] {
-        width: 73%;
+        width: 70%;
         margin: 0px 0px 15px 28px;
     }
     .invalid-feedback {
@@ -162,102 +161,20 @@
         margin: 20px 0px 35px 34px;
     }
     .sign_in_button button {
-        padding: 10px 122px;
+        padding: 10px 150px;
     }
     .sign_up_text {
-        margin-left: 100px;
+        margin-left: 50px;
         margin-bottom: 20px;
     }
     .facebook_google {
         width: 63%;
     }
 }
-
-/*
-@media screen and (min-width: 480px) {
-    .contact_information .email_id {
-        padding-top: 0;
-        margin-top: 70px;
-        margin-left: 40px;
-    
-    }
-    .signin_box_content input[type="email"], .signin_box_content input[type="password"] {
-        width: 63%;
-        margin: 0px 0px 15px 70px;
-    }
-    .invalid-feedback {
-        width: 63%;
-        margin: 0px 0px 15px 70px;
-    }
-    .signin_box {
-        top: 0px;
-        right: 0px;
-        width: 500px;
-        height: 500px;
-    }
-    .signin_box_content h2 {
-        font-size: 26px;
-        margin: 40px 0px 0px 115px;
-    }
-    .remember_me {
-        margin: 20px 85px 20px 70px;
-    }
+@media screen and (max-width: 400px) {
     .sign_in_button {
-        margin: 20px 0px 35px 70px;
-    }
-    .sign_in_button button {
-        padding: 10px 135px;
-    }
-    .sign_up_text {
         margin-left: 0px;
-        margin-bottom: 0px;
-    }
-    .facebook_google {
-        width: 61%;
-    }
-}
-@media screen and (min-width: 768px) {
-    .signin_page_first_box {
-        width: 300px;
-        height: 300px;
-        margin: 40px 0px 40px -35px;
-        display: block;
-    }
-    .signin_page_first_box img {
-        margin: 160px 0 0 110px;
-        height: 200px;
-    }
-    .signin_box {
-        right: -10px;
-        top: -30px;
-    }
-    .signin_box_content h2 {
-        font-size: 30px;
-        margin: 10px 0px 30px 90px;
-    }
-}
-@media screen and (min-width: 992px) {
-    .signin_box {
-        right: -90px;
+       
     }
     
 }
-@media screen and (min-width: 1024px) {
-    .signin_box {
-        right: -90px;
-    }
-}
-
-@media screen and (min-width: 1280px) {
-    .signin_page_first_box {
-        width: 400px;
-        height: 400px;
-    }
-    .signin_page_first_box img {
-        margin: 180px 0 0 170px;
-        height: auto;
-    }
-    .signin_box {
-        right: -180px;
-    }
-}*/

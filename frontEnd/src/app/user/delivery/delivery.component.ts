@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -7,7 +7,7 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-delivery',
   templateUrl: './delivery.component.html',
-  styleUrls: ['./delivery.component.css']
+  styleUrls: ['./delivery.component.css'],
 })
 export class DeliveryComponent implements OnInit {
   deliveryForm: FormGroup;
@@ -21,6 +21,9 @@ export class DeliveryComponent implements OnInit {
   data = {};
   httpOptions = {};
   isLoggedIn = this.auth.isLoggedIn();
+  redirectToHome = "home";
+  showOrderConfirmAlert = false;
+  //showAlert = false;
 
   constructor(
     private router: Router,
@@ -33,9 +36,9 @@ export class DeliveryComponent implements OnInit {
 
   ngOnInit() {
     this.deliveryForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+')]],
       area: ['', Validators.required],
-      surName: ['', Validators.required],
+      surName: ['', [Validators.required , Validators.pattern('^[a-zA-Z]+')]],
       address: ['', Validators.required],
       phone: ['', [
         Validators.required,
@@ -53,7 +56,18 @@ export class DeliveryComponent implements OnInit {
     if (this.deliveryForm.invalid) {
       return;
     }
-    var questionInfo = [{type: 'allergic', value: this.route.snapshot.queryParamMap.get('question1')},
+    
+    //this.http('', )
+  }
+  showOrderConfirm(){
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.deliveryForm.invalid) {
+      return;
+    }
+    else
+    {
+      var questionInfo = [{type: 'allergic', value: this.route.snapshot.queryParamMap.get('question1')},
                     {type: 'fruits', value: this.route.snapshot.queryParamMap.get('question2')} ];
     this.data = {
       firstName: this.f.name.value,
@@ -75,11 +89,13 @@ export class DeliveryComponent implements OnInit {
 
     this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data).subscribe(data => {
       console.log("order created", data);
+    this.showOrderConfirmAlert = true;
+   
     },
       err => {
         console.log(err);
       });
-    //this.http('', )
+    }
   }
 
 }

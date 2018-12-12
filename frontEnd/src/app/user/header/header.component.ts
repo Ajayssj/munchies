@@ -11,6 +11,7 @@ import { from } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  isMobNavbarOpen:Boolean=false;
   isLoggedIn:Observable<boolean> = JSON.parse(this.auth.isLoggedIn());
   constructor(private router: Router, private auth: AuthService) {}
   openSideMenu(event) {

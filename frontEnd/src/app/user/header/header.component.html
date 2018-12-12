@@ -6,12 +6,12 @@
                     <a routerLink="/home"><img src="../assets/Munchies Logo-01.png" alt="No Image" /></a>
                 </div>
                 <ul>
-                    <li class="bars" id="open" (click)="openSideMenu($event)">
+                    <li class="bars" [ngClass]="{'bars_cross':isMobNavbarOpen}" id="open" (click)="isMobNavbarOpen=!isMobNavbarOpen">
                         <div class="bar1"></div>
                         <div class="bar2"></div>
                         <div class="bar3"></div>
                     </li>
-                    <li><a routerLink="/collaborate">Collaborate</a></li>
+                    <li><a routerLink="/collaborate" >Collaborate</a></li>
                     <li><a routerLink="/admin/pages/index">Admin</a></li>
                     <li><a routerLink="/my-orders">My Order</a></li>
 
@@ -23,23 +23,23 @@
                     </li>
                     <li><a routerLink="/subscribe">Get the Bag</a></li>
                 </ul>
-                <div class="overlay" id="overlay"></div>
-                <div class="responsive_menu" id="responsive_menu">
+                <div class="overlay"  [ngClass]="{'showOverlay':isMobNavbarOpen}" id="overlay"></div>
+                <div class="responsive_menu"  [ngClass]="{'openSideMenu':isMobNavbarOpen}"  id="responsive_menu">
                     <div class="menu_list">
                         <div class="menu_item">
-                            <a class="active" routerLink="/collaborate">Collaborate</a>
+                            <a routerLink="/collaborate" (click)="isMobNavbarOpen=!isMobNavbarOpen">Collaborate</a>
                         </div>
                         <div class="menu_item">
-                            <a routerLink="/help">Help</a>
+                            <a routerLink="/help" (click)="isMobNavbarOpen=!isMobNavbarOpen">Help</a>
                         </div>
                         <div class="menu_item">
-                            <a routerLink="/contact">Contact</a>
+                            <a routerLink="/contact" (click)="isMobNavbarOpen=!isMobNavbarOpen">Contact</a>
                         </div>
                         <div class="menu_item">
-                            <a routerLink="/signIn">Sign IN</a>
+                            <a routerLink="/signIn" (click)="isMobNavbarOpen=!isMobNavbarOpen">Sign IN</a>
                         </div>
                         <div class="menu_item">
-                            <a routerLink="/subscribe">Get the Bag</a>
+                            <a routerLink="/subscribe" (click)="isMobNavbarOpen=!isMobNavbarOpen">Get the Bag</a>
                         </div>
                     </div>
                 </div>

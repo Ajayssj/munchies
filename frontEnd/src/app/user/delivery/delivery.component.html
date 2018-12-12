@@ -1,5 +1,6 @@
 <div class="select_delivery_address_wrapper">
-  <div class="delivery_content">
+
+      <div class="delivery_content">
       <h3>MunchPak bag to this address</h3>
       <div class="delivery_form">
           <form [formGroup] = "deliveryForm" (ngSubmit) = "onSubmit()">
@@ -9,16 +10,18 @@
                         <input class="form_control mar" formControlName="name" type="text" name="name" placeholder="Name" />
                         <div *ngIf="submitted && f.name.errors" class="invalid-feedback form_control">
                             <div *ngIf="submitted && f.name.errors.required">Name is required</div>
+                             <div *ngIf="submitted && f.name.errors.pattern">Your Name must contain only letters </div>
                         </div>
                       </div>
                       <div>
                         <input class="form_control" type="text" formControlName="surName" name="surName" placeholder="Surname" />
                         <div *ngIf="submitted && f.surName.errors" class="invalid-feedback form_control">
                             <div *ngIf="submitted && f.surName.errors.required">SurName is required</div>
+                            <div *ngIf="submitted && f.surName.errors.pattern">Your SurName must contain only letters </div>
                         </div>
                       </div>
                       <div>
-                        <input class="form_control" type="text" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
+                        <input class="form_control" type="number" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
                         <div *ngIf="submitted && f.phone.errors" class="invalid-feedback form_control">
                             <div *ngIf="submitted && f.phone.errors.required">Phone Number is required</div>
                             <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>
@@ -47,6 +50,7 @@
                             </select>
                             <div *ngIf="submitted && f.area.errors" class="invalid-feedback form_control">
                                 <div *ngIf="submitted && f.area.errors.required">Area is required</div>
+                                <div *ngIf="submitted && f.area.errors.pattern">please enter valid address</div>
                             </div>
                         </div>
                         <div>
@@ -56,10 +60,10 @@
                             </div>
                         </div>
                         <div>
-                            <input class="form_control" type="text" formControlName="postalCode" name="postalCode" placeholder="Postal Code" />
+                            <input class="form_control" type="number" formControlName="postalCode" name="postalCode" placeholder="Postal Code" />
                             <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback form_control">
                                 <div *ngIf="submitted && f.postalCode.errors.required">Postal Code is required</div>
-                                <div *ngIf="submitted && f.postalCode.errors.pattern">Please Enter Valid postal Code</div>
+                                <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid address</div>
                             </div>
                         </div>
                     </div>
@@ -69,34 +73,11 @@
              <a routerLink="/signIn" class="btn">Sign In</a>
              <a routerLink="/sign-up" class="btn">Sign Up</a>
           </div>
-          <button *ngIf="isLoggedIn" class="btn" (click)="showOrderConfirmAlert=true">MAKE PAYMENT</button>          
-        </form>
-      </div>
-  </div>
-  <!-- <div class="create_account">
-      <h2>Create an account</h2>
-      <form [formGroup] = "createAccount" (ngSubmit) = "onSubmit()">
-          <input type="email" name="email" placeholder="Email" />
-          <input type="password" name="createPassword" placeholder="Create Password" />
-          <input type="password" name="confirmPassword" placeholder="Confirm Password" />
-      </form>
-  </div> -->
-  <!-- <div class="make_payment_btn">
-      <a href="/order-summary">Make Payment</a>
-  </div> -->
-  <div>
-   <!-- <button (click)="showOrderConfirmAlert=true">Open Modal</button> -->
-</div>
-<div *ngIf="showOrderConfirmAlert" class="alertModal">
-    <div class="backgroundBlack"></div>
-    <div class="content">
-        <h4>Thank You for Payment!</h4>
-        <div class="okbtn">
-        <a routerLink="home" >ok</a>
-    </div>
-       <!-- <button class="okbtn">ok</button> -->
+          <button *ngIf="isLoggedIn" (click)="showOrderConfirm();" class="btn" >MAKE PAYMENT</button> 
 
-    </div>
+        </form>
+        <app-alert-popup [showAlert]="showOrderConfirmAlert" [okRedirectBtn]="redirectToHome"></app-alert-popup>
+         
 </div>
 </div>
 

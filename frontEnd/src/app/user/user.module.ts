@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule ,NO_ERRORS_SCHEMA} from '@angular/core';
 import { FormsModule }    from '@angular/forms';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,6 +33,7 @@ import { AuthGuard } from './auth/auth.guard';
 import {ModalModule} from "ngx-modal";
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AlertPopupComponent } from './alert-popup/alert-popup.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     SignUpComponent,
     PrivacyPolicyComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    AlertPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +73,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ModalModule
   ],
   providers: [AuthGuard, AuthService],
-  bootstrap: [UserComponent]
+  bootstrap: [UserComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class UserModule { }

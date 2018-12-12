@@ -1,6 +1,5 @@
 
 .header_wrapper {
-    width: 100%;
     display: block;
     height: 80px;
     background: #fff;
@@ -10,35 +9,41 @@
 }
 header, .content, footer .content {
     font-family: 'MyWebFont' !important;
-    width: 72%;
-    margin: 0 auto;
-    left: 189px;
+    
     background-color: #fff;
 }
 .site_header {
     position: fixed;
     top: 0;
     z-index: 100;
+    left: 0;
+    right: 0;
+}
+
+.site_header .wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 nav .wrapper .logo {
-    height: 80px;
+    height: 85px;
     float: left;
     padding-left: 10px;
 }
 nav .wrapper .logo img {
-    width: auto;
-    height: 80px;
+    width: 140px;
 }
 nav .wrapper ul {
     list-style: none;
     padding-right: 10px;
     margin: 0;   
     float: right;
+    white-space: nowrap;
 }
 nav .wrapper ul li.bars, nav .wrapper ul li.bars_cross {
     display: none;
     position: absolute;
-    right: 10px;
+    right: 35px;
     top: 10px;
     cursor: pointer;
     background: rgba(0, 0, 0, 0.6);
@@ -66,21 +71,20 @@ nav .wrapper ul li:last-child {
 }
 .responsive_menu {
     position: absolute;
-    width: 230px;
-    right: -231px;
+    right: 231px;
     transition: right 0.4s ease 0s;
     background-color: #fff;
     border: 1px solid rgb(240, 238, 235);
-    top: 9px;
-    display: none;
+    top:77px;
+    display: none !important;
 }
 .menu_item {
     margin-bottom: 10px;
     text-align: center;
+    display: none;
 }
 .menu_item a {
     text-decoration: none;
-    color: #292929;
     transition: color 0.5s ease 0s, background-color 0.5s ease 0s;
     width: 100%;
     padding: 10px;
@@ -92,9 +96,11 @@ nav .wrapper ul li:last-child {
     color: #fff;
 }
 .menu_item a.active {
+
     background-color: #292929;
     color: #fff;
 }
+
 nav .wrapper ul li a {
     text-decoration: none;
     color: #DE6B48;
@@ -308,7 +314,6 @@ nav .wrapper ul li.bars.open {
     display: none;
 }
 nav .wrapper ul li.bars_cross {
-    right: 232px;
     display: block;
     z-index: 99999;
 }
@@ -323,6 +328,7 @@ nav .wrapper ul li.bars_cross .bar3 {
 }
 .responsive_menu.openSideMenu {
     right: 0px;
+    display: block !important;
 }
 .overlay {
     position: fixed;
@@ -332,10 +338,14 @@ nav .wrapper ul li.bars_cross .bar3 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #292929;
+    background-color: whitesmoke;
     display: none;
 }
-@media screen and (min-width: 300px) {
+
+.overlay.showOverlay {
+    display: block;
+}
+@media screen and (max-width: 768px) {
     header, .content {
         left: 0;
         width: 100%;
@@ -346,20 +356,24 @@ nav .wrapper ul li.bars_cross .bar3 {
     }
     nav .wrapper ul li.bars {
         display: block;
+
     }
     nav .wrapper ul li.bars_cross.close {
         display: block;
     }
     .responsive_menu {
         display: block;
+        width: 100%;
     }
-    .overlay.showOverlay {
-        display: block;
-    }
+    
+   
 }
 
-@media screen and (min-width: 480px) {
-
+@media screen and (max-width: 768px) {
+    .menu_item{
+        display: block;
+        width: 100%;
+    }
 }
 @media screen and (min-width: 768px) {
     nav .wrapper ul li {
@@ -386,11 +400,7 @@ nav .wrapper ul li.bars_cross .bar3 {
     .responsive_menu {
         display: none;
     }
-    header, .content {
-        left: 137px;
-        width: 72%;
-        box-sizing: border-box;
-    }
+
     nav .wrapper ul li {
         margin: 0px 14px;
         display: inline-block;
