@@ -555,7 +555,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\svn-repo\SVN\manchies-git\munchies.git\trunk\frontEnd\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! F:\svn-repo\munchies\trunk\frontEnd\src\styles.css */"./src/styles.css");
 
 
 /***/ })
