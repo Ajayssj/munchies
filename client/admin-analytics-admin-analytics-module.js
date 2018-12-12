@@ -60,6 +60,7 @@ var AdminAnalyticsComponent = /** @class */ (function () {
         this.allergyOptions = this.chartsService.getpAllergyOptionsOption();
         this.fruitOptions = this.chartsService.getpFruitOptionsOption();
         this.monthWiseTrafficOption = this.chartsService.getMonthWiseTrafficOptionsOption();
+        console.log("plan", this.planSelectedOptions);
     }
     AdminAnalyticsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -209,7 +210,7 @@ var ChartsService = /** @class */ (function () {
             legend: {
                 orient: 'vertical',
                 x: 'left',
-                data: []
+                data: ['week 20', 'week 21', 'week 23']
             },
             roseType: 'angle',
             series: [
@@ -218,9 +219,9 @@ var ChartsService = /** @class */ (function () {
                     type: 'pie',
                     radius: [0, '50%'],
                     data: [
-                    // { value: 235, name: '1 week' },
-                    // { value: 210, name: '4 week' },
-                    // { value: 162, name: '12 week' }
+                        { value: 235, name: '1 week' },
+                        { value: 210, name: '4 week' },
+                        { value: 162, name: '12 week' }
                     ]
                 }
             ]
@@ -335,43 +336,43 @@ var ChartsService = /** @class */ (function () {
         return this.monthWiseTrafficOption;
     };
     ChartsService.prototype.getAllPlans = function () {
-        var _this = this;
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/used/plan')
             .subscribe(function (res) {
-            console.log(res.data);
-            res.data.forEach(function (plan) {
-                _this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
-                _this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
-            });
-            console.log(_this.planSelectedOptions);
+            // console.log(res.data);
+            // res.data.forEach(plan => {
+            //     this.planSelectedOptions.legend.data.push(plan.planInfo.title);
+            //     this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title });
+            // });
+            // this.planSelectedOptions.series[0].data = [...this.planSelectedOptions.series[0].data];
+            // console.log(this.planSelectedOptions)
         }, function (err) {
         });
     };
     ChartsService.prototype.getAllergic = function () {
-        var _this = this;
-        this.http.get(this.auth.getDomainName() + '/api/analysis/most/allergic')
-            .subscribe(function (res) {
-            console.log(res.data);
-            res.data.forEach(function (allergicItem) {
-                _this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
-                _this.allergyOptions.series[0].data.push({ value: allergicItem.count, name: allergicItem._id.toUpperCase() });
-            });
-            console.log(_this.allergyOptions);
-        }, function (err) {
-        });
+        // this.http.get(this.auth.getDomainName() + '/api/analysis/most/allergic')
+        // .subscribe((res: any) => {
+        //     console.log(res.data);
+        //     res.data.forEach(allergicItem => {
+        //         this.allergyOptions.legend.data.push(allergicItem._id);
+        //         this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id});
+        //     });
+        //     console.log(this.allergyOptions)
+        // },
+        // err => {
+        // });        
     };
     ChartsService.prototype.getFruitsLikedMost = function () {
-        var _this = this;
-        this.http.get(this.auth.getDomainName() + '/api/analysis/most/liked/fruits')
-            .subscribe(function (res) {
-            console.log(res.data);
-            res.data.forEach(function (fruitsItem) {
-                _this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
-                _this.fruitOptions.series[0].data.push({ value: fruitsItem.count, name: fruitsItem._id.toUpperCase() });
-            });
-            console.log(_this.fruitOptions);
-        }, function (err) {
-        });
+        // this.http.get(this.auth.getDomainName() + '/api/analysis/most/liked/fruits')
+        // .subscribe((res: any) => {
+        //     console.log(res.data);
+        //     res.data.forEach(fruitsItem => {
+        //         this.fruitOptions.legend.data.push(fruitsItem._id);
+        //         this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id});
+        //     });
+        //     console.log(this.fruitOptions)
+        // },
+        // err => {
+        // });        
     };
     ChartsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),

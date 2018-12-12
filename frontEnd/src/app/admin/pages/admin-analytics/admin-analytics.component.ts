@@ -22,6 +22,7 @@ export class AdminAnalyticsComponent implements OnInit {
     this.allergyOptions = this.chartsService.getpAllergyOptionsOption(); 
     this.fruitOptions = this.chartsService.getpFruitOptionsOption(); 
     this.monthWiseTrafficOption = this.chartsService.getMonthWiseTrafficOptionsOption(); 
+    console.log("plan", this.planSelectedOptions);
   }
   ngOnInit() {
     this.http.get(this.auth.getDomainName() + '/api/analysis/most/delivered/area')
