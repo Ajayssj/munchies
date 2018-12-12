@@ -143,7 +143,6 @@ export class CompanyComponent implements OnInit {
       console.log(data);
       if(!data.success) {
         this.errorMessage = data.error;
-        this.products = this.auth.getAllProducts();
         alert(this.errorMessage);
       }
       else {
