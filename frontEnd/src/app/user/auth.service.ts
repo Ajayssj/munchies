@@ -21,7 +21,7 @@ export class AuthService {
   }
   getDomainName() {
     return window.location.origin;
-    //return "http://localhost:9191";
+    // return "http://localhost:9191";
   }
 
   setLoggedIn(value) {
