@@ -24,5 +24,9 @@
         "build-frontend": "node build-frontend.js",
 		"preinstall" : "npm install -g angular-cli",
 		"postinstall" : "cd ./frontEnd/ && ng build --ouput-path ../client/"
-    }
+    },
+	"engines": {
+		"node": "11.0.0",
+		"npm" : "6.4.1"
+	}
 }
