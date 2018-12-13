@@ -19,11 +19,10 @@
     },
     "repository": {},
     "scripts": {
-        "start": "set NODE_ENV=production && node  app.js",
+        "start": "set NODE_ENV=production && node build-frontend.js && node  app.js",
         "start-dev" : "set NODE_ENV=development && node --inspect app.js",
         "build-frontend": "node build-frontend.js",
 		"preinstall" : "npm install -g angular-cli",
-		"postinstall" : "cd ./frontEnd/ && ng build --output-path ../client/"
     },
 	"engines": {
 		"node": "11.0.0",
