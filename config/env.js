@@ -1,6 +1,6 @@
 
 // const envirnoment = (process.env.NODE_ENV)?process.env.NODE_ENV.trim():'';
-const envirnoment = process.env.NODE_ENV;
+const envirnoment = process.env.NODE_ENV.trim();
 
 var env = {
   SERVER_PORT: process.env.PORT || 9191,

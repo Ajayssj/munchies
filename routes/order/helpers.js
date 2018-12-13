@@ -4,12 +4,26 @@ const db = require('../../database');
 const Order = db.getCollection('orders');
 const ActivePlan = db.getCollection('activePlans');
 const CustomPlan = db.getCollection('customPlans');
-const PlansExtended = db.getCollection('custom');
+const PlansExtended = db.getCollection('plansExtended');
 const Extra = db.getCollection('extraInfo');
 const getNextMondayDate = function(date){
     return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
 }
-const addActivePlan = (obj) => {
+
+const getWeekIdsAndProducts = async (planId) => {
+     return await PlansExtended.find({planId : db.toObjectID(planId)}).toArray();
+}
+
+
+const addActivePlan = async (obj) => {
+    let plans = await getWeekIdsAndProducts(obj.planId);
+     
+    let customWeeks = [];
+    if(plans && Array.isArray(plans)){
+        plans.forEach(plan => {
+            customWeeks.push({wId : plan._id,products : plan.products})
+        })
+    }
     const planId = obj.planId;
     const userId = obj.userId;
     const numOfWeeks = obj.numOfWeeks;
@@ -20,7 +34,7 @@ const addActivePlan = (obj) => {
         startDate : new Date(getNextMondayDate(new Date())),
         isCustom :  false,
         skipedWeeks : [],
-        customWeeks : [],
+        customWeeks : customWeeks,
         weeks : numOfWeeks,
         isActive : true
     }
