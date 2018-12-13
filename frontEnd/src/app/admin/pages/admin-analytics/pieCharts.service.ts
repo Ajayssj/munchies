@@ -23,7 +23,7 @@ planSelectedOptions = {
     roseType: 'angle',
     series: [
         {
-            name: 'PieChart',
+            name: 'Plans',
             type: 'pie',
             radius: [0, '50%'],
             data: [
@@ -48,7 +48,7 @@ allergyOptions = {
     roseType: 'angle',
     series: [
         {
-            name: 'PieChart',
+            name: 'Allergy',
             type: 'pie',
             radius: [0, '50%'],
             data: [
@@ -75,7 +75,7 @@ fruitOptions = {
     roseType: 'angle',
     series: [
         {
-            name: 'PieChart',
+            name: 'Fruits',
             type: 'pie',
             radius: [0, '50%'],
             data: [

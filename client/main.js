@@ -10,13 +10,13 @@
 var map = {
 	"./admin-analytics/admin-analytics.module": [
 		"./src/app/admin/pages/admin-analytics/admin-analytics.module.ts",
-		"default~admin-analytics-admin-analytics-module~charts-charts-module~index-index-module",
+		"default~admin-analytics-admin-analytics-module~charts-charts-module",
 		"common",
 		"admin-analytics-admin-analytics-module"
 	],
 	"./charts/charts.module": [
 		"./src/app/admin/pages/charts/charts.module.ts",
-		"default~admin-analytics-admin-analytics-module~charts-charts-module~index-index-module",
+		"default~admin-analytics-admin-analytics-module~charts-charts-module",
 		"common",
 		"charts-charts-module"
 	],
@@ -47,12 +47,6 @@ var map = {
 	"./icon/icon.module": [
 		"./src/app/admin/pages/icon/icon.module.ts",
 		"icon-icon-module"
-	],
-	"./index/index.module": [
-		"./src/app/admin/pages/index/index.module.ts",
-		"default~admin-analytics-admin-analytics-module~charts-charts-module~index-index-module",
-		"common",
-		"index-index-module"
 	],
 	"./menu-levels/menu-levels.module": [
 		"./src/app/admin/pages/menu-levels/menu-levels.module.ts",
@@ -292,11 +286,11 @@ var LoginComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MENU_ITEM", function() { return MENU_ITEM; });
 var MENU_ITEM = [
-    {
-        path: 'index',
-        title: 'Dashboard',
-        icon: 'dashboard'
-    },
+    // {
+    //     path: 'index',
+    //     title: 'Dashboard',
+    //     icon: 'dashboard'
+    // },
     {
         path: 'admin-analytics',
         title: 'Admin Analytics',
@@ -595,13 +589,13 @@ var childRoutes = [
                 component: _pages_component__WEBPACK_IMPORTED_MODULE_1__["PagesComponent"],
                 // canActivate: [AuthGuard],
                 children: [
-                    { path: '', redirectTo: 'index', pathMatch: 'full' },
+                    { path: '', redirectTo: 'admin-analytics', pathMatch: 'full' },
                     { path: 'admin-analytics', loadChildren: './admin-analytics/admin-analytics.module#AdminAnalyticsModule' },
                     { path: 'customer', loadChildren: './customer/customer.module#CustomerModule' },
                     { path: 'products', loadChildren: './company/company.module#CompanyModule' },
                     { path: 'snacks', loadChildren: './snacks/snacks.module#SnacksModule' },
                     { path: 'plan-management', loadChildren: './plan-management/plan-management.module#PlanManagementModule' },
-                    { path: 'index', loadChildren: './index/index.module#IndexModule' },
+                    // { path: 'index', loadChildren: './index/index.module#IndexModule' },
                     { path: 'editor', loadChildren: './editor/editor.module#EditorModule' },
                     { path: 'icon', loadChildren: './icon/icon.module#IconModule' },
                     { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },
@@ -3015,8 +3009,8 @@ var AuthService = /** @class */ (function () {
         return localStorage.getItem('username');
     };
     AuthService.prototype.getDomainName = function () {
-        return window.location.origin;
-        //return "http://localhost:9191";
+        //return window.location.origin;
+        return "http://localhost:9191";
     };
     AuthService.prototype.setLoggedIn = function (value) {
         localStorage.setItem("isLoggedIn", value);
@@ -3784,7 +3778,7 @@ module.exports = "\r\n.header_wrapper {\r\n    display: block;\r\n    height: 80
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"header_wrapper\">\n    <header class=\"site_header\">\n        <nav>\n            <div class=\"wrapper\">\n                <div class=\"logo\">\n                    <a routerLink=\"/home\"><img src=\"../assets/Munchies Logo-01.png\" alt=\"No Image\" /></a>\n                </div>\n                <ul>\n                    <li class=\"bars\" [ngClass]=\"{'bars_cross':isMobNavbarOpen}\" id=\"open\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">\n                        <div class=\"bar1\"></div>\n                        <div class=\"bar2\"></div>\n                        <div class=\"bar3\"></div>\n                    </li>\n                    <li><a routerLink=\"/collaborate\" >Collaborate</a></li>\n                    <li><a routerLink=\"/admin/pages/index\">Admin</a></li>\n                    <li><a routerLink=\"/my-orders\">My Order</a></li>\n\n                    <li><a routerLink=\"/help\">Help</a></li>\n                    <li><a routerLink=\"/contact\">Contact</a></li>\n                    <li>\n                        <a *ngIf=\"!isLoggedIn\" routerLink=\"/signIn\">Sign In</a>\n                        <a *ngIf=\"isLoggedIn\" (click)=\"logout()\">Logout</a>\n                    </li>\n                    <li><a routerLink=\"/subscribe\">Get the Bag</a></li>\n                </ul>\n                <div class=\"overlay\"  [ngClass]=\"{'showOverlay':isMobNavbarOpen}\" id=\"overlay\"></div>\n                <div class=\"responsive_menu\"  [ngClass]=\"{'openSideMenu':isMobNavbarOpen}\"  id=\"responsive_menu\">\n                    <div class=\"menu_list\">\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/collaborate\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Collaborate</a>\n                        </div>\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/help\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Help</a>\n                        </div>\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/contact\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Contact</a>\n                        </div>\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/signIn\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Sign IN</a>\n                        </div>\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/subscribe\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Get the Bag</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </nav>\n    </header>\n</div>"
+module.exports = "<div class=\"header_wrapper\">\n    <header class=\"site_header\">\n        <nav>\n            <div class=\"wrapper\">\n                <div class=\"logo\">\n                    <a routerLink=\"/home\"><img src=\"../assets/Munchies Logo-01.png\" alt=\"No Image\" /></a>\n                </div>\n                <ul>\n                    <li class=\"bars\" [ngClass]=\"{'bars_cross':isMobNavbarOpen}\" id=\"open\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">\n                        <div class=\"bar1\"></div>\n                        <div class=\"bar2\"></div>\n                        <div class=\"bar3\"></div>\n                    </li>\n                    <li><a routerLink=\"/collaborate\" >Collaborate</a></li>\n                    <li><a routerLink=\"/admin/pages/admin-analytics\">Admin</a></li>\n                    <li><a routerLink=\"/my-orders\">My Order</a></li>\n\n                    <li><a routerLink=\"/help\">Help</a></li>\n                    <li><a routerLink=\"/contact\">Contact</a></li>\n                    <li>\n                        <a *ngIf=\"!isLoggedIn\" routerLink=\"/signIn\">Sign In</a>\n                        <a *ngIf=\"isLoggedIn\" (click)=\"logout()\">Logout</a>\n                    </li>\n                    <li><a routerLink=\"/subscribe\">Get the Bag</a></li>\n                </ul>\n                <div class=\"overlay\"  [ngClass]=\"{'showOverlay':isMobNavbarOpen}\" id=\"overlay\"></div>\n                <div class=\"responsive_menu\"  [ngClass]=\"{'openSideMenu':isMobNavbarOpen}\"  id=\"responsive_menu\">\n                    <div class=\"menu_list\">\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/collaborate\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Collaborate</a>\n                        </div>\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/help\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Help</a>\n                        </div>\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/contact\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Contact</a>\n                        </div>\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/signIn\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Sign IN</a>\n                        </div>\n                        <div class=\"menu_item\">\n                            <a routerLink=\"/subscribe\" (click)=\"isMobNavbarOpen=!isMobNavbarOpen\">Get the Bag</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </nav>\n    </header>\n</div>"
 
 /***/ }),
 

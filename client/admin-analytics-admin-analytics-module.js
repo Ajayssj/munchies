@@ -18,7 +18,7 @@ module.exports = ".question_block .card-header {\r\n    display: none;\r\n}\r\n.
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"question_block\">\n    <h3>Which plan is selected the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div echarts [options]=\"planSelectedOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Which area has the most delivery?</h3>\n    <card cardTitle='Most delivery'>\n      <div *ngFor=\"let area of areaInfo\" class=\"area\">\n        <div class=\"area_text\">{{area.areaName}}</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"{{((area.count) * 100 / totalAreaCount)}}%\" [ngStyle]=\"{'width.%': ((area.count) * 100 / totalAreaCount)}\" class=\"pbar\"><span> {{((area.count) * 100 / totalAreaCount)}} %</span></div>\n        </div>\n      </div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Are you allergic to any of these?</h3>\n    <card cardTitle='Pie Chart'>\n      <div echarts [options]=\"allergyOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Fruits liked the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div echarts [options]=\"fruitOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <!-- <div class=\"question_block\">\n    <h3>Month Wise website traffic</h3>\n    <card cardTitle='Line Chart'>\n      <div echarts [options]=\"monthWiseTrafficOption\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div> -->\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"question_block\">\n    <h3>Which plan is selected the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"planSelectedOptions\" echarts [options]=\"planSelectedOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Which area has the most delivery?</h3>\n    <card cardTitle='Most delivery'>\n      <div *ngFor=\"let area of areaInfo\" class=\"area\">\n        <div class=\"area_text\">{{area.areaName}}</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"{{((area.count) * 100 / totalAreaCount)}}%\" [ngStyle]=\"{'width.%': ((area.count) * 100 / totalAreaCount)}\" class=\"pbar\"><span> {{((area.count) * 100 / totalAreaCount)}} %</span></div>\n        </div>\n      </div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Are you allergic to any of these?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"allergyOptions\" echarts [options]=\"allergyOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Fruits liked the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"fruitOptions\" echarts [options]=\"fruitOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <!-- <div class=\"question_block\">\n    <h3>Month Wise website traffic</h3>\n    <card cardTitle='Line Chart'>\n      <div echarts [options]=\"monthWiseTrafficOption\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div> -->\n</div>\n"
 
 /***/ }),
 
@@ -217,7 +217,7 @@ var ChartsService = /** @class */ (function () {
             roseType: 'angle',
             series: [
                 {
-                    name: 'PieChart',
+                    name: 'Plans',
                     type: 'pie',
                     radius: [0, '50%'],
                     data: [
@@ -242,7 +242,7 @@ var ChartsService = /** @class */ (function () {
             roseType: 'angle',
             series: [
                 {
-                    name: 'PieChart',
+                    name: 'Allergy',
                     type: 'pie',
                     radius: [0, '50%'],
                     data: [
@@ -269,7 +269,7 @@ var ChartsService = /** @class */ (function () {
             roseType: 'angle',
             series: [
                 {
-                    name: 'PieChart',
+                    name: 'Fruits',
                     type: 'pie',
                     radius: [0, '50%'],
                     data: [
@@ -340,43 +340,44 @@ var ChartsService = /** @class */ (function () {
         return this.monthWiseTrafficOption;
     };
     ChartsService.prototype.getAllPlans = function () {
+        var _this = this;
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/used/plan')
             .subscribe(function (res) {
-            // console.log(res.data);
-            // res.data.forEach(plan => {
-            //     this.planSelectedOptions.legend.data.push(plan.planInfo.title);
-            //     this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title });
-            // });
-            // this.planSelectedOptions.series[0].data = [...this.planSelectedOptions.series[0].data];
-            // console.log(this.planSelectedOptions)
+            console.log(res.data);
+            res.data.forEach(function (plan) {
+                _this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
+                _this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
+            });
+            _this.planSelectedOptions.series[0].data = _this.planSelectedOptions.series[0].data.slice();
+            console.log(_this.planSelectedOptions);
         }, function (err) {
         });
     };
     ChartsService.prototype.getAllergic = function () {
-        // this.http.get(this.auth.getDomainName() + '/api/analysis/most/allergic')
-        // .subscribe((res: any) => {
-        //     console.log(res.data);
-        //     res.data.forEach(allergicItem => {
-        //         this.allergyOptions.legend.data.push(allergicItem._id);
-        //         this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id});
-        //     });
-        //     console.log(this.allergyOptions)
-        // },
-        // err => {
-        // });        
+        var _this = this;
+        this.http.get(this.auth.getDomainName() + '/api/analysis/most/allergic')
+            .subscribe(function (res) {
+            console.log(res.data);
+            res.data.forEach(function (allergicItem) {
+                _this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
+                _this.allergyOptions.series[0].data.push({ value: allergicItem.count, name: allergicItem._id.toUpperCase() });
+            });
+            console.log(_this.allergyOptions);
+        }, function (err) {
+        });
     };
     ChartsService.prototype.getFruitsLikedMost = function () {
-        // this.http.get(this.auth.getDomainName() + '/api/analysis/most/liked/fruits')
-        // .subscribe((res: any) => {
-        //     console.log(res.data);
-        //     res.data.forEach(fruitsItem => {
-        //         this.fruitOptions.legend.data.push(fruitsItem._id);
-        //         this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id});
-        //     });
-        //     console.log(this.fruitOptions)
-        // },
-        // err => {
-        // });        
+        var _this = this;
+        this.http.get(this.auth.getDomainName() + '/api/analysis/most/liked/fruits')
+            .subscribe(function (res) {
+            console.log(res.data);
+            res.data.forEach(function (fruitsItem) {
+                _this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
+                _this.fruitOptions.series[0].data.push({ value: fruitsItem.count, name: fruitsItem._id.toUpperCase() });
+            });
+            console.log(_this.fruitOptions);
+        }, function (err) {
+        });
     };
     ChartsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
