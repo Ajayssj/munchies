@@ -17,12 +17,14 @@ export class AdminAnalyticsComponent implements OnInit {
   totalAreaCount=0;
   areaInfo = [];
   monthWiseTrafficOption;
+  Math: any;
   constructor(private chartsService: ChartsService, private http: HttpClient, private auth: AuthService) {
     this.planSelectedOptions = this.chartsService.getpPlanSelectedOptionsOption(); 
     this.allergyOptions = this.chartsService.getpAllergyOptionsOption(); 
     this.fruitOptions = this.chartsService.getpFruitOptionsOption(); 
     this.monthWiseTrafficOption = this.chartsService.getMonthWiseTrafficOptionsOption(); 
     console.log("plan", this.planSelectedOptions);
+    this.Math = Math;
   }
   ngOnInit() {
     this.http.get(this.auth.getDomainName() + '/api/analysis/most/delivered/area')

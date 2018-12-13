@@ -24,6 +24,7 @@ export const childRoutes: Routes = [
                     { path: 'products', loadChildren: './company/company.module#CompanyModule' },
                     { path: 'snacks', loadChildren: './snacks/snacks.module#SnacksModule' },
                     { path: 'plan-management', loadChildren: './plan-management/plan-management.module#PlanManagementModule' },
+                    // { path: 'index', loadChildren: './index/index.module#IndexModule' },
                     { path: 'editor', loadChildren: './editor/editor.module#EditorModule' },
                     { path: 'icon', loadChildren: './icon/icon.module#IconModule' },
                     { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },

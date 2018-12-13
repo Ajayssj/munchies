@@ -2,7 +2,7 @@
   <div class="question_block">
     <h3>Which plan is selected the most?</h3>
     <card cardTitle='Pie Chart'>
-      <div echarts [options]="planSelectedOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
+      <div *ngIf="planSelectedOptions" echarts [options]="planSelectedOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>
   </div>
   <div class="question_block">
@@ -19,13 +19,13 @@
   <div class="question_block">
     <h3>Are you allergic to any of these?</h3>
     <card cardTitle='Pie Chart'>
-      <div echarts [options]="allergyOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
+      <div *ngIf="allergyOptions" echarts [options]="allergyOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>
   </div>
   <div class="question_block">
     <h3>Fruits liked the most?</h3>
     <card cardTitle='Pie Chart'>
-      <div echarts [options]="fruitOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
+      <div *ngIf="fruitOptions" echarts [options]="fruitOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>
   </div>
   <!-- <div class="question_block">

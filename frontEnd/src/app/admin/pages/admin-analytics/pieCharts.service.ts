@@ -17,7 +17,8 @@ planSelectedOptions = {
     legend: {
         orient: 'vertical',
         x: 'left',
-        data: ['1 week', '4 week', '12 week']
+        // data: ['1 week', '4 week', '12 week']
+        data:[]
     },
     roseType: 'angle',
     series: [
@@ -26,9 +27,9 @@ planSelectedOptions = {
             type: 'pie',
             radius: [0, '50%'],
             data: [
-                { value: 235, name: '1 week' },
-                { value: 210, name: '4 week' },
-                { value: 162, name: '12 week' }
+                // { value: 235, name: '1 week' },
+                // { value: 210, name: '4 week' },
+                // { value: 162, name: '12 week' }
             ]
         }
     ]
@@ -41,7 +42,8 @@ allergyOptions = {
     legend: {
         orient: 'vertical',
         x: 'left',
-        data: ['Milk', 'Eggs', 'Peanuts', 'Other Nuts', 'Wheat']
+        // data: ['Milk', 'Eggs', 'Peanuts', 'Other Nuts', 'Wheat']
+        data: []
     },
     roseType: 'angle',
     series: [
@@ -50,11 +52,11 @@ allergyOptions = {
             type: 'pie',
             radius: [0, '50%'],
             data: [
-                { value: 235, name: 'Milk' },
-                { value: 210, name: 'Eggs' },
-                { value: 162, name: 'Peanuts' },
-                { value: 100, name: 'Other Nuts' },
-                { value: 50, name: 'Wheat' }
+                // { value: 235, name: 'Milk' },
+                // { value: 210, name: 'Eggs' },
+                // { value: 162, name: 'Peanuts' },
+                // { value: 100, name: 'Other Nuts' },
+                // { value: 50, name: 'Wheat' }
             ]
         }
     ]
@@ -67,7 +69,8 @@ fruitOptions = {
     legend: {
         orient: 'vertical',
         x: 'left',
-        data: ['Banana', 'Apple', 'Pear', 'Guava', 'Mango']
+        // data: ['Banana', 'Apple', 'Pear', 'Guava', 'Mango']
+        data: []
     },
     roseType: 'angle',
     series: [
@@ -76,11 +79,11 @@ fruitOptions = {
             type: 'pie',
             radius: [0, '50%'],
             data: [
-                { value: 143, name: 'Banana' },
-                { value: 178, name: 'Apple' },
-                { value: 240, name: 'Pear' },
-                { value: 100, name: 'Guava' },
-                { value: 300, name: 'Mango' }
+                // { value: 143, name: 'Banana' },
+                // { value: 178, name: 'Apple' },
+                // { value: 240, name: 'Pear' },
+                // { value: 100, name: 'Guava' },
+                // { value: 300, name: 'Mango' }
             ]
         }
     ]
@@ -141,45 +144,45 @@ fruitOptions = {
     getAllPlans() {
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/used/plan')
         .subscribe((res: any) => {
-            // console.log(res.data);
-            // res.data.forEach(plan => {
-            //     this.planSelectedOptions.legend.data.push(plan.planInfo.title);
-            //     this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title });
-            // });
+            console.log(res.data);
+            res.data.forEach(plan => {
+                this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
+                this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
+            });
 
-            // this.planSelectedOptions.series[0].data = [...this.planSelectedOptions.series[0].data];
-            // console.log(this.planSelectedOptions)
+            this.planSelectedOptions.series[0].data = [...this.planSelectedOptions.series[0].data];
+            console.log(this.planSelectedOptions)
         },
         err => {
 
     });
     }
     getAllergic() {
-        // this.http.get(this.auth.getDomainName() + '/api/analysis/most/allergic')
-        // .subscribe((res: any) => {
-        //     console.log(res.data);
-        //     res.data.forEach(allergicItem => {
-        //         this.allergyOptions.legend.data.push(allergicItem._id);
-        //         this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id});
-        //     });
-        //     console.log(this.allergyOptions)
-        // },
-        // err => {
+        this.http.get(this.auth.getDomainName() + '/api/analysis/most/allergic')
+        .subscribe((res: any) => {
+            console.log(res.data);
+            res.data.forEach(allergicItem => {
+                this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
+                this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id.toUpperCase()});
+            });
+            console.log(this.allergyOptions)
+        },
+        err => {
 
-        // });        
+        });        
     }
     getFruitsLikedMost() {
-        // this.http.get(this.auth.getDomainName() + '/api/analysis/most/liked/fruits')
-        // .subscribe((res: any) => {
-        //     console.log(res.data);
-        //     res.data.forEach(fruitsItem => {
-        //         this.fruitOptions.legend.data.push(fruitsItem._id);
-        //         this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id});
-        //     });
-        //     console.log(this.fruitOptions)
-        // },
-        // err => {
+        this.http.get(this.auth.getDomainName() + '/api/analysis/most/liked/fruits')
+        .subscribe((res: any) => {
+            console.log(res.data);
+            res.data.forEach(fruitsItem => {
+                this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
+                this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id.toUpperCase()});
+            });
+            console.log(this.fruitOptions)
+        },
+        err => {
 
-        // });        
+        });        
     }
 }
