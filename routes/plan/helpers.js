@@ -356,8 +356,8 @@ module.exports = {
             [
                 {
                       $match: {
-                            _id : db.toObjectID('5c1207414231a10364455ba5'),
-                            "customWeeks.wId" :  db.toObjectID('5c0e2571cdfb5107849569f0')
+                            _id : db.toObjectID(activePlanId),
+                            "customWeeks.wId" :  db.toObjectID(weekId)
                         }
                     },
                     {
@@ -366,7 +366,7 @@ module.exports = {
                             $filter: {
                                    input: "$customWeeks",
                                    as: "product",
-                                   cond: { $eq: [ "$$product.wId", db.toObjectID('5c0e2571cdfb5107849569f0')] }
+                                   cond: { $eq: [ "$$product.wId", db.toObjectID(weekId)] }
                                 }
                              }
                           } 

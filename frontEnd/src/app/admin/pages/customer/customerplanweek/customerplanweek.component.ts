@@ -31,7 +31,8 @@ export class CustomerplanweekComponent implements OnInit {
       console.log("weekProds",res.data);
       if (res.data && res.data.length) {
         // this.weeks = res.data[0].products;
-        this.weeks = [...res.data[0].customWeekProducts,...res.data[0].defaultWeekProducts];
+        // this.weeks = [...res.data[0].customWeekProducts,...res.data[0].defaultWeekProducts];
+        this.weeks = res.data[0].products;
         console.log("weeksProducts",this.weeks);
         
       }
@@ -107,6 +108,7 @@ export class CustomerplanweekComponent implements OnInit {
 
   closeAlertModal(modal) {
     modal.close();
+    
   }
 
   onClose() {
