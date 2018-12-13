@@ -21,7 +21,7 @@
     "scripts": {
         "start": "set NODE_ENV=production && node  app.js",
         "start-dev" : "set NODE_ENV=development && node --inspect app.js",
-        "build-frontend": "node build-frontend.js",
+        "build-frontend": "node build-frontend.js"
     },
 	"engines": {
 		"node": "11.0.0",
