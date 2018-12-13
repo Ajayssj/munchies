@@ -413,7 +413,8 @@ var CustomerplanweekComponent = /** @class */ (function () {
             console.log("weekProds", res.data);
             if (res.data && res.data.length) {
                 // this.weeks = res.data[0].products;
-                _this.weeks = res.data[0].customWeekProducts.concat(res.data[0].defaultWeekProducts);
+                // this.weeks = [...res.data[0].customWeekProducts,...res.data[0].defaultWeekProducts];
+                _this.weeks = res.data[0].products;
                 console.log("weeksProducts", _this.weeks);
             }
         }, function (err) {
