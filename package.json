@@ -19,7 +19,8 @@
     },
     "repository": {},
     "scripts": {
-        "start": "node --inspect app.js",
+        "start": "set NODE_ENV=production && node  app.js",
+        "start-dev" : "set NODE_ENV=development && node --inspect app.js",
         "build-frontend": "node build-frontend.js"
     }
 }

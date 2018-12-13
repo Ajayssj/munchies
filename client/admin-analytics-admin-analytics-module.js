@@ -18,7 +18,7 @@ module.exports = ".question_block .card-header {\r\n    display: none;\r\n}\r\n.
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"question_block\">\n    <h3>Which plan is selected the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div echarts [options]=\"planSelectedOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Which area has the most delivery?</h3>\n    <card cardTitle='Most delivery'>\n      <div *ngFor=\"let area of areaInfo\" class=\"area\">\n        <div class=\"area_text\">{{area.areaName}}</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"{{((area.count) * 100 / totalAreaCount)}}%\" [ngStyle]=\"{'width.%': ((area.count) * 100 / totalAreaCount)}\" class=\"pbar\"><span> {{((area.count) * 100 / totalAreaCount)}} %</span></div>\n        </div>\n      </div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Are you allergic to any of these?</h3>\n    <card cardTitle='Pie Chart'>\n      <div echarts [options]=\"allergyOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Fruits liked the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div echarts [options]=\"fruitOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <!-- <div class=\"question_block\">\n    <h3>Month Wise website traffic</h3>\n    <card cardTitle='Line Chart'>\n      <div echarts [options]=\"monthWiseTrafficOption\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div> -->\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"question_block\">\n    <h3>Which plan is selected the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div echarts [options]=\"planSelectedOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Which area has the most delivery?</h3>\n    <card cardTitle='Most delivery'>\n      <div class=\"area\">\n        <div class=\"area_text\">Contonment</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"40%\" [ngStyle]=\"{'width.%': 40}\" class=\"pbar\"><span>40%</span></div>\n        </div>\n      </div>\n      <div class=\"area\">\n        <div class=\"area_text\">Indira Nagar</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"20%\" [ngStyle]=\"{'width.%': 20}\" class=\"pbar\"><span>20%</span></div>\n        </div>\n      </div>\n      <div class=\"area\">\n        <div class=\"area_text\">Usmanpur</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"50%\" [ngStyle]=\"{'width.%': 50}\" class=\"pbar\"><span>50%</span></div>\n        </div>\n      </div>\n      <div class=\"area\">\n        <div class=\"area_text\">Cidco</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"80%\" [ngStyle]=\"{'width.%': 80}\" class=\"pbar\"><span>80%</span></div>\n        </div>\n      </div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Are you allergic to any of these?</h3>\n    <card cardTitle='Pie Chart'>\n      <div echarts [options]=\"allergyOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Fruits liked the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div echarts [options]=\"fruitOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Fruits liked the most?</h3>\n    <card cardTitle='Line Chart'>\n      <div echarts [options]=\"monthWiseTrafficOption\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -34,8 +34,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminAnalyticsComponent", function() { return AdminAnalyticsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _pieCharts_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pieCharts.service */ "./src/app/admin/pages/admin-analytics/pieCharts.service.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _user_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../user/auth.service */ "./src/app/user/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47,34 +45,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
-
 var AdminAnalyticsComponent = /** @class */ (function () {
-    function AdminAnalyticsComponent(chartsService, http, auth) {
+    function AdminAnalyticsComponent(chartsService) {
         this.chartsService = chartsService;
-        this.http = http;
-        this.auth = auth;
-        this.totalAreaCount = 0;
-        this.areaInfo = [];
         this.planSelectedOptions = this.chartsService.getpPlanSelectedOptionsOption();
         this.allergyOptions = this.chartsService.getpAllergyOptionsOption();
         this.fruitOptions = this.chartsService.getpFruitOptionsOption();
         this.monthWiseTrafficOption = this.chartsService.getMonthWiseTrafficOptionsOption();
-        console.log("plan", this.planSelectedOptions);
     }
     AdminAnalyticsComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.http.get(this.auth.getDomainName() + '/api/analysis/most/delivered/area')
-            .subscribe(function (res) {
-            console.log(res.data);
-            res.data.forEach(function (area) {
-                // this.planSelectedOptions.legend.data.push(plan.planInfo.title);
-                // this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title });
-                _this.totalAreaCount += area.count;
-                _this.areaInfo.push({ areaName: area._id, count: area.count });
-            });
-        }, function (err) {
-        });
         this.width = 40;
     };
     AdminAnalyticsComponent = __decorate([
@@ -84,7 +63,7 @@ var AdminAnalyticsComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./admin-analytics.component.css */ "./src/app/admin/pages/admin-analytics/admin-analytics.component.css")],
             providers: [_pieCharts_service__WEBPACK_IMPORTED_MODULE_1__["ChartsService"]]
         }),
-        __metadata("design:paramtypes", [_pieCharts_service__WEBPACK_IMPORTED_MODULE_1__["ChartsService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _user_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+        __metadata("design:paramtypes", [_pieCharts_service__WEBPACK_IMPORTED_MODULE_1__["ChartsService"]])
     ], AdminAnalyticsComponent);
     return AdminAnalyticsComponent;
 }());
@@ -184,24 +163,15 @@ var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forCh
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartsService", function() { return ChartsService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _user_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../user/auth.service */ "./src/app/user/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
 
 var ChartsService = /** @class */ (function () {
-    function ChartsService(http, auth) {
-        this.http = http;
-        this.auth = auth;
+    function ChartsService() {
         this.planSelectedOptions = {
             tooltip: {
                 trigger: 'item',
@@ -210,7 +180,7 @@ var ChartsService = /** @class */ (function () {
             legend: {
                 orient: 'vertical',
                 x: 'left',
-                data: ['week 20', 'week 21', 'week 23']
+                data: ['1 week', '4 week', '12 week']
             },
             roseType: 'angle',
             series: [
@@ -234,7 +204,7 @@ var ChartsService = /** @class */ (function () {
             legend: {
                 orient: 'vertical',
                 x: 'left',
-                data: []
+                data: ['Milk', 'Eggs', 'Peanuts', 'Other Nuts', 'Wheat']
             },
             roseType: 'angle',
             series: [
@@ -243,11 +213,11 @@ var ChartsService = /** @class */ (function () {
                     type: 'pie',
                     radius: [0, '50%'],
                     data: [
-                    // { value: 235, name: 'Milk' },
-                    // { value: 210, name: 'Eggs' },
-                    // { value: 162, name: 'Peanuts' },
-                    // { value: 100, name: 'Other Nuts' },
-                    // { value: 50, name: 'Wheat' }
+                        { value: 235, name: 'Milk' },
+                        { value: 210, name: 'Eggs' },
+                        { value: 162, name: 'Peanuts' },
+                        { value: 100, name: 'Other Nuts' },
+                        { value: 50, name: 'Wheat' }
                     ]
                 }
             ]
@@ -260,7 +230,7 @@ var ChartsService = /** @class */ (function () {
             legend: {
                 orient: 'vertical',
                 x: 'left',
-                data: []
+                data: ['Banana', 'Apple', 'Pear', 'Guava', 'Mango']
             },
             roseType: 'angle',
             series: [
@@ -269,11 +239,11 @@ var ChartsService = /** @class */ (function () {
                     type: 'pie',
                     radius: [0, '50%'],
                     data: [
-                    // { value: 143, name: 'Banana' },
-                    // { value: 178, name: 'Apple' },
-                    // { value: 240, name: 'Pear' },
-                    // { value: 100, name: 'Guava' },
-                    // { value: 300, name: 'Mango' }
+                        { value: 143, name: 'Banana' },
+                        { value: 178, name: 'Apple' },
+                        { value: 240, name: 'Pear' },
+                        { value: 100, name: 'Guava' },
+                        { value: 300, name: 'Mango' }
                     ]
                 }
             ]
@@ -304,10 +274,7 @@ var ChartsService = /** @class */ (function () {
                 {
                     // type: 'value',
                     type: 'value',
-                    data: [0, 1000, 2000],
-                    axisTick: {
-                        alignWithLabel: true
-                    }
+                    yAxisTicks: [0, 1000, 2000]
                 }
             ],
             series: [
@@ -319,9 +286,6 @@ var ChartsService = /** @class */ (function () {
                 }
             ]
         };
-        this.getAllPlans();
-        this.getAllergic();
-        this.getFruitsLikedMost();
     }
     ChartsService.prototype.getpPlanSelectedOptionsOption = function () {
         return this.planSelectedOptions;
@@ -335,48 +299,8 @@ var ChartsService = /** @class */ (function () {
     ChartsService.prototype.getMonthWiseTrafficOptionsOption = function () {
         return this.monthWiseTrafficOption;
     };
-    ChartsService.prototype.getAllPlans = function () {
-        this.http.get(this.auth.getDomainName() + '/api/analysis/most/used/plan')
-            .subscribe(function (res) {
-            // console.log(res.data);
-            // res.data.forEach(plan => {
-            //     this.planSelectedOptions.legend.data.push(plan.planInfo.title);
-            //     this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title });
-            // });
-            // this.planSelectedOptions.series[0].data = [...this.planSelectedOptions.series[0].data];
-            // console.log(this.planSelectedOptions)
-        }, function (err) {
-        });
-    };
-    ChartsService.prototype.getAllergic = function () {
-        // this.http.get(this.auth.getDomainName() + '/api/analysis/most/allergic')
-        // .subscribe((res: any) => {
-        //     console.log(res.data);
-        //     res.data.forEach(allergicItem => {
-        //         this.allergyOptions.legend.data.push(allergicItem._id);
-        //         this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id});
-        //     });
-        //     console.log(this.allergyOptions)
-        // },
-        // err => {
-        // });        
-    };
-    ChartsService.prototype.getFruitsLikedMost = function () {
-        // this.http.get(this.auth.getDomainName() + '/api/analysis/most/liked/fruits')
-        // .subscribe((res: any) => {
-        //     console.log(res.data);
-        //     res.data.forEach(fruitsItem => {
-        //         this.fruitOptions.legend.data.push(fruitsItem._id);
-        //         this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id});
-        //     });
-        //     console.log(this.fruitOptions)
-        // },
-        // err => {
-        // });        
-    };
     ChartsService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _user_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])()
     ], ChartsService);
     return ChartsService;
 }());
