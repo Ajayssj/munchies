@@ -17,9 +17,33 @@
         "nodemailer": "^4.6.8",
         "save": "^2.3.3"
     },
+	 "devDependencies": {
+		"@angular-devkit/build-angular": "^0.10.5",
+		"@angular/cli": "~7.0.2",
+		"@angular/compiler-cli": "~7.0.0",
+		"@angular/language-service": "~7.0.0",
+		"@types/jasmine": "~2.8.8",
+		"@types/jasminewd2": "~2.0.3",
+		"@types/node": "~8.9.4",
+		"codelyzer": "~4.5.0",
+		"gyp": "^0.5.0",
+		"jasmine-core": "~2.99.1",
+		"jasmine-spec-reporter": "~4.2.1",
+		"karma": "~3.0.0",
+		"karma-chrome-launcher": "~2.2.0",
+		"karma-coverage-istanbul-reporter": "~2.0.1",
+		"karma-jasmine": "~1.1.2",
+		"karma-jasmine-html-reporter": "^0.2.2",
+		"node-gyp": "^3.8.0",
+		"node-pre-gyp": "^0.10.3",
+		"protractor": "~5.4.0",
+		"ts-node": "~7.0.0",
+		"tslint": "~5.11.0",
+		"typescript": "~3.1.1"
+	  },
     "repository": {},
     "scripts": {
-        "start": "set NODE_ENV=production && node build-frontend.js && node  app.js",
+        "start": "set NODE_ENV=production && cd ./frontEnd && ng build --output-path ../client/ && cd ../ && node  app.js",
         "start-dev" : "set NODE_ENV=development && node --inspect app.js",
         "build-frontend": "node build-frontend.js"
     }
