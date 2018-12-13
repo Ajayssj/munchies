@@ -18,7 +18,7 @@ module.exports = ".question_block .card-header {\r\n    display: none;\r\n}\r\n.
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"question_block\">\n    <h3>Which plan is selected the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"planSelectedOptions\" echarts [options]=\"planSelectedOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Which area has the most delivery?</h3>\n    <card cardTitle='Most delivery'>\n      <div *ngFor=\"let area of areaInfo\" class=\"area\">\n        <div class=\"area_text\">{{area.areaName}}</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"{{((area.count) * 100 / totalAreaCount)}}%\" [ngStyle]=\"{'width.%': ((area.count) * 100 / totalAreaCount)}\" class=\"pbar\"><span> {{((area.count) * 100 / totalAreaCount)}} %</span></div>\n        </div>\n      </div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Are you allergic to any of these?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"allergyOptions\" echarts [options]=\"allergyOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Fruits liked the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"fruitOptions\" echarts [options]=\"fruitOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <!-- <div class=\"question_block\">\n    <h3>Month Wise website traffic</h3>\n    <card cardTitle='Line Chart'>\n      <div echarts [options]=\"monthWiseTrafficOption\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div> -->\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"question_block\">\n    <h3>Which plan is selected the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"planSelectedOptions\" echarts [options]=\"planSelectedOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Which area has the most delivery?</h3>\n    <card cardTitle='Most delivery'>\n      <div *ngFor=\"let area of areaInfo\" class=\"area\">\n        <div class=\"area_text\">{{area.areaName}}</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"{{area.percent}}%\" [ngStyle]=\"{'width.%': area.percent}\" class=\"pbar\"><span> {{area.percent}} %</span></div>\n        </div>\n      </div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Are you allergic to any of these?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"allergyOptions\" echarts [options]=\"allergyOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Fruits liked the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"fruitOptions\" echarts [options]=\"fruitOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <!-- <div class=\"question_block\">\n    <h3>Month Wise website traffic</h3>\n    <card cardTitle='Line Chart'>\n      <div echarts [options]=\"monthWiseTrafficOption\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div> -->\n</div>\n"
 
 /***/ }),
 
@@ -56,23 +56,26 @@ var AdminAnalyticsComponent = /** @class */ (function () {
         this.auth = auth;
         this.totalAreaCount = 0;
         this.areaInfo = [];
+        this.Math = Math;
+    }
+    AdminAnalyticsComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.planSelectedOptions = this.chartsService.getpPlanSelectedOptionsOption();
         this.allergyOptions = this.chartsService.getpAllergyOptionsOption();
         this.fruitOptions = this.chartsService.getpFruitOptionsOption();
         this.monthWiseTrafficOption = this.chartsService.getMonthWiseTrafficOptionsOption();
         console.log("plan", this.planSelectedOptions);
-        this.Math = Math;
-    }
-    AdminAnalyticsComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/delivered/area')
             .subscribe(function (res) {
             console.log(res.data);
-            res.data.forEach(function (area) {
+            _this.totalAreaCount = res.data.reduce(function (a, b) { return ({ count: a.count + b.count }); }).count;
+            console.log('Area Count  : ', _this.totalAreaCount);
+            res.data.forEach(function (area, index) {
                 // this.planSelectedOptions.legend.data.push(plan.planInfo.title);
                 // this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title });
-                _this.totalAreaCount += area.count;
-                _this.areaInfo.push({ areaName: area._id, count: area.count });
+                area.percent = ((area.count * 100) / _this.totalAreaCount).toFixed(2);
+                console.log('Percent  : ', res.data[index].percent);
+                _this.areaInfo.push({ areaName: area._id, count: area.count, percent: area.percent });
             });
         }, function (err) {
         });

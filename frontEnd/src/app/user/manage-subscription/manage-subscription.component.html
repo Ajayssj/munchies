@@ -21,12 +21,12 @@
                             <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>
                             <!-- <td><button (click)="skipNextWeek(order,alertModal)" class="btn btn-danger"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td> -->
                             <td  style="cursor: pointer;">
-                                <button 
+                                <span 
                                 [disabled]="order.state" 
                                 (click)="skipNextWeek(order,alertModal)" 
                                 class="btn btn-danger"><i class='fa fa-trash fa-fw'></i>
                                 {{order.label}}
-                            </button></td>
+                            </span></td>
                         </tr>
                     </tbody>
                 </table>

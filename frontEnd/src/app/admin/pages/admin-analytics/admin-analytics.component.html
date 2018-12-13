@@ -11,7 +11,7 @@
       <div *ngFor="let area of areaInfo" class="area">
         <div class="area_text">{{area.areaName}}</div>
         <div class="pbar_wrapper">
-           <div title="{{((area.count) * 100 / totalAreaCount)}}%" [ngStyle]="{'width.%': ((area.count) * 100 / totalAreaCount)}" class="pbar"><span> {{((area.count) * 100 / totalAreaCount)}} %</span></div>
+           <div title="{{area.percent}}%" [ngStyle]="{'width.%': area.percent}" class="pbar"><span> {{area.percent}} %</span></div>
         </div>
       </div>
     </card>
