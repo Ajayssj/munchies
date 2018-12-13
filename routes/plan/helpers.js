@@ -355,49 +355,82 @@ module.exports = {
         ActivePlan.aggregate(
             [
                 {
-                    $match: {
-                        _id : db.toObjectID(activePlanId),
-                        "customWeeks.wId" :  db.toObjectID(weekId)
+                      $match: {
+                            _id : db.toObjectID('5c1207414231a10364455ba5'),
+                            "customWeeks.wId" :  db.toObjectID('5c0e2571cdfb5107849569f0')
+                        }
+                    },
+                    {
+                     $project : {
+                           plans: {
+                            $filter: {
+                                   input: "$customWeeks",
+                                   as: "product",
+                                   cond: { $eq: [ "$$product.wId", db.toObjectID('5c0e2571cdfb5107849569f0')] }
+                                }
+                             }
+                          } 
+                    },
+                    {
+                        $lookup : {
+                            "from" : "products",
+                            "localField" : "plans.products",
+                            "foreignField" : "_id",
+                            "as" : "products"
+                        }
+                    },
+                    {
+                       $project : {
+                            plans : 0
+                       }
                     }
-                },
-                {
-                    $lookup : {
-                        "from" : "products",
-                        "localField" : "customWeeks.products",
-                        "foreignField" : "_id",
-                        "as" : "customWeekProducts"
-                    }
-                },
-                {
-                    $lookup : {
-                        "from" : "plansExtended",
-                        "localField" : "customWeeks.wId",
-                        "foreignField" : "_id",
-                        "as" : "plans"
-                    }
-                },
-               /*  {
-                    $match : {
-                        "plans._id" : db.toObjectID(weekId)
-                    }
-                },   */
-                {
-                    $lookup : {
-                        "from" : "products",
-                        "localField" : "plans.products",
-                        "foreignField" : "_id",
-                        "as" : "defaultWeekProducts"
-                    }
-                },
-                {
-                   $project : {
-                        plans : 0,
-                        customWeeks : 0,
-                        skipedWeeks : 0
-                   }
-                }
+            ]
+            // [
+            //     {
+            //         $match: {
+            //             _id : db.toObjectID(activePlanId),
+            //             "customWeeks.wId" :  db.toObjectID(weekId)
+            //         }
+            //     },
+            //     {
+            //         $lookup : {
+            //             "from" : "products",
+            //             "localField" : "customWeeks.products",
+            //             "foreignField" : "_id",
+            //             "as" : "customWeekProducts"
+            //         }
+            //     },
+            //     {
+            //         $lookup : {
+            //             "from" : "plansExtended",
+            //             "localField" : "customWeeks.wId",
+            //             "foreignField" : "_id",
+            //             "as" : "plans"
+            //         }
+            //     },
+            //    /*  {
+            //         $match : {
+            //             "plans._id" : db.toObjectID(weekId)
+            //         }
+            //     },   */
+            //     {
+            //         $lookup : {
+            //             "from" : "products",
+            //             "localField" : "plans.products",
+            //             "foreignField" : "_id",
+            //             "as" : "defaultWeekProducts"
+            //         }
+            //     },
+            //     {
+            //        $project : {
+            //             plans : 0,
+            //             customWeeks : 0,
+            //             skipedWeeks : 0
+            //        }
+            //     }
         
-            ]).toArray()
+            // ]
+        ).toArray()
                 .then(customizedPlansProducts => {
                     // let defaultWeekProducts = customizedPlansProducts[0].defaultWeekProducts.filter(item => item._id == db.toObjectID(weekId))
                     // customizedPlansProducts.defaultWeekProducts = defaultWeekProducts;
