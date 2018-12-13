@@ -21,6 +21,8 @@
     "scripts": {
         "start": "set NODE_ENV=production && node  app.js",
         "start-dev" : "set NODE_ENV=development && node --inspect app.js",
-        "build-frontend": "node build-frontend.js"
+        "build-frontend": "node build-frontend.js",
+		"preinstall" : "npm install -g angular-cli",
+		"postinstall" : "cd ./frontEnd/ && ng build --ouput-path ../client/"
     }
 }
