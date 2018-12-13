@@ -70,8 +70,15 @@
 	  },
     "repository": {},
     "scripts": {
-        "start": "set NODE_ENV=production && cd ./frontEnd && ng build --output-path ../client/ && cd ../ && node  app.js",
+		"ng": "ng",
+		"start": "ng serve",
+		"build": "ng build",
+		"test": "ng test",
+		"lint": "ng lint",
+		"e2e": "ng e2e",
+        "start": "set NODE_ENV=production && node  app.js",
         "start-dev" : "set NODE_ENV=development && node --inspect app.js",
+		"postinstall" : "cd ./frontEnd && ng build --output-path ../client/",
         "build-frontend": "node build-frontend.js"
     }
 }
