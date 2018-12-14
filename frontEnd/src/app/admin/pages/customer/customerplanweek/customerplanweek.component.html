@@ -19,7 +19,7 @@
             <td>{{weekprod.type}}</td>
             <td>{{weekprod.name}}</td>
             <td>{{weekprod.price}}</td>
-            <td><button (click)="deleteWeekProd(weekprod._id, alertModal)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button></td>
+            <td><button (click)="deleteWeekProd(weekprod._id, i, alertModal)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button></td>
           </tr>
         </tbody>
       </table>
@@ -47,7 +47,7 @@
           <td>{{prod.type}}</td>
           <td>{{prod.name}}</td>
           <td>{{prod.price}}</td>
-          <td><button (click)="addProd(prod._id, alertModal)" class="btn btn-success"><i class="fa fa-check fa-fw"></i>Add</button></td>
+          <td><button (click)="addProd(prod._id, i, alertModal)" class="btn btn-success"><i class="fa fa-check fa-fw"></i>Add</button></td>
         </tr>
       </tbody>
     </table>

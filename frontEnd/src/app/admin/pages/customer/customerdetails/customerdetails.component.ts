@@ -156,6 +156,10 @@ export class CustomerdetailsComponent implements OnInit {
     console.log(userId, planId);
     this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+planId);
   }
+  
+  viewCustomerInfo(activePlanId) {
+    this.router.navigateByUrl('/admin/pages/customer/customerInfo/' + activePlanId);
+  }
 
   changeView(view) {
     this.view = view;

@@ -22,6 +22,7 @@ export class CustomerplanweekComponent implements OnInit {
   deleteMessage = '';
   data = {};
   alertText: String;
+  addSuccess= false;
   constructor(private http: HttpClient, private auth: AuthService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class CustomerplanweekComponent implements OnInit {
 
   }
 
-  deleteWeekProd(prodId, alertModal) {
+  deleteWeekProd(prodId, index, alertModal) {
     console.log(prodId);
     const routeParams = this.activeRoute.snapshot.params;
     console.log(routeParams);
@@ -61,6 +62,7 @@ export class CustomerplanweekComponent implements OnInit {
         // alert('Product Deleted Successfully!');
         this.alertText = "Product Deleted Successfully!";
         this.openModal(alertModal);
+        this.weeks.splice(index, 1);
       } else if (res.error) {
         // alert(res.error);
           this.alertText = res.error;
@@ -71,26 +73,36 @@ export class CustomerplanweekComponent implements OnInit {
       console.log("deleteProd err",err);
     });
   }
-  addProd(prodId, alertModal) {
+  addProd(prodId, index, alertModal) {
     console.log(prodId);
-    const routeParams = this.activeRoute.snapshot.params;
-    console.log(routeParams);
-    this.http.post(this.auth.getDomainName() + '/api/plan/active/'+routeParams.planid+'/product/'+prodId+'/week/'+routeParams.weekid,{}).subscribe((res: any) => {
-      console.log("addProd",res);
-      if (res.success) {
-        // alert('Product Added Successfully!');
-        this.alertText = "Product Added Successfully!";
-        this.openModal(alertModal);
-      } else if (res.error) {
-        // alert(res.error);
-          this.alertText = res.error;
-          this.openModal(alertModal);
+    var isExist = false;
+    for (let wp = 0; wp < this.weeks.length; wp++) {
+      if (this.weeks[wp]["_id"] == prodId) {
+        isExist = true;
+        alert("Product already exist!");
       }
-    },
-      err=> {
-      console.log("addProd err",err);
-    });
-    
+    } 
+    if (!isExist) {
+      const routeParams = this.activeRoute.snapshot.params;
+      console.log(routeParams);
+      this.http.post(this.auth.getDomainName() + '/api/plan/active/'+routeParams.planid+'/product/'+prodId+'/week/'+routeParams.weekid,{}).subscribe((res: any) => {
+        console.log("addProd",res);
+        if (res.success) {
+          // alert('Product Added Successfully!');
+          this.alertText = "Product Added Successfully!";
+          // this.openModal(alertModal);
+          this.addSuccess = true;
+          this.weeks.push(this.products[index]);
+        } else if (res.error) {
+          // alert(res.error);
+            this.alertText = res.error;
+            // this.openModal(alertModal);
+        }
+      },
+        err=> {
+        console.log("addProd err",err);
+      });
+    }
   }
 
   changeView(view) {
@@ -103,7 +115,7 @@ export class CustomerplanweekComponent implements OnInit {
 
   closeModal(modal) {
     modal.close();
-    window.location.reload();
+    // window.location.reload();
   }
 
   closeAlertModal(modal) {
@@ -112,7 +124,7 @@ export class CustomerplanweekComponent implements OnInit {
   }
 
   onClose() {
-    window.location.reload();
+    // window.location.reload();
     swal({
       type: 'success',
       title: 'Success!',

@@ -251,7 +251,7 @@ addProduct(modal) {
       if(response.success) {
         this.message = response.message;
         console.log(this.addProductArray)
-        this.products.push(this.addProductArray);
+        this.products.push({ ...this.addProductArray, ...{_id : response.data._id}});
         // this.scrollTop();
       }
     }, 

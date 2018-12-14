@@ -61,12 +61,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customerplan_customerplan_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./customerplan/customerplan.component */ "./src/app/admin/pages/customer/customerplan/customerplan.component.ts");
 /* harmony import */ var _customerplanweek_customerplanweek_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./customerplanweek/customerplanweek.component */ "./src/app/admin/pages/customer/customerplanweek/customerplanweek.component.ts");
 /* harmony import */ var _customerdetails_customerdetails_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./customerdetails/customerdetails.component */ "./src/app/admin/pages/customer/customerdetails/customerdetails.component.ts");
+/* harmony import */ var _customerinfo_customerinfo_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./customerinfo/customerinfo.component */ "./src/app/admin/pages/customer/customerinfo/customerinfo.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -94,7 +96,8 @@ var CustomerModule = /** @class */ (function () {
                 _customer_component__WEBPACK_IMPORTED_MODULE_6__["CustomerComponent"],
                 _customerdetails_customerdetails_component__WEBPACK_IMPORTED_MODULE_9__["CustomerdetailsComponent"],
                 _customerplanweek_customerplanweek_component__WEBPACK_IMPORTED_MODULE_8__["CustomerplanweekComponent"],
-                _customerplan_customerplan_component__WEBPACK_IMPORTED_MODULE_7__["CustomerplanComponent"]
+                _customerplan_customerplan_component__WEBPACK_IMPORTED_MODULE_7__["CustomerplanComponent"],
+                _customerinfo_customerinfo_component__WEBPACK_IMPORTED_MODULE_10__["CustomerinfoComponent"]
             ]
         })
     ], CustomerModule);
@@ -120,6 +123,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customerplan_customerplan_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./customerplan/customerplan.component */ "./src/app/admin/pages/customer/customerplan/customerplan.component.ts");
 /* harmony import */ var _customerplanweek_customerplanweek_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./customerplanweek/customerplanweek.component */ "./src/app/admin/pages/customer/customerplanweek/customerplanweek.component.ts");
 /* harmony import */ var _customerdetails_customerdetails_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./customerdetails/customerdetails.component */ "./src/app/admin/pages/customer/customerdetails/customerdetails.component.ts");
+/* harmony import */ var _customerinfo_customerinfo_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./customerinfo/customerinfo.component */ "./src/app/admin/pages/customer/customerinfo/customerinfo.component.ts");
+
 
 
 
@@ -131,6 +136,7 @@ var childRoutes = [
         component: _customer_component__WEBPACK_IMPORTED_MODULE_1__["CustomerComponent"],
         children: [
             { path: '', component: _customerdetails_customerdetails_component__WEBPACK_IMPORTED_MODULE_4__["CustomerdetailsComponent"], pathMatch: 'full' },
+            { path: 'customerInfo/:activePlanId', component: _customerinfo_customerinfo_component__WEBPACK_IMPORTED_MODULE_5__["CustomerinfoComponent"] },
             { path: 'cust/:custid/plan/:planid', component: _customerplan_customerplan_component__WEBPACK_IMPORTED_MODULE_2__["CustomerplanComponent"] },
             { path: 'cust/:custid/plan/:planid/week/:weekid', component: _customerplanweek_customerplanweek_component__WEBPACK_IMPORTED_MODULE_3__["CustomerplanweekComponent"] },
         ]
@@ -159,7 +165,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n  <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Customer Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>No</th>\n            <th>Name</th>\n            <th>Address</th>\n            <th>Area of Delivery</th>\n            <th>Week Number</th>\n            <!-- <th>Plan Detail</th> -->\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let user of users, let i=index\">\n            <td>{{i+1}}</td>\n            <td>{{user.user.firstName}} {{user.user.lastName}}</td>\n            <td>{{user.address}}</td>\n            <td>{{user.Area_of_delivery}}</td>\n            <!-- <td><a routerLink='/admin/pages/customer/cust/3423/plan/123/week/1/' class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            <td><a routerLink=\"/admin/pages/customer/cust/3423/plan/123\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n            <td><a (click)=\"viewUserWeek(user)\" class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            <!-- <td><a (click)=\"viewUserPlan(user.user._id,user.planInfo.planId)\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n          </tr>\n         \n        </tbody>\n      </table>\n    </card>\n  </div>\n</div>\n<!-- <div class=\"row\">\n    <div class=\"col-md-12\">\n      <card cardTitle=\"Customer Details\">\n        <table class=\"table table-bordered table-hover\">\n          <thead>\n            <tr>\n              <th>No</th>\n              <th>Name</th>\n              <th>Address</th>\n              <th>Area of Delivery</th>\n              <th>Week Number</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let user of users, let i=index\">\n              <td>{{i+1}}</td>\n              <td>{{user.user.firstName}} {{user.user.lastName}}</td>\n              <td>{{user.address}}</td>\n              <td>{{user.Area_of_delivery}}</td>\n              <td><a (click)=\"viewUserWeek(user.user._id,user.planInfo.planId,user.planInfo.weeks,user.planInfo._id)\" class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            </tr>\n           \n          </tbody>\n        </table>\n      </card>\n    </div>\n  </div> -->"
+module.exports = "<div class=\"row\">\n  <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n  <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Customer Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>No</th>\n            <th>Name</th>\n            <th>Address</th>\n            <th>Area of Delivery</th>\n            <th>Week Number</th>\n            <!-- <th>Plan Detail</th> -->\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let user of users, let i=index\">\n            <td>{{i+1}}</td>\n            <td (click)=\"viewCustomerInfo(user.planInfo._id)\">{{user.user.firstName}} {{user.user.lastName}}</td>\n            <td>{{user.address}}</td>\n            <td>{{user.Area_of_delivery}}</td>\n            <!-- <td><a routerLink='/admin/pages/customer/cust/3423/plan/123/week/1/' class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            <td><a routerLink=\"/admin/pages/customer/cust/3423/plan/123\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n            <td><a (click)=\"viewUserWeek(user)\" class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            <!-- <td><a (click)=\"viewUserPlan(user.user._id,user.planInfo.planId)\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n          </tr>\n        </tbody>\n      </table>\n    </card>\n  </div>\n</div>\n<!-- <div class=\"row\">\n    <div class=\"col-md-12\">\n      <card cardTitle=\"Customer Details\">\n        <table class=\"table table-bordered table-hover\">\n          <thead>\n            <tr>\n              <th>No</th>\n              <th>Name</th>\n              <th>Address</th>\n              <th>Area of Delivery</th>\n              <th>Week Number</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let user of users, let i=index\">\n              <td>{{i+1}}</td>\n              <td>{{user.user.firstName}} {{user.user.lastName}}</td>\n              <td>{{user.address}}</td>\n              <td>{{user.Area_of_delivery}}</td>\n              <td><a (click)=\"viewUserWeek(user.user._id,user.planInfo.planId,user.planInfo.weeks,user.planInfo._id)\" class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            </tr>\n           \n          </tbody>\n        </table>\n      </card>\n    </div>\n  </div> -->"
 
 /***/ }),
 
@@ -199,7 +205,122 @@ var CustomerdetailsComponent = /** @class */ (function () {
         this.users = [];
         this.deleteMessage = '';
         this.data = {};
+        this.getWeekArray = function (weekNo) { return new Array(weekNo); };
     }
+    CustomerdetailsComponent.prototype.getNextWeek = function (user) {
+        var activeWeek = this.getActiveWeek(user.planInfo.startDate);
+        if (activeWeek) {
+            if ((activeWeek + 1) <= user.planInfo.weeks) {
+                return { success: true, value: activeWeek + 1 };
+            }
+            else {
+                return { success: false, value: 'No Next Week' };
+            }
+        }
+        else {
+            return { success: false, value: 'Not Started' };
+        }
+    };
+    CustomerdetailsComponent.prototype.getActiveWeek = function (startDate) {
+        var start = new Date(startDate);
+        var today = new Date();
+        if (this.getCoreDate() >= this.getCoreDate(start))
+            return Math.ceil(Math.abs(Math.floor((start - today) / 86400000)) / 7);
+        else
+            return 0;
+    };
+    CustomerdetailsComponent.prototype.getNextWeekId = function (weekNo, weekArray) {
+        return weekArray.find(function (item) { return item.week == weekNo; });
+    };
+    CustomerdetailsComponent.prototype.skipThisWeek = function (weekObj, activePlanId) {
+        return this.http.put(this.auth.getDomainName() + '/api/plan/active/' + activePlanId + '/skip-week/' + weekObj._id + '/' + weekObj.week, {});
+    };
+    CustomerdetailsComponent.prototype.getCoreDate = function (date) {
+        if (date === void 0) { date = new Date(new Date().toUTCString()); }
+        // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
+        return new Date(date.toLocaleDateString());
+    };
+    CustomerdetailsComponent.prototype.skipNextWeek = function (order, index, alertModal) {
+        var actweek;
+        // order.planInfo.startDate = new Date('12-5-2018')
+        if (this.getCoreDate() >= this.getCoreDate(new Date(order.plans.startDate))) {
+            actweek = this.getActiveWeek(new Date(order.plans.startDate));
+            var nextWeek = actweek + 1;
+            if (this.notLastWeek(nextWeek, order.plans.weeks)) {
+                console.log('Active Week : ' + actweek);
+                var weekObj = this.getNextWeekId(nextWeek, order.weekIds);
+                if (weekObj) {
+                    if (!this.isThisWeekSkip(order.plans.skipedWeeks, weekObj._id)) {
+                        this.skipThisWeek(weekObj, order.plans._id).subscribe(function (res) {
+                            if (res.success) {
+                                /* this.alertText = 'Week Skiped Successfully!';
+                                this.openModal(alertModal); */
+                                alert(res.message);
+                                window.location.reload();
+                            }
+                            else if (res.error) {
+                                alert(res.error);
+                                /*  this.alertText = res.error;
+                                 this.openModal(alertModal); */
+                            }
+                        }, function (err) {
+                            console.log("skipWeek err", err);
+                        });
+                    }
+                    else {
+                        alert('This Week was Skiped Already!');
+                    }
+                }
+                else {
+                    alert('No Week\'s Data Found');
+                }
+            }
+            else {
+                alert('This is last Week!');
+            }
+        }
+        else {
+            alert('Your Plan Not Activated Yet!');
+        }
+    };
+    CustomerdetailsComponent.prototype.isThisWeekSkip = function (skipWeeks, weekId) {
+        return skipWeeks.find(function (item) { return item.wId = weekId; });
+    };
+    CustomerdetailsComponent.prototype.notLastWeek = function (weekNo, maxWeek) {
+        return (maxWeek > weekNo);
+    };
+    CustomerdetailsComponent.prototype.shouldButtonDisabled = function (user) {
+        var actweek;
+        // user.plans.startDate = new Date('12-5-2018')
+        var currentDate = this.getCoreDate();
+        var startDate = this.getCoreDate(new Date(user.planInfo.startDate));
+        console.log(currentDate + ' : ' + startDate);
+        console.log(currentDate.getTime() + '  > = ' + startDate.getTime());
+        if (currentDate.getTime() >= startDate.getTime()) {
+            actweek = this.getActiveWeek(new Date(user.planInfo.startDate));
+            var nextWeek = actweek + 1;
+            if (this.notLastWeek(nextWeek, user.planInfo.weeks)) {
+                var weekObj = this.getNextWeekId(nextWeek, user.weekIds);
+                if (weekObj) {
+                    if (!this.isThisWeekSkip(user.planInfo.skipedWeeks, weekObj._id)) {
+                        return { state: false, label: 'Skip Next Week' };
+                    }
+                    else {
+                        return { state: true, label: 'Already Skiped' };
+                    }
+                }
+                else {
+                    return { state: true, label: 'Not Found' };
+                }
+            }
+            else {
+                return { state: true, label: 'No Next Week' };
+            }
+        }
+        else {
+            return { state: true, label: 'Not Started Yet' };
+        }
+    };
     CustomerdetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.http.get(this.auth.getDomainName() + '/api/order/getAllOrders').subscribe(function (res) {
@@ -210,24 +331,26 @@ var CustomerdetailsComponent = /** @class */ (function () {
         });
     };
     CustomerdetailsComponent.prototype.viewUserWeek = function (user) {
-        var userId = user.user._id;
-        var planId = user.planInfo.planId;
-        var weekNo = user.planInfo.weeks;
-        var activeplanID = user.planInfo._id;
-        var weekIDArr = user.weekIds;
-        var weekNoId = '';
-        console.log(userId, planId, weekNo, activeplanID, weekIDArr);
-        for (var wid = 0; wid < weekIDArr.length; wid++) {
-            if (weekNo == weekIDArr[wid].week) {
-                weekNoId = weekIDArr[wid]._id;
-                break;
-            }
+        var res = this.getNextWeek(user);
+        if (res.success) {
+            var nextWeek = this.getNextWeek(user).value;
+            var userId = user.user._id;
+            var activeplanID = user.planInfo._id;
+            console.log('Next Week : ', nextWeek);
+            var weekId = this.getNextWeekId(nextWeek, user.weekIds)._id;
+            alert(JSON.stringify(weekId));
+            this.router.navigateByUrl('/admin/pages/customer/cust/' + userId + '/plan/' + activeplanID + '/week/' + weekId);
         }
-        this.router.navigateByUrl('/admin/pages/customer/cust/' + userId + '/plan/' + activeplanID + '/week/' + weekNoId);
+        else {
+            alert(res.value);
+        }
     };
     CustomerdetailsComponent.prototype.viewUserPlan = function (userId, planId) {
         console.log(userId, planId);
         this.router.navigateByUrl('/admin/pages/customer/cust/' + userId + '/plan/' + planId);
+    };
+    CustomerdetailsComponent.prototype.viewCustomerInfo = function (activePlanId) {
+        this.router.navigateByUrl('/admin/pages/customer/customerInfo/' + activePlanId);
     };
     CustomerdetailsComponent.prototype.changeView = function (view) {
         this.view = view;
@@ -241,6 +364,111 @@ var CustomerdetailsComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _user_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], CustomerdetailsComponent);
     return CustomerdetailsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/admin/pages/customer/customerinfo/customerinfo.component.css":
+/*!******************************************************************************!*\
+  !*** ./src/app/admin/pages/customer/customerinfo/customerinfo.component.css ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FkbWluL3BhZ2VzL2N1c3RvbWVyL2N1c3RvbWVyaW5mby9jdXN0b21lcmluZm8uY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/admin/pages/customer/customerinfo/customerinfo.component.html":
+/*!*******************************************************************************!*\
+  !*** ./src/app/admin/pages/customer/customerinfo/customerinfo.component.html ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n  <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Customer Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>No</th>\n            <th>Name</th>\n            <th>Contact</th>\n            <th>Area of Delivery</th>\n            <th>Area</th>\n            <th>Plan</th>\n            <th>Current Week</th>\n            <th>Skipped Week</th>\n            <!-- <th>Plan Detail</th> -->\n          </tr>\n        </thead>\n        <tbody>\n          <!-- <tr *ngFor=\"let user of users, let i=index\">\n            <td>{{i+1}}</td>\n            <td><a routerLink=\"/customerInfo\">{{user.user.firstName}} {{user.user.lastName}}</a></td>\n            <td>{{user.address}}</td>\n            <td>{{user.Area_of_delivery}}</td>\n            <td>\n              <a (click)=\"viewUserWeek(user)\" class=\"btn btn-info\">\n                <i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}\n              </a>\n            </td>\n          </tr> -->\n          <!-- <tr *ngFor=\"let customer of customers, let i=index\">\n            <td>{{i+1}}</td>\n            <td><a routerLink=\"/customerInfo\">{{user.user.firstName}} {{user.user.lastName}}</a></td>\n            <td>{{user.address}}</td>\n            <td>{{user.Area_of_delivery}}</td>\n            <td>\n              <a (click)=\"viewUserWeek(user)\" class=\"btn btn-info\">\n                <i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}\n              </a>\n            </td>\n          </tr> -->\n          <tr *ngIf=\"customer\">\n            <td>1</td>\n            <td>{{customer.order.customerData.firstName + ' ' + customer.order.customerData.lastName}}</td>\n            <td>{{customer.order.customerData.phoneNo}}</td>\n            <td>{{customer.order.Area_of_delivery}}</td>\n            <td>{{customer.order.address}}</td>\n            <td>{{customer.plan.title}}</td>\n            <td>{{(getActiveWeek(customer.startDate))?getActiveWeek(customer.startDate):'Not started'}}</td>\n            <td><div *ngFor=\"let weeks of customer.skippedWeeks\">{{weeks.wNo}}</div></td>\n          </tr>\n        </tbody>\n      </table>\n    </card>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/admin/pages/customer/customerinfo/customerinfo.component.ts":
+/*!*****************************************************************************!*\
+  !*** ./src/app/admin/pages/customer/customerinfo/customerinfo.component.ts ***!
+  \*****************************************************************************/
+/*! exports provided: CustomerinfoComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomerinfoComponent", function() { return CustomerinfoComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _user_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../user/auth.service */ "./src/app/user/auth.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var CustomerinfoComponent = /** @class */ (function () {
+    function CustomerinfoComponent(http, auth, router, activatedRoute) {
+        this.http = http;
+        this.auth = auth;
+        this.router = router;
+        this.activatedRoute = activatedRoute;
+        this.customer = {};
+    }
+    CustomerinfoComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var routeParams = this.activatedRoute.snapshot.params;
+        console.log(routeParams);
+        this.http.get(this.auth.getDomainName() + '/api/plan/customer/info/' + routeParams.activePlanId).subscribe(function (res) {
+            console.log(res);
+            _this.customer = res.data[0];
+        }, function (err) {
+        });
+        // this.customer = 
+        // this.http.get(this.auth.getDomainName() + '/api/order/getAllOrders').subscribe((res: any) => {
+        //   console.log("cust",res.data);
+        //   this.users = res.data;
+        // },
+        //   err=> {
+        //   console.log(err);
+        // });
+    };
+    // endDate = currentDate
+    CustomerinfoComponent.prototype.getActiveWeek = function (startDate) {
+        var start = new Date(startDate);
+        var today = new Date();
+        if (this.getCoreDate() >= this.getCoreDate(start))
+            return Math.ceil(Math.abs(Math.floor((start - today) / 86400000)) / 7);
+        else
+            return 0;
+    };
+    CustomerinfoComponent.prototype.getCoreDate = function (date) {
+        if (date === void 0) { date = new Date(new Date().toUTCString()); }
+        // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
+        return new Date(date.toLocaleDateString());
+    };
+    CustomerinfoComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-custinfo',
+            template: __webpack_require__(/*! ./customerinfo.component.html */ "./src/app/admin/pages/customer/customerinfo/customerinfo.component.html"),
+            styles: [__webpack_require__(/*! ./customerinfo.component.css */ "./src/app/admin/pages/customer/customerinfo/customerinfo.component.css")]
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _user_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
+    ], CustomerinfoComponent);
+    return CustomerinfoComponent;
 }());
 
 
@@ -360,7 +588,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p>\n  custplanweek works!\n</p> -->\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <button (click)=\"openModal(thirdModal)\" class=\"btn btn-primary\" style=\"margin:20px\">Add Product</button>\n    <card cardTitle=\"Week Plan Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>Type</th>\n            <th>Product</th>\n            <th>MRP</th>\n            <th>Action</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let weekprod of weeks, let i=index\">\n            <td>{{weekprod.type}}</td>\n            <td>{{weekprod.name}}</td>\n            <td>{{weekprod.price}}</td>\n            <td><button (click)=\"deleteWeekProd(weekprod._id, alertModal)\" class=\"btn btn-danger\"><i class=\"fa fa-trash fa-fw\"></i>Delete</button></td>\n          </tr>\n        </tbody>\n      </table>\n    </card>\n    <!-- <button class=\"btn btn-success\" style=\"margin:20px\">Save</button> -->\n  </div>\n</div>\n\n<modal #thirdModal [closeOnEscape]=\"false\" [closeOnOutsideClick]=\"false\">\n  <modal-header>\n    <h3>Add Products</h3>\n  </modal-header>\n  <modal-content>\n    <table class=\"table table-bordered table-hover\">\n      <thead>\n        <tr>\n          <th>Type</th>\n          <th>Product</th>\n          <th>MRP</th>\n          <th>Action</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let prod of products, let i=index\">\n          <td>{{prod.type}}</td>\n          <td>{{prod.name}}</td>\n          <td>{{prod.price}}</td>\n          <td><button (click)=\"addProd(prod._id, alertModal)\" class=\"btn btn-success\"><i class=\"fa fa-check fa-fw\"></i>Add</button></td>\n        </tr>\n      </tbody>\n    </table>\n  </modal-content>\n  <modal-footer>\n    <button class=\"btn btn-primary\" (click)=\"closeModal(thirdModal)\">close</button>\n  </modal-footer>\n</modal>\n\n<modal #alertModal modalClass=\"modal-sm\">\n  <modal-header>\n      <h3>Product Action</h3>\n  </modal-header>\n  <modal-content>\n      {{alertText}}\n  </modal-content>\n  <modal-footer>\n      <button class=\"btn btn-primary\" (click)=\"closeAlertModal(alertModal)\">close</button>\n  </modal-footer>\n</modal>"
+module.exports = "<!-- <p>\n  custplanweek works!\n</p> -->\n<div class=\"row\">\n  <div class=\"col-md-12\">\n    <button (click)=\"openModal(thirdModal)\" class=\"btn btn-primary\" style=\"margin:20px\">Add Product</button>\n    <card cardTitle=\"Week Plan Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>Type</th>\n            <th>Product</th>\n            <th>MRP</th>\n            <th>Action</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let weekprod of weeks, let i=index\">\n            <td>{{weekprod.type}}</td>\n            <td>{{weekprod.name}}</td>\n            <td>{{weekprod.price}}</td>\n            <td><button (click)=\"deleteWeekProd(weekprod._id, i, alertModal)\" class=\"btn btn-danger\"><i class=\"fa fa-trash fa-fw\"></i>Delete</button></td>\n          </tr>\n        </tbody>\n      </table>\n    </card>\n    <!-- <button class=\"btn btn-success\" style=\"margin:20px\">Save</button> -->\n  </div>\n</div>\n\n<modal #thirdModal [closeOnEscape]=\"false\" [closeOnOutsideClick]=\"false\">\n  <modal-header>\n    <h3>Add Products</h3>\n  </modal-header>\n  <modal-content>\n    <table class=\"table table-bordered table-hover\">\n      <thead>\n        <tr>\n          <th>Type</th>\n          <th>Product</th>\n          <th>MRP</th>\n          <th>Action</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let prod of products, let i=index\">\n          <td>{{prod.type}}</td>\n          <td>{{prod.name}}</td>\n          <td>{{prod.price}}</td>\n          <td><button (click)=\"addProd(prod._id, i, alertModal)\" class=\"btn btn-success\"><i class=\"fa fa-check fa-fw\"></i>Add</button></td>\n        </tr>\n      </tbody>\n    </table>\n  </modal-content>\n  <modal-footer>\n    <button class=\"btn btn-primary\" (click)=\"closeModal(thirdModal)\">close</button>\n  </modal-footer>\n</modal>\n\n<modal #alertModal modalClass=\"modal-sm\">\n  <modal-header>\n      <h3>Product Action</h3>\n  </modal-header>\n  <modal-content>\n      {{alertText}}\n  </modal-content>\n  <modal-footer>\n      <button class=\"btn btn-primary\" (click)=\"closeAlertModal(alertModal)\">close</button>\n  </modal-footer>\n</modal>"
 
 /***/ }),
 
@@ -404,6 +632,7 @@ var CustomerplanweekComponent = /** @class */ (function () {
         this.products = [];
         this.deleteMessage = '';
         this.data = {};
+        this.addSuccess = false;
     }
     CustomerplanweekComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -427,7 +656,7 @@ var CustomerplanweekComponent = /** @class */ (function () {
             console.log(err);
         });
     };
-    CustomerplanweekComponent.prototype.deleteWeekProd = function (prodId, alertModal) {
+    CustomerplanweekComponent.prototype.deleteWeekProd = function (prodId, index, alertModal) {
         var _this = this;
         console.log(prodId);
         var routeParams = this.activeRoute.snapshot.params;
@@ -438,6 +667,7 @@ var CustomerplanweekComponent = /** @class */ (function () {
                 // alert('Product Deleted Successfully!');
                 _this.alertText = "Product Deleted Successfully!";
                 _this.openModal(alertModal);
+                _this.weeks.splice(index, 1);
             }
             else if (res.error) {
                 // alert(res.error);
@@ -448,26 +678,37 @@ var CustomerplanweekComponent = /** @class */ (function () {
             console.log("deleteProd err", err);
         });
     };
-    CustomerplanweekComponent.prototype.addProd = function (prodId, alertModal) {
+    CustomerplanweekComponent.prototype.addProd = function (prodId, index, alertModal) {
         var _this = this;
         console.log(prodId);
-        var routeParams = this.activeRoute.snapshot.params;
-        console.log(routeParams);
-        this.http.post(this.auth.getDomainName() + '/api/plan/active/' + routeParams.planid + '/product/' + prodId + '/week/' + routeParams.weekid, {}).subscribe(function (res) {
-            console.log("addProd", res);
-            if (res.success) {
-                // alert('Product Added Successfully!');
-                _this.alertText = "Product Added Successfully!";
-                _this.openModal(alertModal);
+        var isExist = false;
+        for (var wp = 0; wp < this.weeks.length; wp++) {
+            if (this.weeks[wp]["_id"] == prodId) {
+                isExist = true;
+                alert("Product already exist!");
             }
-            else if (res.error) {
-                // alert(res.error);
-                _this.alertText = res.error;
-                _this.openModal(alertModal);
-            }
-        }, function (err) {
-            console.log("addProd err", err);
-        });
+        }
+        if (!isExist) {
+            var routeParams = this.activeRoute.snapshot.params;
+            console.log(routeParams);
+            this.http.post(this.auth.getDomainName() + '/api/plan/active/' + routeParams.planid + '/product/' + prodId + '/week/' + routeParams.weekid, {}).subscribe(function (res) {
+                console.log("addProd", res);
+                if (res.success) {
+                    // alert('Product Added Successfully!');
+                    _this.alertText = "Product Added Successfully!";
+                    // this.openModal(alertModal);
+                    _this.addSuccess = true;
+                    _this.weeks.push(_this.products[index]);
+                }
+                else if (res.error) {
+                    // alert(res.error);
+                    _this.alertText = res.error;
+                    // this.openModal(alertModal);
+                }
+            }, function (err) {
+                console.log("addProd err", err);
+            });
+        }
     };
     CustomerplanweekComponent.prototype.changeView = function (view) {
         this.view = view;
@@ -477,13 +718,13 @@ var CustomerplanweekComponent = /** @class */ (function () {
     };
     CustomerplanweekComponent.prototype.closeModal = function (modal) {
         modal.close();
-        window.location.reload();
+        // window.location.reload();
     };
     CustomerplanweekComponent.prototype.closeAlertModal = function (modal) {
         modal.close();
     };
     CustomerplanweekComponent.prototype.onClose = function () {
-        window.location.reload();
+        // window.location.reload();
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()({
             type: 'success',
             title: 'Success!',
