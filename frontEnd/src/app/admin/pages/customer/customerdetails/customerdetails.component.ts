@@ -14,6 +14,116 @@ export class CustomerdetailsComponent implements OnInit {
   deleteMessage = '';
   data = {};
   constructor(private http: HttpClient, private auth: AuthService, private router: Router) { }
+  getNextWeek(user){
+    let activeWeek = this.getActiveWeek(user.planInfo.startDate);
+    if(activeWeek){
+      let nextWeekObj = this.getNextWeekId(activeWeek + 1, user.planInfo.skipedWeeks);
+      if(nextWeekObj){
+
+      }else{
+
+      }
+    }else{
+      return 'Not started';
+    }
+  }
+
+
+  getActiveWeek(startDate) {
+    let start : any = new Date(startDate);
+    let today : any = new Date();
+    if( this.getCoreDate() >= this.getCoreDate(start))
+      return Math.ceil(Math.abs(Math.floor(( start - today ) / 86400000)) / 7);
+    else
+      return 0;
+  }
+  getNextWeekId(weekNo,weekArray){
+    return weekArray.find(item => item.week == weekNo);
+  }
+
+  skipThisWeek(weekObj,activePlanId){
+      return this.http.put(this.auth.getDomainName() + '/api/plan/active/'+ activePlanId +'/skip-week/'+ weekObj._id + '/' + weekObj.week ,{})
+  }
+  getCoreDate(date = new Date(new Date().toUTCString())){
+    // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
+    return new Date(date.toLocaleDateString());
+  }
+  skipNextWeek(order, index, alertModal) {
+    let actweek : number;
+    // order.planInfo.startDate = new Date('12-5-2018')
+    if(this.getCoreDate() >=  this.getCoreDate(new Date(order.plans.startDate))){
+      actweek = this.getActiveWeek(new Date(order.plans.startDate));
+      let nextWeek = actweek + 1;
+      if(this.notLastWeek(nextWeek,order.plans.weeks)){
+        console.log('Active Week : ' + actweek);
+        let weekObj = this.getNextWeekId(nextWeek,order.weekIds);
+        if(weekObj){
+          if(!this.isThisWeekSkip(order.plans.skipedWeeks,weekObj._id)){
+            this.skipThisWeek(weekObj,order.plans._id).subscribe((res: any) => {
+              if (res.success) {
+                /* this.alertText = 'Week Skiped Successfully!';
+                this.openModal(alertModal); */
+                alert(res.message);
+                window.location.reload();
+              } else if (res.error) {
+                alert(res.error);
+               /*  this.alertText = res.error;
+                this.openModal(alertModal); */
+              }
+            },
+              err=> {
+              console.log("skipWeek err",err);
+            });
+          }else{
+            alert('This Week was Skiped Already!');
+          }
+        }else{
+          alert('No Week\'s Data Found');
+        }
+      }else{
+        alert('This is last Week!');
+      }
+      
+    }else{
+      alert('Your Plan Not Activated Yet!')
+    }
+  }
+  isThisWeekSkip(skipWeeks,weekId){
+    return skipWeeks.find(item => item.wId = weekId);
+  }
+  notLastWeek(weekNo,maxWeek){
+    return (maxWeek > weekNo )
+  }
+  getWeekArray = (weekNo) => new Array(weekNo);
+
+  shouldButtonDisabled(user){
+    let actweek : number;
+    // user.plans.startDate = new Date('12-5-2018')
+    let currentDate = this.getCoreDate();
+    let startDate =  this.getCoreDate(new Date(user.planInfo.startDate));
+    console.log(currentDate + ' : ' + startDate);
+    console.log(currentDate.getTime() +'  > = '+ startDate.getTime());
+    if(currentDate.getTime() >= startDate.getTime()){
+      actweek = this.getActiveWeek(new Date(user.planInfo.startDate));
+      let nextWeek = actweek + 1;
+      if(this.notLastWeek(nextWeek,user.planInfo.weeks)){
+        let weekObj = this.getNextWeekId(nextWeek,user.weekIds);
+        if(weekObj){
+          if(!this.isThisWeekSkip(user.planInfo.skipedWeeks,weekObj._id)){
+            return {state : false ,label :'Skip Next Week'};  
+          }else{
+            return {state : true ,label : 'Already Skiped'};
+          }
+        }else{
+          return {state : true ,label :'Not Found'};
+        }
+      }else{
+        return {state : true ,label :'No Next Week'};
+      }
+    }else{
+      return {state : true ,label :'Not Started Yet'};
+    }
+  }
 
   ngOnInit() {
     this.http.get(this.auth.getDomainName() + '/api/order/getAllOrders').subscribe((res: any) => {
