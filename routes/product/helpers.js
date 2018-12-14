@@ -39,7 +39,7 @@ module.exports = {
             Product.insertOne(productObj)
                 .then(product => {
                     companyModule.addCompany(productObj.company.trim().toLowerCase());
-                    res.json({success : true, message : 'Product Added Successfully!'})
+                    res.json({success : true, message : 'Product Added Successfully!', data : product.ops[0]})
                 }).catch(err => {
                     res.json({success : false, error : err})
                 })
