@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ChartsService } from './pieCharts.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../user/auth.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../../../user/auth.service';
   styleUrls: ['./admin-analytics.component.css'],
   providers: [ChartsService]
 })
-export class AdminAnalyticsComponent implements OnInit {
+export class AdminAnalyticsComponent implements OnInit, OnChanges {
   planSelectedOptions;
   allergyOptions;
   fruitOptions;
@@ -22,10 +22,16 @@ export class AdminAnalyticsComponent implements OnInit {
     this.Math = Math;
   }
   ngOnInit() {
-    this.planSelectedOptions = this.chartsService.getpPlanSelectedOptionsOption(); 
-    this.allergyOptions = this.chartsService.getpAllergyOptionsOption(); 
-    this.fruitOptions = this.chartsService.getpFruitOptionsOption(); 
-    this.monthWiseTrafficOption = this.chartsService.getMonthWiseTrafficOptionsOption(); 
+    this.chartsService.getAllPlans((options) => {
+      this.planSelectedOptions = options;
+      console.log(this.planSelectedOptions)
+    });
+    this.chartsService.getAllergic((options) => {
+      this.allergyOptions = options;
+    });
+     this.chartsService.getFruitsLikedMost((options) => {
+      this.fruitOptions = options;
+    });
     console.log("plan", this.planSelectedOptions);
     this.http.get(this.auth.getDomainName() + '/api/analysis/most/delivered/area')
     .subscribe((res: any) => {
@@ -44,6 +50,8 @@ export class AdminAnalyticsComponent implements OnInit {
 
   });
   this.width = 40;
+}
+ngOnChanges() {  
 }
   
 }

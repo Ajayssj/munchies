@@ -60,10 +60,16 @@ var AdminAnalyticsComponent = /** @class */ (function () {
     }
     AdminAnalyticsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.planSelectedOptions = this.chartsService.getpPlanSelectedOptionsOption();
-        this.allergyOptions = this.chartsService.getpAllergyOptionsOption();
-        this.fruitOptions = this.chartsService.getpFruitOptionsOption();
-        this.monthWiseTrafficOption = this.chartsService.getMonthWiseTrafficOptionsOption();
+        this.chartsService.getAllPlans(function (options) {
+            _this.planSelectedOptions = options;
+            console.log(_this.planSelectedOptions);
+        });
+        this.chartsService.getAllergic(function (options) {
+            _this.allergyOptions = options;
+        });
+        this.chartsService.getFruitsLikedMost(function (options) {
+            _this.fruitOptions = options;
+        });
         console.log("plan", this.planSelectedOptions);
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/delivered/area')
             .subscribe(function (res) {
@@ -80,6 +86,8 @@ var AdminAnalyticsComponent = /** @class */ (function () {
         }, function (err) {
         });
         this.width = 40;
+    };
+    AdminAnalyticsComponent.prototype.ngOnChanges = function () {
     };
     AdminAnalyticsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -326,59 +334,62 @@ var ChartsService = /** @class */ (function () {
                 }
             ]
         };
-        this.getAllPlans();
-        this.getAllergic();
-        this.getFruitsLikedMost();
     }
-    ChartsService.prototype.getpPlanSelectedOptionsOption = function () {
-        return this.planSelectedOptions;
-    };
-    ChartsService.prototype.getpAllergyOptionsOption = function () {
-        return this.allergyOptions;
-    };
-    ChartsService.prototype.getpFruitOptionsOption = function () {
-        return this.fruitOptions;
-    };
-    ChartsService.prototype.getMonthWiseTrafficOptionsOption = function () {
-        return this.monthWiseTrafficOption;
-    };
-    ChartsService.prototype.getAllPlans = function () {
+    ChartsService.prototype.getAllPlans = function (cb) {
         var _this = this;
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/used/plan')
             .subscribe(function (res) {
             console.log(res.data);
-            res.data.forEach(function (plan) {
-                _this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
-                _this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
-            });
-            _this.planSelectedOptions.series[0].data = _this.planSelectedOptions.series[0].data.slice();
-            console.log(_this.planSelectedOptions);
+            if (res.success) {
+                res.data.forEach(function (plan) {
+                    _this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
+                    _this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
+                });
+                _this.planSelectedOptions.series[0].data = _this.planSelectedOptions.series[0].data.slice();
+                console.log(_this.planSelectedOptions);
+                cb(_this.planSelectedOptions);
+            }
+            else {
+                cb(_this.planSelectedOptions);
+            }
         }, function (err) {
         });
     };
-    ChartsService.prototype.getAllergic = function () {
+    ChartsService.prototype.getAllergic = function (cb) {
         var _this = this;
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/allergic')
             .subscribe(function (res) {
             console.log(res.data);
-            res.data.forEach(function (allergicItem) {
-                _this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
-                _this.allergyOptions.series[0].data.push({ value: allergicItem.count, name: allergicItem._id.toUpperCase() });
-            });
-            console.log(_this.allergyOptions);
+            if (res.success) {
+                res.data.forEach(function (allergicItem) {
+                    _this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
+                    _this.allergyOptions.series[0].data.push({ value: allergicItem.count, name: allergicItem._id.toUpperCase() });
+                });
+                console.log(_this.allergyOptions);
+                cb(_this.allergyOptions);
+            }
+            else {
+                cb(_this.allergyOptions);
+            }
         }, function (err) {
         });
     };
-    ChartsService.prototype.getFruitsLikedMost = function () {
+    ChartsService.prototype.getFruitsLikedMost = function (cb) {
         var _this = this;
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/liked/fruits')
             .subscribe(function (res) {
             console.log(res.data);
-            res.data.forEach(function (fruitsItem) {
-                _this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
-                _this.fruitOptions.series[0].data.push({ value: fruitsItem.count, name: fruitsItem._id.toUpperCase() });
-            });
-            console.log(_this.fruitOptions);
+            if (res.success) {
+                res.data.forEach(function (fruitsItem) {
+                    _this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
+                    _this.fruitOptions.series[0].data.push({ value: fruitsItem.count, name: fruitsItem._id.toUpperCase() });
+                });
+                console.log(_this.fruitOptions);
+                cb(_this.fruitOptions);
+            }
+            else {
+                cb(_this.fruitOptions);
+            }
         }, function (err) {
         });
     };

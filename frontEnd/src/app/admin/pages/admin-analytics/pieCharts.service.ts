@@ -4,11 +4,7 @@ import { AuthService } from '../../../user/auth.service';
 
 @Injectable()
 export class ChartsService {
-    constructor(private http: HttpClient, private auth: AuthService) {
-        this.getAllPlans();
-        this.getAllergic();
-        this.getFruitsLikedMost();
-        }
+    constructor(private http: HttpClient, private auth: AuthService) { }
 planSelectedOptions = {
     tooltip: {
         trigger: 'item',
@@ -129,57 +125,63 @@ fruitOptions = {
             }
         ]
     };
-    getpPlanSelectedOptionsOption() {
-        return this.planSelectedOptions;
-    }
-    getpAllergyOptionsOption() {
-        return this.allergyOptions;
-    }
-    getpFruitOptionsOption() {
-        return this.fruitOptions;
-    }
-    getMonthWiseTrafficOptionsOption() {
-        return this.monthWiseTrafficOption;
-    }
-    getAllPlans() {
+    getAllPlans(cb) {
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/used/plan')
         .subscribe((res: any) => {
             console.log(res.data);
-            res.data.forEach(plan => {
-                this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
-                this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
-            });
-
-            this.planSelectedOptions.series[0].data = [...this.planSelectedOptions.series[0].data];
-            console.log(this.planSelectedOptions)
+            if(res.success){
+                res.data.forEach(plan => {
+                    this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
+                    this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
+                });
+    
+                this.planSelectedOptions.series[0].data = [...this.planSelectedOptions.series[0].data];
+                console.log(this.planSelectedOptions)
+                cb(this.planSelectedOptions);
+            }else{
+                cb(this.planSelectedOptions);
+            }
+            
         },
         err => {
 
     });
     }
-    getAllergic() {
+    getAllergic(cb) {
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/allergic')
         .subscribe((res: any) => {
             console.log(res.data);
-            res.data.forEach(allergicItem => {
-                this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
-                this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id.toUpperCase()});
-            });
-            console.log(this.allergyOptions)
+            if(res.success) {
+                res.data.forEach(allergicItem => {
+                    this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
+                    this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id.toUpperCase()});
+                });
+                console.log(this.allergyOptions)
+                cb(this.allergyOptions);
+            }
+            else {
+                cb(this.allergyOptions);
+            }
         },
         err => {
 
         });        
     }
-    getFruitsLikedMost() {
+    getFruitsLikedMost(cb) {
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/liked/fruits')
         .subscribe((res: any) => {
             console.log(res.data);
-            res.data.forEach(fruitsItem => {
-                this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
-                this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id.toUpperCase()});
-            });
-            console.log(this.fruitOptions)
+            if(res.success) {
+                res.data.forEach(fruitsItem => {
+                    this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
+                    this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id.toUpperCase()});
+                });
+                console.log(this.fruitOptions);
+                cb(this.fruitOptions);
+            }   
+            else {
+                cb(this.fruitOptions);
+            }
         },
         err => {
 
