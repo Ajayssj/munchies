@@ -2,7 +2,7 @@
     "name": "manchief",
     "description": "Manchief App",
     "dependencies": {
-      "body-parser": "^1.18.3",
+        "body-parser": "^1.18.3",
         "copy-dir": "^0.4.0",
         "cors": "^2.8.5",
         "express": "^4.16.4",
@@ -19,12 +19,12 @@
     "repository": {},
     "scripts": {
         "start": "set NODE_ENV=production && node  app.js",
-        "start-dev" : "set NODE_ENV=development && node --inspect app.js",
+        "start-dev": "set NODE_ENV=development && node --inspect app.js",
         "build-frontend": "node build-frontend.js",
-        "postinstall" : "cd ./frontEnd/ && npm install && npm run build"
+        "postinstall": "cd ./frontEnd/ && npm run build"
     },
-	"engines": {
-		"node": "11.0.0",
-		"npm" : "6.4.1"
-	}
+    "engines": {
+        "node": "11.0.0",
+        "npm": "6.4.1"
+    }
 }
