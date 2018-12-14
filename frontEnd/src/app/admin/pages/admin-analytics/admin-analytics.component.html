@@ -2,6 +2,7 @@
   <div class="question_block">
     <h3>Which plan is selected the most?</h3>
     <card cardTitle='Pie Chart'>
+      {{planSelectedOptions|json}}
       <div *ngIf="planSelectedOptions" echarts [options]="planSelectedOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>
   </div>
