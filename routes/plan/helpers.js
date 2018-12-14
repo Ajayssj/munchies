@@ -84,6 +84,107 @@ const createWeekByPlans = function(weeks,planId){
         
 }
 module.exports = {
+   getCustomerInfo : (req,res) => {
+     let activePlanId = req.params.activePlanId;
+     if(activePlanId){
+        ActivePlan.aggregate(
+
+            // Pipeline
+            [
+                // Stage 1
+                {
+                    $match: {
+                        _id : db.toObjectID(activePlanId)
+                    }
+                },
+        
+                // Stage 2
+                {
+                    $lookup: {
+                        "from" : "user",
+                        "localField" : "userId",
+                        "foreignField" : "_id",
+                        "as" : "user"
+                    }
+                },
+        
+                // Stage 3
+                {
+                    $lookup: {
+                        "from" : "plans",
+                        "localField" : "planId",
+                        "foreignField" : "_id",
+                        "as" : "plan"
+                    }
+                },
+        
+                // Stage 4
+                {
+                    $unwind: {
+                        path : "$plan",
+                        includeArrayIndex : "arrayIndex", // optional
+                        preserveNullAndEmptyArrays : false // optional
+                    }
+                },
+        
+                // Stage 5
+                {
+                    $unwind: {
+                        path : "$user",
+                        includeArrayIndex : "arrayIndex", // optional
+                        preserveNullAndEmptyArrays : false // optional
+                    }
+                },
+        
+                // Stage 6
+                {
+                    $lookup: {
+                        "from" : "orders",
+                        "localField" : "_id",
+                        "foreignField" : "activePlanId",
+                        "as" : "order"
+                    }
+                },
+        
+                // Stage 7
+                {
+                    $unwind: {
+                        path : "$order",
+                        includeArrayIndex : "arrayIndex", // optional
+                        preserveNullAndEmptyArrays : false // optional
+                    }
+                },
+        
+                // Stage 8
+                {
+                    $project: {
+                        skipedWeeks : 1,
+                        "order.address" : 1,
+                        "order.postalCode" : 1,
+                        "order.Area_of_delivery" : 1,
+                        "order.customerData" : 1,
+                        "plan.title" : 1,
+                        "user.firstName" : 1,
+                        "user.lastName" : 1,
+                        "user.firstName" : 1,
+                        "user.email" : 1,
+                        "startDate" : 1
+                        
+                        
+                    }
+                },
+        
+            ]
+        
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+        
+        ).toArray().then(info => {
+            res.json({success : true, data : info});
+        }).catch(err => res.json({success : false, error : err}));    
+     }else{
+        res.json({success : false, error : 'ActivePlan Id is required'});
+     }
+   },
    addProductInPlan : (req,res)=>{
     const planId = req.params.planId;
     const productId = req.params.productId;

@@ -21,6 +21,7 @@ routes.get('/plan/core/',helpers.getCorePlans);
 routes.delete('/plan/core/delete',helpers.deleteCorePlan);
 routes.put('/plan/core/edit',helpers.editCorePlan);
 
+routes.get('/plan/customer/info/:activePlanId',helpers.getCustomerInfo);
 
 // get core plans list sorted by week ASC order 
 routes.get('/plan/core/:planId',helpers.getCorePlan);
@@ -35,4 +36,5 @@ routes.post('/plan/core/:planId/product/:productId/week/:week',helpers.addProduc
 //  delete product from core plan and week
 routes.delete('/plan/core/:planId/product/:productId/week/:week',helpers.deleteProductFromCorePlan)
 // 
+
 module.exports = routes;
