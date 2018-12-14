@@ -44,7 +44,7 @@ module.exports = {
                     if(user){
                         if(user.password === password){
                             req.session.user = user;
-                            res.json({success : true});
+                            res.json({success : true, data : user});
                         }else
                             res.json({success : false, error : 'Password is Invalid!'});
                     }else{

@@ -18,12 +18,12 @@ export class CustomerdetailsComponent implements OnInit {
     let activeWeek = this.getActiveWeek(user.planInfo.startDate);
     if(activeWeek){
       if((activeWeek + 1) <= user.planInfo.weeks){
-        return activeWeek + 1;
+        return {success : true, value : activeWeek + 1}
       }else{
-        return 'No Next Week'
+        return {success : false, value : 'No Next Week'}
       }
     }else{
-      return 'Not Started';
+      return {success : false, value : 'Not Started'}
     }
   }
 
@@ -135,20 +135,22 @@ export class CustomerdetailsComponent implements OnInit {
   }
 
   viewUserWeek(user) {
-    var userId = user.user._id;
-    var planId = user.planInfo.planId;
-    var weekNo = user.planInfo.weeks;
-    var activeplanID = user.planInfo._id;
-    var weekIDArr = user.weekIds;
-    var weekNoId = '';
-    console.log(userId, planId, weekNo, activeplanID, weekIDArr);
-    for (let wid = 0; wid < weekIDArr.length; wid++) {
-      if (weekNo == weekIDArr[wid].week) {
-        weekNoId =weekIDArr[wid]._id;
-        break;
-      }
+    
+    let res = this.getNextWeek(user);
+    if(res.success){
+      
+      let nextWeek = this.getNextWeek(user).value;
+      
+      var userId = user.user._id;
+      var activeplanID = user.planInfo._id;
+      console.log('Next Week : ',nextWeek);
+      let weekId = this.getNextWeekId(nextWeek,user.weekIds)._id;
+      alert(JSON.stringify(weekId))
+      this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+activeplanID+'/week/'+weekId);
+    }else{
+      alert(res.value);
     }
-    this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+activeplanID+'/week/'+weekNoId);
+    
   }
   viewUserPlan(userId, planId) {
     console.log(userId, planId);
