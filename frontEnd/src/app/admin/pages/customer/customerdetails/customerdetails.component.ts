@@ -17,14 +17,13 @@ export class CustomerdetailsComponent implements OnInit {
   getNextWeek(user){
     let activeWeek = this.getActiveWeek(user.planInfo.startDate);
     if(activeWeek){
-      let nextWeekObj = this.getNextWeekId(activeWeek + 1, user.planInfo.skipedWeeks);
-      if(nextWeekObj){
-
+      if((activeWeek + 1) <= user.planInfo.weeks){
+        return activeWeek + 1;
       }else{
-
+        return 'No Next Week'
       }
     }else{
-      return 'Not started';
+      return 'Not Started';
     }
   }
 
