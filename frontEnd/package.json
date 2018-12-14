@@ -4,13 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --output-path ../client",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~7.0.2",
+    "@angular/compiler-cli": "~7.0.0",
     "@angular/animations": "~7.0.0",
     "@angular/common": "~7.0.0",
     "@angular/compiler": "~7.0.0",
