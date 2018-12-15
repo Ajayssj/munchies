@@ -10,21 +10,22 @@
             <th>Name</th>
             <th>Address</th>
             <th>Area of Delivery</th>
-            <th>Week Number</th>
+            <th>Next Week</th>
             <!-- <th>Plan Detail</th> -->
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of users, let i=index">
             <td>{{i+1}}</td>
-            <td (click)="viewCustomerInfo(user.planInfo._id)">{{user.user.firstName}} {{user.user.lastName}}</td>
+            <td>{{user.user.firstName}} {{user.user.lastName}}</td>
             <td>{{user.address}}</td>
             <td>{{user.Area_of_delivery}}</td>
             <!-- <td><a routerLink='/admin/pages/customer/cust/3423/plan/123/week/1/' class="btn btn-info"><i class="fa fa-pencil fa-fw"></i>{{user.planInfo.weeks}}</a></td>
             <td><a routerLink="/admin/pages/customer/cust/3423/plan/123" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>View</a></td> -->
-            <td><a (click)="viewUserWeek(user)" class="btn btn-info"><i class="fa fa-pencil fa-fw"></i>{{user.planInfo.weeks}}</a></td>
+            <td><a (click)="viewUserWeek(user)" class="btn btn-info"><i class="fa fa-pencil fa-fw"></i>{{getNextWeek(user).value}}</a></td>
             <!-- <td><a (click)="viewUserPlan(user.user._id,user.planInfo.planId)" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>View</a></td> -->
           </tr>
+         
         </tbody>
       </table>
     </card>
