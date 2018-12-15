@@ -1,0 +1,4 @@
+.productmodal_body{
+    overflow: auto;
+    max-height: 400px;
+}
