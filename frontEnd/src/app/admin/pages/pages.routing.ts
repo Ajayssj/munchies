@@ -1,13 +1,18 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { PagesComponent } from './pages.component';
 import { CustomerComponent } from './customer/customer.component';
 import { AdminComponent } from '../admin.component';
-import { AuthGuard } from './../auth.guard';
+import { AuthGuard } from '../auth.guard';
+import { AuthRoleGuardService } from '../../app.role.guard'
 
 export const childRoutes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
+        canActivate: [AuthRoleGuardService], 
+        data: { 
+            expectedRole: 2
+        } ,
         children: [
             // {
             //     path: 'login',

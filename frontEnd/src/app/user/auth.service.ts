@@ -23,6 +23,12 @@ export class AuthService {
     return window.location.origin;
     // return "http://localhost:9191";
   }
+  setUserRole(role){
+    localStorage.setItem('userRole',role);
+  }
+  getUserRole(){
+    return localStorage.getItem('userRole');
+  }
 
   setLoggedIn(value) {
     localStorage.setItem("isLoggedIn", value);

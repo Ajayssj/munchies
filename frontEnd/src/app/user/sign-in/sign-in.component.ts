@@ -10,6 +10,7 @@ import swal from 'sweetalert2';
 interface SignInRes {
   success: boolean;
   error: string;
+  data : object;
 }
 @Component({
   selector: 'app-sign-in',
@@ -72,13 +73,15 @@ export class SignInComponent implements OnInit {
       this.password = this.loginForm.get('password').value;
       console.log(this.username + "\n");
       console.log(this.password);
-      this.http.post(this.authService.getDomainName() + '/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: SignInRes) => {
+      this.http.post(this.authService.getDomainName() + '/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: any) => {
         console.log("PATCH Request is successful ", data);
         this.success = data.success;
         this.error = data.error;
         if (data.success) {
           this.authService.setLoggedIn(true);
           this.authService.setUserName(this.username);
+          this.authService.setUserRole(data.data.role);
+          
           console.log(this.authService.getUserName());
           console.log(this.username);
           if (this.authService.isLoggedIn()) {

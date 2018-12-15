@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 /* components */
 import { PagesComponent } from './pages.component';
 import { LoginComponent } from './login/login.component';
+import { AuthRoleGuardService } from '../../app.role.guard';
 
 //import { CompanyComponent } from './company/company.component';
 //import { SnacksComponent } from './snacks/snacks.component';
@@ -25,7 +26,7 @@ import { LoginComponent } from './login/login.component';
         LoginComponent
     ],
     providers: [
-        
+        AuthRoleGuardService
     ]
 })
 export class PagesModule { }

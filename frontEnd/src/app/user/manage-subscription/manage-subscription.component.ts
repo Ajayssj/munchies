@@ -62,7 +62,7 @@ export class ManageSubscriptionComponent implements OnInit {
           if(!this.isThisWeekSkip(order.plans.skipedWeeks,weekObj._id)){
             return {state : false ,label :'Skip Next Week'};  
           }else{
-            return {state : true ,label : 'Already Skiped'};
+            return {state : true ,label : 'Skipped'};
           }
         }else{
           return {state : true ,label :'Not Found'};
@@ -111,6 +111,8 @@ export class ManageSubscriptionComponent implements OnInit {
                 /* this.alertText = 'Week Skiped Successfully!';
                 this.openModal(alertModal); */
                 alert(res.message);
+                // order.label = this.shouldButtonDisabled(order).label;
+                
                 window.location.reload();
               } else if (res.error) {
                 alert(res.error);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,NavigationStart } from '@angular/router';
 import { AuthService } from '../auth.service';
 import {  Observable } from 'rxjs/Observable';
 import { element } from 'protractor';
@@ -12,8 +12,20 @@ import { from } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   isMobNavbarOpen:Boolean=false;
-  isLoggedIn:Observable<boolean> = JSON.parse(this.auth.isLoggedIn());
-  constructor(private router: Router, private auth: AuthService) {}
+  isLoggedIn = false;
+  displayHeader = false;
+  constructor(private router: Router, private auth: AuthService) {
+    router.events.forEach((event) => {
+      if(event instanceof NavigationStart) {
+        console.log("changed")
+        this.isLoggedIn = JSON.parse(this.auth.isLoggedIn());
+        console.log('Condition : ',JSON.parse(this.auth.getUserRole()) == 2);
+        
+        if(JSON.parse(this.auth.getUserRole()) == 2) this.displayHeader = true;
+      }
+      
+    });
+  }
   openSideMenu(event) {
     var openBtn = document.getElementById("open");
     console.log("hiiiiiiii");

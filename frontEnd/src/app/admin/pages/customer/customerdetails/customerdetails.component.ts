@@ -143,9 +143,7 @@ export class CustomerdetailsComponent implements OnInit {
       
       var userId = user.user._id;
       var activeplanID = user.planInfo._id;
-      console.log('Next Week : ',nextWeek);
       let weekId = this.getNextWeekId(nextWeek,user.weekIds)._id;
-      // alert(JSON.stringify(weekId))
       this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+activeplanID+'/week/'+weekId);
     }else{
       alert(res.value);
@@ -156,7 +154,9 @@ export class CustomerdetailsComponent implements OnInit {
     console.log(userId, planId);
     this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+planId);
   }
-
+  viewCustomerInfo(activePlanId) {
+    this.router.navigateByUrl('/admin/pages/customer/customerInfo/' + activePlanId);
+  }
   changeView(view) {
     this.view = view;
   }

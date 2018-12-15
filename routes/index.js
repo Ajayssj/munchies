@@ -37,7 +37,7 @@ module.exports = {
         app.use(session({
             secret: CREDENTIALS.SESSION_SECRET_KEY, resave: false, saveUninitialized: true,
             cookie: {
-                maxAge: 1000 * 60 * 24 // 24 hours
+                maxAge: 1000 * 60 * 60 * 24 // 24 hours
             },
         }));
         app.use(bodyParser.urlencoded({urlencoded : false}));
