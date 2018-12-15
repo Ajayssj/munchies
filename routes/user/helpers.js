@@ -113,7 +113,7 @@ module.exports = {
         }
     },
     changePassword : (req,res) => {
-        
+    
         const user = req.session.user;
         if(user){
             const userId = user._id;
