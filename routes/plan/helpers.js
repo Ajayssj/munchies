@@ -6,7 +6,12 @@ const ActivePlan = db.getCollection('activePlans');
 const CustomPlan = db.getCollection('customPlans');
 const PlansExtended = db.getCollection('plansExtended');
 const utils = require('../../utils');
-
+const User = db.getCollection('user');
+const getAdminEmails = (cb) => {
+    User.find({ role : 2}).toArray().then(users => {
+        cb({success : true, users : users })
+    }).catch(err => {cb({success : false, error : err})});
+}
 const isProductExists = (productId) => {
     return new Promise((success,error) => {
         Product.findOne({_id : db.toObjectID(productId)})
@@ -706,6 +711,21 @@ module.exports = {
                     $inc: { weeks : 1}
                 }).then(plan => {
                     if(plan.result.nModified == 1){
+                        getAdminEmails((result) => {
+                            if(result.success){
+                                result.users.forEach(admin => {
+                                    utils.sendSkippedWeekMail({week : week, user : req.session.user, admin : admin.email},(result) => {
+                                        if(result.result)
+                                            console.log( admin.email + ' Skipped Week Mail Sent Successfully!');
+                                        else
+                                            console.log( admin.email + ' Skipped Week Mail not Sent!');
+                                            
+                                    });
+                                })
+                               
+                            }
+                        })
+                        
                         res.json({success : true, message : week + ' Week Skipped Successfully!'});   
                     }else
                         res.json({success : false, error : 'Plan not found to be edited!'})

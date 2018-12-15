@@ -29,6 +29,24 @@ module.exports = {
             callback({result : true, info });
     });
    },
+   sendSkippedWeekMail : function(info,callback){
+
+    let transporter = nodemailer.createTransport(credentionals.MAIL_CRED);
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: credentionals.MAIL_CRED.auth.user, // sender address
+        to: info.admin, // list of receivers
+        subject: `week number ${info.week} skipped by ${info.user.firstName} ${info.user.lastName}`, // Subject line
+        text: '', // plain text body
+        html: `<h1> week number ${info.week} skipped by ${info.user.firstName} ${info.user.lastName} <br> Email :  ${info.user.email}</h1>` // html body
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) 
+            callback({result : false, error : error});
+        else
+            callback({result : true, info });
+    });
+   },
    sendRegistrationEmail : function(dataObj,callback){
        console.log("sendRegistrationEmail called==>",dataObj.email,dataObj.password);
        

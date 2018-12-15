@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,NavigationStart } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../auth.service';
 import {  Observable } from 'rxjs/Observable';
 import { element } from 'protractor';
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   displayHeader = false;
   constructor(private router: Router, private auth: AuthService) {
     router.events.forEach((event) => {
-      if(event instanceof NavigationStart) {
+      if(event instanceof NavigationEnd) {
         console.log("changed")
         this.isLoggedIn = JSON.parse(this.auth.isLoggedIn());
         console.log('Condition : ',JSON.parse(this.auth.getUserRole()) == 2);
@@ -37,6 +37,8 @@ export class HeaderComponent implements OnInit {
   }
   logout() {
     this.auth.setLoggedIn(false);
+    this.displayHeader = false;
+    this.isLoggedIn = false;
     this.router.navigate(['/signIn']);
   }
   // toggleIsLoggedIn() {
