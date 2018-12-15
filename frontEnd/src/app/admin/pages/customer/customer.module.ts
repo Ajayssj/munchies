@@ -9,6 +9,7 @@ import { CustomerplanComponent } from './customerplan/customerplan.component';
 import { CustomerplanweekComponent } from './customerplanweek/customerplanweek.component';
 import { CustomerdetailsComponent } from './customerdetails/customerdetails.component';
 import { CustomerinfoComponent } from './customerinfo/customerinfo.component';
+import { NotificationComponent } from '../ui/components/notification/notification.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { CustomerinfoComponent } from './customerinfo/customerinfo.component';
         CustomerdetailsComponent,
         CustomerplanweekComponent,
         CustomerplanComponent,
-        CustomerinfoComponent
+        CustomerinfoComponent,
+        NotificationComponent
     ]
 })
 export class CustomerModule { }

@@ -18,29 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr *ngFor="let user of users, let i=index">
-            <td>{{i+1}}</td>
-            <td><a routerLink="/customerInfo">{{user.user.firstName}} {{user.user.lastName}}</a></td>
-            <td>{{user.address}}</td>
-            <td>{{user.Area_of_delivery}}</td>
-            <td>
-              <a (click)="viewUserWeek(user)" class="btn btn-info">
-                <i class="fa fa-pencil fa-fw"></i>{{user.planInfo.weeks}}
-              </a>
-            </td>
-          </tr> -->
-          <!-- <tr *ngFor="let customer of customers, let i=index">
-            <td>{{i+1}}</td>
-            <td><a routerLink="/customerInfo">{{user.user.firstName}} {{user.user.lastName}}</a></td>
-            <td>{{user.address}}</td>
-            <td>{{user.Area_of_delivery}}</td>
-            <td>
-              <a (click)="viewUserWeek(user)" class="btn btn-info">
-                <i class="fa fa-pencil fa-fw"></i>{{user.planInfo.weeks}}
-              </a>
-            </td>
-          </tr> -->
-          <tr *ngIf="customer">
+            <tr *ngIf="customer">
             <td>1</td>
             <td>{{customer.order.customerData.firstName + ' ' + customer.order.customerData.lastName}}</td>
             <td>{{customer.order.customerData.phoneNo}}</td>

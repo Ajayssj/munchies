@@ -32,6 +32,7 @@ var map = {
 	],
 	"./customer/customer.module": [
 		"./src/app/admin/pages/customer/customer.module.ts",
+		"common",
 		"customer-customer-module"
 	],
 	"./editor/editor.module": [
