@@ -66,7 +66,8 @@ module.exports = {
                 firstName :  req.body.firstName,
                 lastName : req.body.lastName,
                 email : req.body.email,
-                password : utils.createHash(req.body.password)
+                password : utils.createHash(req.body.password),
+                role : 1
             }
             isEmailExists(userObj.email)
                 .then((exists) => {
