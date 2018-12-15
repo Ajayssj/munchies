@@ -26,7 +26,7 @@
             <td>{{customer.order.address}}</td>
             <td>{{customer.plan.title}}</td>
             <td>{{(getActiveWeek(customer.startDate))?getActiveWeek(customer.startDate):'Not started'}}</td>
-            <td><div *ngFor="let weeks of customer.skippedWeeks">{{weeks.wNo}}</div></td>
+            <td><span *ngFor="let weeks of customer.skipedWeeks let weekNoIndex = index">{{weeks.wNo}}<span *ngIf="customer.skipedWeeks.length-1 != weekNoIndex">,</span></span></td>
           </tr>
         </tbody>
       </table>
