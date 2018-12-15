@@ -1,4 +1,9 @@
-.productmodal_body{
-    overflow: auto;
+.productmodal_body {
     max-height: 400px;
+    overflow: auto;
+}
+@media only screen and (max-width:320px){
+    .productmodal_body {
+        margin-left: -10px;
+    }
 }

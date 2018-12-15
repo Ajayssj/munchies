@@ -28,29 +28,31 @@
   </div>
 </div>
 
-<modal #thirdModal [closeOnEscape]="false" [closeOnOutsideClick]="false">
+<modal #thirdModal [closeOnEscape]="false" [closeOnOutsideClick]="false" >
   <modal-header>
     <h3>Add Products</h3>
   </modal-header>
-  <modal-content class="productmodal_body">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Product</th>
-          <th>MRP</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let prod of products, let i=index">
-          <td>{{prod.type}}</td>
-          <td>{{prod.name}}</td>
-          <td>{{prod.price}}</td>
-          <td><button (click)="addProd(prod._id, i, alertModal)" class="btn btn-success"><i class="fa fa-check fa-fw"></i>Add</button></td>
-        </tr>
-      </tbody>
-    </table>
+  <modal-content>
+    <div class="productmodal_body">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Product</th>
+              <th>MRP</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prod of products, let i=index">
+              <td>{{prod.type}}</td>
+              <td>{{prod.name}}</td>
+              <td>{{prod.price}}</td>
+              <td><button (click)="addProd(prod._id, i, alertModal)" class="btn btn-success"><i class="fa fa-check fa-fw"></i>Add</button></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
   </modal-content>
   <modal-footer>
     <button class="btn btn-primary" (click)="closeModal(thirdModal)">close</button>
