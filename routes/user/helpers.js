@@ -27,6 +27,20 @@ const isEmailExists = function(email){
    })
 }
 module.exports = {
+    getUserInfo : (req,res) => {
+      let user = req.session.user;
+      if(user){
+         User.findOne({_id : db.toObjectID(user._id)},{password : 0}).then(user => {
+            if(user){
+                res.json({success : true, data : user})
+            }else{
+                res.json({success : false, error : "No User Found!"})
+            }
+         }).catch(err => res.json({success : false, error : err}));
+      }else{
+        res.json({success : false, error : 'You are no logged In'})
+      }
+    },
     getAllUsers : (req,res) => {
         User.find().toArray()
         .then(users => {
