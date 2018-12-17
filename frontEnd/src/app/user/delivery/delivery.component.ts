@@ -69,10 +69,14 @@ export class DeliveryComponent implements OnInit {
     {
       var question1 = this.route.snapshot.queryParamMap.get('question1');
       var question2 = this.route.snapshot.queryParamMap.get('question2');
-      if(question1 != '' && question2 != '' ) {
-      var questionInfo = [{type: 'allergic', value: question1},
-                    {type: 'fruits', value: question2} ];
+      var questionInfo =[]
+      if(question1 && question1.length > 0)  {
+        questionInfo.push({type: 'allergic', value: question1})
       }
+      if(question2 && question2.length > 0)  {
+        questionInfo.push({ type: 'fruits', value: question2})
+      }
+      
     this.data = {
       firstName: this.f.name.value,
       lastName: this.f.surName.value,
@@ -82,7 +86,7 @@ export class DeliveryComponent implements OnInit {
       postalCode: this.f.postalCode.value,
       planId: this.route.snapshot.queryParamMap.get('selectedPlan'),
       weeks : this.route.snapshot.queryParamMap.get('week'),
-      extraInfo: questionInfo
+      extraInfo: JSON.stringify(questionInfo)
     }
     this.httpOptions = {
       headers: new HttpHeaders({

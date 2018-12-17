@@ -361,8 +361,10 @@ var ChartsService = /** @class */ (function () {
             console.log(res.data);
             if (res.success) {
                 res.data.forEach(function (allergicItem) {
-                    _this.allergyOptions.legend.data.push(allergicItem && allergicItem._id ? allergicItem._id.toUpperCase() : '');
-                    _this.allergyOptions.series[0].data.push({ value: allergicItem.count, name: allergicItem && allergicItem._id ? allergicItem._id.toUpperCase() : '' });
+                    if (allergicItem && allergicItem._id) {
+                        _this.allergyOptions.legend.data.push(allergicItem && allergicItem._id ? allergicItem._id.toUpperCase() : '');
+                        _this.allergyOptions.series[0].data.push({ value: allergicItem.count, name: allergicItem && allergicItem._id ? allergicItem._id.toUpperCase() : '' });
+                    }
                 });
                 console.log(_this.allergyOptions);
                 cb(_this.allergyOptions);
@@ -380,8 +382,10 @@ var ChartsService = /** @class */ (function () {
             console.log(res.data);
             if (res.success) {
                 res.data.forEach(function (fruitsItem) {
-                    _this.fruitOptions.legend.data.push(fruitsItem && fruitsItem._id ? fruitsItem._id.toUpperCase() : "");
-                    _this.fruitOptions.series[0].data.push({ value: fruitsItem.count, name: fruitsItem && fruitsItem._id ? fruitsItem._id.toUpperCase() : "" });
+                    if (fruitsItem && fruitsItem._id) {
+                        _this.fruitOptions.legend.data.push(fruitsItem && fruitsItem._id ? fruitsItem._id.toUpperCase() : "");
+                        _this.fruitOptions.series[0].data.push({ value: fruitsItem.count, name: fruitsItem && fruitsItem._id ? fruitsItem._id.toUpperCase() : "" });
+                    }
                 });
                 console.log(_this.fruitOptions);
                 cb(_this.fruitOptions);

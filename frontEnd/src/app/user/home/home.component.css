@@ -82,7 +82,7 @@
     flex-wrap: wrap;
 }
 .boxes .box {
-    background-color: #e3c567;
+    border: 6pt solid #e3c567;
     margin-right: 10px;
     padding: 10px 15px;
     min-height: 475px;
@@ -94,7 +94,7 @@
     margin-right: 0px;
 }
 .boxes .box h3 {
-    color: #fff;
+    color: gray;
     letter-spacing: 1px;
     text-align: center;
     line-height: 30px;
@@ -104,7 +104,7 @@
 .boxes .box p {
     font-size: 18px;
     font-weight: normal;
-    color: rgb(63, 61, 61);
+    color: gray; /* rgb(63, 61, 61) */
 }
 .subscribe_btn2 {
     margin: 80px 0px;
@@ -217,7 +217,7 @@
 }
 
 .page_down_content {
-	margin: 105px 0px 50px 0px;
+	margin: 105px 0px 30px 0px;
     text-align: center;
 }
 .page_down_content h2 {
@@ -240,8 +240,31 @@
     text-align: center;
 }
 .svg-img img{
-    height: 130px;
+    height: 90px;
     width: auto;
+}
+
+.btn {
+    text-decoration: none;
+    color:#323232;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 25px;
+    border: 2px solid rgba(50, 50, 50, 1);
+    margin-top: 50px;
+    cursor: pointer;
+    outline: none;
+    float: left;
+    font: normal normal normal 16px/1.4em din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif;
+}
+.btn.submit {
+    float: none;
+    margin-top: 30px;
+}
+.btn:hover {
+    color: #fff;
+    background-color: rgba(50, 50, 50, 1);
+    border: 2px solid rgba(50, 50, 50, 1);
 }
 
 @media screen and (min-width: 300px) {
@@ -370,7 +393,7 @@
     .list_item .list_text {
         width: auto;
         font-size: 23px;
-        line-height: 50px;
+        line-height: 58px;
     }
     .munchers_have_spoken_box_wrapper {
         flex-direction: row;
