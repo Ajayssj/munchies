@@ -91,12 +91,14 @@ export class DeliveryComponent implements OnInit {
     };
     console.log("route params", this.data)
 
-    this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data).subscribe(data => {
-      console.log("order created", data);
-    this.showOrderConfirmAlert = true;
-   
+    this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data).subscribe((res : any) => {
+      console.log("order created", res);
+      this.showOrderConfirmAlert = true;
+        
     },
       err => {
+        if(err.status == 401)
+          alert(err.error.error);
         console.log(err);
       });
     }
