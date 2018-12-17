@@ -292,6 +292,11 @@ var MENU_ITEM = [
     //     title: 'Dashboard',
     //     icon: 'dashboard'
     // },
+    // {
+    //     path: 'home',
+    //     title: 'Home',
+    //     icon: 'home'
+    // },
     {
         path: 'admin-analytics',
         title: 'Admin Analytics',
@@ -583,6 +588,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var childRoutes = [
+    // { path: 'home', redirectTo: this.router.navigate(['../../home'], { relativeTo: this.route }),pathMatch: 'full'  },
     {
         path: 'admin',
         component: _admin_component__WEBPACK_IMPORTED_MODULE_2__["AdminComponent"],
@@ -2158,7 +2164,7 @@ var MenuComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pages-top\">\n  <div class=\"avatar-wrap\">\n    <div class=\"avatar\">\n      <img src=\"{{avatarImgSrc}}\" alt=\"avatar\">\n    </div>\n    <div class=\"user-info-wrap\">\n      <span class=\"user-name\" title=\"{{userName}}\">{{userName}}</span>\n      <span class=\"user-post\" title=\"{{userPost}}\">{{userPost}}</span>\n    </div>\n  </div>\n\n  <div class=\"collapse-menu\" (click)=\"_sidebarToggle()\">\n    <!-- <i class=\"fa fa-navicon fa-fw\" [ngClass]=\"{'toggle-on':sidebarToggle,'toggle-off':!sidebarToggle}\"></i> -->\n    <i class=\"fa fa-dedent fa-fw\" *ngIf=\"sidebarToggle\"></i>\n    <i class=\"fa fa-indent fa-fw\" *ngIf=\"!sidebarToggle\"></i>\n  </div>\n\n\n  <div class=\"search-group\">\n    <input type=\"text\" class=\"search-input\" placeholder=\"Search project · · ·\">\n    <button class=\"search-btn\">\n      <i class=\"fa fa-search fa-fw\"></i>\n    </button>\n  </div>\n\n  <div class=\"msg-tips-wrap\">\n    <div class=\"msg-entrance ring\">\n      <span class=\"fa fa-bell fa-fw\"></span>\n      <span class=\"badge\" *ngIf=\"tip.ring\"></span>\n    </div>\n    <div class=\"msg-entrance email\">\n      <span class=\"fa fa-envelope fa-fw\"></span>\n      <span class=\"badge\" *ngIf=\"tip.email\"></span>\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"pages-top\">\n  <div class=\"avatar-wrap\">\n    <div class=\"avatar\">\n      <img src=\"{{avatarImgSrc}}\" alt=\"avatar\">\n    </div>\n    <div class=\"user-info-wrap\">\n      <span class=\"user-name\" title=\"{{userName}}\">{{userName}}</span>\n      <span class=\"user-post\" title=\"{{userPost}}\">{{userPost}}</span>\n      <!-- <ul><li><a routerLink=\"/home\" >Collaborate</a></li></ul> -->\n    </div>\n  </div>\n\n  <div class=\"collapse-menu\" (click)=\"_sidebarToggle()\">\n    <!-- <i class=\"fa fa-navicon fa-fw\" [ngClass]=\"{'toggle-on':sidebarToggle,'toggle-off':!sidebarToggle}\"></i> -->\n    <i class=\"fa fa-dedent fa-fw\" *ngIf=\"sidebarToggle\"></i>\n    <i class=\"fa fa-indent fa-fw\" *ngIf=\"!sidebarToggle\"></i>\n  </div>\n\n\n  <div class=\"search-group\">\n    <input type=\"text\" class=\"search-input\" placeholder=\"Search project · · ·\">\n    <button class=\"search-btn\">\n      <i class=\"fa fa-search fa-fw\"></i>\n    </button>\n  </div>\n\n  <div class=\"msg-tips-wrap\">\n    <div class=\"msg-entrance ring\">\n      <span class=\"fa fa-bell fa-fw\"></span>\n      <span class=\"badge\" *ngIf=\"tip.ring\"></span>\n    </div>\n    <div class=\"msg-entrance email\">\n      <span class=\"fa fa-envelope fa-fw\"></span>\n      <span class=\"badge\" *ngIf=\"tip.email\"></span>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -3791,7 +3797,7 @@ var ForgotPasswordComponent = /** @class */ (function () {
         else {
             this.email = this.forgotPasswordForm.get('email').value;
             var data = { 'email': this.email, 'siteUrl': this.authService.getDomainName() };
-            this.http.post(this.authService.getDomainName() + '/api/user/password/recover', data).subscribe(function (data) {
+            this.http.post(this.authService.getDomainName() + '/public/api/user/password/recover', data).subscribe(function (data) {
                 _this.success = data.success;
                 _this.error = data.error;
                 if (_this.success) {
@@ -3903,6 +3909,7 @@ var HeaderComponent = /** @class */ (function () {
         this.displayHeader = false;
         this.isLoggedIn = false;
         this.router.navigate(['/signIn']);
+        localStorage.clear();
     };
     // toggleIsLoggedIn() {
     //   this.isLoggedIn = !this.isLoggedIn;
@@ -4755,7 +4762,7 @@ var ResetPasswordComponent = /** @class */ (function () {
                     'password': this.password,
                     'token': this.token
                 };
-                this.http.post(this.authService.getDomainName() + '/api/user/password/reset', this.data).subscribe(function (data) {
+                this.http.post(this.authService.getDomainName() + '/public/api/user/password/reset', this.data).subscribe(function (data) {
                     _this.success = data.success;
                     _this.error = data.error;
                     // this.router.navigate(['/sign-up']);
@@ -5131,7 +5138,7 @@ var SignUpComponent = /** @class */ (function () {
                     'password': this.password
                 };
                 console.log(this.data);
-                this.http.post(this.authService.getDomainName() + '/api/user/register', this.data).subscribe(function (data) {
+                this.http.post(this.authService.getDomainName() + '/public/api/user/register', this.data).subscribe(function (data) {
                     console.log("success", data.success);
                     _this.success = data.success;
                     _this.error = data.error;

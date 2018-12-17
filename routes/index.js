@@ -11,7 +11,9 @@ module.exports = {
 		const typeApi = require('./type');
         const companyApi = require('./company');
         const analysisApi = require('./analysis');
+        const publicApi = require('./public');
 
+        app.use('/public/api',publicApi);
         app.use('/api', userApi);
         app.use('/api', productApi);
         app.use('/api', planApi);

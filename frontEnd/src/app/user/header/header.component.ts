@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit {
     this.displayHeader = false;
     this.isLoggedIn = false;
     this.router.navigate(['/signIn']);
+    localStorage.clear();
   }
   // toggleIsLoggedIn() {
   //   this.isLoggedIn = !this.isLoggedIn;

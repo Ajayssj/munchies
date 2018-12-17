@@ -62,7 +62,7 @@ export class ResetPasswordComponent implements OnInit {
           'password': this.password,
           'token' : this.token
         }
-        this.http.post(this.authService.getDomainName() + '/api/user/password/reset', this.data).subscribe( (data:Res) => {
+        this.http.post(this.authService.getDomainName() + '/public/api/user/password/reset', this.data).subscribe( (data:Res) => {
             this.success = data.success;
             this.error = data.error;
             // this.router.navigate(['/sign-up']);

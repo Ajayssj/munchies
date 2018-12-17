@@ -69,7 +69,7 @@ export class SignUpComponent implements OnInit {
           'password': this.password
         }
         console.log(this.data);
-        this.http.post(this.authService.getDomainName() + '/api/user/register', this.data).subscribe( (data:SignUpRes) => {
+        this.http.post(this.authService.getDomainName() + '/public/api/user/register', this.data).subscribe( (data:SignUpRes) => {
             console.log("success", data.success);
             this.success = data.success;
             this.error = data.error;
