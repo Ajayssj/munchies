@@ -36,7 +36,7 @@ export class DeliveryComponent implements OnInit {
 
   ngOnInit() {
     this.deliveryForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+')]],
+      name: ['', [Validators.required]], //Validators.pattern('^[a-zA-Z]+')
       area: ['', Validators.required],
       surName: ['', [Validators.required , Validators.pattern('^[a-zA-Z]+')]],
       address: ['', Validators.required],

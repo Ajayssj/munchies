@@ -1,4 +1,5 @@
 <div class="header_wrapper">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <header class="site_header">
         <nav>
             <div class="wrapper">
@@ -21,7 +22,15 @@
                         <a *ngIf="!isLoggedIn" routerLink="/signIn">Sign In</a>
                         <a *ngIf="isLoggedIn" (click)="logout()">Logout</a>
                     </li>
-                    <li><a routerLink="/subscribe">Get the Bag</a></li>
+                    <li class="userdropdown"><i class="fa fa-user"></i>
+                        <ul class="submenu">
+                          <li><a href="/profile">Edit Profile</a></li>
+                          <li><a href="/change-password">Change Password</a></li>
+                          <li><a (click)="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li><a routerLink="/subscribe" class="getthebag_btn">Get the Bag</a></li>
+                    
                 </ul>
                 <div class="overlay"  [ngClass]="{'showOverlay':isMobNavbarOpen}" id="overlay"></div>
                 <div class="responsive_menu"  [ngClass]="{'openSideMenu':isMobNavbarOpen}"  id="responsive_menu">
@@ -39,7 +48,7 @@
                             <a routerLink="/signIn" (click)="isMobNavbarOpen=!isMobNavbarOpen">Sign IN</a>
                         </div>
                         <div class="menu_item">
-                            <a routerLink="/subscribe" (click)="isMobNavbarOpen=!isMobNavbarOpen">Get the Bag</a>
+                            <a routerLink="/subscribe" (click)="isMobNavbarOpen=!isMobNavbarOpen"  class="getthebag_btn">Get the Bag</a>
                         </div>
                     </div>
                 </div>

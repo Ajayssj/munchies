@@ -1,1 +1,8 @@
+<!-- <div class="loader-wrapper">
+    yoo
+    <img src="https://giphy.com/static/img/loader_purple.gif" class="apploader">
+</div> -->
+<div class="loader-wrapper" *ngIf="loadingRouteConfig">
+<div id="loading-bar-spinner" class="spinner"><div class="spinner-icon"></div></div>
+</div>
 <router-outlet></router-outlet>

@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { from } from 'rxjs';
+import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +7,17 @@ import { from } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor () {
+  loadingRouteConfig: boolean;
+  constructor (private router: Router) {
   }
   ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof RouteConfigLoadStart) {
+          this.loadingRouteConfig = true;
+      } else if (event instanceof RouteConfigLoadEnd) {
+          this.loadingRouteConfig = false;
+      }
+  });
   }
 
 

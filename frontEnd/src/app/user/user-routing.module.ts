@@ -21,6 +21,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { UserComponent } from './user.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
   children: [
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
+  { path: "profile", component: ProfileComponent },
   { path: "collaborate", component: CollaborateComponent },
   { path: "help", component: HelpComponent },
   { path: "contact", component: ContactComponent },

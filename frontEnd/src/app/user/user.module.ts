@@ -34,6 +34,7 @@ import {ModalModule} from "ngx-modal";
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AlertPopupComponent } from './alert-popup/alert-popup.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { AlertPopupComponent } from './alert-popup/alert-popup.component';
     PrivacyPolicyComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    AlertPopupComponent
+    AlertPopupComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
