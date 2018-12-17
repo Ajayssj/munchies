@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PagesComponent } from './pages.component';
 import { LoginComponent } from './login/login.component';
 import { AuthRoleGuardService } from '../../app.role.guard';
+import { CustomSearchPipe } from './custom-search.pipe';
 
 //import { CompanyComponent } from './company/company.component';
 //import { SnacksComponent } from './snacks/snacks.component';
@@ -23,7 +24,8 @@ import { AuthRoleGuardService } from '../../app.role.guard';
     ],
     declarations: [
         PagesComponent,
-        LoginComponent
+        LoginComponent,
+        CustomSearchPipe
     ],
     providers: [
         AuthRoleGuardService

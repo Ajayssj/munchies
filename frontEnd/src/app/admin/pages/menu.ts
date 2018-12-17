@@ -4,6 +4,11 @@ export let MENU_ITEM = [
     //     title: 'Dashboard',
     //     icon: 'dashboard'
     // },
+    // {
+    //     path: 'home',
+    //     title: 'Home',
+    //     icon: 'home'
+    // },
     {
         path: 'admin-analytics',
         title: 'Admin Analytics',

@@ -57,6 +57,7 @@ export class CompanyComponent implements OnInit {
   errorMessage = '';
   allergyDetails: Array<string>;
   hideWeekDrp = 0;
+  pNameArr = [];
   public weekArray: Array<Object> = [{id: 1, text: 'Week 1'}, {id: 2, text: 'Week 2'}, {id: 3, text: 'Week 3'},
    {id: 4, text: 'Week 4'}, {id: 5, text: 'Week 5'}, {id: 6, text: 'Week 6'}, {id: 7, text: 'Week 7'}, 
    {id: 8, text: 'Week 8'}, {id: 9, text: 'Week 9'}, {id: 10, text: 'Week 10'}, {id: 11, text: 'Week 11'},
@@ -70,7 +71,6 @@ export class CompanyComponent implements OnInit {
       })
     }
       this.cdRef.detectChanges();
-    //  this.hideAutoComplete = false;
 
     }
 
@@ -94,7 +94,6 @@ export class CompanyComponent implements OnInit {
             uniqArr.push(item.week)
           }
         });
-        console.log(element);
         this.productResponse.products[index].weeks = uniqArr;
       });
       console.log(this.productResponse);
@@ -272,21 +271,6 @@ addProduct(modal) {
     });
     this.closeModal(modal);
   }
-  //edit Type code
-  // editType(modal, selectedType) {
-  //   this.pType = selectedType.type;
-  //   this.selectedTypeId = selectedType._id;
-  //   this.companyId = this.selectCompanyId;
-  //   this.http.put(this.auth.getDomainName() + '/api/type/edit', {type: this.pType, typeId: this.selectedTypeId, companyId: this.companyId}).subscribe((data:any)=>{
-  //     console.log(data);
-  //      if(data && data.success) { this.productTypes.push(data) }
-  //   }, 
-  //   err=> {
-  //     console.log(err);
-  //   });
-  //   this.closeModal(modal);
-  // }
-  //edit Product code
   editProduct(modal,selectedProduct) {
     this.editProductArray = {
       name: selectedProduct.name,
@@ -306,6 +290,16 @@ addProduct(modal) {
       console.log(err);
     });
     this.closeModal(modal);
+  }
+
+  // Products Table Sorting Code 
+  //sorting
+  key: string = 'name'; //set default
+  reverse: boolean = false;
+  sort(key){
+    console.log(key)
+    this.key = key;
+    this.reverse = !this.reverse;
   }
   // Multiple select
   

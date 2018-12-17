@@ -5725,7 +5725,6 @@ var UserComponent = /** @class */ (function () {
         this.styles = {
             'min-height': contentElementHeight
         };
-        console.log(contentElementHeight);
     };
     UserComponent.prototype.ngAfterViewInit = function () {
     };

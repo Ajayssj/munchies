@@ -6,24 +6,58 @@
       <div class="row">
         <button (click)="addModal.open()" class="btn btn-primary" style="margin:20px">Add Product</button>
         <span class="success" *ngIf="message!=''">{{message}}</span>
+        <!-- <button class="btn btn-primary weeksDrp">Weeks</button> -->
+        <input class="form-control search-input" placeholder="Search" type="text" name="search" [(ngModel)]="searchFilter"> 
       </div>
       <table class="table table-bordered">
         <thead>
           <tr>
             <th>No</th>
-            <th>Product Name</th>
-            <th>Type</th>
-            <th>Company</th>
-            <th>Quantity</th>
-            <th>Cost</th>
-            <th>MRP</th>
-            <th>Allergy</th>
-            <th>KCAL</th>
+            <th (click)="sort('name')">Product Name
+              <span class="glyphicon sort-icon" *ngIf="key =='name'" 
+                [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+              </span>
+            </th>
+            <th (click)="sort('type')">Type
+              <span class="glyphicon sort-icon" *ngIf="key =='type'" 
+                [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+              </span>
+            </th>
+            <th (click)="sort('company')">Company
+              <span class="glyphicon sort-icon" *ngIf="key =='company'" 
+                [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+              </span>
+            </th>
+            <th (click)="sort('quantity')">Quantity
+              <span class="glyphicon sort-icon" *ngIf="key =='quantity'" 
+                [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+              </span>
+            </th>
+            <th (click)="sort('Cost')">Cost
+              <span class="glyphicon sort-icon" *ngIf="key =='Cost'" 
+                [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+              </span>
+            </th>
+            <th (click)="sort('price')">MRP
+              <span class="glyphicon sort-icon" *ngIf="key =='price'" 
+                [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+              </span>
+            </th>
+            <th (click)="sort('allergyDetails')">Allergy
+              <span class="glyphicon sort-icon" *ngIf="key =='allergyDetails'" 
+                [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+              </span>
+            </th>
+            <th (click)="sort('kcal')">KCAL
+              <span class="glyphicon sort-icon" *ngIf="key =='kcal'" 
+                [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+              </span>
+            </th>
             <th>Edit/Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products, let i=index">
+          <tr *ngFor="let product of products | orderBy: key : reverse | filter:searchFilter, let i=index">
             <td>{{i+1}}</td>
             <td>{{product.name}}</td>
             <td>{{product.type}}</td>

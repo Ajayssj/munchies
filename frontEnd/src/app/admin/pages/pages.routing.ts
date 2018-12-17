@@ -4,9 +4,11 @@ import { CustomerComponent } from './customer/customer.component';
 import { AdminComponent } from '../admin.component';
 import { AuthGuard } from '../auth.guard';
 import { AuthRoleGuardService } from '../../app.role.guard'
+import { HomeComponent } from '../../user/home/home.component';
 
 export const childRoutes: Routes = [
-    {
+    // { path: 'home', redirectTo: this.router.navigate(['../../home'], { relativeTo: this.route }),pathMatch: 'full'  },
+    {   
         path: 'admin',
         component: AdminComponent,
         canActivate: [AuthRoleGuardService], 

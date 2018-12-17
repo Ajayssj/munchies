@@ -44,7 +44,6 @@ export class UserComponent {
     this.styles = {
       'min-height': contentElementHeight
     }
-    console.log(contentElementHeight);
   }
 
   ngAfterViewInit(){

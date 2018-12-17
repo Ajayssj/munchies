@@ -89,3 +89,15 @@ modal-footer button.btn {
 .selectedWeeks {
   max-width: 200px;
 }
+.glyphicon {
+  float: right;
+}
+.table th {
+  cursor: pointer;
+}
+.search-input, button.weeksDrp {
+  width: 150px;
+  float: right;
+  margin-top: 20px;
+  margin-right: 15px;
+}
