@@ -13,7 +13,7 @@ import { log } from 'util';
 })
 
 export class ManageSubscriptionComponent implements OnInit {
-  orders: [OrdersType];
+  orders:any;
   alertText: String;
   NOT_STARTED_YET = 1;
   SKIPED = 2;
@@ -41,7 +41,7 @@ export class ManageSubscriptionComponent implements OnInit {
   skipThisWeek(weekObj,activePlanId){
       return this.http.put(this.auth.getDomainName() + '/api/plan/active/'+ activePlanId +'/skip-week/'+ weekObj._id + '/' + weekObj.week ,{})
   }
-  getCoreDate(date = new Date(new Date().toUTCString())){
+  getCoreDate(date = new Date(new Date())){
     // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
     return new Date(date.toLocaleDateString());
   }
@@ -74,6 +74,13 @@ export class ManageSubscriptionComponent implements OnInit {
       return {state : true ,label :'Not Started Yet'};
     }
   }
+  mapOrdersData(){
+    this.orders.forEach((order,index) =>{
+       let result = this.shouldButtonDisabled(order);
+       this.orders[index].state = result.state ;
+       this.orders[index].label = result.label ;
+    })
+  }
   ngOnInit() {
 
     this.http.get(this.auth.getDomainName() + '/api/order/getMyOrders').subscribe((resData: any) => {
@@ -84,7 +91,8 @@ export class ManageSubscriptionComponent implements OnInit {
          item.state = isDisabled.state;
          item.label = isDisabled.label;
       });
-      this.orders =  resData.orderData
+      this.orders =  resData.orderData;
+
     }, error => {
       console.log('error', 'Allow Signup', 'Server Error');
     });
@@ -95,7 +103,7 @@ export class ManageSubscriptionComponent implements OnInit {
   //   sessionStorage.removeItem('token');
   //   this.router.navigate(['/signIn']);
   // }
-  skipNextWeek(order, index, alertModal) {
+  skipNextWeek(order, alertModal,index) {
     let actweek : number;
     // order.plans.startDate = new Date('12-5-2018')
     if(this.getCoreDate() >=  this.getCoreDate(new Date(order.plans.startDate))){
@@ -106,14 +114,16 @@ export class ManageSubscriptionComponent implements OnInit {
         let weekObj = this.getNextWeekId(nextWeek,order.weekIds);
         if(weekObj){
           if(!this.isThisWeekSkip(order.plans.skipedWeeks,weekObj._id)){
+            console.log(' InDEX : ' + index);
             this.skipThisWeek(weekObj,order.plans._id).subscribe((res: any) => {
               if (res.success) {
                 /* this.alertText = 'Week Skiped Successfully!';
                 this.openModal(alertModal); */
                 alert(res.message);
                 // order.label = this.shouldButtonDisabled(order).label;
-                
-                window.location.reload();
+                this.orders[index].state = false;
+                this.orders[index].label = 'Skipped';
+                this.orders[index].plans.skipedWeeks.push(res.data);
               } else if (res.error) {
                 alert(res.error);
                /*  this.alertText = res.error;
@@ -141,7 +151,7 @@ export class ManageSubscriptionComponent implements OnInit {
     return skipWeeks.find(item => item.wId = weekId);
   }
   notLastWeek(weekNo,maxWeek){
-    return (maxWeek > weekNo )
+    return (maxWeek >= weekNo )
   }
   getWeekArray = (weekNo) => new Array(weekNo);
 

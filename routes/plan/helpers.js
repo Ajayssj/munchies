@@ -7,6 +7,8 @@ const CustomPlan = db.getCollection('customPlans');
 const PlansExtended = db.getCollection('plansExtended');
 const utils = require('../../utils');
 const User = db.getCollection('user');
+let moment = require('moment-timezone');
+let indianTime = moment.tz('Asia/Calcutta');
 const getAdminEmails = (cb) => {
     User.find({ role : 2}).toArray().then(users => {
         cb({success : true, users : users })
@@ -57,14 +59,15 @@ const activateDeactivatePlan = (activePlanId,status = true) => {
    })
 }
 const getCoreDate = function(date){
+    date = new Date(date);
    return new Date(date.toLocaleDateString()).getTime()
 }
 const shouldWeekSkip = function(activePlanId,week,cb){
      ActivePlan.findOne({_id : db.toObjectID(activePlanId)})   
         .then(plan => {
             if(plan){
-                currentDate = new Date(new Date().toUTCString()).addDays(2);
-                weekDate = new Date(plan.startDate).addDays(7 * (week - 1));
+                currentDate = moment(moment.tz('Asia/Calcutta').format()).add('days', 2).startOf('day').format();
+                weekDate = moment(moment(plan.startDate).tz('Asia/Calcutta').format()).add('days',7 * (week - 1)).startOf('day').format();
                 if( getCoreDate(weekDate) > getCoreDate(currentDate))
                     cb(true);
                 else
@@ -705,12 +708,14 @@ module.exports = {
     if(userId && activePlanId && weekId && !Number.isNaN(week)){
         shouldWeekSkip(activePlanId,week,function(result){
             if(result){
+                let skippedWeek = {wId : db.toObjectID(weekId), wNo : week};
                 ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
                 {
-                    $push : {skipedWeeks : {wId : db.toObjectID(weekId), wNo : week} },
+                    $push : {skipedWeeks : skippedWeek },
                     $inc: { weeks : 1}
                 }).then(plan => {
                     if(plan.result.nModified == 1){
+                        res.json({success : true, message : week + ' Week Skipped Successfully!', data : skippedWeek});   
                         getAdminEmails((result) => {
                             if(result.success){
                                 result.users.forEach(admin => {
@@ -725,8 +730,7 @@ module.exports = {
                                
                             }
                         })
-                        
-                        res.json({success : true, message : week + ' Week Skipped Successfully!'});   
+
                     }else
                         res.json({success : false, error : 'Plan not found to be edited!'})
                 }).catch(err => res.json({success : false, error : err}));

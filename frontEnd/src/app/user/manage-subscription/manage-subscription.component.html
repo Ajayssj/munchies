@@ -23,7 +23,7 @@
                             <td  style="cursor: pointer;">
                                 <span 
                                 [disabled]="order.state" 
-                                (click)="skipNextWeek(order,alertModal)" 
+                                (click)="skipNextWeek(order,alertModal,i)" 
                                 class="btn btn-danger"><i class='fa fa-trash fa-fw'></i>
                                 {{order.label}}
                             </span></td>

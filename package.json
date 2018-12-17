@@ -12,13 +12,15 @@
         "firebase-admin": "^6.1.0",
         "generate-password": "^1.4.1",
         "mkdirp": "^0.5.1",
+        "moment": "^2.23.0",
+        "moment-timezone": "^0.5.23",
         "mongodb": "^3.1.8",
         "nodemailer": "^4.6.8",
         "save": "^2.3.3"
     },
     "repository": {},
     "scripts": {
-        "start": "set NODE_ENV=production && node  app.js",
+        "start": "set NODE_ENV=production && node --inspect app.js",
         "start-dev": "set NODE_ENV=development && node --inspect app.js",
         "build-frontend": "node build-frontend.js"
     },

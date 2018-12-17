@@ -7,7 +7,9 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+// process.env.TZ = 'Asia/Calcutta';
 
+// console.log('India Time Zone : Time  :  ', moment.format('MMMM Do YYYY, h:mm:ss a'));
 const database = require('./database');
 global.__baseUrl = __dirname;
 const server = app.listen(env.SERVER_PORT, function () {
