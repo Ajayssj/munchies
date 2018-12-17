@@ -52,7 +52,7 @@ const createWeekByPlans = function(weeks,planId,activePlanId){
 const insertExtraInfo = function(orderId,data){
     let arrObj = [];
     data.forEach(obj => {
-        arrObj.push({ type : obj.type, value : obj.value, orderId : orderId });
+        arrObj.push({ type : obj.type.toLowerCase(), value : obj.value.toLowerCase(), orderId : orderId });
     })
     return Extra.insertMany(arrObj);
     
