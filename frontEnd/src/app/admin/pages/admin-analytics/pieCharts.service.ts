@@ -134,8 +134,6 @@ fruitOptions = {
                     this.planSelectedOptions.legend.data.push(plan.planInfo.title.toUpperCase());
                     this.planSelectedOptions.series[0].data.push({ value: plan.count, name: plan.planInfo.title.toUpperCase() });
                 });
-    
-                this.planSelectedOptions.series[0].data = [...this.planSelectedOptions.series[0].data];
                 console.log(this.planSelectedOptions)
                 cb(this.planSelectedOptions);
             }else{
@@ -153,8 +151,8 @@ fruitOptions = {
             console.log(res.data);
             if(res.success) {
                 res.data.forEach(allergicItem => {
-                    this.allergyOptions.legend.data.push(allergicItem._id.toUpperCase());
-                    this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem._id.toUpperCase()});
+                    this.allergyOptions.legend.data.push(allergicItem && allergicItem._id ? allergicItem._id.toUpperCase() :'');
+                    this.allergyOptions.series[0].data.push({value: allergicItem.count, name: allergicItem && allergicItem._id ? allergicItem._id.toUpperCase() :'' });
                 });
                 console.log(this.allergyOptions)
                 cb(this.allergyOptions);
@@ -173,8 +171,8 @@ fruitOptions = {
             console.log(res.data);
             if(res.success) {
                 res.data.forEach(fruitsItem => {
-                    this.fruitOptions.legend.data.push(fruitsItem._id.toUpperCase());
-                    this.fruitOptions.series[0].data.push({value: fruitsItem.count, name: fruitsItem._id.toUpperCase()});
+                    this.fruitOptions.legend.data.push( fruitsItem && fruitsItem._id ? fruitsItem._id.toUpperCase() :"");
+                    this.fruitOptions.series[0].data.push({value: fruitsItem.count, name:fruitsItem && fruitsItem._id ? fruitsItem._id.toUpperCase() :""});
                 });
                 console.log(this.fruitOptions);
                 cb(this.fruitOptions);

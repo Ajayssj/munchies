@@ -67,8 +67,12 @@ export class DeliveryComponent implements OnInit {
     }
     else
     {
-      var questionInfo = [{type: 'allergic', value: this.route.snapshot.queryParamMap.get('question1')},
-                    {type: 'fruits', value: this.route.snapshot.queryParamMap.get('question2')} ];
+      var question1 = this.route.snapshot.queryParamMap.get('question1');
+      var question2 = this.route.snapshot.queryParamMap.get('question2');
+      if(question1 != '' && question2 != '' ) {
+      var questionInfo = [{type: 'allergic', value: question1},
+                    {type: 'fruits', value: question2} ];
+      }
     this.data = {
       firstName: this.f.name.value,
       lastName: this.f.surName.value,
