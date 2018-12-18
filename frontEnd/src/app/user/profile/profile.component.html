@@ -21,11 +21,11 @@
             <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>
             <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid Phone Number</div>
         </div>
-        <input type="email" [(ngModel)]="email" name="email" formControlName="email" placeholder="Email" />
-        <div *ngIf="submitted && (f.email.errors || f.email.invalid)" class="invalid-feedback">
+        <input type="email" [value]="email" name="email" formControlName="email" placeholder="Email" readonly />
+        <!-- <div *ngIf="submitted && (f.email.errors || f.email.invalid)" class="invalid-feedback">
             <div *ngIf="f.email.errors.required">Username is required</div>
             <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-        </div>
+        </div> -->
         <input type="text" [(ngModel)]="address" name="address" formControlName="address" placeholder="Address" />
         <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
             <div *ngIf="f.address.errors.required">Address is required</div>

@@ -88,7 +88,8 @@ header, .content, footer .content {
     left: 0;
     right: 0;
     background: black;
-    opacity: 0.9;
+    opacity: 0.7;
+    z-index: 999;
 }
 
 .apploader {

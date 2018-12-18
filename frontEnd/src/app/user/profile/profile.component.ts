@@ -23,16 +23,37 @@ export class ProfileComponent implements OnInit {
   firstName = '';
   lastName = '';
   email = '';
+  phone = '';
+  address = '';
   constructor(
     private formBuilder: FormBuilder,
     private router: Router, private http: HttpClient,
     private authService : AuthService) { }
 
   ngOnInit() {
+    this.http.get(this.authService.getDomainName() + '/api/user/getUserInfo').subscribe( (res:any) => {
+      console.log("success", res.data);
+      this.firstName = res.data.firstName;
+      this.lastName = res.data.lastName;
+      this.email = res.data.email;
+      this.phone = res.data.phone;
+      this.address = res.data.address;
+    },
+    error => {
+      this.error = error;
+    });
+
+
     this.userProfileForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: [''],
+      phone: ['', [
+        Validators.required,
+        Validators.maxLength(10),
+        Validators.pattern('[0-9]+')  // validates input is digit
+      ]],
+      address: ['', [Validators.required]],
   });
   }
   // convenience getter for easy access to form fields
@@ -46,23 +67,22 @@ export class ProfileComponent implements OnInit {
     else {
       this.firstName = this.userProfileForm.get('firstName').value;
       this.lastName = this.userProfileForm.get('lastName').value;
-      this.email = this.userProfileForm.get('email').value;
+      // this.email = this.userProfileForm.get('email').value;
+      this.phone = this.userProfileForm.get('phone').value;
+      this.address = this.userProfileForm.get('address').value;
       this.data = {
         'firstName': this.firstName, 
         'lastName': this.lastName,
-        'email': this.email,
+        // 'email': this.email,
+        'phone': this.phone,
+        'address': this.address,
       }
       console.log(this.data);
-      this.http.post(this.authService.getDomainName() + '/api/user/register', this.data).subscribe( (data:SignUpRes) => {
+      this.http.put(this.authService.getDomainName() + '/api/user/editUserInfo', this.data).subscribe( (data:SignUpRes) => {
           console.log("success", data.success);
           this.success = data.success;
           this.error = data.error;
-          this.router.navigate(['/sign-up']);
-          var pos = window.pageYOffset;
-          if (pos > 0) {
-              window.scrollTo(0, 0); // how far to scroll on each step
-              console.log(pos);
-          }
+          
         },
         error => {
           this.error = error;

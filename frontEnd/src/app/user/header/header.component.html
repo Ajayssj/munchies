@@ -20,7 +20,7 @@
                     <li><a routerLink="/contact">Contact</a></li>
                     <li>
                         <a *ngIf="!isLoggedIn" routerLink="/signIn">Sign In</a>
-                        <a *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+                        <!-- <a *ngIf="isLoggedIn" (click)="logout()">Logout</a> -->
                     </li>
                     <li *ngIf="isLoggedIn" class="userdropdown"><i class="fa fa-user"></i>
                         <ul class="submenu">
@@ -49,6 +49,15 @@
                         </div>
                         <div class="menu_item">
                             <a routerLink="/subscribe" (click)="isMobNavbarOpen=!isMobNavbarOpen"  class="getthebag_btn">Get the Bag</a>
+                        </div>
+                        <div class="menu_item">
+                            <a routerLink="/profile" (click)="isMobNavbarOpen=!isMobNavbarOpen">Edit Profile</a>
+                        </div>
+                        <div class="menu_item">
+                            <a routerLink="/change-password" (click)="isMobNavbarOpen=!isMobNavbarOpen">Change Password</a>
+                        </div>
+                        <div class="menu_item">
+                            <a (click)="logout()" class="getthebag_btn">Logout</a>
                         </div>
                     </div>
                 </div>
