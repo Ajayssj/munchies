@@ -27,6 +27,22 @@ const isEmailExists = function(email){
    })
 }
 module.exports = {
+    editUserInfo : (req,res) => {
+        let user = req.session.user;
+        if(user){
+            const userObj = {
+                firstName :  req.body.firstName,
+                lastName : req.body.lastName,
+                address : req.body.address,
+                phone : req.body.phone
+            }
+            User.updateOne({_id : db.toObjectID(user._id)},{ $set : userObj}).then(user => {
+                   res.json({success : true, message : 'User info edited successfully!'})
+            }).catch(err => res.json({success : false, error : err}));
+         }else{
+           res.json({success : false, error : 'You are no logged In'})
+         }
+    },
     getUserInfo : (req,res) => {
       let user = req.session.user;
       if(user){
