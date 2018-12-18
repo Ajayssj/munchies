@@ -87,6 +87,9 @@
 .manage_subscription_page_wrapper .block p {
     z-index: 50;
 }
+.no_records {
+    padding-top: 20px;
+}
 
  @media only screen and (max-width:320px){
     .myorder_custom{

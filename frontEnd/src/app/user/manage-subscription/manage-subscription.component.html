@@ -28,6 +28,7 @@
                                 {{order.label}}
                             </span></td>
                         </tr>
+                        <tr><td colspan="6" class="no_records" *ngIf="!(orders.length > 0)">No Records Found</td></tr>
                     </tbody>
                 </table>
                 <h3 class="skipweek_text"><a href="/skip-week">Skip the coming weeks bag</a></h3>
