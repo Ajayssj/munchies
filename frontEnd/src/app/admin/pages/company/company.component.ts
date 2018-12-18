@@ -88,8 +88,11 @@ export class CompanyComponent implements OnInit {
     this.allergyDetails = ['Wheat', 'Milk', 'Eggs', 'Peanuts', 'Other nuts', 'none'];
 
     this.http.get(this.auth.getDomainName() + '/api/product').subscribe((res: any) => {
-      this.productResponse = res.data;
-      this.products = res.data.products;
+      console.log(res);
+      if(res.success) {
+        this.productResponse = res.data;
+        this.products = res.data.products;
+      }
       this.productResponse.products.forEach((element,index)=> {
         var uniqArr=[];
         element.weeks.forEach(item => {
