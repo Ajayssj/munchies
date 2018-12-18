@@ -12,7 +12,7 @@ import { FormInputsComponent } from '../form/components/form-inputs/form-inputs.
 import { MultipleSelectComponent } from '../form/components/ng2-select/multiple-select/multiple-select.component';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-// import { CustomSearchPipe } from '../pipe/custom-search.pipe';
+import { CustomSearchPipe } from '../pipe/custom-search.pipe';
 @NgModule({
     imports: [
         CommonModule,
@@ -30,7 +30,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
         ModalsComponent,
         FormComponent,
         FormInputsComponent,
-        MultipleSelectComponent
+        MultipleSelectComponent,
+        CustomSearchPipe
     ]
 })
 export class CompanyModule { }

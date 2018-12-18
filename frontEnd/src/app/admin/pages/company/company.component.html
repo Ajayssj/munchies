@@ -4,9 +4,22 @@
 
     <div>
       <div class="row">
-        <button (click)="addModal.open()" class="btn btn-primary" style="margin:20px">Add Product</button>
+        <button (click)="addModal.open()" class="btn btn-primary add_product_btn" style="margin:20px">Add Product</button>
         <span class="success" *ngIf="message!=''">{{message}}</span>
         <!-- <button class="btn btn-primary weeksDrp">Weeks</button> -->
+        <div class="input-group search_by_week">
+          <div class="input-group-btn " [ngClass]="{'open':selectedWeek}">
+            <button type="button" data-toggle="dropdown" class="btn btn-success dropdown-toggle week-dropdown-btn" aria-expanded="true"
+              aria-haspopup="true" (click)="selectedWeek= selectedWeek ? null : 1">
+              {{searchWeek > 0 ? 'Week ' + searchWeek: 'Select Week'}}
+              <span class="caret"></span>
+            </button>
+            <ul *ngIf="selectedWeek" class="dropdown-menu">
+              <li value="All" (click)="searchWeek=''; selectedWeek=null">All</li>
+              <li *ngFor="let week of weekArray" value="{{week.id}}" (click)="searchWeek=week.id; selectedWeek=null">{{week.text}}</li>
+            </ul>
+          </div>
+        </div>
         <input class="form-control search-input" placeholder="Search" type="text" name="search" [(ngModel)]="searchFilter"> 
       </div>
       <table class="table table-bordered">
@@ -57,7 +70,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products | orderBy: key : reverse | filter:searchFilter, let i=index">
+          <tr *ngFor="let product of products | orderBy: key : reverse | filter:searchFilter | customSearch: searchWeek, let i=index">
             <td>{{i+1}}</td>
             <td>{{product.name}}</td>
             <td>{{product.type}}</td>

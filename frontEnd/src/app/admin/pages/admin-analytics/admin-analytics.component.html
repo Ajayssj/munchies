@@ -11,7 +11,7 @@
       <div *ngFor="let area of areaInfo" class="area">
         <div class="area_text">{{area.areaName}}</div>
         <div class="pbar_wrapper">
-           <div title="{{area.percent}}%" [ngStyle]="{'width.%': area.percent}" class="pbar"><span> {{area.percent}} %</span></div>
+           <div title="{{area.percent}}%" [ngStyle]="{'width.%': area.percent}" class="pbar"><span> {{area.count + ' (' + area.percent}} %)</span></div>
         </div>
       </div>
     </card>
@@ -23,7 +23,7 @@
     </card>
   </div>
   <div class="question_block">
-    <h3>Fruits liked the most?</h3>
+    <h3>Fruits disliked the most?</h3>
     <card cardTitle='Pie Chart'>
       <div *ngIf="fruitOptions" echarts [options]="fruitOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>

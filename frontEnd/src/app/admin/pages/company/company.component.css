@@ -101,3 +101,15 @@ modal-footer button.btn {
   margin-top: 20px;
   margin-right: 15px;
 }
+.search_by_week {
+  width: 100px;
+  float: right;
+  margin-top: 20px;
+}
+.search_by_week button {
+  padding: 7px 15px;
+}
+.add_product_btn {
+  margin: 22px 20px 0px 20px;
+  padding: 6px 12px;
+}

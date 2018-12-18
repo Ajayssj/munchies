@@ -73,6 +73,11 @@
 .myorder_custom a{
     color: #db6945;
 }
+.my_orders_text {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
 .skipweek_text {
     margin-top: 50px; 
 }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../user/auth.service';
 import swal from 'sweetalert2';
+import {CustomSearchPipe} from '../pipe/custom-search.pipe';
 import { element } from 'protractor';
 interface productRes {
   success: boolean,
@@ -58,6 +59,7 @@ export class CompanyComponent implements OnInit {
   allergyDetails: Array<string>;
   hideWeekDrp = 0;
   pNameArr = [];
+  selectedWeek = '';
   public weekArray: Array<Object> = [{id: 1, text: 'Week 1'}, {id: 2, text: 'Week 2'}, {id: 3, text: 'Week 3'},
    {id: 4, text: 'Week 4'}, {id: 5, text: 'Week 5'}, {id: 6, text: 'Week 6'}, {id: 7, text: 'Week 7'}, 
    {id: 8, text: 'Week 8'}, {id: 9, text: 'Week 9'}, {id: 10, text: 'Week 10'}, {id: 11, text: 'Week 11'},
@@ -68,7 +70,8 @@ export class CompanyComponent implements OnInit {
       if(!event.target.classList.contains("week-dropdown-btn")) {
       this.products.forEach(productItem =>{
         productItem.selectedWeek = null;
-      })
+      });
+      this.selectedWeek = null;
     }
       this.cdRef.detectChanges();
 
