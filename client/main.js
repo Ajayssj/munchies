@@ -3885,7 +3885,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth.service */ "./src/app/user/auth.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth.service */ "./src/app/user/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3898,11 +3899,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(router, auth) {
+    function HeaderComponent(router, auth, http) {
         var _this = this;
         this.router = router;
         this.auth = auth;
+        this.http = http;
         this.isMobNavbarOpen = false;
         this.isLoggedIn = false;
         this.displayHeader = false;
@@ -3926,11 +3929,20 @@ var HeaderComponent = /** @class */ (function () {
         sideBarMenu.classList.toggle("openSideMenu");
     };
     HeaderComponent.prototype.logout = function () {
-        this.auth.setLoggedIn(false);
-        this.displayHeader = false;
-        this.isLoggedIn = false;
-        this.router.navigate(['/signIn']);
-        localStorage.clear();
+        var _this = this;
+        this.http.get(this.auth.getDomainName() + '/api/user/logout').subscribe(function (res) {
+            if (res.success) {
+                _this.auth.setLoggedIn(false);
+                _this.displayHeader = false;
+                _this.isLoggedIn = false;
+                _this.router.navigate(['/signIn']);
+                localStorage.clear();
+            }
+            else {
+                alert(res.error);
+            }
+        }, function (err) {
+        });
     };
     // toggleIsLoggedIn() {
     //   this.isLoggedIn = !this.isLoggedIn;
@@ -3944,7 +3956,7 @@ var HeaderComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./header.component.html */ "./src/app/user/header/header.component.html"),
             styles: [__webpack_require__(/*! ./header.component.css */ "./src/app/user/header/header.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], HeaderComponent);
     return HeaderComponent;
 }());
