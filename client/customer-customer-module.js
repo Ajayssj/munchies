@@ -259,7 +259,7 @@ var CustomerdetailsComponent = /** @class */ (function () {
                                 /* this.alertText = 'Week Skiped Successfully!';
                                 this.openModal(alertModal); */
                                 alert(res.message);
-                                window.location.reload();
+                                // window.location.reload();
                             }
                             else if (res.error) {
                                 alert(res.error);

@@ -15,7 +15,7 @@
         <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
             <div *ngIf="f.lastName.errors.required">Last Name is required</div>
         </div>
-        <input class="form_control" type="number" [(ngModel)]="phone" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
+        <input class="form_control" type="number" min="0" [(ngModel)]="phone" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
         <div *ngIf="submitted && f.phone.errors" class="invalid-feedback form_control">
             <div *ngIf="submitted && f.phone.errors.required">Phone Number is required</div>
             <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>

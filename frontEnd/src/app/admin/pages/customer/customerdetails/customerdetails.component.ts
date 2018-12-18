@@ -63,7 +63,7 @@ export class CustomerdetailsComponent implements OnInit {
                 /* this.alertText = 'Week Skiped Successfully!';
                 this.openModal(alertModal); */
                 alert(res.message);
-                window.location.reload();
+                // window.location.reload();
               } else if (res.error) {
                 alert(res.error);
                /*  this.alertText = res.error;
