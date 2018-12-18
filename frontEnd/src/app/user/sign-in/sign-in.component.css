@@ -51,6 +51,7 @@
     color: #DE6B48;
 }
 .forgot_password {
+    cursor: pointer;
     display: inline-block;
     color: #DE6B48;
 }

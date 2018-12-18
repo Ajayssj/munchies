@@ -267,6 +267,10 @@
     border: 2px solid rgba(50, 50, 50, 1);
 }
 
+p {
+    text-align: justify;
+}
+
 @media screen and (min-width: 300px) {
     header, .content {
         left: 0;

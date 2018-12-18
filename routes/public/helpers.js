@@ -37,7 +37,7 @@ module.exports = {
                                     res.json(result);
                             });
                     }else{
-                        res.json({success : false, error : 'Email ID Doest Exists!'});
+                        res.json({success : false, error : 'Email ID Does Not Exists!'});
                     }
                 }).catch(err => {
                     res.json({success : false, error : err});

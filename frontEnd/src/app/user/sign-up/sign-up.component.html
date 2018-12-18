@@ -3,7 +3,7 @@
     <h2>Create an account</h2>
     <form [formGroup] = "createAccountForm" (ngSubmit) = "onSubmit()">
         <div *ngIf="submitted && success" class="success color">
-            Your have registered successfully!
+            You have registered successfully!
         </div>
         <div *ngIf="submitted && error" class="error color">
             {{error}}
