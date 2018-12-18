@@ -158,7 +158,7 @@ module.exports = {
             const userId = user._id;
             const currentPassword = req.body.currentPassword;
             const newPassword = req.body.newPassword;
-            if(currentPassword && newPassword){
+            if(currentPassword.trim() && newPassword.trim()){
                 User.findOne({_id : db.toObjectID(userId)})
                 .then(user => {
                     if(user){ 
