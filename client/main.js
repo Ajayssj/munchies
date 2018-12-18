@@ -3931,16 +3931,14 @@ var HeaderComponent = /** @class */ (function () {
     HeaderComponent.prototype.logout = function () {
         var _this = this;
         this.http.get(this.auth.getDomainName() + '/api/user/logout').subscribe(function (res) {
-            if (res.success) {
-                _this.auth.setLoggedIn(false);
-                _this.displayHeader = false;
-                _this.isLoggedIn = false;
-                _this.router.navigate(['/signIn']);
-                localStorage.clear();
-            }
-            else {
+            if (!res.success) {
                 alert(res.error);
             }
+            _this.auth.setLoggedIn(false);
+            _this.displayHeader = false;
+            _this.isLoggedIn = false;
+            _this.router.navigate(['/signIn']);
+            localStorage.clear();
         }, function (err) {
         });
     };

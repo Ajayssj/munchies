@@ -37,16 +37,19 @@ export class HeaderComponent implements OnInit {
     sideBarMenu.classList.toggle("openSideMenu");
   }
   logout() {
+    
+    
+
     this.http.get(this.auth.getDomainName() + '/api/user/logout').subscribe((res:any) => {
-      if(res.success){
-        this.auth.setLoggedIn(false);
-        this.displayHeader = false;
-        this.isLoggedIn = false;
-        this.router.navigate(['/signIn']);
-        localStorage.clear();
-      }else{
+      if(!res.success){
         alert(res.error);
       }
+      this.auth.setLoggedIn(false);
+      this.displayHeader = false;
+      this.isLoggedIn = false;
+      this.router.navigate(['/signIn']);
+      localStorage.clear();
+      
     },err =>{
 
     })
