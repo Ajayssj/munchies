@@ -23,7 +23,7 @@ export class CustomerdetailsComponent implements OnInit {
         return {success : false, value : 'No Next Week'}
       }
     }else{
-      return {success : false, value : 'Not Started'}
+      return {success : true, value : 1}
     }
   }
 
@@ -36,6 +36,7 @@ export class CustomerdetailsComponent implements OnInit {
     else
       return 0;
   }
+  
   getNextWeekId(weekNo,weekArray){
     return weekArray.find(item => item.week == weekNo);
   }

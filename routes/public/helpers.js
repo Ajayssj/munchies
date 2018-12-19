@@ -56,17 +56,23 @@ module.exports = {
                 isEmailExists(email)
                         .then(exists => {
                             if(exists){ 
-                                const password = utils.createHash(req.body.password.trim());
-                                User.updateOne({email : email},{$set : { password : password}})
-                                    .then(passwordSet => {
-                                      /*   if(passwordSet.result.nModified == 1)
+                                const pass = req.body.password.trim();
+                                if(pass){
+                                    const password = utils.createHash(pass);
+                                    User.updateOne({email : email},{$set : { password : password}})
+                                        .then(passwordSet => {
+                                          /*   if(passwordSet.result.nModified == 1)
+                                                res.json({success : true, message : 'Password Reset Successfully! Try to login again!'});
+                                            else
+                                                res.json({success : false, error : 'Something went wrong!'}); */
                                             res.json({success : true, message : 'Password Reset Successfully! Try to login again!'});
-                                        else
-                                            res.json({success : false, error : 'Something went wrong!'}); */
-                                        res.json({success : true, message : 'Password Reset Successfully! Try to login again!'});
-
-                                    }).catch(err => {
-                                    })
+    
+                                        }).catch(err => {
+                                        })
+                                }else{
+                                    res.json({success : false, error : 'Password should not be empty'});
+                                }
+                               
                             }else{
                                 res.json({success : false, error : 'Email ID Doest Exists!'});
                             }
@@ -179,6 +185,8 @@ module.exports = {
                 lastName : req.body.lastName,
                 email : req.body.email,
                 password : utils.createHash(req.body.password),
+                address : req.body.address,
+                phone : req.body.phone,
                 role : 1
             }
             isEmailExists(userObj.email)

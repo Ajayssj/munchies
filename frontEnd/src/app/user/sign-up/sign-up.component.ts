@@ -23,8 +23,10 @@ export class SignUpComponent implements OnInit {
   data = {};
   firstName = '';
   lastName = '';
+  phone = '';
   email = '';
   password = '';
+  address = '';
   confirmPassword = '';
   passwordNotMatch = false;
   constructor(
@@ -38,6 +40,7 @@ export class SignUpComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      phone: ['', Validators.required],
       confirmPassword: ['', Validators.required]
   });
   }
@@ -55,6 +58,8 @@ export class SignUpComponent implements OnInit {
       this.email = this.createAccountForm.get('email').value;
       this.password = this.createAccountForm.get('password').value;
       this.confirmPassword = this.createAccountForm.get('confirmPassword').value;
+      this.address = this.createAccountForm.get('address').value;
+      this.phone = this.createAccountForm.get('phone').value;
       if(this.password != this.confirmPassword) {
         this.passwordNotMatch = true;
         console.log(this.passwordNotMatch);
@@ -66,7 +71,9 @@ export class SignUpComponent implements OnInit {
           'firstName': this.firstName, 
           'lastName': this.lastName,
           'email': this.email,
-          'password': this.password
+          'password': this.password,
+          'address': this.address,
+          'phone': this.phone
         }
         console.log(this.data);
         this.http.post(this.authService.getDomainName() + '/public/api/user/register', this.data).subscribe( (data:SignUpRes) => {

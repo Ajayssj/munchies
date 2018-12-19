@@ -221,7 +221,7 @@ var CustomerdetailsComponent = /** @class */ (function () {
             }
         }
         else {
-            return { success: false, value: 'Not Started' };
+            return { success: true, value: 1 };
         }
     };
     CustomerdetailsComponent.prototype.getActiveWeek = function (startDate) {
@@ -259,7 +259,7 @@ var CustomerdetailsComponent = /** @class */ (function () {
                                 /* this.alertText = 'Week Skiped Successfully!';
                                 this.openModal(alertModal); */
                                 alert(res.message);
-                                window.location.reload();
+                                // window.location.reload();
                             }
                             else if (res.error) {
                                 alert(res.error);

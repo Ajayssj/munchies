@@ -45,11 +45,11 @@ const getNextMondayDate = function(date){
 const generateLastWeekDate = function(startDate,numOfWeeks){
     return startDate.setDate(startDate.getDate() + (numOfWeeks * 7));
 }
-const getActiveWeek = (startDate,endDate) => {
+/* const getActiveWeek = (startDate,endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
    return Math.ceil(Math.abs(Math.floor(( start - end ) / 86400000)) / 7);
-}
+} */
 const extendOneWeek = (date) => {
     return date.setDate(date.getDate() + 7);
 }
@@ -58,24 +58,89 @@ const activateDeactivatePlan = (activePlanId,status = true) => {
     ActivePlan.updateOne({_id : db.toObjectID(activePlanId)},{$set : { isActive : status}}).then(success).catch(error)
    })
 }
-const getCoreDate = function(date){
-    date = new Date(date);
+/* const getCoreDate = function(date){
+date = new Date(date);
    return new Date(date.toLocaleDateString()).getTime()
+} */
+const getCoreDate = (date) => {
+    // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
+    return new Date(date.toLocaleDateString());
+  }
+const getLastWeekDate = function(startDate,numOfWeeks){
+    return startDate.setDate(startDate.getDate() + (numOfWeeks * 7));
 }
-const shouldWeekSkip = function(activePlanId,week,cb){
-     ActivePlan.findOne({_id : db.toObjectID(activePlanId)})   
-        .then(plan => {
+const isThisWeekSkip = (skipWeeks,wNo) => {
+    return skipWeeks.find(item => item.wNo == wNo);
+  }
+const notLastWeek = (weekNo,maxWeek) =>{
+    return (maxWeek >= weekNo )
+  }
+const getNextWeekId = (weekNo,weekArray) => {
+    return weekArray.find(item => item.week == weekNo);
+  }
+const getActiveWeek = (startDate,lastWeek = 1500) => {
+    let start = new Date(startDate);
+    let today = new Date(moment(moment.tz('Asia/Calcutta').format()));
+    if(getCoreDate(today).getTime() >= getCoreDate(start).getTime() && getCoreDate(today).getTime() <= getCoreDate(new Date(getLastWeekDate(new Date(start),lastWeek))).getTime())
+      return Math.ceil(Math.abs(Math.floor(( start - today ) / 86400000)) / 7);
+    else if(getCoreDate(today).getTime() > getCoreDate(new Date(getLastWeekDate(new Date(start),lastWeek))).getTime() )
+      return 10000; 
+    else
+      return 0;
+  }
+const verifySkipWeek = function(plan){
+    let actweek;
+    let currentDate = getCoreDate(new Date(moment(moment.tz('Asia/Calcutta').format())));
+    let startDate =  getCoreDate(new Date(moment(moment(plan.startDate).tz('Asia/Calcutta').format())));
+    // currentDate = moment(moment.tz('Asia/Calcutta').format()).add('days', 2).startOf('day').format();
+
+    if(currentDate.getTime() >= startDate.getTime()){
+      actweek = getActiveWeek(new Date((moment(moment(plan.startDate).tz('Asia/Calcutta').format()))),plan.weeks);
+      let nextWeek = actweek + 1;
+      if(notLastWeek(nextWeek,plan.weeks)){
+        let weekObj = getNextWeekId(nextWeek - plan.skipedWeeks.length,plan.weekIds);
+        if(weekObj){
+          if(!isThisWeekSkip(plan.skipedWeeks,nextWeek)){
+              weekObj.week = nextWeek;
+            return {success : true, data : weekObj};  
+          }else{
+            return {success : false, error : 'Skipped'};
+          }
+        }else{
+          return {success : false, error : 'Not Found'};
+        }
+      }else{
+        return {success : false, error : 'No Next Week'};
+      }
+    }else if(plan.skipedWeeks.length){
+        return {success : false, error : 'Skipped'};
+    }else{
+      return {success : false, error : 'Skip 1st Week'};
+    }
+        
+}
+const shouldWeekSkip = function(activePlanId,userId,cb){
+     ActivePlan.findOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)})   
+        .then( async (plan) => {
             if(plan){
-                currentDate = moment(moment.tz('Asia/Calcutta').format()).add('days', 2).startOf('day').format();
-                weekDate = moment(moment(plan.startDate).tz('Asia/Calcutta').format()).add('days',7 * (week - 1)).startOf('day').format();
-                if( getCoreDate(weekDate) > getCoreDate(currentDate))
-                    cb(true);
-                else
-                    cb(false);
+                plan.weekIds = await PlansExtended.find({planId : db.toObjectID(plan.planId)}).toArray();
+                let result = verifySkipWeek(plan);    
+                if(result.success){
+                    let week = result.data.week;
+                    currentDate = moment(moment.tz('Asia/Calcutta').format()).add('days', 2).startOf('day').format();
+                    weekDate = moment(moment(plan.startDate).tz('Asia/Calcutta').format()).add('days',7 * (week - 1)).startOf('day').format();
+                    if(getCoreDate(new Date(weekDate)).getTime() > getCoreDate(new Date(currentDate)).getTime())
+                        cb(true,result.data);
+                    else
+                        cb(false,'Less than 2 days , can not be skiped!');
+                }else{
+                    cb(false,result.error);
+                }
+                
             }
             
         })
-        .catch();
+        .catch(err => console.log(err));
 }
 Date.prototype.addDays = function(days) {
     this.setDate(this.getDate() + parseInt(days));
@@ -700,6 +765,48 @@ module.exports = {
             }).catch(err => res.json({success : false, error : err}));
    },
    skipActivePlanWeek : (req,res) => {
+    const activePlanId = req.params.activePlanId;
+    const userId = req.session.user._id;
+    if(userId && activePlanId){
+        shouldWeekSkip(activePlanId,userId,function(result,value){
+            if(result){
+                let skippedWeek = {wId : db.toObjectID(value._id), wNo : value.week};
+                ActivePlan.updateOne({_id : db.toObjectID(activePlanId), userId : db.toObjectID(userId)},
+                {
+                    $push : {skipedWeeks : skippedWeek },
+                    $inc: { weeks : 1}
+                }).then(plan => {
+                    if(plan.result.nModified == 1){
+                        res.json({success : true, message : value.week + ' Week Skipped Successfully!'});   
+                        getAdminEmails((result) => {
+                            if(result.success){
+                                result.users.forEach(admin => {
+                                    utils.sendSkippedWeekMail({week : value.week, user : req.session.user, admin : admin.email},(result) => {
+                                        if(result.result)
+                                            console.log( admin.email + ' Skipped Week Mail Sent Successfully!');
+                                        else
+                                            console.log( admin.email + ' Skipped Week Mail not Sent!');
+                                            
+                                    });
+                                })
+                               
+                            }
+                        })
+
+                    }else
+                        res.json({success : false, error : 'Plan not found to be edited!'})
+                }).catch(err => res.json({success : false, error : err}));
+            }else{
+                res.json({success : false, error : value})
+            }
+
+        })
+       
+    }else{
+        res.json({success : false, error : 'Invalid Request Data!'})
+    }
+   },
+   skipActivePlanWeek_back : (req,res) => {
     const activePlanId = req.params.activePlanId;
     const userId = req.session.user._id;
     let week = req.params.week;

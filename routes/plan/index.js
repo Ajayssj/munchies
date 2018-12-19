@@ -2,7 +2,9 @@ var routes = require('express').Router();
 const helpers = require('./helpers');
 
 routes.get('/plan/active/:userId',helpers.getActivePlans);
-routes.put('/plan/active/:activePlanId/skip-week/:weekId/:week',helpers.skipActivePlanWeek);
+// routes.put('/plan/active/:activePlanId/skip-week/:weekId/:week',helpers.skipActivePlanWeek);
+routes.put('/plan/active/:activePlanId/skip-week',helpers.skipActivePlanWeek);
+
 routes.put('/plan/active/:activePlanId/undo-skip-week/:weekId',helpers.undoSkippedActivePlanWeek);
 routes.get('/plan/customize/:activePlanId',helpers.getCustmoizedPlan);
 routes.get('/plan/customize/:activePlanId/week/:weekId',helpers.getCustmoizedPlanByWeek);

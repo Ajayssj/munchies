@@ -6,6 +6,8 @@ const ActivePlan = db.getCollection('activePlans');
 const CustomPlan = db.getCollection('customPlans');
 const PlansExtended = db.getCollection('plansExtended');
 const Extra = db.getCollection('extraInfo');
+let moment = require('moment-timezone');
+
 const getNextMondayDate = function(date){
     return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
 }
@@ -13,7 +15,32 @@ const getNextMondayDate = function(date){
 const getWeekIdsAndProducts = async (planId) => {
      return await PlansExtended.find({planId : db.toObjectID(planId)}).toArray();
 }
-
+const getCoreDate = (date) => {
+    // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
+    return new Date(date.toLocaleDateString());
+  }
+const getLastWeekDate = function(startDate,numOfWeeks){
+    return startDate.setDate(startDate.getDate() + (numOfWeeks * 7));
+}
+const isThisWeekSkip = (skipWeeks,weekNo) => {
+    return skipWeeks.find(item => item.wNo == weekNo);
+  }
+const notLastWeek = (weekNo,maxWeek) =>{
+    return (maxWeek >= weekNo )
+  }
+const getNextWeekId = (weekNo,weekArray) => {
+    return weekArray.find(item => item.week == weekNo);
+  }
+const getActiveWeek = (startDate,lastWeek = 1500) => {
+    let start = new Date(startDate);
+    let today = new Date(moment(moment.tz('Asia/Calcutta').format()));
+    if(getCoreDate(today).getTime() >= getCoreDate(start).getTime() && getCoreDate(today).getTime() <= getCoreDate(new Date(getLastWeekDate(new Date(start),lastWeek))).getTime())
+      return Math.ceil(Math.abs(Math.floor(( start - today ) / 86400000)) / 7);
+    else if(getCoreDate(today).getTime() > getCoreDate(new Date(getLastWeekDate(new Date(start),lastWeek))).getTime() )
+      return 10000; 
+    else
+      return 0;
+  }
 
 const addActivePlan = async (obj) => {
     let plans = await getWeekIdsAndProducts(obj.planId);
@@ -49,6 +76,37 @@ const createWeekByPlans = function(weeks,planId,activePlanId){
     return PlansExtended.insertMany(objArr);
         
 }
+const getWeeKState = (order) => {
+    let actweek;
+    let currentDate = getCoreDate(new Date(moment(moment.tz('Asia/Calcutta').format())));
+    let startDate =  getCoreDate(new Date(moment(moment(order.plans.startDate).tz('Asia/Calcutta').format())));
+    // currentDate = moment(moment.tz('Asia/Calcutta').format()).add('days', 2).startOf('day').format();
+
+    if(currentDate.getTime() >= startDate.getTime()){
+      actweek = getActiveWeek(new Date((moment(moment(order.plans.startDate).tz('Asia/Calcutta').format()))),order.plans.weeks);
+      let nextWeek = actweek + 1;
+      if(notLastWeek(nextWeek,order.plans.weeks)){
+        let weekObj = getNextWeekId(nextWeek - order.plans.skipedWeeks.length,order.weekIds);
+        if(weekObj){
+          if(!isThisWeekSkip(order.plans.skipedWeeks,nextWeek)){
+            return {state : true ,label :'Skip Next Week', activeWeek : actweek};  
+          }else{
+            return {state : false ,label : 'Skipped',activeWeek : actweek};
+          }
+        }else if(nextWeek > order.plans.weeks){
+          return {state : false ,label :'No Next Week',activeWeek : actweek};
+        }else{
+          return {state : false ,label :'No Week Found',activeWeek : actweek};
+        }
+      }else{
+        return {state : false ,label :'No Next Week',activeWeek : actweek};
+      }
+    }else if(order.plans.skipedWeeks.length){
+        return {state : false ,label :'Skipped',activeWeek : actweek};
+    }else{
+      return {state : true ,label :'Skip 1st Week',activeWeek : actweek};
+    }
+  }
 const insertExtraInfo = function(orderId,data){
     let arrObj = [];
     data.forEach(obj => {
@@ -249,11 +307,15 @@ module.exports = {
             ]
         
         ).toArray()
-            .then(order => {
-                if(order){
-                    console.log("OrderData==>",order);
-
-                        res.json({success : true,orderData:order});
+            .then(orders => {
+                if(orders){
+                    orders.forEach((order,index) => {
+                        let result = getWeeKState(order);
+                        orders[index].state = result.state;
+                        orders[index].label = result.label;
+                        orders[index].activeWeek = (result.activeWeek)?((result.activeWeek == 10000)?'Expired':result.activeWeek):'Not started';
+                    })
+                     res.json({success : true,orderData: orders});
                 }else{
                     res.json({success : false, error : 'customer Id is not found!'});
                 }

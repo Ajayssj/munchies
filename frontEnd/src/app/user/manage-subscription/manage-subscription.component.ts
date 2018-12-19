@@ -38,8 +38,8 @@ export class ManageSubscriptionComponent implements OnInit {
     return weekArray.find(item => item.week == weekNo);
   }
 
-  skipThisWeek(weekObj,activePlanId){
-      return this.http.put(this.auth.getDomainName() + '/api/plan/active/'+ activePlanId +'/skip-week/'+ weekObj._id + '/' + weekObj.week ,{})
+  skipThisWeek(activePlanId){
+      return this.http.put(this.auth.getDomainName() + '/api/plan/active/'+ activePlanId +'/skip-week/' ,{})
   }
   getCoreDate(date = new Date(new Date())){
     // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
@@ -71,7 +71,7 @@ export class ManageSubscriptionComponent implements OnInit {
         return {state : true ,label :'No Next Week'};
       }
     }else{
-      return {state : true ,label :'Not Started Yet'};
+      return {state : false ,label :'Skip 1st Week'};
     }
   }
   mapOrdersData(){
@@ -86,11 +86,11 @@ export class ManageSubscriptionComponent implements OnInit {
     this.http.get(this.auth.getDomainName() + '/api/order/getMyOrders').subscribe((resData: any) => {
     // this.http.get(this.auth.getDomainName() + '/api/plan/active/5bfbdcc51efad521746223ae').subscribe((resData: any) => {
      // console.log('loll', resData.orderData);
-      resData.orderData.forEach(item =>{
+     /*  resData.orderData.forEach(item =>{
          let isDisabled = this.shouldButtonDisabled(item);
          item.state = isDisabled.state;
          item.label = isDisabled.label;
-      });
+      }); */
       this.orders =  resData.orderData;
 
     }, error => {
@@ -106,46 +106,25 @@ export class ManageSubscriptionComponent implements OnInit {
   skipNextWeek(order, alertModal,index) {
     let actweek : number;
     // order.plans.startDate = new Date('12-5-2018')
-    if(this.getCoreDate() >=  this.getCoreDate(new Date(order.plans.startDate))){
-      actweek = this.getActiveWeek(new Date(order.plans.startDate));
-      let nextWeek = actweek + 1;
-      if(this.notLastWeek(nextWeek,order.plans.weeks)){
-        console.log('Active Week : ' + actweek);
-        let weekObj = this.getNextWeekId(nextWeek,order.weekIds);
-        if(weekObj){
-          if(!this.isThisWeekSkip(order.plans.skipedWeeks,weekObj._id)){
-            console.log(' InDEX : ' + index);
-            this.skipThisWeek(weekObj,order.plans._id).subscribe((res: any) => {
-              if (res.success) {
-                /* this.alertText = 'Week Skiped Successfully!';
-                this.openModal(alertModal); */
-                alert(res.message);
-                // order.label = this.shouldButtonDisabled(order).label;
-                this.orders[index].state = false;
-                this.orders[index].label = 'Skipped';
-                this.orders[index].plans.skipedWeeks.push(res.data);
-              } else if (res.error) {
-                alert(res.error);
-               /*  this.alertText = res.error;
-                this.openModal(alertModal); */
-              }
-            },
-              err=> {
-              console.log("skipWeek err",err);
-            });
-          }else{
-            alert('This Week was Skiped Already!');
-          }
-        }else{
-          alert('No Week\'s Data Found');
-        }
-      }else{
-        alert('This is last Week!');
+   if(order.state){
+    this.skipThisWeek(order.plans._id).subscribe((res: any) => {
+      if (res.success) {
+        /* this.alertText = 'Week Skiped Successfully!';
+        this.openModal(alertModal); */
+        alert(res.message);
+        // order.label = this.shouldButtonDisabled(order).label;
+        this.orders[index].state = false;
+        this.orders[index].label = 'Skipped';
+      } else if (res.error) {
+        alert(res.error);
+       /*  this.alertText = res.error;
+        this.openModal(alertModal); */
       }
-      
-    }else{
-      alert('Your Plan Not Activated Yet!')
-    }
+    },
+      err=> {
+      console.log("skipWeek err",err);
+    });
+   }
   }
   isThisWeekSkip(skipWeeks,weekId){
     return skipWeeks.find(item => item.wId = weekId);

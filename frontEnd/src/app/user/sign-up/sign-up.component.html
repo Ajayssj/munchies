@@ -16,6 +16,10 @@
         <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
             <div *ngIf="f.lastName.errors.required">Last Name is required</div>
         </div>
+        <input type="text" name="phone" formControlName="phone" placeholder="Phone " />
+        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+            <div *ngIf="f.phone.errors.required">Phone is required</div>
+        </div>
         <input type="email" name="email" formControlName="email" placeholder="Email" />
         <div *ngIf="submitted && (f.email.errors || f.email.invalid)" class="invalid-feedback">
             <div *ngIf="f.email.errors.required">Username is required</div>
@@ -32,6 +36,12 @@
         <div *ngIf="submitted && passwordNotMatch" class="invalid-feedback">
             <div *ngIf="passwordNotMatch">Confirm Password not matched with password</div>
         </div>
+        <input type="text" name="address" formControlName="address" placeholder="Address" />
+        <div *ngIf="submitted && (f.address.errors || f.address.invalid)" class="invalid-feedback">
+            <!-- <div *ngIf="f.address.errors.required">Username is required</div> -->
+            <!-- <div *ngIf="f.address.errors.email">Email must be a valid email address</div> -->
+        </div>
+        
         <div class="create_account_btn">
             <button>Create Account</button>
         </div>
