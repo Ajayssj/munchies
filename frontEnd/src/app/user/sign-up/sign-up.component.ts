@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { from } from 'rxjs';
 interface SignUpRes {
   success: boolean;
   error: string;
@@ -36,16 +37,21 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
     this.createAccountForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      phone: ['', Validators.required],
+      password: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       confirmPassword: ['', Validators.required]
-  });
+   });
   }
   // convenience getter for easy access to form fields
   get f() { return this.createAccountForm.controls; }
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+}
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
