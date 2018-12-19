@@ -40,13 +40,14 @@
                                 <option value="Indiranagar">Indiranagar</option>
                                 <option value="Ulsoor">Ulsoor</option>
                                 <option value="Vasanth Nagar">Vasanth Nagar</option>
-                                <option value="Electronic city">Electronic city</option>
-                                <option value="HSR layout">HSR Layout</option>
+                                <!-- <option value="Electronic city">Electronic city</option> -->
                                 <option value="Koramangala">Koramangala</option>
+                                <!-- <option value="HSR layout">HSR Layout</option> -->
                                 <option value="Madiwala">Madiwala</option>
                                 <option value="BTM Layout">BTM Layout</option>
-                                <option value="Item 1">Bommanahalli</option>
-                                <option value="Item 2">Item 2</option>
+                                <option value="Whitefield">Whitefield</option>
+                                <option value="Marathahalli">Marathahalli</option>
+                                <option value="CV Raman Nagar">CV Raman Nagar</option>
                             </select>
                             <div *ngIf="submitted && f.area.errors" class="invalid-feedback form_control">
                                 <div *ngIf="submitted && f.area.errors.required">Area is required</div>
@@ -73,7 +74,7 @@
              <a routerLink="/signIn" class="btn">Sign In</a>
              <a routerLink="/sign-up" class="btn">Sign Up</a>
           </div>
-          <button *ngIf="isLoggedIn" (click)="showOrderConfirm();" class="btn" >MAKE PAYMENT</button> 
+          <button *ngIf="isLoggedIn" (click)="showOrderConfirm();" class="btn" >Ok</button> 
 
         </form>
         <app-alert-popup [showAlert]="showOrderConfirmAlert" [okRedirectBtn]="redirectToHome"></app-alert-popup>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
@@ -35,8 +35,8 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit() {
     this.changePasswordForm = this.formBuilder.group({
-      currentPassword: ['', Validators.required],
-      newPassword: ['', Validators.required],
+      currentPassword: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
+      newPassword: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
       confirmPassword: ['', Validators.required]
   });
   }
@@ -44,6 +44,12 @@ export class ChangePasswordComponent implements OnInit {
     this.changePasswordForm.reset();
   }
   get f() { return this.changePasswordForm.controls; }
+
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+  }
 
   onSubmit() {
     this.submitted = true;

@@ -21,8 +21,7 @@ header, .content, footer .content {
 }
 
 .site_header .wrapper {
-    display: flex;
-    flex-wrap: nowrap;
+    padding: 0px 50px;
     justify-content: center;
 }
 nav .wrapper .logo {
