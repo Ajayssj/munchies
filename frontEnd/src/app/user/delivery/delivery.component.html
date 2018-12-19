@@ -74,7 +74,7 @@
              <a routerLink="/signIn" class="btn">Sign In</a>
              <a routerLink="/sign-up" class="btn">Sign Up</a>
           </div>
-          <button *ngIf="isLoggedIn" (click)="showOrderConfirm();" class="btn" >Ok</button> 
+          <button *ngIf="isLoggedIn" (click)="showOrderConfirm();" class="btn ok_btn" >Ok</button> 
 
         </form>
         <app-alert-popup [showAlert]="showOrderConfirmAlert" [okRedirectBtn]="redirectToHome"></app-alert-popup>

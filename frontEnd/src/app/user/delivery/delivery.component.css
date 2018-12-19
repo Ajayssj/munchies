@@ -48,7 +48,6 @@
     margin-bottom: 20px;
 }
 .delivery_form p {
-    float: left;
     margin-top: 0;
     font-size: 14px;
     color: #E5663D;
@@ -82,6 +81,9 @@
     color: #fff;
     background-color: rgba(50, 50, 50, 1);
     border: 2px solid rgba(50, 50, 50, 1);
+}
+.btn.ok_btn {
+    padding: 10px 40px;
 }
 
 @media screen and (max-width: 768px){
