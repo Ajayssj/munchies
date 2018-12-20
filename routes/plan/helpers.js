@@ -115,7 +115,8 @@ const verifySkipWeek = function(plan){
     }else if(plan.skipedWeeks.length){
         return {success : false, error : 'Skipped'};
     }else{
-      return {success : false, error : 'Skip 1st Week'};
+        let weekObj = getNextWeekId(1,plan.weekIds);
+      return {success : true, data : weekObj};
     }
         
 }
