@@ -7,7 +7,24 @@ const CustomPlan = db.getCollection('customPlans');
 const PlansExtended = db.getCollection('plansExtended');
 const Extra = db.getCollection('extraInfo');
 const Plan = db.getCollection('plans');
+const isValidCoupan = require('../coupan/helpers').isValidCoupan;
 let moment = require('moment-timezone');
+
+const shippingCharges  = {
+    'Area of Delivery' : 50,
+    'Cantonment' : 50,
+    'Domlur' : 50,
+    'Indiranagar' : 50,
+    'Ulsoor' : 50,
+    'Vasanth Nagar' : 50,
+    'Koramangala' : 50,
+    'Madiwala' : 50,
+    'BTM Layout' : 50,
+    'Whitefield' : 50,
+    'Marathahalli' : 50,
+    'CV Raman Naga' : 50
+}
+
 
 const getNextMondayDate = function(date){
     return date.setDate(date.getDate() + (1 + 7 - date.getDay()) % 7);
@@ -116,9 +133,58 @@ const insertExtraInfo = function(orderId,data){
     return Extra.insertMany(arrObj);
     
 }
+const canBeApply = function(coupan,callback){
+        Order.aggregate(
+            [
+                {
+                    $match : {
+                        userId :coupan.userId,
+                        coupanId : db.toObjectID(coupan._id)
+                    }
+                },
+                {
+                    $group: {
+                       _id : '$coupanId',
+                        used: {
+                                $sum: 1
+                            }
+                        
+                    }
+                },
+                // {
+                //     $project : {
+                //         info : { $cond : {$eq: [ "$_id", db.toObjectID(coupan._id)]}}
+                //     }
+                // }
+                /* {
+                    $project : {
+                        info: {
+                            $filter: {
+                                input: "$_id",
+                                as: "id",
+                                cond: { $eq: [ "$$id", db.toObjectID(coupan._id)] }
+                                }
+                            }
+                        }
+                    
+                } */
+        
+            ]
+        ).toArray().then(result => {
+            if(result.length && coupan.frequency > result[0].used)
+                callback({success : true, data : result});
+            else if(!result.length)
+                callback({success : true, data : result});
+            else
+                callback({success : false, error : 'You can use this coupan more than ' + coupan.frequency})
 
+        }).catch(err => callback({success : false, error : err}));
+}
 const getPlanInfo = function(planId){
     return  Plan.findOne({ _id : db.toObjectID(planId)});
+}
+const getDiscountAmount = function(discount, total){
+    return (parseFloat(discount).toFixed(2) / 100) * parseFloat(total).toFixed(2);
 }
 module.exports = {
     getAllOrders : (req,res) => {
@@ -181,66 +247,84 @@ module.exports = {
         }).catch(err => res.json({success : false, error : err}))
         
     },
-    createOrder : async (req,res) => {
+    createOrder : (req,res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }else{
             const userId = db.toObjectID(req.session.user._id);
             const planId = req.body.planId;
-            if(planId && userId){
-                let extraInfo = req.body.extraInfo;
-                if(extraInfo){ 
-                    try{
-                        extraInfo = JSON.parse(extraInfo);
-                    }catch(err){
-                        console.log('JSON ERROR : ', err);
-                    }
-                }
-                let  planInfo;
-                try{
-                   planInfo = await getPlanInfo(planId);
-                   if(planInfo){
-                    addActivePlan({userId : userId,planId : planId,numOfWeeks : Number(planInfo.numOfWeeks) })
-                    .then(plan => {
-                        const orderObj = {
-                            customerData:{
-                                firstName :req.body.firstName,
-                                lastName : req.body.lastName,
-                                phoneNo:req.body.phoneNo,
-                            },
-                            userId : userId,
-                            planId:db.toObjectID(planId),
-                            activePlanId: plan.ops[0]._id,
-                            date: new Date(new Date().toUTCString()),
-                            total:Number(planInfo.pricePerBag),
-                            shippingCost:0,
-                            Area_of_delivery:req.body.Area_of_delivery,
-                            address:req.body.address,
-                            postalCode:req.body.postalCode
-                        }
-                        Order.insertOne(orderObj).then(order => {
-                            if(extraInfo && Array.isArray(extraInfo) && extraInfo.length){
-                                insertExtraInfo(order.ops[0]._id,extraInfo)
-                                .then(result => {
-                                    console.log('Extra Info Inserted Successfully!');
-                                });
+            const coupanId = req.body.coupanId;
+            if(planId && userId && coupanId){
+                isValidCoupan(coupanId,function(coupan) {
+                    if(coupan.success){
+                        coupan.data.userId = userId;
+                        canBeApply(coupan.data,async function(should){
+                            if(should.success){
+                                let extraInfo = req.body.extraInfo;
+                                if(extraInfo){ 
+                                    try{
+                                        extraInfo = JSON.parse(extraInfo);
+                                    }catch(err){
+                                        console.log('JSON ERROR : ', err);
+                                    }
+                                }
+                                let  planInfo;
+                                try{
+                                    planInfo = await getPlanInfo(planId);
+                                    if(planInfo){
+                                        addActivePlan({userId : userId,planId : planId,numOfWeeks : Number(planInfo.numOfWeeks) })
+                                        .then(plan => {
+                                            let area = (req.body.Area_of_delivery)?req.body.Area_of_delivery:'';
+                                            const shippingCharge = (shippingCharges[area.trim()])?shippingCharges[area.trim()]:50;                                          
+                                            let totalPrice = Number(planInfo.pricePerBag);
+                                            totalPrice  -= getDiscountAmount(coupan.data.discount,totalPrice).toFixed(2);
+                                            const orderObj = {
+                                                customerData:{
+                                                    firstName :req.body.firstName,
+                                                    lastName : req.body.lastName,
+                                                    phoneNo:req.body.phoneNo,
+                                                },
+                                                userId : userId,
+                                                planId:db.toObjectID(planId),
+                                                activePlanId: plan.ops[0]._id,
+                                                date: new Date(moment().tz('Asia/Calcutta').format()),
+                                                total: totalPrice,
+                                                shippingCost:shippingCharge,
+                                                Area_of_delivery:area,
+                                                address:req.body.address,
+                                                postalCode:req.body.postalCode,
+                                                coupanId : db.toObjectID(coupanId)
+                                            }
+                                            Order.insertOne(orderObj).then(order => {
+                                                if(extraInfo && Array.isArray(extraInfo) && extraInfo.length){
+                                                    insertExtraInfo(order.ops[0]._id,extraInfo)
+                                                    .then(result => {
+                                                        console.log('Extra Info Inserted Successfully!');
+                                                    });
+                                                }
+                                                res.json({success : true, order : order});
+                                            }).catch(err => {
+                                                res.json({success : false, error : err});
+                                            })
+                                        })
+                                        .catch(err => {
+                                            res.json({success : false, error : err});
+                                        })
+                                    }else{
+                                        res.json({success : false, error : 'Plan Not Found!'});
+                                    }
+                                }catch(err){
+                                    res.json({success : false, error : err});
+                                }
+                            }else{
+                                res.json(should);
                             }
-                            res.json({success : true, order : order});
-                        }).catch(err => {
-                            res.json({success : false, error : err});
                         })
-                    })
-                    .catch(err => {
-                        res.json({success : false, error : err});
-                    })
-                   }else{
-                    res.json({success : false, error : 'Plan Not Found!'});
-                   }
-                }catch(err){
-                    res.json({success : false, error : err});
-                }
-               
+                    }else{
+                        res.json(result);
+                    }
+                })
             }else{
                 res.json({success : false, error : 'Invalid request Data'});
             }

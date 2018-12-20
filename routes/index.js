@@ -12,6 +12,7 @@ module.exports = {
         const companyApi = require('./company');
         const analysisApi = require('./analysis');
         const publicApi = require('./public');
+        const coupanApi = require('./coupan');
 
         app.use('/public/api',publicApi);
         app.use('/api', userApi);
@@ -21,6 +22,7 @@ module.exports = {
 		app.use('/api',typeApi);
         app.use('/api',companyApi);
         app.use('/api',analysisApi);
+        app.use('/api',coupanApi);
         app.use(express.static('client'));
         app.get('/*', (req, res) => res.sendFile(__baseUrl + '/client/'));
 
