@@ -13,6 +13,7 @@ export class OrderSummaryComponent implements OnInit {
   selectedPlan = '';
   question1 = '';
   question2 = '';
+  customerData: any;
   constructor(
     private http: HttpClient, 
     private router: Router,
@@ -20,9 +21,15 @@ export class OrderSummaryComponent implements OnInit {
     private auth: AuthService) { }
 
   ngOnInit() {
-    this.selectedPlanId = this.route.snapshot.queryParamMap.get('selectedPlan');
-    this.question1 = this.route.snapshot.queryParamMap.get('question1');
-    this.question2 = this.route.snapshot.queryParamMap.get('question2');
+    this.customerData = this.auth.getCustomerData();
+    this.selectedPlanId = this.customerData.planId;
+    var extraInfo = JSON.parse(this.customerData.extraInfo);
+    this.question1 = extraInfo[0].value;
+    this.question2 = extraInfo[1].value;
+    console.log(this.customerData.planId)
+    console.log(this.question1)
+    console.log(this.question2)
+    console.log(this.customerData)
     // this.http.get(this.auth.getDomainName() + '/api/plan/core').subscribe((res:any)=> {
     // },
     // err=> {

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/switchMap';
   providedIn: 'root'
 })
 export class AuthService {
-
+  customerData = {};
   constructor(public afAuth: AngularFireAuth, public http: HttpClient) {
   }
 
@@ -28,6 +28,14 @@ export class AuthService {
   }
   getUserRole(){
     return localStorage.getItem('userRole');
+  }
+  getCustomerData() {
+    console.log(this.customerData)
+    return this.customerData;
+  }
+  setCustomerData(data) {
+    this.customerData = data;
+    console.log(this.customerData)
   }
 
   setLoggedIn(value) {

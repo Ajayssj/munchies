@@ -3069,6 +3069,7 @@ var AuthService = /** @class */ (function () {
     function AuthService(afAuth, http) {
         this.afAuth = afAuth;
         this.http = http;
+        this.customerData = {};
         this.verifyFirebaseToken = function (token, callback) {
             this.http.post(this.getDomainName() + '/api/user/verifyFirebaseToken', { token: token }).subscribe(function (resData) {
                 console.log("data", resData);
@@ -3093,6 +3094,14 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.getUserRole = function () {
         return localStorage.getItem('userRole');
+    };
+    AuthService.prototype.getCustomerData = function () {
+        console.log(this.customerData);
+        return this.customerData;
+    };
+    AuthService.prototype.setCustomerData = function (data) {
+        this.customerData = data;
+        console.log(this.customerData);
     };
     AuthService.prototype.setLoggedIn = function (value) {
         localStorage.setItem("isLoggedIn", value);
@@ -3681,7 +3690,6 @@ var DeliveryComponent = /** @class */ (function () {
         //this.http('', )
     };
     DeliveryComponent.prototype.showOrderConfirm = function () {
-        var _this = this;
         this.submitted = true;
         // stop here if form is invalid
         if (this.deliveryForm.invalid) {
@@ -3713,14 +3721,17 @@ var DeliveryComponent = /** @class */ (function () {
                 })
             };
             console.log("route params", this.data);
-            this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data).subscribe(function (res) {
-                console.log("order created", res);
-                _this.showOrderConfirmAlert = true;
-            }, function (err) {
-                if (err.status == 401)
-                    alert(err.error.error);
-                console.log(err);
-            });
+            // this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.data).subscribe((res : any) => {
+            //   console.log("order created", res);
+            //   this.showOrderConfirmAlert = true;
+            // },
+            //   err => {
+            //     if(err.status == 401)
+            //       alert(err.error.error);
+            //     console.log(err);
+            //   });
+            this.auth.setCustomerData(this.data);
+            this.router.navigate(['/order-summary']);
         }
     };
     DeliveryComponent = __decorate([
@@ -4548,9 +4559,15 @@ var OrderSummaryComponent = /** @class */ (function () {
         this.question2 = '';
     }
     OrderSummaryComponent.prototype.ngOnInit = function () {
-        this.selectedPlanId = this.route.snapshot.queryParamMap.get('selectedPlan');
-        this.question1 = this.route.snapshot.queryParamMap.get('question1');
-        this.question2 = this.route.snapshot.queryParamMap.get('question2');
+        this.customerData = this.auth.getCustomerData();
+        this.selectedPlanId = this.customerData.planId;
+        var extraInfo = JSON.parse(this.customerData.extraInfo);
+        this.question1 = extraInfo[0].value;
+        this.question2 = extraInfo[1].value;
+        console.log(this.customerData.planId);
+        console.log(this.question1);
+        console.log(this.question2);
+        console.log(this.customerData);
         // this.http.get(this.auth.getDomainName() + '/api/plan/core').subscribe((res:any)=> {
         // },
         // err=> {
