@@ -314,6 +314,8 @@ module.exports = {
                         orders[index].state = result.state;
                         orders[index].label = result.label;
                         orders[index].activeWeek = (result.activeWeek)?((result.activeWeek == 10000)?'Expired':result.activeWeek):'Not started';
+                        delete orders[index].plans.skipedWeeks;
+                        delete orders[index].weekIds;
                     })
                      res.json({success : true,orderData: orders});
                 }else{

@@ -72,7 +72,6 @@ module.exports = {
                                 }else{
                                     res.json({success : false, error : 'Password should not be empty'});
                                 }
-                               
                             }else{
                                 res.json({success : false, error : 'Email ID Doest Exists!'});
                             }
