@@ -13,18 +13,21 @@ export class OrderSummaryComponent implements OnInit {
   selectedPlan = '';
   question1 = '';
   question2 = '';
-  constructor(private http: HttpClient, private router: Router,
-     private route: ActivatedRoute, private auth: AuthService) { }
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private route: ActivatedRoute, 
+    private auth: AuthService) { }
 
   ngOnInit() {
     this.selectedPlanId = this.route.snapshot.queryParamMap.get('selectedPlan');
     this.question1 = this.route.snapshot.queryParamMap.get('question1');
     this.question2 = this.route.snapshot.queryParamMap.get('question2');
-    this.http.get(this.auth.getDomainName() + '/api/plan/core').subscribe((res:any)=> {
-    },
-    err=> {
+    // this.http.get(this.auth.getDomainName() + '/api/plan/core').subscribe((res:any)=> {
+    // },
+    // err=> {
 
-    })
+    // })
   }
 
 }
