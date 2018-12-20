@@ -102,7 +102,7 @@
     font-weight: normal;
 }
 .boxes .box p {
-    font-size: 18px;
+    /* font-size: 18px; */
     font-weight: normal;
     color: gray; /* rgb(63, 61, 61) */
 }
@@ -143,7 +143,7 @@
     letter-spacing: 1px;
     line-height: 22px;
     color: #292929;
-    font-size: 18px;
+    /* font-size: 18px; */
 }
 .whats_inside img {
     height: 130px;
@@ -201,7 +201,7 @@
     padding: 30px;
     box-sizing: border-box;
     color: #fff;
-    font-size: 18px;
+    /* font-size: 18px; */
     position: relative;
 }
 .munchers_have_spoken_box:nth-child(2) {
@@ -410,7 +410,7 @@ p {
         margin: 0 5%;
     }
     .content_box {
-        padding: 30px 20px 80px 30px;
+        padding: 40px 0px 20px 30px;
     }
     .content_box img {
         width: 100px;
@@ -477,7 +477,7 @@ p {
         font-size: 16px;
     }
     .content_box_wrapper .content_box:nth-child(2) {
-        padding: 0px 0px 80px 30px;
+        padding: 0px 0px 20px 30px;
     }
 }
 @media screen and (min-width: 1024px) {

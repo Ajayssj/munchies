@@ -7,15 +7,17 @@
                   <span>Plan</span>
                   <span>Change</span>
               </div>
-              <div class="week_plan">One Week Plan</div>
+              <div class="week_plan">One week plan</div>
           </div>
           <div class="plan">
               <div class="heading">
                   <span>Dietary Selections</span>
                   <span>Change</span>
               </div>
-              <div class="selected_product">No Chocolate</div>
-              <div class="selected_product">No Eggs</div>
+              <div *ngIf="!question1" class="selected_product">No Preference</div>
+              <div *ngIf="question1" class="selected_product">No {{question1}}</div>
+              <div *ngIf="!question2" class="selected_product">No Preference</div>
+              <div *ngIf="question2" class="selected_product">No {{question2}}</div>
           </div>
           <div class="sub_total_shipment">
                 <div class="block first">
@@ -33,7 +35,7 @@
               </div>
           </div>
           <div class="submit_btn">
-              <button class="btn">Submit</button>
+              <a routerLink="/thank-you" class="btn">Submit</a>
           </div>
       </div>
       <!-- <div class="payment">

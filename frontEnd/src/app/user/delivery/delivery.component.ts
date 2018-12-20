@@ -23,6 +23,9 @@ export class DeliveryComponent implements OnInit {
   isLoggedIn = this.auth.isLoggedIn();
   redirectToHome = "home";
   showOrderConfirmAlert = false;
+  selectedPlanId = '';
+  question1 = '';
+  question2 = '';
   //showAlert = false;
 
   constructor(
@@ -47,6 +50,9 @@ export class DeliveryComponent implements OnInit {
       ]],
       postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{6}(?:-[0-9]{4})?$')]],
     });
+    this.selectedPlanId = this.route.snapshot.queryParamMap.get('selectedPlan');
+    this.question1 = this.route.snapshot.queryParamMap.get('question1');
+    this.question2 = this.route.snapshot.queryParamMap.get('question2');
   }
   // convenience getter for easy access to form fields
   get f() { return this.deliveryForm.controls; }
