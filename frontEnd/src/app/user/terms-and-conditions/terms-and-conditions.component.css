@@ -1,0 +1,8 @@
+.tc_wrapper {
+    width: 70%;
+    margin: 0 auto;
+    letter-spacing: 1px;
+}
+.tc_wrapper > h2 {
+    text-align: center;
+}

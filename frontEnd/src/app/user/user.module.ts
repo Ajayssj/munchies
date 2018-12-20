@@ -35,6 +35,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AlertPopupComponent } from './alert-popup/alert-popup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ProfileComponent } from './profile/profile.component';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     AlertPopupComponent,
-    ProfileComponent
+    ProfileComponent,
+    TermsAndConditionsComponent
   ],
   imports: [
     BrowserModule,

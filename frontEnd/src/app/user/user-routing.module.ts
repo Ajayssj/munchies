@@ -22,6 +22,7 @@ import { UserComponent } from './user.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: "sign-up", component: SignUpComponent },
   { path: "subscribe", component: SubscribeComponent },
   { path: "refund-and-cancellation", component: RefundAndCancellationComponent },
+  { path: "terms-and-conditions", component: TermsAndConditionsComponent },
   { path : "forgot-password", component : ForgotPasswordComponent },
   { path : "reset-password/:token", component : ResetPasswordComponent},
   { path: "delivery", component: DeliveryComponent,
