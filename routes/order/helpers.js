@@ -187,10 +187,8 @@ module.exports = {
             return res.status(422).json({ errors: errors.array() });
         }else{
             const userId = db.toObjectID(req.session.user._id);
-            let weeks = req.body.weeks;
-            weeks = Number(weeks,10);
             const planId = req.body.planId;
-            if(planId && userId && !Number.isNaN(weeks)){
+            if(planId && userId){
                 let extraInfo = req.body.extraInfo;
                 if(extraInfo){ 
                     try{
@@ -203,7 +201,7 @@ module.exports = {
                 try{
                    planInfo = await getPlanInfo(planId);
                    if(planInfo){
-                    addActivePlan({userId : userId,planId : planId,numOfWeeks : planInfo.numOfWeeks })
+                    addActivePlan({userId : userId,planId : planId,numOfWeeks : Number(planInfo.numOfWeeks) })
                     .then(plan => {
                         const orderObj = {
                             customerData:{
