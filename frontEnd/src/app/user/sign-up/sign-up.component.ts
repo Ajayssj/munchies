@@ -42,7 +42,8 @@ export class SignUpComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
       phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      address: ['']
    });
   }
   // convenience getter for easy access to form fields
