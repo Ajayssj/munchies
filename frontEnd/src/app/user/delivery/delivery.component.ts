@@ -85,7 +85,6 @@ export class DeliveryComponent implements OnInit {
       phoneNo: this.f.phone.value,
       postalCode: this.f.postalCode.value,
       planId: this.route.snapshot.queryParamMap.get('selectedPlan'),
-      weeks : this.route.snapshot.queryParamMap.get('week'),
       extraInfo: JSON.stringify(questionInfo)
     }
     this.httpOptions = {

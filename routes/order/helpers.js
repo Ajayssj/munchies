@@ -6,6 +6,7 @@ const ActivePlan = db.getCollection('activePlans');
 const CustomPlan = db.getCollection('customPlans');
 const PlansExtended = db.getCollection('plansExtended');
 const Extra = db.getCollection('extraInfo');
+const Plan = db.getCollection('plans');
 let moment = require('moment-timezone');
 
 const getNextMondayDate = function(date){
@@ -115,6 +116,10 @@ const insertExtraInfo = function(orderId,data){
     return Extra.insertMany(arrObj);
     
 }
+
+const getPlanInfo = function(planId){
+    return  Plan.findOne({ _id : db.toObjectID(planId)});
+}
 module.exports = {
     getAllOrders : (req,res) => {
         Order.aggregate(
@@ -176,7 +181,7 @@ module.exports = {
         }).catch(err => res.json({success : false, error : err}))
         
     },
-    createOrder : (req,res) => {
+    createOrder : async (req,res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
@@ -194,39 +199,50 @@ module.exports = {
                         console.log('JSON ERROR : ', err);
                     }
                 }
-                addActivePlan({userId : userId,planId : planId,numOfWeeks : weeks})
-                .then(plan => {
-                    const orderObj = {
-                        customerData:{
-                            firstName :req.body.firstName,
-                            lastName : req.body.lastName,
-                            phoneNo:req.body.phoneNo,
-                        },
-                        userId : userId,
-                        planId:db.toObjectID(planId),
-                        activePlanId: plan.ops[0]._id,
-                        date: new Date(new Date().toUTCString()),
-                        total:req.body.total,
-                        shippingCost:0,
-                        Area_of_delivery:req.body.Area_of_delivery,
-                        address:req.body.address,
-                        postalCode:req.body.postalCode
-                    }
-                    Order.insertOne(orderObj).then(order => {
-                        if(extraInfo && Array.isArray(extraInfo) && extraInfo.length){
-                            insertExtraInfo(order.ops[0]._id,extraInfo)
-                            .then(result => {
-                                console.log('Extra Info Inserted Successfully!');
-                            });
+                let  planInfo;
+                try{
+                   planInfo = await getPlanInfo(planId);
+                   if(planInfo){
+                    addActivePlan({userId : userId,planId : planId,numOfWeeks : planInfo.numOfWeeks })
+                    .then(plan => {
+                        const orderObj = {
+                            customerData:{
+                                firstName :req.body.firstName,
+                                lastName : req.body.lastName,
+                                phoneNo:req.body.phoneNo,
+                            },
+                            userId : userId,
+                            planId:db.toObjectID(planId),
+                            activePlanId: plan.ops[0]._id,
+                            date: new Date(new Date().toUTCString()),
+                            total:Number(planInfo.pricePerBag),
+                            shippingCost:0,
+                            Area_of_delivery:req.body.Area_of_delivery,
+                            address:req.body.address,
+                            postalCode:req.body.postalCode
                         }
-                        res.json({success : true, order : order});
-                    }).catch(err => {
+                        Order.insertOne(orderObj).then(order => {
+                            if(extraInfo && Array.isArray(extraInfo) && extraInfo.length){
+                                insertExtraInfo(order.ops[0]._id,extraInfo)
+                                .then(result => {
+                                    console.log('Extra Info Inserted Successfully!');
+                                });
+                            }
+                            res.json({success : true, order : order});
+                        }).catch(err => {
+                            res.json({success : false, error : err});
+                        })
+                    })
+                    .catch(err => {
                         res.json({success : false, error : err});
                     })
-                })
-                .catch(err => {
+                   }else{
+                    res.json({success : false, error : 'Plan Not Found!'});
+                   }
+                }catch(err){
                     res.json({success : false, error : err});
-                })
+                }
+               
             }else{
                 res.json({success : false, error : 'Invalid request Data'});
             }
@@ -301,6 +317,7 @@ module.exports = {
                         "planInfo.title" : 1,
                         "weekIds.week" : 1,
                         "weekIds._id" : 1,
+                        "total" : 1
                          
                     }
                 },
