@@ -22,12 +22,12 @@ export class SignUpComponent implements OnInit {
   success = false;
   error = '';
   data = {};
-  firstName = '';
-  lastName = '';
-  phone = '';
+  //firstName = '';
+ // lastName = '';
+  //phone = '';
   email = '';
   password = '';
-  address = '';
+  //address = '';
   confirmPassword = '';
   passwordNotMatch = false;
   constructor(
@@ -37,13 +37,13 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
     this.createAccountForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+')]],
-      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+')]],
+     // firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+')]],
+      //lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email]],
       password: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      //phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       confirmPassword: ['', Validators.required],
-      address: ['']
+     // address: ['']
    });
   }
   // convenience getter for easy access to form fields
@@ -60,13 +60,13 @@ export class SignUpComponent implements OnInit {
       return;
     }
     else {
-      this.firstName = this.createAccountForm.get('firstName').value;
-      this.lastName = this.createAccountForm.get('lastName').value;
+     // this.firstName = this.createAccountForm.get('firstName').value;
+     // this.lastName = this.createAccountForm.get('lastName').value;
       this.email = this.createAccountForm.get('email').value;
       this.password = this.createAccountForm.get('password').value;
       this.confirmPassword = this.createAccountForm.get('confirmPassword').value;
-      this.address = this.createAccountForm.get('address').value;
-      this.phone = this.createAccountForm.get('phone').value;
+     // this.address = this.createAccountForm.get('address').value;
+     // this.phone = this.createAccountForm.get('phone').value;
       if(this.password != this.confirmPassword) {
         this.passwordNotMatch = true;
         console.log(this.passwordNotMatch);
@@ -75,17 +75,19 @@ export class SignUpComponent implements OnInit {
       else {
         this.passwordNotMatch = false;
         this.data = {
-          'firstName': this.firstName, 
-          'lastName': this.lastName,
+         // 'firstName': this.firstName, 
+         // 'lastName': this.lastName,
           'email': this.email,
           'password': this.password,
-          'address': this.address,
-          'phone': this.phone
+         // 'address': this.address,
+         // 'phone': this.phone
+         
         }
         console.log(this.data);
         this.http.post(this.authService.getDomainName() + '/public/api/user/register', this.data).subscribe( (data:SignUpRes) => {
             console.log("success", data.success);
             this.success = data.success;
+            this.router.navigate(['/subscribe']);
             this.error = data.error;
             this.router.navigate(['/sign-up']);
             var pos = window.pageYOffset;

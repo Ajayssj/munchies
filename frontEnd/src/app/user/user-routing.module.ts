@@ -11,7 +11,7 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ManageSubscriptionComponent } from './manage-subscription/manage-subscription.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { SkipWeekComponent } from './skip-week/skip-week.component';
+//import { SkipWeekComponent } from './skip-week/skip-week.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -60,10 +60,10 @@ const routes: Routes = [
   canActivate: [
     AuthGuard
   ]  },
-  { path: "skip-week", component: SkipWeekComponent,
+  /*{ path: "skip-week", component: SkipWeekComponent,
   canActivate: [
     AuthGuard
-  ]  },
+  ]  },*/
   { path: "thank-you", component: ThankYouComponent,
   canActivate: [
     AuthGuard

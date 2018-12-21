@@ -44,11 +44,14 @@ nav .wrapper ul li.bars, nav .wrapper ul li.bars_cross {
     display: none;
     position: absolute;
     right: 35px;
-    top: 10px;
+    top: 25px;
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 15px 15px 10px;
+    background: #DE6B48;
+    padding: 12px 19px 8px 10px;
     transition: right 0.5s ease 0s;
+    width: 15px;
+    height: 25px;
+    border-radius: 7px;
 }
 nav .wrapper ul li.bars .bar1, nav .wrapper ul li.bars .bar2, nav .wrapper ul li.bars .bar3, nav .wrapper ul li.bars_cross .bar1, nav .wrapper ul li.bars_cross .bar2, nav .wrapper ul li.bars_cross .bar3 {
     width: 25px;
@@ -90,14 +93,15 @@ nav .wrapper ul li:last-child {
     padding: 10px;
     box-sizing: border-box;
     display: block;
+    cursor: pointer;
 }
 .menu_item a:hover {
-    background-color: #292929;
+    background-color: #DE6B48;
     color: #fff;
 }
 .menu_item a.active {
 
-    background-color: #292929;
+    background-color: #DE6B48;
     color: #fff;
 }
 
@@ -504,9 +508,9 @@ nav .wrapper ul li.bars_cross .bar3 {
     -moz-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
   }
-  .userdropdown .submenu li:hover {
-    /* background-color: #e74c3c; */
-  }
+  /*.userdropdown .submenu li:hover {
+     background-color: #e74c3c; 
+  }*/
   .userdropdown .submenu li:hover a {
     /* color: #FFF; */
     padding: 0 10px;

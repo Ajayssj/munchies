@@ -43,19 +43,22 @@
                         <div class="menu_item">
                             <a routerLink="/contact" (click)="isMobNavbarOpen=!isMobNavbarOpen">Contact</a>
                         </div>
-                        <div class="menu_item">
+                        <div class="menu_item" *ngIf="!isLoggedIn">
                             <a routerLink="/signIn" (click)="isMobNavbarOpen=!isMobNavbarOpen">Sign IN</a>
                         </div>
                         <div class="menu_item">
                             <a routerLink="/subscribe" (click)="isMobNavbarOpen=!isMobNavbarOpen"  class="getthebag_btn">Get the Bag</a>
                         </div>
-                        <div class="menu_item">
+                        <div class="menu_item"  *ngIf="isLoggedIn">
                             <a routerLink="/profile" (click)="isMobNavbarOpen=!isMobNavbarOpen">Edit Profile</a>
                         </div>
-                        <div class="menu_item">
+                        <div class="menu_item" *ngIf="isLoggedIn">
                             <a routerLink="/change-password" (click)="isMobNavbarOpen=!isMobNavbarOpen">Change Password</a>
                         </div>
-                        <div class="menu_item">
+                        <div class="menu_item" *ngIf="!isLoggedIn">
+                            <a routerLink="/forgot-password" (click)="isMobNavbarOpen=!isMobNavbarOpen">Forgot Password</a>
+                        </div>
+                        <div class="menu_item menu_item a" *ngIf="isLoggedIn">
                             <a (click)="logout()" class="getthebag_btn">Logout</a>
                         </div>
                     </div>

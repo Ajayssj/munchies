@@ -115,3 +115,14 @@
         position: absolute;
     }
  }
+ @media only screen and (max-width:768px){
+    .custom_order_table th, .custom_order_table td{
+        padding-right: 2px;
+    }
+    .manage_subscription{
+        display: none;
+    }
+    .manage_subscription_page_wrapper .block p{
+        padding: 5px;
+    }
+ }

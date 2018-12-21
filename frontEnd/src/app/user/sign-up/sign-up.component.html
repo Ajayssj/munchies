@@ -2,7 +2,7 @@
 <div class="create_account">
     <h2>Create an account</h2>
     <form [formGroup] = "createAccountForm" (ngSubmit) = "onSubmit()">
-        <div *ngIf="submitted && success" class="success color">
+       <!-- <div *ngIf="submitted && success" class="success color">
             You have registered successfully!
         </div>
         <div *ngIf="submitted && error" class="error color">
@@ -22,14 +22,15 @@
         <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
             <div *ngIf="f.phone.errors.required">Phone is required</div>
             <div *ngIf="f.phone.errors.pattern">Please enter valid number</div>
-        </div>
+        </div>-->
         <input type="email" name="email" formControlName="email" placeholder="Email" />
         <div *ngIf="submitted && (f.email.errors || f.email.invalid)" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Username is required</div>
+            <div *ngIf="f.email.errors.required">Email is required</div>
             <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
         </div>
         <input type="password" name="password" formControlName="password" placeholder="Create Password" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+    
             <div *ngIf="f.password.errors.required">Password is required</div>
             <div *ngIf="!f.password.errors.required && f.password.hasError('whitespace')">Please enter valid Password</div>
         </div>
@@ -40,14 +41,15 @@
         <div *ngIf="submitted && passwordNotMatch" class="invalid-feedback">
             <div *ngIf="passwordNotMatch">Confirm Password not matched with password</div>
         </div>
-        <input type="text" name="address" formControlName="address" placeholder="Address" />
+       <!-- <input type="text" name="address" formControlName="address" placeholder="Address" />-->
         <!-- <div *ngIf="submitted && (f.address.errors || f.address.invalid)" class="invalid-feedback">
             <div *ngIf="f.address.errors.required">Username is required</div>
             <div *ngIf="f.address.errors.email">Email must be a valid email address</div>
         </div> -->
         
         <div class="create_account_btn">
-            <button>Create Account</button>
+            <button>Create Account</button> 
+        
         </div>
     </form>
 </div>

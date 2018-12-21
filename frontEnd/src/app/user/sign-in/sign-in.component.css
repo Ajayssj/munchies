@@ -145,7 +145,7 @@
     }
     .signin_box_content h2 {
         font-size: 26px;
-        margin: 40px 0px 25px 70px;
+        margin: 40px 0px 25px 47px;
     }
     .signin_box_content input[type="email"], .signin_box_content input[type="password"] {
         width: 70%;
@@ -162,7 +162,7 @@
         margin: 20px 0px 35px 34px;
     }
     .sign_in_button button {
-        padding: 10px 150px;
+        padding: 10px 120px;
     }
     .sign_up_text {
         margin-left: 50px;

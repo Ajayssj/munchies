@@ -18,7 +18,7 @@ import { ManageSubscriptionComponent } from './manage-subscription/manage-subscr
 import { DeliveryComponent } from './delivery/delivery.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
-import { SkipWeekComponent } from './skip-week/skip-week.component';
+//import { SkipWeekComponent } from './skip-week/skip-week.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -54,7 +54,7 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
     DeliveryComponent,
     MyOrdersComponent,
     OrderSummaryComponent,
-    SkipWeekComponent,
+    //SkipWeekComponent,
     ThankYouComponent,
     PersonalDetailsComponent,
     ChangePasswordComponent,
