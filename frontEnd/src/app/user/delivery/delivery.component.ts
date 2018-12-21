@@ -26,6 +26,14 @@ export class DeliveryComponent implements OnInit {
   selectedPlanId = '';
   question1 = '';
   question2 = '';
+  customerData = { 
+    firstName: '',
+    lastName: '',
+    phoneNo: '',
+    address: '',
+    Area_of_delivery: '',
+    postalCode: ''
+  };
   //showAlert = false;
 
   constructor(
@@ -38,17 +46,24 @@ export class DeliveryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(JSON.parse(this.auth.getCustomerData())) {
+      this.customerData = JSON.parse(this.auth.getCustomerData());
+    }
+    else {
+      this.customerData = this.customerData;
+    }
+    console.log(this.customerData)
     this.deliveryForm = this.formBuilder.group({
-      name: ['', [Validators.required]], //Validators.pattern('^[a-zA-Z]+')
-      area: ['', Validators.required],
-      surName: ['', [Validators.required , Validators.pattern('^[a-zA-Z]+')]],
-      address: ['', Validators.required],
-      phone: ['', [
+      name: [this.customerData.firstName || '', [Validators.required]], //Validators.pattern('^[a-zA-Z]+')
+      area: [this.customerData.Area_of_delivery || '', Validators.required],
+      surName: [this.customerData.lastName || '', [Validators.required , Validators.pattern('^[a-zA-Z]+')]],
+      address: [this.customerData.address || '', Validators.required],
+      phone: [this.customerData.phoneNo || '', [
         Validators.required,
         Validators.maxLength(10),
         Validators.pattern('[0-9]+')  // validates input is digit
       ]],
-      postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{6}(?:-[0-9]{4})?$')]],
+      postalCode: [this.customerData.postalCode || '', [Validators.required, Validators.pattern('^[0-9]{6}(?:-[0-9]{4})?$')]],
     });
     this.selectedPlanId = this.route.snapshot.queryParamMap.get('selectedPlan');
     this.question1 = this.route.snapshot.queryParamMap.get('question1');
@@ -67,6 +82,7 @@ export class DeliveryComponent implements OnInit {
   }
   showOrderConfirm(){
     this.submitted = true;
+    console.log(this.deliveryForm.value)
     // stop here if form is invalid
     if (this.deliveryForm.invalid) {
       return;
@@ -75,6 +91,7 @@ export class DeliveryComponent implements OnInit {
     {
       var question1 = this.route.snapshot.queryParamMap.get('question1');
       var question2 = this.route.snapshot.queryParamMap.get('question2');
+      var selectedPlanName = this.route.snapshot.queryParamMap.get('selectedPlanName');
       var questionInfo =[]
       if(question1 && question1.length > 0)  {
         questionInfo.push({type: 'allergic', value: question1})
@@ -84,15 +101,16 @@ export class DeliveryComponent implements OnInit {
       }
       
     this.data = {
-      firstName: this.f.name.value,
-      lastName: this.f.surName.value,
-      Area_of_delivery: this.f.area.value,
-      address: this.f.address.value,
-      phoneNo: this.f.phone.value,
-      postalCode: this.f.postalCode.value,
-      planId: this.route.snapshot.queryParamMap.get('selectedPlan'),
-      extraInfo: JSON.stringify(questionInfo)
+      'firstName': this.f.name.value,
+      'lastName': this.f.surName.value,
+      'Area_of_delivery': this.f.area.value,
+      'address': this.f.address.value,
+      'phoneNo': this.f.phone.value,
+      'postalCode': this.f.postalCode.value,
+      'planId': this.route.snapshot.queryParamMap.get('selectedPlan'),
+      'extraInfo': JSON.stringify(questionInfo)
     }
+    this.data['planName'] = selectedPlanName;
     this.httpOptions = {
       headers: new HttpHeaders({
         'Cache-Control': 'no-cache'
@@ -110,7 +128,7 @@ export class DeliveryComponent implements OnInit {
     //       alert(err.error.error);
     //     console.log(err);
     //   });
-    this.auth.setCustomerData(this.data);
+    this.auth.setCustomerData(JSON.stringify(this.data));
     this.router.navigate(['/order-summary']);
     }
   }

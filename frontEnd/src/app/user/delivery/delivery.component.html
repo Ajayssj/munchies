@@ -7,21 +7,21 @@
               <div class="row">
                   <div class="fields">
                       <div>
-                        <input class="form_control mar" formControlName="name" type="text" name="name" placeholder="Name" />
+                        <input class="form_control mar" [value]="customerData.firstName || ''" formControlName="name" type="text" name="name" placeholder="Name" />
                         <div *ngIf="submitted && f.name.errors" class="invalid-feedback form_control">
                             <div *ngIf="submitted && f.name.errors.required">Name is required</div>
                              <div *ngIf="submitted && f.name.errors.pattern">Your Name must contain only letters </div>
                         </div>
                       </div>
                       <div>
-                        <input class="form_control" type="text" formControlName="surName" name="surName" placeholder="Surname" />
+                        <input class="form_control" [value]="customerData.lastName || ''" type="text" formControlName="surName" name="surName" placeholder="Surname" />
                         <div *ngIf="submitted && f.surName.errors" class="invalid-feedback form_control">
                             <div *ngIf="submitted && f.surName.errors.required">SurName is required</div>
                             <div *ngIf="submitted && f.surName.errors.pattern">Your SurName must contain only letters </div>
                         </div>
                       </div>
                       <div>
-                        <input class="form_control" type="number" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
+                        <input class="form_control" [value]="customerData.phoneNo || ''" type="number" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
                         <div *ngIf="submitted && f.phone.errors" class="invalid-feedback form_control">
                             <div *ngIf="submitted && f.phone.errors.required">Phone Number is required</div>
                             <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>
@@ -33,7 +33,7 @@
               <div class="row">
                     <div class="fields">
                         <div>
-                            <select class="form_control dd_custom" formControlName="area" name="area" placeholder="Area">
+                            <select class="form_control dd_custom" [value]="customerData.Area_of_delivery || ''" formControlName="area" name="area" placeholder="Area">
                                 <option value="" default="" disabled="" style="display: none;">Area of Delivery</option>
                                 <option value="Cantonment">Cantonment</option>
                                 <option value="Domlur">Domlur</option>
@@ -55,13 +55,13 @@
                             </div>
                         </div>
                         <div>
-                            <input class="form_control" type="text" formControlName="address" name="address" placeholder="Address..." />
+                            <input class="form_control" [value]="customerData.address || ''" type="text" formControlName="address" name="address" placeholder="Address..." />
                             <div *ngIf="submitted && f.address.errors" class="invalid-feedback form_control">
                                 <div *ngIf="submitted && f.address.errors.required">Address is required</div>
                             </div>
                         </div>
                         <div>
-                            <input class="form_control" type="number" formControlName="postalCode" name="postalCode" placeholder="Postal Code" />
+                            <input class="form_control" [value]="customerData.postalCode || ''" type="number" formControlName="postalCode" name="postalCode" placeholder="Postal Code" />
                             <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback form_control">
                                 <div *ngIf="submitted && f.postalCode.errors.required">Postal Code is required</div>
                                 <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid address</div>

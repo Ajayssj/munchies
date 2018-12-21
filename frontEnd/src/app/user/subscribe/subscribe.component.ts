@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SubscribeComponent implements OnInit {
   selectedPlanId = null;
   noOfWeeks = 0;
+  selectedPlanName = '';
   plan = [{
     planId: "5c0e2531cdfb5107849569ea",
     planName: "Trial Week",
@@ -169,6 +170,7 @@ export class SubscribeComponent implements OnInit {
   selectedPlan(itemObj) {
     this.selectedPlanId = itemObj.planId;
     this.noOfWeeks = itemObj.weeks;
+    this.selectedPlanName = itemObj.planName;
     
   }
   checkDelivery() {

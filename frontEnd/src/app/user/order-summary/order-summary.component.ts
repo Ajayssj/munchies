@@ -14,6 +14,7 @@ export class OrderSummaryComponent implements OnInit {
   question1 = '';
   question2 = '';
   customerData: any;
+  planTitle = '';
   constructor(
     private http: HttpClient, 
     private router: Router,
@@ -21,20 +22,39 @@ export class OrderSummaryComponent implements OnInit {
     private auth: AuthService) { }
 
   ngOnInit() {
-    this.customerData = this.auth.getCustomerData();
+    this.customerData = JSON.parse(this.auth.getCustomerData());
+    console.log(this.customerData)
     this.selectedPlanId = this.customerData.planId;
+    this.planTitle = this.customerData.planName;
     var extraInfo = JSON.parse(this.customerData.extraInfo);
-    this.question1 = extraInfo[0].value;
-    this.question2 = extraInfo[1].value;
+    console.log(extraInfo)
+    if(extraInfo && extraInfo[0]) {
+       this.question1 = extraInfo[0].value;
+    }
+    if(extraInfo && extraInfo[1]) {
+      this.question2 = extraInfo[1].value;
+    }
     console.log(this.customerData.planId)
     console.log(this.question1)
     console.log(this.question2)
-    console.log(this.customerData)
-    // this.http.get(this.auth.getDomainName() + '/api/plan/core').subscribe((res:any)=> {
-    // },
-    // err=> {
-
-    // })
+    console.log(this.customerData);
+    delete this.customerData.planName;
+    console.log(this.customerData);
+    this.customerData['coupanId'] = '';
+  }
+  createOrder() {
+    console.log("hiiiiii", this.customerData)
+    this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.customerData).subscribe((res : any) => {
+      console.log("order created", res);
+      if(res.success) {
+        this.router.navigate(['/thank-you']);
+      }
+    },
+      err => {
+        if(err.status == 401)
+          alert(err.error.error);
+        console.log(err);
+      });
   }
 
 }

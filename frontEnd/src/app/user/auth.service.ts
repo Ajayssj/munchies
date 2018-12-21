@@ -30,12 +30,12 @@ export class AuthService {
     return localStorage.getItem('userRole');
   }
   getCustomerData() {
-    console.log(this.customerData)
-    return this.customerData;
+    console.log(localStorage.getItem('custData'))
+    return localStorage.getItem('custData');
   }
   setCustomerData(data) {
-    this.customerData = data;
-    console.log(this.customerData)
+    console.log(data);
+    localStorage.setItem('custData', data);
   }
 
   setLoggedIn(value) {

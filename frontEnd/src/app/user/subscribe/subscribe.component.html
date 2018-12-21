@@ -27,7 +27,7 @@
    <!-- <div (click)="checkDelivery()">
         <button class="ok_button"  (click)="checkDelivery()">ok</button> -->
  <div class="ok_button" (click)="checkDelivery()">
-      <a routerLink="/delivery" [queryParams]="{selectedPlan: selectedPlanId,question1: questions[0].selectedOpt, question2: questions[1].selectedOpt }">Ok</a> 
+      <a routerLink="/delivery" [queryParams]="{selectedPlan: selectedPlanId, selectedPlanName: selectedPlanName,question1: questions[0].selectedOpt, question2: questions[1].selectedOpt }">Ok</a> 
     </div>
   </div>
 </div>

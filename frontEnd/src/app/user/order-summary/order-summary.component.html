@@ -7,7 +7,7 @@
                   <span>Plan</span>
                   <span>Change</span>
               </div>
-              <div class="week_plan">One week plan</div>
+              <div class="week_plan">{{planTitle}}</div>
           </div>
           <div class="plan">
               <div class="heading">
@@ -35,7 +35,7 @@
               </div>
           </div>
           <div class="submit_btn">
-              <a routerLink="/thank-you" class="btn">Submit</a>
+              <button (click)="createOrder()" class="btn">Submit</button>
           </div>
       </div>
       <!-- <div class="payment">
