@@ -123,10 +123,10 @@ module.exports = {
         profile : [
             [
                 // check('firstName').custom(customVal),
-                check('phone').isNumeric().withMessage('should contain numeric value!'),
-                check('firstName').isAlpha().withMessage('has invalid FirstName'),
+                check('phone').optional().isNumeric().withMessage('should contain numeric value!'),
+                check('firstName').optional().isAlpha().withMessage('has invalid FirstName'),
                 // check('lastName').custom(customVal),
-                check('lastName').isAlpha().withMessage('has invalid lastName'),
+                check('lastName').optional().isAlpha().withMessage('has invalid lastName'),
                 // check('email').custom(customVal),
                 // check('email').isEmail().withMessage('has invalid email'),
                 // check('password').custom(customVal),
