@@ -1,5 +1,6 @@
 .tc_wrapper {
-    width: 70%;
+    width: 100%;
+    text-align: justify;
     margin: 0 auto;
     letter-spacing: 1px;
 }

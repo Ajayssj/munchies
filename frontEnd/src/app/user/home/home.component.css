@@ -85,7 +85,6 @@
     border: 6pt solid #e3c567;
     margin-right: 10px;
     padding: 10px 15px;
-    min-height: 475px;
     float: left;
     width: 24%;
     box-sizing: border-box;
@@ -425,7 +424,7 @@ p {
     }
     .boxes .box {
         width: 49%; 
-        min-height: 375px;
+        /*min-height: 375px;*/
     }
     .boxes .box:nth-child(odd) {
         margin-right: 2%;
@@ -487,7 +486,7 @@ p {
     
     .boxes .box {
         width: 24%;
-        min-height: 475px;
+        /*min-height: 475px;*/
     }
     .boxes .box:nth-child(2n+1), .boxes .box:nth-child(2) {
         margin-right: 1.3%;

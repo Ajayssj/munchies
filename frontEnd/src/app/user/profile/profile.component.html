@@ -15,13 +15,13 @@
         <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
             <div *ngIf="f.lastName.errors.required">Last Name is required</div>
         </div>
-        <input class="form_control" type="number" min="0" [(ngModel)]="phone" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
+        <input class="form_control" type="tel" min="0" [(ngModel)]="phone" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
         <div *ngIf="submitted && f.phone.errors" class="invalid-feedback form_control">
             <div *ngIf="submitted && f.phone.errors.required">Phone Number is required</div>
             <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>
             <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid Phone Number</div>
         </div>
-        <input type="email" [value]="email" name="email" formControlName="email" placeholder="Email" readonly />
+        <input type="email" [value]="email" name="email" formControlName="email" placeholder="Email" disabled />
         <!-- <div *ngIf="submitted && (f.email.errors || f.email.invalid)" class="invalid-feedback">
             <div *ngIf="f.email.errors.required">Username is required</div>
             <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
