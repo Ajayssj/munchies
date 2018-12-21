@@ -1,0 +1,17 @@
+.cp_wrapper {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 16px;
+    vertical-align: baseline;
+}
+.cp_wrapper h2 {
+    text-align: left;
+    font-weight: 700;
+    margin: 1.25rem 0 .625rem;
+    font-size: 1.625rem;
+}
+.cp_wrapper p {
+    margin: .625rem 0 .625rem 0;
+}
