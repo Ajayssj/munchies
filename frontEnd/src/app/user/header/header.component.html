@@ -17,8 +17,8 @@
 
                     <li><a routerLink="/help">Help</a></li>
                     <li><a routerLink="/contact">Contact</a></li>
-                    <li>
-                        <a *ngIf="!isLoggedIn" routerLink="/signIn">Sign In</a>
+                    <li *ngIf="!isLoggedIn">
+                        <a routerLink="/signIn">Sign In</a>
                         <!-- <a *ngIf="isLoggedIn" (click)="logout()">Logout</a> -->
                     </li>
                     <li *ngIf="isLoggedIn" class="userdropdown"><i class="fa fa-user"></i>

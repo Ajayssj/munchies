@@ -41,6 +41,7 @@ export class ChangePasswordComponent implements OnInit {
   });
   }
   resetForm(){
+    this.submitted = false;
     this.changePasswordForm.reset();
   }
   get f() { return this.changePasswordForm.controls; }
