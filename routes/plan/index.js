@@ -1,6 +1,6 @@
 var routes = require('express').Router();
 const helpers = require('./helpers');
-
+const validation = require('../../validations').plan;
 routes.get('/plan/active/:userId',helpers.getActivePlans);
 // routes.put('/plan/active/:activePlanId/skip-week/:weekId/:week',helpers.skipActivePlanWeek);
 routes.put('/plan/active/:activePlanId/skip-week',helpers.skipActivePlanWeek);
@@ -18,10 +18,10 @@ routes.post('/plan/active/:planId/product/:productId/week/:weekId',helpers.addPr
 routes.delete('/plan/active/:planId/product/:productId/week/:weekId',helpers.deleteProductFromPlan)
 
 
-routes.post('/plan/core/add',helpers.addCorePlan);
+routes.post('/plan/core/add',...validation.core.add ,helpers.addCorePlan);
 routes.get('/plan/core/',helpers.getCorePlans);
 routes.delete('/plan/core/delete',helpers.deleteCorePlan);
-routes.put('/plan/core/edit',helpers.editCorePlan);
+routes.put('/plan/core/edit', ...validation.core.edit ,helpers.editCorePlan);
 
 routes.get('/plan/customer/info/:activePlanId',helpers.getCustomerInfo);
 

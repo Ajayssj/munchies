@@ -418,7 +418,8 @@ module.exports = {
    getActivePlans : (req,res) => {
     const userId = req.params.userId;
     if(!userId) userId = req.session.user._id.toString();
-    ActivePlan.aggregate(
+    if(userId){
+        ActivePlan.aggregate(
             [
                 {
                     $match: {
@@ -468,59 +469,67 @@ module.exports = {
             }).catch(err =>{
                 res.json({success : false, error : err });
             })
+    }else{
+        res.json({success : false, error : 'UserId is required!'})
+    }
    },
    getCustmoizedPlan : (req,res) => {
     const activePlanId = req.params.activePlanId;
-    ActivePlan.aggregate(
-        [
-            {
-                $match: {
-                    _id : db.toObjectID(activePlanId)
+    if(activePlanId){
+        ActivePlan.aggregate(
+            [
+                {
+                    $match: {
+                        _id : db.toObjectID(activePlanId)
+                    }
+                },
+                {
+                    $lookup : {
+                        "from" : "products",
+                        "localField" : "customWeeks.products",
+                        "foreignField" : "_id",
+                        "as" : "customWeekProducts"
+                    }
+                },
+                {
+                    $project : {
+                        customWeeks: 0,
+                        skipedWeeks : 0
+                    }
+                },
+                {
+                    $lookup : {
+                        "from" : "plansExtended",
+                        "localField" : "planId",
+                        "foreignField" : "planId",
+                        "as" : "plans"
+                    }
+                },
+                {
+                    $lookup : {
+                        "from" : "products",
+                        "localField" : "plans.products",
+                        "foreignField" : "_id",
+                        "as" : "defaultWeekProducts"
+                    }
+                },
+                {
+                   $project : {
+                        plans : 0,
+                        customWeeks : 0
+                   }
                 }
-            },
-            {
-                $lookup : {
-                    "from" : "products",
-                    "localField" : "customWeeks.products",
-                    "foreignField" : "_id",
-                    "as" : "customWeekProducts"
-                }
-            },
-            {
-                $project : {
-                    customWeeks: 0,
-                    skipedWeeks : 0
-                }
-            },
-            {
-                $lookup : {
-                    "from" : "plansExtended",
-                    "localField" : "planId",
-                    "foreignField" : "planId",
-                    "as" : "plans"
-                }
-            },
-            {
-                $lookup : {
-                    "from" : "products",
-                    "localField" : "plans.products",
-                    "foreignField" : "_id",
-                    "as" : "defaultWeekProducts"
-                }
-            },
-            {
-               $project : {
-                    plans : 0,
-                    customWeeks : 0
-               }
-            }
-    
-        ]).toArray()
-            .then(customizedPlan => {
-                res.json({success : true, data : customizedPlan});
-            }).catch(err => {
-                res.json({success : false, error : err});
-            })
+        
+            ]).toArray()
+                .then(customizedPlan => {
+                    res.json({success : true, data : customizedPlan});
+                }).catch(err => {
+                    res.json({success : false, error : err});
+                })
+    }else{
+        res.json({success : false, data : 'Active Plan Id is required!'});
+
+    }
     
    },
    getCustmoizedPlanByWeek : (req,res) => {
@@ -560,51 +569,6 @@ module.exports = {
                        }
                     }
             ]
-            // [
-            //     {
-            //         $match: {
-            //             _id : db.toObjectID(activePlanId),
-            //             "customWeeks.wId" :  db.toObjectID(weekId)
-            //         }
-            //     },
-            //     {
-            //         $lookup : {
-            //             "from" : "products",
-            //             "localField" : "customWeeks.products",
-            //             "foreignField" : "_id",
-            //             "as" : "customWeekProducts"
-            //         }
-            //     },
-            //     {
-            //         $lookup : {
-            //             "from" : "plansExtended",
-            //             "localField" : "customWeeks.wId",
-            //             "foreignField" : "_id",
-            //             "as" : "plans"
-            //         }
-            //     },
-            //    /*  {
-            //         $match : {
-            //             "plans._id" : db.toObjectID(weekId)
-            //         }
-            //     },   */
-            //     {
-            //         $lookup : {
-            //             "from" : "products",
-            //             "localField" : "plans.products",
-            //             "foreignField" : "_id",
-            //             "as" : "defaultWeekProducts"
-            //         }
-            //     },
-            //     {
-            //        $project : {
-            //             plans : 0,
-            //             customWeeks : 0,
-            //             skipedWeeks : 0
-            //        }
-            //     }
-        
-            // ]
         ).toArray()
                 .then(customizedPlansProducts => {
                     // let defaultWeekProducts = customizedPlansProducts[0].defaultWeekProducts.filter(item => item._id == db.toObjectID(weekId))
@@ -619,32 +583,41 @@ module.exports = {
    },
    deactivatePlan : (req,res) => {
        const activePlanId = req.params.activePlanId;
-       activateDeactivatePlan(activePlanId,false)
-        .then(updated => {
-            console.log('Then');
-            if(updated.result.nModified == 1)
-                res.json({success : true, message : 'Active Plan Deactivated Successfully!'});
-            else
-                res.json({success : false, error : 'Active Plan Not Found!'});
-        }).catch(err => {
-            res.json({result : false, error : err});
-        })
+       if(activePlanId){
+            activateDeactivatePlan(activePlanId,false)
+                .then(updated => {
+                    console.log('Then');
+                    if(updated.result.nModified == 1)
+                        res.json({success : true, message : 'Active Plan Deactivated Successfully!'});
+                    else
+                        res.json({success : false, error : 'Active Plan Not Found!'});
+                }).catch(err => {
+                    res.json({result : false, error : err});
+                })
+       }else{
+            res.json({success : false, error : 'Active Plan Id is required!'});
+       }
    },
    activatePlan : (req,res) => {
     const activePlanId = req.params.activePlanId;
+    if(activePlanId){
         activateDeactivatePlan(activePlanId)
-        .then(updated => {
-            if(updated.result.nModified == 1)
-                res.json({success : true, message : 'Active Plan Activated Successfully!'});
-            else
-                res.json({success : false, error : 'Active Plan Not Found!'});
-        }).catch(err => {
-            res.json({result : false, error : err});
-        })
+            .then(updated => {
+                if(updated.result.nModified == 1)
+                    res.json({success : true, message : 'Active Plan Activated Successfully!'});
+                else
+                    res.json({success : false, error : 'Active Plan Not Found!'});
+            }).catch(err => {
+                res.json({result : false, error : err});
+            })
+    }else{
+        res.json({success : false, error : 'Active Plan Id is required!'});
+    }
    },
    deletePlan : (req,res) => {
         const activePlanId = req.params.activePlanId;
-        ActivePlan.findOneAndDelete({_id : db.toObjectID(activePlanId)})
+        if(activePlanId){
+            ActivePlan.findOneAndDelete({_id : db.toObjectID(activePlanId)})
             .then(activePlan =>{
                 if(activePlan){
                     /* if(activePlan.isCustom)
@@ -653,6 +626,9 @@ module.exports = {
                 }else
                     res.json({success : false, error : 'Active Plan Not Found!'});
             })
+        }else{
+            res.json({success : false, error : 'Active PlanId required!'});
+        }
    },
    addCorePlan : (req,res) => {
     const planObj = {  

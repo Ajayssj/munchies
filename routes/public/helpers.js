@@ -175,36 +175,31 @@ module.exports = {
 
     },
     register : (req,res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }else{
-            const userObj = {
-                firstName :  req.body.firstName,
-                lastName : req.body.lastName,
-                email : req.body.email,
-                password : utils.createHash(req.body.password),
-                address : req.body.address,
-                phone : req.body.phone,
-                role : 1
-            }
-            isEmailExists(userObj.email)
-                .then((exists) => {
-                   if(!exists){
-                        User.insertOne(userObj).then(user => {
-                            req.session.user = user;
-                            res.json({success : true, user : user})
-                        }).catch(err => {
-                            res.json({success : false, error : err});
-                        })
-                   }else{
-                        res.json({success : false, error : 'Email ID Already Exists!'});
-                   }
-                })
-                .catch(err => {
-                    console.error(err);
-                    res.json({success : false, error : 'Something Went Wrong!'});
-                })
+        const userObj = {
+            // firstName :  req.body.firstName,
+            // lastName : req.body.lastName,
+            email : req.body.email,
+            password : utils.createHash(req.body.password),
+            // address : req.body.address,
+            // phone : req.body.phone,
+            role : 1
         }
+        isEmailExists(userObj.email)
+            .then((exists) => {
+                if(!exists){
+                    User.insertOne(userObj).then(user => {
+                        req.session.user = user;
+                        res.json({success : true, user : user})
+                    }).catch(err => {
+                        res.json({success : false, error : err});
+                    })
+                }else{
+                    res.json({success : false, error : 'Email ID Already Exists!'});
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                res.json({success : false, error : 'Something Went Wrong!'});
+            })
     },
 }

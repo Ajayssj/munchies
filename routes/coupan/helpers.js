@@ -34,7 +34,8 @@ module.exports = {
             const discount = req.body.discount;
             const description = req.body.description;
             const expiryDate = new Date(moment(req.body.expiry).tz('Asia/Calcutta').format());
-            Coupan.insertOne({title,code : coupan, expiry : expiryDate, discount : parseFloat(discount), frequency : Number(frequency),description})
+            const type = Number(req.body.type);
+            Coupan.insertOne({title,code : coupan, expiry : expiryDate, discount : parseFloat(discount), frequency : Number(frequency),description, type})
                 .then(result => {
                     res.json({ success : true, message : 'Coupan code created!'})
                 }).catch(err =>{

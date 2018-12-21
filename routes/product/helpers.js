@@ -20,34 +20,29 @@ const isProductExists = (productId) => {
 
 module.exports = {
     addProduct : (req,res) => {
-        const errors = validationResult(req);
-        console.log(req.body);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }else{
-            var productObj = {
-                name : req.body.name,
-                type : req.body.type,
-                quantity : req.body.quantity,
-                company : req.body.company,
-                price : req.body.price,
-                kcal : req.body.kcal,
-                allergyDetails : req.body.allergyDetails,
-                cost : req.body.cost
-            }
-            // TODO : Add new product here..
-            Product.insertOne(productObj)
-                .then(product => {
-                    companyModule.addCompany(productObj.company.trim().toLowerCase());
-                    res.json({success : true, message : 'Product Added Successfully!', data : product.ops[0]})
-                }).catch(err => {
-                    res.json({success : false, error : err})
-                })
+        var productObj = {
+            name : req.body.name,
+            type : req.body.type,
+            quantity : req.body.quantity,
+            company : req.body.company,
+            price : req.body.price,
+            kcal : req.body.kcal,
+            allergyDetails : req.body.allergyDetails,
+            cost : req.body.cost
         }
+        // TODO : Add new product here..
+        Product.insertOne(productObj)
+            .then(product => {
+                companyModule.addCompany(productObj.company.trim().toLowerCase());
+                res.json({success : true, message : 'Product Added Successfully!', data : product.ops[0]})
+            }).catch(err => {
+                res.json({success : false, error : err})
+            })
     },
     getProduct : (req,res) =>{
         const productId = req.params.productId;
-        isProductExists(productId)
+        if(productId){
+            isProductExists(productId)
             .then(product => {
                 if(product.exists)
                     res.json({success : true, data : product.product});
@@ -56,6 +51,8 @@ module.exports = {
             }).catch(err => {
                 res.json({success : false, error : err });
             })
+        }else
+            res.json({success : false, error : 'ProductId is required!' });
     },
     getProducts : (req,res) =>{
         Product.aggregate(
@@ -95,7 +92,8 @@ module.exports = {
     },
     deleteProduct : (req,res) => {
         const productId = req.params.productId;
-        Product.findOneAndDelete({_id : db.toObjectID(productId)})
+        if(productId){
+            Product.findOneAndDelete({_id : db.toObjectID(productId)})
             .then(product => {
                 if(product){
                     res.json({success : true, message : 'Product Deleted Successfully!' });
@@ -104,29 +102,27 @@ module.exports = {
             }).catch(err => {
                 res.json({success : false, error : err });
             })
+        }else{
+            res.json({success : false, error : 'ProductId is required!' });
+        }
     },
     editProduct : (req,res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }else{
-            const productId = req.body.productId;
-            const productObj = {
-                name : req.body.name,
-                type : req.body.type,
-                quantity : req.body.quantity,
-                company : req.body.company,
-                price : req.body.price,
-                kcal : req.body.kcal,
-                allergyDetails : req.body.allergyDetails,
-                cost : req.body.cost
-            }
-            Product.updateOne({_id : db.toObjectID(productId)},{ $set : productObj})
-                .then(result => {
-                    res.json({success : true, message : 'Product Updated Successfully!' });
-                }).catch(err => {
-                    res.json({success : false, error : err });
-                })
+        const productId = req.body.productId;
+        const productObj = {
+            name : req.body.name,
+            type : req.body.type,
+            quantity : req.body.quantity,
+            company : req.body.company,
+            price : req.body.price,
+            kcal : req.body.kcal,
+            allergyDetails : req.body.allergyDetails,
+            cost : req.body.cost
         }
+        Product.updateOne({_id : db.toObjectID(productId)},{ $set : productObj})
+            .then(result => {
+                res.json({success : true, message : 'Product Updated Successfully!' });
+            }).catch(err => {
+                res.json({success : false, error : err });
+            })
     }
 }

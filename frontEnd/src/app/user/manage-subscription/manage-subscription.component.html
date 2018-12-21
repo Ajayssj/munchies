@@ -15,10 +15,12 @@
                     <tbody>
                         <tr *ngFor="let order of orders; let i = index;">
                             <td>{{i + 1}}</td>
-                            <td>{{order.plans.weeks}} Week</td>
+                            <!-- <td>{{order.plans.weeks}} Week</td> -->
+                            <td>{{order.planInfo[0].title}}</td>
                             <td>Rs. {{order.total}}</td>
                             <td>{{ order.activeWeek }}</td>
-                            <td>{{order.plans.activatedDate | date: 'dd/MM/yyyy'}}</td>
+                            <!-- <td>{{order.plans.activatedDate | date: 'dd-MM-yyyy'}}</td> -->
+                            <td>{{order.plans.activatedDate | date: 'dd MMM yyyy'}}</td>
                             <!-- <td><button (click)="skipNextWeek(order,alertModal)" class="btn btn-danger"><i class='fa fa-trash fa-fw'></i>Skip Next Week</button></td> -->
                             <td  style="cursor: pointer;">
                                 <span 
