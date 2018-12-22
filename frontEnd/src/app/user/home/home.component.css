@@ -48,6 +48,20 @@
     width: 150px;
     height: auto;
 }
+
+/* .content_box.two .space-right{
+    margin-right: 50px;    
+}
+.content_box.two .space-right p {    
+    text-align: right;
+}
+.content_box.two .space-left {    
+    text-align: left;
+}
+.content_box .content-box-icon {
+    width: 18%;
+} */
+
 .content_box .text {
     margin-right: 20px;
     line-height: 24px;
@@ -331,6 +345,7 @@ p {
     }
     .content_box {
         padding: 20px;
+        
     }
     .content_box div {
         width: 100%;
@@ -342,6 +357,9 @@ p {
     }
     .content_box_wrapper .content_box:nth-child(2) {
         padding: 20px;
+    }
+    .content_box .content-box-icon {
+        /* width: 100%; */
     }
     .text_area {
         width: 100%;
@@ -363,8 +381,27 @@ p {
     }
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (max-width: 300px) {
+    .content_box .content-box-icon {
+        width: 100%;
+    }
+    .content_box.two .space-right p {    
+        text-align: left;        
+    }
+}
 
+@media screen and (max-width: 580px) {
+    .content_box .content-box-icon {
+        width: 100%;        
+    }
+    .content_box.two .space-right p {    
+        text-align: left;        
+    }
+}
+
+
+@media screen and (min-width: 480px) {
+    
 }
 @media screen and (min-width: 768px) {
     
@@ -412,7 +449,7 @@ p {
         padding: 40px 0px 20px 30px;
     }
     .content_box img {
-        width: 100px;
+        width: 100%;
     }
     
     .content_box div {
@@ -421,6 +458,18 @@ p {
     }
     .content_box .text {
         width: 53%;
+    }
+    .content_box.two .space-right{
+        margin-right: 50px;    
+    }
+    .content_box.two .space-right p {    
+        text-align: right;
+    }
+    .content_box.two .space-left {    
+        text-align: left;
+    }
+    .content_box .content-box-icon {
+        width: 18%;
     }
     .boxes .box {
         width: 49%; 
@@ -444,7 +493,7 @@ p {
     }
     .food_box:nth-child(4) .text_area {
         width: 52%;
-    }
+    }    
 }
 @media screen and (min-width: 992px) {
     nav .wrapper ul li.bars {

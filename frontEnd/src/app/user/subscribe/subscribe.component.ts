@@ -33,33 +33,34 @@ export class SubscribeComponent implements OnInit {
   questions = [{
     qId: 1,
     question: "Are you allergic to any of the following?",
-    options: [{
-      optionId: 1,
-      optionText: "Milk",
-      optName: "q1"
-    },
+    options: [
+      //{
+    //   optionId: 1,
+    //   optionText: "Milk",
+    //   optName: "q1"
+    // },
     {
-      optionId: 2,
+      optionId: 1,
       optionText: "Eggs",
       optName: "q1"
     },
     {
-      optionId: 3,
+      optionId: 2,
       optionText: "Peanuts",
       optName: "q1"
     },
     {
-      optionId: 4,
+      optionId: 3,
       optionText: "Other Nuts",
       optName: "q1"
     },
     {
-      optionId: 5,
-      optionText: "Wheat",
+      optionId: 4,
+      optionText: "Gluten",
       optName: "q1"
     },
     {
-      optionId: 6,
+      optionId: 5,
       optionText: "none",
       optName: "q1"
     }],

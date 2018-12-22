@@ -1,4 +1,4 @@
-@import './../assets/css/language.css';
+/* @import './../assets/css/language.css';
 @import './../assets/css/opensanshebrew.css';
 @font-face {
     font-family: 'MyWebFont';
@@ -13,18 +13,20 @@
         url('../assets/font/aee74cb3-c913-4b54-9722-6001c92325f2.woff2') format('woff2'),
         url('../assets/font/d513e15e-8f35-4129-ad05-481815e52625.woff2') format('woff2'); 
   }
+   */
+
 .main_wrapper {
     width: 100%;
 }
 body, html {
-    font-family: 'MyWebFont' !important;
+    font-family: 'Comfortaa' !important;
 }
 header, .content, footer .content {
     width: 72%;
     margin: 0 auto;
     left: 189px;
     background-color: #fff;
-    font-family: 'MyWebFont' !important;
+    font-family: 'Comfortaa' !important;
 }
 .content_position {
     padding-top: 80px;
