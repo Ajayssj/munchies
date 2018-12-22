@@ -6,6 +6,7 @@ const validation = require('../../validations').user;
 
 routes.post('/user/password/recover',...validation.forgotPassword,public.passwordRecovery);
 routes.post('/user/register',...validation.register,public.register);
+routes.post('/user/login',...validation.login,public.login);
 
 routes.post('/user/verifyFirebaseToken',public.verifyFirebaseToken);
 

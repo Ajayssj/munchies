@@ -13,6 +13,8 @@ module.exports = {
             '/api/company/*',
             '/api/analysis/*',
             '/api/order/*',
+            '/api/coupan',
+            '/api/coupan/*'
         ],
         AUTH_URLs : [
             '/api/plan/*',
@@ -22,12 +24,14 @@ module.exports = {
             '/api/company/*',
             '/api/analysis/*',
             '/api/user/password/change',
-            '/api/user/password/change/*'
+            '/api/user/password/change/*',
+            '/api/coupan',
+            '/api/coupan/*'
         ]
    },
    ROLES : {
        ADMIN : 2,
-       USER : 3,
-       SUPER_ADMIN : 1
+       USER : 1,
+       SUPER_ADMIN : 3
    }
 }

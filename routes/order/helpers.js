@@ -256,71 +256,64 @@ module.exports = {
         let skip = size * (pageNo - 1)
         let limit = size
 
-        Order.aggregate(
+        Order.count({},function(err,totalCount){
+            if(!err){
+                Order.aggregate(
+                    [
+                        {
+                            $lookup: {
+                                "from" : "user",
+                                "localField" : "userId",
+                                "foreignField" : "_id",
+                                "as" : "user"
+                            }
+                        },
+                        {
+                            $lookup: {
+                                "from" : "plansExtended",
+                                "localField" : "planId",
+                                "foreignField" : "planId",
+                                "as" : "weekIds"
+                            }
+                        },
+                        {
+                            $lookup: {
+                                "from" : "activePlans",
+                                "localField" : "activePlanId",
+                                "foreignField" : "_id",
+                                "as" : "planInfo"
+                            }
+                        },
+                        {
+                            $unwind: {
+                                path : "$user",
+                                includeArrayIndex : "arrayIndex", // optional
+                                preserveNullAndEmptyArrays : false // optional
+                            }
+                        },
+                        {
+                            $unwind: {
+                                path : "$planInfo",
+                                includeArrayIndex : "arrayIndex", // optional
+                                preserveNullAndEmptyArrays : false // optional
+                            }
+                        },
+                        {
+                            $skip : skip
+                        },
+                        {
+                            $limit : limit
+                        }
 
-            // Pipeline
-            [
-                // Stage 1
-                {
-                    $lookup: {
-                        "from" : "user",
-                        "localField" : "userId",
-                        "foreignField" : "_id",
-                        "as" : "user"
-                    }
-                },
-                {
-                    $lookup: {
-                        "from" : "plansExtended",
-                        "localField" : "planId",
-                        "foreignField" : "planId",
-                        "as" : "weekIds"
-                    }
-                },
-        
-                // Stage 2
-                {
-                    $lookup: {
-                        "from" : "activePlans",
-                        "localField" : "activePlanId",
-                        "foreignField" : "_id",
-                        "as" : "planInfo"
-                    }
-                },
-        
-                // Stage 3
-                {
-                    $unwind: {
-                        path : "$user",
-                        includeArrayIndex : "arrayIndex", // optional
-                        preserveNullAndEmptyArrays : false // optional
-                    }
-                },
-        
-                // Stage 4
-                {
-                    $unwind: {
-                        path : "$planInfo",
-                        includeArrayIndex : "arrayIndex", // optional
-                        preserveNullAndEmptyArrays : false // optional
-                    }
-                },
-                {
-                    $skip : skip
-                },
-                {
-                    $limit : limit
-                }
-
-        
-            ]
-        
-            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
-        
-        ).toArray().then(orders => {
-            res.json({success : true, data : orders})
-        }).catch(err => res.json({success : false, error : err}))
-        
+                
+                    ]
+                ).toArray().then(orders => {
+                    res.json({success : true, data : {orders, totalCount}})
+                }).catch(err => res.json({success : false, error : err}))
+            }else{
+                res.json({success : false, error : err});
+            }
+        });
     },
     createOrder : (req,res) => {
         const userId = db.toObjectID(req.session.user._id);

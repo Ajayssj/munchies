@@ -174,6 +174,30 @@ module.exports = {
         })
 
     },
+    login : (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }else{
+            const email = req.body.email , password = utils.createHash(req.body.password);
+            User.findOne({email : email})   
+                .then(user => {
+                    if(user){
+                        if(user.password === password){
+                            req.session.user = user;
+                            res.json({success : true, data : user});
+                        }else
+                            res.json({success : false, error : 'Password is Invalid!'});
+                    }else{
+                        res.json({success : false, error : 'Email is not found!'});
+                    }
+    
+                }).catch(err => {
+                    res.json({success : false, error : 'Database Error : ' + err});
+                })    
+        }
+        
+    },
     register : (req,res) => {
         const userObj = {
             // firstName :  req.body.firstName,

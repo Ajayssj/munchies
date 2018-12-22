@@ -79,6 +79,11 @@ module.exports = {
                 check('discount').isAlphanumeric().withMessage(' contain invalid contents!')
             ],
             throwError
+        ],
+        apply : [
+            [ 
+                check('coupan').custom(customVal),
+            ], throwError
         ]
    },
    user : {
