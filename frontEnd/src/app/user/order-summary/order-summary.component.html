@@ -22,8 +22,8 @@
           <div class="sub_total_shipment">
                 <div class="block first">
                     <span class="offer_code">Offer Code</span>
-                    <input class="offer_code_input" type="text" name="code" placeholder="Code" />
-                    <button class="btn apply">Apply</button>
+                    <input class="offer_code_input" type="text" [(ngModel)]="couponCode" name="code" placeholder="Code" />
+                    <button (click)="applyCoupon(couponCode)" class="btn apply">Apply</button>
                 </div>
                 <div class="block">
                     <span>Delivery</span>

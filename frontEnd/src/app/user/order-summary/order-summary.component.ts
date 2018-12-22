@@ -15,6 +15,7 @@ export class OrderSummaryComponent implements OnInit {
   question2 = '';
   customerData: any;
   planTitle = '';
+  couponCode = '';
   constructor(
     private http: HttpClient, 
     private router: Router,
@@ -56,5 +57,12 @@ export class OrderSummaryComponent implements OnInit {
         console.log(err);
       });
   }
+  applyCoupon(code) {
+    this.http.put(this.auth.getDomainName() + '/api/coupan/apply', {coupan: code}).subscribe((res: any) => {
+      console.log(res);
+    },
+    err => {
 
+    })
+  }
 }
