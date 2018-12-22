@@ -320,7 +320,8 @@ module.exports = {
         const planId = req.body.planId;
         const coupanId = req.body.coupanId;
         if(planId && userId){
-            let data = {orderInfo : req.body}
+            let data = {orderInfo : req.body};
+            data.orderInfo.userId = userId;
             if(coupanId){
                 isValidCoupan(coupanId,function(coupan) {
                     if(coupan.success){
