@@ -87,9 +87,18 @@ export class SignUpComponent implements OnInit {
         this.http.post(this.authService.getDomainName() + '/public/api/user/register', this.data).subscribe( (data:SignUpRes) => {
             console.log("success", data.success);
             this.success = data.success;
-            this.router.navigate(['/subscribe']);
-            this.error = data.error;
-            this.router.navigate(['/sign-up']);
+            if(data.success){
+              this.http.post(this.authService.getDomainName() + '/api/user/login', this.data).subscribe( (res: any) => {
+                if(res.success){
+                  this.authService.setLoggedIn(true);
+                  this.authService.setUserName(res.data.email);
+                  this.authService.setUserRole(res.data.role);
+                  this.router.navigate(['/subscribe']);
+                }
+              },err => {})
+            }else{
+              this.error = data.error;
+            }
             var pos = window.pageYOffset;
             if (pos > 0) {
                 window.scrollTo(0, 0); // how far to scroll on each step

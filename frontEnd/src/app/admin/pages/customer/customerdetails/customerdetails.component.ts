@@ -14,6 +14,15 @@ export class CustomerdetailsComponent implements OnInit {
   deleteMessage = '';
   data = {};
   constructor(private http: HttpClient, private auth: AuthService, private router: Router) { }
+  acceptOrder(id,state,index){
+    this.http.put(this.auth.getDomainName() + '/api/order/accept/'+ id + '/' + state ,{}).subscribe((res : any) => {
+        if(res.success){
+          this.users[index].isAccepted = state;
+        }else{
+          alert(res.error);
+        }
+    })
+  }
   getNextWeek(user){
     let activeWeek = this.getActiveWeek(user.planInfo.startDate);
     if(activeWeek){

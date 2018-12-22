@@ -178,7 +178,6 @@ module.exports = {
             check('phoneNo').custom(customVal),
             check('phoneNo').isMobilePhone().withMessage('Invalid Phone No'),
             // check('Date').isAfter().withMessage('Invalid Date'),
-            check('total').isNumeric().withMessage('Invalid total'),
             // check('Area_of_delivery').isAlpha()().withMessage('Invalid Area Of Delivery'),
             check('address').custom(customVal),
             check('postalCode').custom(customVal),
@@ -211,6 +210,15 @@ module.exports = {
             check('postalCode').isLength({max : 6}).withMessage(' can not contain more than 6 character!'),
             ],
             throwError
+     ],
+     getAll : [
+         [
+            check('pageNo').custom(customVal),
+            check('pageNo').isInt({ gt : 0 }).withMessage('should start with 1'),
+            check('size').custom(customVal),
+            check('size').isInt({ gt : 0 }).withMessage('should start with 1')
+
+         ],throwError
      ]
     }
 
