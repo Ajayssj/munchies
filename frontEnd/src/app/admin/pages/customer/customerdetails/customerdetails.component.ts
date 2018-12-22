@@ -1,19 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AuthService } from '../../../../user/auth.service';
 
 @Component({
   selector: 'app-custdetails',
   templateUrl: './customerdetails.component.html',
-  styleUrls: ['./customerdetails.component.css']
+  styleUrls: ['./customerdetails.component.scss']
 })
 export class CustomerdetailsComponent implements OnInit {
   view: String = 'user';
   users = [];
   deleteMessage = '';
   data = {};
-  constructor(private http: HttpClient, private auth: AuthService, private router: Router) { }
+  tableData: Array<any>;
+
+  /* pagination Info */
+  pageSize = 10;
+  pageNumber: number = 1;
+  pages = [];
+  limit = 10;
+  pageChanged(pN: number): void {
+    this.pageNumber = pN;
+    console.log(pN);
+    this.getData(this.pageNumber, this.limit);
+  }
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService,
+    private router: Router) { }
   acceptOrder(id,state,index){
     this.http.put(this.auth.getDomainName() + '/api/order/accept/'+ id + '/' + state ,{}).subscribe((res : any) => {
         if(res.success){
@@ -135,13 +150,11 @@ export class CustomerdetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get(this.auth.getDomainName() + '/api/order/getAllOrders').subscribe((res: any) => {
-      console.log("cust",res.data);
-      this.users = res.data.orders;
-    },
-      err=> {
-      console.log(err);
-    });
+//let params = new HttpParams();
+    //params = params.set('pageNo', this.pageNumber)
+    //this.http.get(url,  { params: params })
+    this.getData(this.pageNumber, this.limit);
+
   }
 
   viewUserWeek(user) {
@@ -169,5 +182,24 @@ export class CustomerdetailsComponent implements OnInit {
   }
   changeView(view) {
     this.view = view;
+  }
+  getData(pageNo, limit) {
+    this.http.get(this.auth.getDomainName() + '/api/order/getAllOrders', {
+      params: {
+        pageNo: pageNo,
+        size: limit
+      }
+    }).subscribe((res: any) => {
+      console.log("cust",res.data);
+      this.users = res.data.orders;
+       let totalRecords = res.data.totalCount;
+       let pages =  Math.ceil(totalRecords / this.limit);
+       this.pages = new Array(pages);
+       console.log(pages);
+       console.log(this.pages);
+    },
+      err=> {
+      console.log(err);
+    });
   }
 }

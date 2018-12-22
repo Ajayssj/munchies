@@ -10,6 +10,7 @@ import { CustomerplanweekComponent } from './customerplanweek/customerplanweek.c
 import { CustomerdetailsComponent } from './customerdetails/customerdetails.component';
 import { CustomerinfoComponent } from './customerinfo/customerinfo.component';
 import { NotificationComponent } from '../ui/components/notification/notification.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NotificationComponent } from '../ui/components/notification/notificatio
         ReactiveFormsModule,
         SharedModule,
         ModalModule,
-        routing
+        routing,
+        NgxPaginationModule
     ],
     declarations: [
         CustomerComponent,

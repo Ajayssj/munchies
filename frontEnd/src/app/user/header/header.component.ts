@@ -48,9 +48,6 @@ export class HeaderComponent implements OnInit {
     sideBarMenu.classList.toggle("openSideMenu");
   }
   logout() {
-    
-    
-
     this.http.get(this.auth.getDomainName() + '/public/api/user/logout').subscribe((res:any) => {
       if(!res.success){
         alert(res.error);
@@ -64,7 +61,6 @@ export class HeaderComponent implements OnInit {
     },err =>{
 
     })
-   
   }
   // toggleIsLoggedIn() {
   //   this.isLoggedIn = !this.isLoggedIn;

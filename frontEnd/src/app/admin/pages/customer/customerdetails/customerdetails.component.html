@@ -17,7 +17,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of users, let i=index">
-            <td>{{i+1}}</td>
+            <td>{{ pageSize * (pageNumber - 1) + i+1 }}</td>
             <td (click)="viewCustomerInfo(user.planInfo._id)" style="cursor: pointer;">{{user.user.firstName}} {{user.user.lastName}}</td>
             <td>{{user.address}}</td>
             <td>{{user.Area_of_delivery}}</td>
@@ -31,6 +31,37 @@
          
         </tbody>
       </table>
+      <div class="pagination-wrapper">
+        <div class="form-group pages">
+          <div class="my-pagination">
+            <button [disabled]="pageNumber == 1" (click)="pageChanged(pageNumber-1)" class="btn btn-primary">Prev</button>
+            <span class="page" *ngFor="let page of pages; let i=index" [ngClass]="{'active': pageNumber == (i+1)}" (click)="pageChanged(i+1)">{{i+1}}</span>
+            <button [disabled]="pageNumber == pages.length" (click)="pageChanged(pageNumber+1)" class="btn btn-primary">Next</button>
+          </div>
+        </div>
+      </div>
+      <!-- <form class="pagination-wrapper">
+        <div class="form-group pages">
+          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" directionLinks="true"
+            autoHide="false" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+        <div class="form-group options pages">
+          <div class="input-group input-group-sm">
+            <select class="form-control" name="pageChangedName" [(ngModel)]="limit" (ngModelChange)="loadData()">
+              <option>1</option>
+              <option>5</option>
+              <option>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+              <option>200</option>
+            </select>
+            <span class="input-group-addon addon-right">Per Page</span>
+          </div>
+        </div>
+      </form> -->
     </card>
   </div>
 </div>
