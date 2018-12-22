@@ -32,6 +32,7 @@ export class ForgotPasswordComponent implements OnInit {
   });
   }
   resetEmail(){
+    this.submitted = false;
     this.forgotPasswordForm.reset()
   }
   get f() { return this.forgotPasswordForm.controls; }

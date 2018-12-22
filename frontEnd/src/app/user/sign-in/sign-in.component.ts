@@ -63,7 +63,7 @@ export class SignInComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
   onSubmit() {
-    this.submitted = true;
+    this.submitted = false;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
@@ -73,7 +73,7 @@ export class SignInComponent implements OnInit {
       this.password = this.loginForm.get('password').value;
       console.log(this.username + "\n");
       console.log(this.password);
-      this.http.post(this.authService.getDomainName() + '/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: any) => {
+      this.http.post(this.authService.getDomainName() + '/public/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: any) => {
         console.log("PATCH Request is successful ", data);
         this.success = data.success;
         this.error = data.error;

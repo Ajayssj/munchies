@@ -479,7 +479,7 @@ nav .wrapper ul li.bars_cross .bar3 {
     position: absolute;
     -webkit-box-shadow: 0px 1px 1px #CCC;
     box-shadow: 0px 1px 1px #CCC;
-    display: none;
+    /* display: none; */
     -webkit-transition: all .5s ease-in-out;
     -moz-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
@@ -489,9 +489,9 @@ nav .wrapper ul li.bars_cross .bar3 {
     border: solid 1px #de6b48;
     margin-left: -1px !important;
   }
-  .userdropdown:hover .submenu {
+  /* .userdropdown:hover .submenu {
     display: block
-  }
+  } */
   .userdropdown .submenu:before {
     content: "";
     position: absolute;

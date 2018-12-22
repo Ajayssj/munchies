@@ -50,8 +50,8 @@ module.exports = {
     bindAuth: function (app) {
         const auth = require('../auth');
         const isAdmin = require('../permissions');
-        app.all(PERMISSIONS.AUTH_URLs, auth.isLoggedIn);
-        app.all(PERMISSIONS.ADMIN_URLs, isAdmin);
+        app.all('/api/*', auth.isLoggedIn);
+    
     },
     bindAPI: function (app) {
         this.bindMiddleware(app);

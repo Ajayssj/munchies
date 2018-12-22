@@ -198,6 +198,14 @@ module.exports = {
         }
         
     },
+    logout : (req,res) => {
+        if(req.session.user){
+            delete req.session.user;
+            res.json({success : true});
+        }else{
+            res.json({success : false, error : 'Your Session Expired!'})
+        }
+    },
     register : (req,res) => {
         const userObj = {
             // firstName :  req.body.firstName,

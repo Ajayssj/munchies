@@ -137,7 +137,7 @@ export class CustomerdetailsComponent implements OnInit {
   ngOnInit() {
     this.http.get(this.auth.getDomainName() + '/api/order/getAllOrders').subscribe((res: any) => {
       console.log("cust",res.data);
-      this.users = res.data;
+      this.users = res.data.orders;
     },
       err=> {
       console.log(err);

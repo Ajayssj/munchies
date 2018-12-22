@@ -53,9 +53,8 @@ export class SignUpComponent implements OnInit {
     const isValid = !isWhitespace;
     return isValid ? null : { 'whitespace': true };
 }
-  onSubmit() {
-    this.submitted = true;
-    // stop here if form is invalid
+  onSubmit() {    
+    this.submitted = false;
     if (this.createAccountForm.invalid) {
       return;
     }
@@ -88,7 +87,7 @@ export class SignUpComponent implements OnInit {
             console.log("success", data.success);
             this.success = data.success;
             if(data.success){
-              this.http.post(this.authService.getDomainName() + '/api/user/login', this.data).subscribe( (res: any) => {
+              this.http.post(this.authService.getDomainName() + '/public/api/user/login', this.data).subscribe( (res: any) => {
                 if(res.success){
                   this.authService.setLoggedIn(true);
                   this.authService.setUserName(res.data.email);

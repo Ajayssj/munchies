@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
@@ -15,6 +15,17 @@ export class HeaderComponent implements OnInit {
   isMobNavbarOpen:Boolean=false;
   isLoggedIn = false;
   displayHeader = false;
+  subMenuShown = false;
+  @HostListener('document:click', ['$event'])
+   clickout(event) {
+    if(!event.target.classList.contains("userdropdown")) {
+      this.subMenuShown = false;
+    }
+   }
+
+  showHideMenu(){
+    this.subMenuShown = !this.subMenuShown;
+  }
   constructor(private router: Router, private auth: AuthService, private http : HttpClient) {
     router.events.forEach((event) => {
       if(event instanceof NavigationEnd) {
@@ -40,7 +51,7 @@ export class HeaderComponent implements OnInit {
     
     
 
-    this.http.get(this.auth.getDomainName() + '/api/user/logout').subscribe((res:any) => {
+    this.http.get(this.auth.getDomainName() + '/public/api/user/logout').subscribe((res:any) => {
       if(!res.success){
         alert(res.error);
       }
