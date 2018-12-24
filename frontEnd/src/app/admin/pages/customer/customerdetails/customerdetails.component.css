@@ -1,0 +1,8 @@
+.pageNo {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #e2e2e2;
+}
+.pageNo.active {
+    background-color: rgba(252,164,0,.5);
+}

@@ -35,7 +35,7 @@
         <div class="form-group pages">
           <div class="my-pagination">
             <button [disabled]="pageNumber == 1" (click)="pageChanged(pageNumber-1)" class="btn btn-primary">Prev</button>
-            <span class="page" *ngFor="let page of pages; let i=index" [ngClass]="{'active': pageNumber == (i+1)}" (click)="pageChanged(i+1)">{{i+1}}</span>
+            <span class="pageNo" *ngFor="let page of pages; let i=index" [ngClass]="{'active': pageNumber == (i+1)}" (click)="pageChanged(i+1)">{{i+1}}</span>
             <button [disabled]="pageNumber == pages.length" (click)="pageChanged(pageNumber+1)" class="btn btn-primary">Next</button>
           </div>
         </div>
