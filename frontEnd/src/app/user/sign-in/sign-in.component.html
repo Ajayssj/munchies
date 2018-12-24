@@ -17,7 +17,7 @@
                     <div *ngIf="f.password.errors.required">Password is required</div>
                 </div>
                 <div class="forgot_remember_links">
-                    <div class="remember_me"><input type="checkbox" name="chk" checked /> <span>Remember Me</span></div>
+                    <div  class="remember_me"><input type="checkbox" (change)="onChange($event.target.checked)" name="chk" /> <span>Remember Me</span></div>
                     <div class="forgot_password" routerLink="/forgot-password">Forgot Password</div>
                 </div>
                 <div class="sign_in_button">

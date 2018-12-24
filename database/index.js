@@ -8,7 +8,7 @@ module.exports = {
     mongoClient.connect(env.DB_URL,{useNewUrlParser: true} , function(err, client){
       db = client.db(env.DB_NAME);
       console.log(env.DB_URL);
-      cb(err);
+      cb(err,db);
     });
   },
   getDB : function(){

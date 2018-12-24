@@ -27,7 +27,7 @@ module.exports = {
         app.get('/*', (req, res) => res.sendFile(__baseUrl + '/client/'));
 
     },
-    bindMiddleware: function (app) {
+    bindMiddleware: function (app,db) {
 
         app.use(function (req, res, next) {
             // res.header('Access-Control-Allow-Credentials', true);
@@ -38,11 +38,13 @@ module.exports = {
         });
         var bodyParser = require('body-parser');
         var session = require('express-session');
+        const MongoStore = require('connect-mongo')(session);
         app.use(session({
             secret: CREDENTIALS.SESSION_SECRET_KEY, resave: false, saveUninitialized: true,
             cookie: {
                 maxAge: 1000 * 60 * 60 * 24 // 24 hours
             },
+            store: new MongoStore({ db: db})
         }));
         app.use(bodyParser.urlencoded({urlencoded : false}));
         app.use(bodyParser.json());
@@ -53,8 +55,8 @@ module.exports = {
         app.all('/api/*', auth.isLoggedIn);
     
     },
-    bindAPI: function (app) {
-        this.bindMiddleware(app);
+    bindAPI: function (app,db) {
+        this.bindMiddleware(app,db);
         this.bindAuth(app);
         this.bindRoutes(app);
     }

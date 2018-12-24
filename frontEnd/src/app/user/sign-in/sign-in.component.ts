@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, Form, NgModel } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { from } from 'rxjs';
@@ -26,10 +26,15 @@ export class SignInComponent implements OnInit {
   username = '';
   password = '';
   forgetPasswordMail = '';
+  rememberMe = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router, private http: HttpClient, private authService: AuthService) {
+  }
+  onChange(state : any) {
+    this.rememberMe = state;
+    console.log('Remember me : ', this.rememberMe);
   }
   async fbLogin() {
    let fbLoginRes = await this.authService.doFacebookLogin();
@@ -73,7 +78,7 @@ export class SignInComponent implements OnInit {
       this.password = this.loginForm.get('password').value;
       console.log(this.username + "\n");
       console.log(this.password);
-      this.http.post(this.authService.getDomainName() + '/public/api/user/login', { 'email': this.username, 'password': this.password }).subscribe((data: any) => {
+      this.http.post(this.authService.getDomainName() + '/public/api/user/login', { 'email': this.username, 'password': this.password, rememberMe : this.rememberMe }).subscribe((data: any) => {
         console.log("PATCH Request is successful ", data);
         this.success = data.success;
         this.error = data.error;

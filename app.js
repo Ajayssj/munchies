@@ -14,11 +14,11 @@ const database = require('./database');
 global.__baseUrl = __dirname;
 const server = app.listen(env.SERVER_PORT, function () {
     console.info('Server Started At ', env.SERVER_PORT);
-    database.connectDB(err => {
+    database.connectDB((err,db) => {
         if (!err) {
             console.info('Mongodb Connected Successfully!');
            // app.use(cors());
-            require('./routes').bindAPI(app);
+            require('./routes').bindAPI(app,db);
         } else {
             console.error('Mongodb Connection Failed!', err);
         }

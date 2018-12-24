@@ -6,7 +6,7 @@ import { AuthService } from '../../../../user/auth.service';
 @Component({
   selector: 'app-custdetails',
   templateUrl: './customerdetails.component.html',
-  styleUrls: ['./customerdetails.component.scss']
+  styleUrls: ['./customerdetails.component.css']
 })
 export class CustomerdetailsComponent implements OnInit {
   view: String = 'user';
