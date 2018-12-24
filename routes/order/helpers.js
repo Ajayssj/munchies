@@ -505,7 +505,7 @@ module.exports = {
     },
     acceptOrder : (req,res) => {
         const orderId = req.params.orderId;
-        const state =  req.params.state;
+        const state =  req.body.state;
 
         if(orderId){
             Order.updateOne({_id : db.toObjectID(orderId)},{ $set : { isAccepted : state }})

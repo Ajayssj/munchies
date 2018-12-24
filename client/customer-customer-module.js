@@ -225,7 +225,7 @@ var CustomerdetailsComponent = /** @class */ (function () {
     };
     CustomerdetailsComponent.prototype.acceptOrder = function (id, state, index) {
         var _this = this;
-        this.http.put(this.auth.getDomainName() + '/api/order/accept/' + id + '/' + state, {}).subscribe(function (res) {
+        this.http.put(this.auth.getDomainName() + '/api/order/accept/' + id, { state: state }).subscribe(function (res) {
             if (res.success) {
                 _this.users[index].isAccepted = state;
             }

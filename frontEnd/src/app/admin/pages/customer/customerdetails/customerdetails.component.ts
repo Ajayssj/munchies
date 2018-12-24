@@ -30,7 +30,7 @@ export class CustomerdetailsComponent implements OnInit {
     private auth: AuthService,
     private router: Router) { }
   acceptOrder(id,state,index){
-    this.http.put(this.auth.getDomainName() + '/api/order/accept/'+ id + '/' + state ,{}).subscribe((res : any) => {
+    this.http.put(this.auth.getDomainName() + '/api/order/accept/'+ id ,{ state : state}).subscribe((res : any) => {
         if(res.success){
           this.users[index].isAccepted = state;
         }else{
