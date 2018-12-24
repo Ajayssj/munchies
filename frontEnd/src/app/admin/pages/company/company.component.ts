@@ -13,7 +13,7 @@ interface productRes {
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.css']
+  styleUrls: ['./company.component.scss']
 })
 export class CompanyComponent implements OnInit {
   view: String = 'company';
@@ -60,6 +60,11 @@ export class CompanyComponent implements OnInit {
   hideWeekDrp = 0;
   pNameArr = [];
   selectedWeek = '';
+  tableData: Array<any>;
+
+  /* pagination Info */
+  pageSize = 10;
+  pageNumber = 1;
   public weekArray: Array<Object> = [{id: 1, text: 'Week 1'}, {id: 2, text: 'Week 2'}, {id: 3, text: 'Week 3'},
    {id: 4, text: 'Week 4'}, {id: 5, text: 'Week 5'}, {id: 6, text: 'Week 6'}, {id: 7, text: 'Week 7'}, 
    {id: 8, text: 'Week 8'}, {id: 9, text: 'Week 9'}, {id: 10, text: 'Week 10'}, {id: 11, text: 'Week 11'},
@@ -134,6 +139,7 @@ export class CompanyComponent implements OnInit {
     err=> {
       console.log(err);
     });
+    this.loadData();
   }
 //Delete code
 
@@ -195,6 +201,7 @@ export class CompanyComponent implements OnInit {
   ifMatchString(name,companyObj) {
     
     // this.ref.detectChanges();
+    console.log(name);
     if(name && name.length > 0 && companyObj.includes(name)) {
       // this.hideAutoComplete = false;
       return true;
@@ -344,5 +351,13 @@ addProduct(modal) {
       .map((item: any) => {
         return item.text;
       }).join(',');
+  }
+
+  loadData() {
+    this.tableData = this.products;
+  }
+
+  pageChanged(pN: number): void {
+    this.pageNumber = pN;
   }
 }

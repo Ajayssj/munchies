@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="question_block">
-    <h3>Which plan is selected the most?</h3>
+    <h3>plan selected the most</h3>
     <card cardTitle='Pie Chart'>
       <div *ngIf="planSelectedOptions" echarts [options]="planSelectedOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>
   </div>
   <div class="question_block">
-    <h3>Which area has the most delivery?</h3>
+    <h3>Areas with the most Delivery</h3>
     <card cardTitle='Most delivery'>
       <div *ngFor="let area of areaInfo" class="area">
         <div class="area_text">{{area.areaName}}</div>
@@ -17,7 +17,7 @@
     </card>
   </div>
   <div class="question_block">
-    <h3>Are you allergic to any of these?</h3>
+    <h3>Allergens and People</h3>
     <card cardTitle='Pie Chart'>
       <div *ngIf="allergyOptions" echarts [options]="allergyOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>

@@ -13,6 +13,7 @@ import { MultipleSelectComponent } from '../form/components/ng2-select/multiple-
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CustomSearchPipe } from '../pipe/custom-search.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
     imports: [
         CommonModule,
@@ -23,7 +24,8 @@ import { CustomSearchPipe } from '../pipe/custom-search.pipe';
         ModalModule,
         SelectModule,
         Ng2OrderModule,
-        Ng2SearchPipeModule
+        Ng2SearchPipeModule,
+        NgxPaginationModule
     ],
     declarations: [
         CompanyComponent,
