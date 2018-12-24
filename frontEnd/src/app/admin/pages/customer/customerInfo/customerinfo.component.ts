@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../../../user/auth.service';
@@ -12,7 +12,14 @@ export class CustomerinfoComponent implements OnInit {
   customer = {};
   constructor(private http: HttpClient, private auth: AuthService, private router: Router,
   private activatedRoute: ActivatedRoute) { }
-
+  // @HostListener('document:keypress', ['$event'])
+  // handleKeyboardEvent(event: KeyboardEvent) {
+  //   console.log(event.key === 'Delete');
+  //   let x = event.keyCode;
+  //   if (x === 27) {
+  //       console.log('Escape!');
+  //   }
+  // }
   ngOnInit() {
     const routeParams = this.activatedRoute.snapshot.params;
     console.log(routeParams)
@@ -46,5 +53,8 @@ export class CustomerinfoComponent implements OnInit {
   getCoreDate(date = new Date(new Date().toUTCString())){
     // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
     return new Date(date.toLocaleDateString());
+  }
+  navigateBack() {
+    window.history.back();
   }
 }

@@ -96,7 +96,7 @@ input:focus {
     cursor: pointer;
     outline: none;
     float: left;
-    font: normal normal normal 16px/1.4em din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif;
+    font-family: 'Comfortaa';
 }
 .btn a {
     text-decoration: none;

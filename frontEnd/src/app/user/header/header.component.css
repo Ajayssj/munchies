@@ -8,7 +8,7 @@
     top: 0;
 }
 header, .content, footer .content {
-    font-family: 'MyWebFont' !important;
+    font-family: 'Comfortaa';
     
     background-color: #fff;
 }
@@ -110,7 +110,7 @@ nav .wrapper ul li a {
     color: #DE6B48;
     line-height: 80px;
     font-size: 16px;
-    font-family: din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif;
+    font-family: 'Comfortaa';
 }
 /* nav .wrapper ul li:last-child a {
     border: 2px solid red;
@@ -456,7 +456,7 @@ nav .wrapper ul li.bars_cross .bar3 {
   .userdropdown ul li a {
     text-decoration: none;
     color: #e74c3c;
-    font-family: Tahoma, Arial;
+    font-family: 'Comfortaa';
   }
   .userdropdown li {
     float: left;

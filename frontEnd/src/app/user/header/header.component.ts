@@ -49,6 +49,7 @@ export class HeaderComponent implements OnInit {
   }
   logout() {
     this.http.get(this.auth.getDomainName() + '/public/api/user/logout').subscribe((res:any) => {
+      console.log(res)
       if(!res.success){
         alert(res.error);
       }

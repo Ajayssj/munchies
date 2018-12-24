@@ -78,6 +78,24 @@
         @include transition(all .5s);
     }
 }
+.homeBtn {
+    position: absolute;
+    top: 35%;
+    left: 300px;
+    padding: 3px 10px;
+    background: #fca400;
+    border-radius: 2px;
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+    &:hover {
+        background: #fff;
+        a {
+            color: #fca400;
+        }
+    }
+}
 
 .search-group {
     display: none;

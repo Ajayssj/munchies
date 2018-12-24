@@ -431,7 +431,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n  <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Customer Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>No</th>\n            <th>Name</th>\n            <th>Contact</th>\n            <th>Area of Delivery</th>\n            <th>Area</th>\n            <th>Plan</th>\n            <th>Current Week</th>\n            <th>Skipped Week</th>\n            <!-- <th>Plan Detail</th> -->\n          </tr>\n        </thead>\n        <tbody>\n            <tr *ngIf=\"customer\">\n            <td>1</td>\n            <td>{{customer.order.customerData.firstName + ' ' + customer.order.customerData.lastName}}</td>\n            <td>{{customer.order.customerData.phoneNo}}</td>\n            <td>{{customer.order.Area_of_delivery}}</td>\n            <td>{{customer.order.address}}</td>\n            <td>{{customer.plan.title}}</td>\n            <td>{{(getActiveWeek(customer.startDate))?getActiveWeek(customer.startDate):'Not started'}}</td>\n            <td><span *ngFor=\"let weeks of customer.skipedWeeks let weekNoIndex = index\">{{weeks.wNo}}<span *ngIf=\"customer.skipedWeeks.length-1 != weekNoIndex\">,</span></span></td>\n          </tr>\n        </tbody>\n      </table>\n    </card>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\n  <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n  <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Customer Details\">\n      <!-- <Button class=\"btn btn-primary\" (click)=\"navigateBack()\">Back</Button> -->\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>No</th>\n            <th>Name</th>\n            <th>Contact</th>\n            <th>Area of Delivery</th>\n            <th>Area</th>\n            <th>Plan</th>\n            <th>Current Week</th>\n            <th>Skipped Week</th>\n            <!-- <th>Plan Detail</th> -->\n          </tr>\n        </thead>\n        <tbody>\n            <tr *ngIf=\"customer\">\n            <td>1</td>\n            <td>{{customer.order.customerData.firstName + ' ' + customer.order.customerData.lastName}}</td>\n            <td>{{customer.order.customerData.phoneNo}}</td>\n            <td>{{customer.order.Area_of_delivery}}</td>\n            <td>{{customer.order.address}}</td>\n            <td>{{customer.plan.title}}</td>\n            <td>{{(getActiveWeek(customer.startDate))?getActiveWeek(customer.startDate):'Not started'}}</td>\n            <td><span *ngFor=\"let weeks of customer.skipedWeeks let weekNoIndex = index\">{{weeks.wNo}}<span *ngIf=\"customer.skipedWeeks.length-1 != weekNoIndex\">,</span></span></td>\n          </tr>\n        </tbody>\n      </table>\n    </card>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -470,6 +470,14 @@ var CustomerinfoComponent = /** @class */ (function () {
         this.activatedRoute = activatedRoute;
         this.customer = {};
     }
+    // @HostListener('document:keypress', ['$event'])
+    // handleKeyboardEvent(event: KeyboardEvent) {
+    //   console.log(event.key === 'Delete');
+    //   let x = event.keyCode;
+    //   if (x === 27) {
+    //       console.log('Escape!');
+    //   }
+    // }
     CustomerinfoComponent.prototype.ngOnInit = function () {
         var _this = this;
         var routeParams = this.activatedRoute.snapshot.params;
@@ -501,6 +509,9 @@ var CustomerinfoComponent = /** @class */ (function () {
         if (date === void 0) { date = new Date(new Date().toUTCString()); }
         // return (new Date(new Date(new Date( new Date(date).setHours(0)).setMinutes(0)).setSeconds(0)))
         return new Date(date.toLocaleDateString());
+    };
+    CustomerinfoComponent.prototype.navigateBack = function () {
+        window.history.back();
     };
     CustomerinfoComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

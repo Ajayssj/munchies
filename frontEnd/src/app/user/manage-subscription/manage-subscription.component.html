@@ -13,9 +13,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr *ngIf="!orders.length">
+                        <tr *ngIf="!orders || !orders.length">
                             <td colspan="6" style="text-align: center"> No Orders </td>
-                        </tr> -->
+                        </tr>
                         <tr *ngFor="let order of orders; let i = index;">
                             <td>{{i + 1}}</td>
                             <!-- <td>{{order.plans.weeks}} Week</td> -->
