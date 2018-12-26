@@ -121,8 +121,12 @@
     }
     .manage_subscription{
         display: none;
+        font-size: 10px;
     }
     .manage_subscription_page_wrapper .block p{
         padding: 5px;
+    }
+    .manage_subscription_page_wrapper .block table {
+        font-size: 14px;
     }
  }

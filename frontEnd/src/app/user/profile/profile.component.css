@@ -64,3 +64,9 @@
     background-color: #E5663D;
     color: #fff;
 }
+@media screen and (max-width: 768px) {
+    .create_account {   
+        width:90%;
+    }
+
+}
