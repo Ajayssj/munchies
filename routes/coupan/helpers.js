@@ -170,7 +170,7 @@ module.exports = {
                         coupan.userId = user._id;
                         canBeApply(coupan, function(should){
                             if(should.success){
-                                coupan = coupan.data;
+                                // coupan = coupan.data;
                                 res.json({success : true, data : coupan});
                             }else{
                                 res.json(should);
