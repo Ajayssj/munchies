@@ -1,11 +1,60 @@
 const { validationResult } = require('express-validator/check');
 
 const db = require('../../database');
+
+const Order = db.getCollection('orders');
 const Coupan = db.getCollection('coupans');
 const utils = require('../../utils');
 var cc = require('coupon-code');
 let moment = require('moment-timezone');
 
+const canBeApply = function(coupan,callback){
+    Order.aggregate(
+        [
+            {
+                $match : {
+                    userId :db.toObjectID(coupan.userId),
+                    coupanId : db.toObjectID(coupan._id)
+                }
+            },
+            {
+                $group: {
+                   _id : '$coupanId',
+                    used: {
+                            $sum: 1
+                        }
+                    
+                }
+            },
+            // {
+            //     $project : {
+            //         info : { $cond : {$eq: [ "$_id", db.toObjectID(coupan._id)]}}
+            //     }
+            // }
+            /* {
+                $project : {
+                    info: {
+                        $filter: {
+                            input: "$_id",
+                            as: "id",
+                            cond: { $eq: [ "$$id", db.toObjectID(coupan._id)] }
+                            }
+                        }
+                    }
+                
+            } */
+    
+        ]
+    ).toArray().then(result => {
+        if(result.length && coupan.frequency > result[0].used)
+            callback({success : true, data : result});
+        else if(!result.length)
+            callback({success : true, data : result});
+        else
+            callback({success : false, error : 'You can use this coupan more than ' + coupan.frequency})
+
+    }).catch(err => callback({success : false, error : err}));
+}
 
 const isCoupanExists = function(code){
     return new Promise((success,error) =>{
@@ -110,14 +159,24 @@ module.exports = {
     },
     applyCoupan : (req,res) => {
         const coupan = req.body.coupan;
-        if(coupan){
+        const user = req.session.user;
+        if(coupan && user){
             isCoupanExists(coupan).then(coupan => {
                 if(coupan){
                     let expired = isCoupanExpired(coupan.expiry)
                     if(expired)
                         res.json({success : false, error : 'Coupan expired!'});
                     else{
-                        res.json({success : true, data : coupan});
+                        coupan.userId = user._id;
+                        canBeApply(coupan, function(should){
+                            if(should.success){
+                                coupan = coupan.data;
+                                res.json({success : true, data : coupan});
+                            }else{
+                                res.json(should);
+                            }
+                        })
+                        
                     }
                      
                 }else{
@@ -127,7 +186,7 @@ module.exports = {
                 res.json({success : false, error : err})
             })
         }else{
-            res.json({success : false, error : 'Coupan code required!'})
+            res.json({success : false, error : 'Your Session expired Or Coupan not provided!'})
         }
     },  
     isValidCoupan : (coupanId,callback) =>{
@@ -143,6 +202,6 @@ module.exports = {
                 }else{
                     callback({success :false, error : 'Coupan Not Found!'});
                 }
-            }).catch(err =>  callback({ success : false, error : err}))
+        }).catch(err =>  callback({ success : false, error : err}))
     }
 }
