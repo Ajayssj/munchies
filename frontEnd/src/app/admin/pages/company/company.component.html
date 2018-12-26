@@ -134,7 +134,7 @@
       <div class="form-group">
         <label class="control-label">Type</label>
         <select [(ngModel)]="addPtype" placeholder="Select Type" class="form-control">
-          <option [value]="default" selected="selected">Select Type</option>
+          <option value="default" selected="selected">Select Type</option>
           <option *ngFor="let productType of productTypes" value="{{productType}}">{{productType}}</option>
         </select>
       </div>
@@ -162,8 +162,8 @@
       </div>
       <div class="form-group">
         <label class="control-label">Allergy Details</label>
-        <select [(ngModel)]="addPallergyDetails" placeholder="Select Company" class="form-control">
-          <option [value]="default" selected="selected">Select Allergy Details</option>
+        <select [(ngModel)]="addPallergyDetails" class="form-control">
+          <option value="default" selected="selected">Select Allergy Details</option>
           <option *ngFor="let allergy of allergyDetails" value="{{allergy}}">{{allergy}}</option>
         </select>
       </div>
@@ -181,7 +181,7 @@
     <h3>Edit Product</h3>
   </modal-header>
   <modal-content>
-    <div (keydown.enter)="editProduct(editModal, selectedProductObj)">
+    <div (keydown.enter)="editProduct(editModal, selectedProductObj)" (click)="hideAutoComplete = false">
       <div class="form-group">
         <label class="control-label">Name</label>
         <input type="text" class="form-control" [(ngModel)]="selectedProductObj.name" />
@@ -189,13 +189,19 @@
       <div class="form-group">
         <label class="control-label">Type</label>
         <select [(ngModel)]="selectedProductObj.type" placeholder="Select Type" class="form-control">
-          <option [value]="default" selected="selected">{{selectedProductObj.type}}</option>
+          <option value="{{selectedProductObj.type}}" selected="selected">{{selectedProductObj.type}}</option>
           <option *ngFor="let productType of productTypes" value="{{productType}}">{{productType}}</option>
         </select>
       </div>
       <div class="form-group">
         <label class="control-label">Company</label>
-        <input type="text" class="form-control" [(ngModel)]="selectedProductObj.company" />
+        <input type="text" class="form-control" (keydown)="hideAutoComplete=true" [(ngModel)]="selectedProductObj.company" />
+        <ul class="auto_complete_items" [hidden]="!hideAutoComplete">
+          <li 
+          *ngFor="let company of companyName" 
+          [ngClass]="{'hidden':(!ifMatchString(selectedProductObj.company | lowercase,company  | lowercase))}"
+          (click)="populateCompanyName(company)"><span>{{company}}</span></li>
+        </ul>
       </div>
       <div class="form-group">
         <label class="control-label">Quantity</label>
@@ -213,7 +219,7 @@
         <label class="control-label">Allergy Details</label>
         <!-- <input type="text" class="form-control" [(ngModel)]="selectedProductObj.allergyDetails" /> -->
         <select [(ngModel)]="selectedProductObj.allergyDetails" class="form-control">
-            <option [value]="default" selected="selected">Select Allergy Details</option>
+            <option value="default" selected="selected">Select Allergy Details</option>
             <option *ngFor="let allergy of allergyDetails" value="{{allergy}}">{{allergy}}</option>
           </select>
       </div>

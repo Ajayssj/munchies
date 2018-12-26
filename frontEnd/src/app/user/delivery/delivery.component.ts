@@ -92,6 +92,7 @@ export class DeliveryComponent implements OnInit {
       var question1 = this.route.snapshot.queryParamMap.get('question1');
       var question2 = this.route.snapshot.queryParamMap.get('question2');
       var selectedPlanName = this.route.snapshot.queryParamMap.get('selectedPlanName');
+      var selectedPlanRate = this.route.snapshot.queryParamMap.get('selectedPlanRate');
       var questionInfo =[]
       if(question1 && question1.length > 0)  {
         questionInfo.push({type: 'allergic', value: question1})
@@ -111,6 +112,7 @@ export class DeliveryComponent implements OnInit {
       'extraInfo': JSON.stringify(questionInfo)
     }
     this.data['planName'] = selectedPlanName;
+    this.data['planRate'] = selectedPlanRate;
     this.httpOptions = {
       headers: new HttpHeaders({
         'Cache-Control': 'no-cache'

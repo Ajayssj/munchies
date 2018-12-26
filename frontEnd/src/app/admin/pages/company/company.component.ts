@@ -41,7 +41,7 @@ export class CompanyComponent implements OnInit {
   addType: any;
   addPname: any;
   addPtype: any;
-  addPcompany: any;
+  addPcompany = '';
   addPquantity: any;
   addPcost: any;
   addPmrp: any;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-subscribe',
@@ -6,28 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./subscribe.component.css']
 })
 export class SubscribeComponent implements OnInit {
+  constructor(private router: Router) {}
   selectedPlanId = null;
   noOfWeeks = 0;
   selectedPlanName = '';
+  selectedPlanRate = '';
   plan = [{
     planId: "5c0e2531cdfb5107849569ea",
     planName: "Trial Week",
-    planRate: "500Rs/bag",
-    planText: "Try our snack bag of one week. You'll get one bag with 6 healthy snacks that will take care of your evening hunger pangs.",
+    planRate: "499",
+    planText: "Try our Munchpak Bag today!",
     weeks : 4
   },
   {
     planId: "5c0e2571cdfb5107849569ef",
     planName: "For 4 Weeks",
-    planRate: "500Rs/bag",
-    planText: "1 snack bag delivered each week for a period of 1 month",
+    planRate: "1950",
+    planText: "1 snack bag delivered each week every Monday for 4 weeks! ",
     weeks : 4
   },
   { 
     planId: "5c0e258acdfb5107849569f4",
     planName: "For 12 Weeks",
-    planRate: "500Rs/bag",
-    planText: "1 snack bag delivered each week for a period of 6 months",
+    planRate: "1950",
+    planText: "1 snack bag delivered each week every Monday for 12 weeks!",
     weeks : 12
   }];
   questions = [{
@@ -161,8 +164,6 @@ export class SubscribeComponent implements OnInit {
   }
   ]
 
-  constructor() { }
-
 
   ngOnInit() {
     console.log("hiiiiii", this.questions);
@@ -172,10 +173,15 @@ export class SubscribeComponent implements OnInit {
     this.selectedPlanId = itemObj.planId;
     this.noOfWeeks = itemObj.weeks;
     this.selectedPlanName = itemObj.planName;
+    this.selectedPlanRate = itemObj.planRate;
     
   }
   checkDelivery() {
     console.log("in check delivery");
     console.log("plan selected", this.selectedPlanId);
+    if(this.selectedPlanId == null || this.selectedPlanId == '') {
+
+      this.router.navigate(['/subscribe']);
+    }
   }
 }
