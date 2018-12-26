@@ -117,3 +117,8 @@ input:focus {
     margin-top: 0px;
     padding: 5px 30px;
 }
+.error {
+    color: red;
+    margin-bottom: 20px;
+    display: inline-block;
+}

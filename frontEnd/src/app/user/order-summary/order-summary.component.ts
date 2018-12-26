@@ -48,28 +48,28 @@ export class OrderSummaryComponent implements OnInit {
     console.log(this.customerData);
   }
   createOrder() {
-      this.customerData['planRate'] = this.subTotal - this.discount;
-      this.customerData['coupanId'] = this.coupanId;
-      console.log("hiiiiii", this.customerData);
-      this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.customerData).subscribe((res : any) => {
-        console.log("order created", res);
-        if(res.success) {
-          this.router.navigate(['/thank-you']);
-        }
-        else {
-          this.coupanCodeError = res.error;
-        }
-      },
-        err => {
-          if(err.status == 401)
-            alert(err.error.error);
-          console.log(err);
-        });
+    if(!this.coupanCodeError || this.couponCode == '') {
+    this.customerData['planRate'] = this.subTotal - this.discount;
+    this.customerData['coupanId'] = this.coupanId;
+    console.log("hiiiiii", this.customerData);
+    this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.customerData).subscribe((res : any) => {
+      console.log("order created", res);
+      if(res.success) {
+        this.router.navigate(['/thank-you']);
+      }
+    },
+      err => {
+        if(err.status == 401)
+          alert(err.error.error);
+        console.log(err);
+      });
+    }
   }
   applyCoupon(code) {
     this.http.put(this.auth.getDomainName() + '/api/coupan/apply', {coupan: code}).subscribe((res: any) => {
       console.log(res);
       if(res.success) {
+        this.coupanCodeError = '';
         this.coupanId = res.data._id;
         if(res.data.type == 2) {
           this.discount = res.data.discount;
@@ -79,6 +79,8 @@ export class OrderSummaryComponent implements OnInit {
         }
       }
       else {
+        this.coupanCodeError = res.error;
+        console.log(this.coupanCodeError)
         this.subTotal = this.subTotal;
       }
       console.log(this.subTotal)

@@ -20,7 +20,7 @@
               <div *ngIf="question2" class="selected_product">No {{question2}}</div>
           </div>
           <div class="sub_total_shipment">
-                <h2 *ngIf="couponCodeError != ''">{{couponCodeError}}</h2>
+                <span class="error" *ngIf="coupanCodeError != ''">{{coupanCodeError}}</span>
                 <div class="block first">
                     <span class="offer_code">Offer Code</span>
                     <input class="offer_code_input" type="text" [(ngModel)]="couponCode" name="code" placeholder="Code" />

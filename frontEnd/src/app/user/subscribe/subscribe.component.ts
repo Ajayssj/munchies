@@ -29,7 +29,7 @@ export class SubscribeComponent implements OnInit {
   { 
     planId: "5c0e258acdfb5107849569f4",
     planName: "For 12 Weeks",
-    planRate: "1950",
+    planRate: "5740",
     planText: "1 snack bag delivered each week every Monday for 12 weeks!",
     weeks : 12
   }];
