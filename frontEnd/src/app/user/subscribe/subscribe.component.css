@@ -181,7 +181,7 @@ input[type='radio'] {
     background-color: rgba(50, 50, 50, 1);
     border: 2px solid rgba(50, 50, 50, 1);
 }*/
-.ok_button a {
+button.btn {
     text-decoration: none;
     color: rgba(50, 50, 50, 1);
     padding: 10px 20px;
@@ -190,11 +190,31 @@ input[type='radio'] {
     border: 2px solid rgba(50, 50, 50, 1);
     padding: 10px 50px;
     font-weight: bold;
+    cursor: pointer;
+    outline: none;
 }
-.ok_button a:hover {
+button.btn:hover {
     color: #fff;
     background-color: rgba(50, 50, 50, 1);
     border: 2px solid rgba(50, 50, 50, 1);
+    outline: none;
+}
+.error_wrapper_parent {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 10px;
+}
+.error_wrapper {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: #f2dede;
+    padding: 10px 0px;
+}
+.error {
+    color: #a94442;
+    display: inline-block;
+    font-size: 22px;
 }
 
 @media screen and (max-width: 768px) {

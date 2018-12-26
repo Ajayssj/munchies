@@ -7,8 +7,8 @@
 </div>
 <h2>ONLY IN NAMMA BENGALURU!</h2>
 <div class="content_box_wrapper">
-  <div class="content_box">
-      <div>
+  <div class="content_box one">
+      <div class="content-box-icon-left">
           <img style="width: 100px;" src="assets/hurry.png" alt="No Image"/>
       </div>
       <div>
@@ -120,6 +120,7 @@
 </div>
 <div class="page_down_content">
     <h2>Subscribe to get the latest news about products and healthy snacking recipes</h2>
-    <input type="email" name="email" placeholder="E-mail Address" />
-    <div class="submitBtn"><button class="btn submit">Subscribe</button></div>
+    <div *ngIf="successMessage != ''" class="">{{successMessage}}</div>
+    <input type="email" [(ngModel)]="subscribeEmail" name="email" placeholder="E-mail Address" />
+    <div class="submitBtn"><button (click)="mailchimp(subscribeEmail)" class="btn submit">Subscribe</button></div>
 </div>

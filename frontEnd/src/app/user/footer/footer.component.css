@@ -79,14 +79,18 @@ footer .content {
     .footer_line div {
         padding-right: 0px;
         margin-bottom: 0px;
-        text-align: left;
+        text-align: center;
         padding-right: 10px;
         display: inline-block; 
         margin-bottom: 10px;
         box-sizing: border-box;
+        font-size: 12px;
     }
     .footer_line {
         flex-direction: row;
+    }
+    footer .content {
+        width: 100%;
     }
     .social_media_icons {
         text-align: center;
@@ -95,11 +99,20 @@ footer .content {
 @media screen and (min-width: 992px) {
 
     footer .content {
-        width: 72%;
+        width: 100%;
+    }
+    .footer_line div {
+        font-size: 14px;
     }
 }
 @media screen and (min-width: 1024px) {
 
 }
 @media screen and (min-width: 1280px) {
+    footer .content {
+        width: 100%;
+    }
+    .footer_line div {
+        font-size: 16px;
+    }
 }

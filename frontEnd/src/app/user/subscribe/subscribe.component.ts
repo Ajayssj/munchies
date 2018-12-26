@@ -12,6 +12,8 @@ export class SubscribeComponent implements OnInit {
   noOfWeeks = 0;
   selectedPlanName = '';
   selectedPlanRate = '';
+  queryParams = {};
+  selectPlanError = '';
   plan = [{
     planId: "5c0e2531cdfb5107849569ea",
     planName: "Trial Week",
@@ -134,7 +136,7 @@ export class SubscribeComponent implements OnInit {
 
   ngOnInit() {
     console.log("hiiiiii", this.questions);
-  }
+  } 
 
   selectedPlan(itemObj) {
     this.selectedPlanId = itemObj.planId;
@@ -143,12 +145,22 @@ export class SubscribeComponent implements OnInit {
     this.selectedPlanRate = itemObj.planRate;
     
   }
-  checkDelivery() {
+  checkDelivery(element) {
     console.log("in check delivery");
     console.log("plan selected", this.selectedPlanId);
     if(this.selectedPlanId == null || this.selectedPlanId == '') {
-
+      this.selectPlanError = 'Please select a plan';
+      console.log(element);
+      element.scrollIntoView({ behavior: 'smooth' });
       this.router.navigate(['/subscribe']);
+    }
+    else {
+      this.queryParams = { selectedPlan: this.selectedPlanId, selectedPlanRate: this.selectedPlanRate,
+        selectedPlanName: this.selectedPlanName,question1: this.questions[0].selectedOpt,
+        question2: this.questions[1].selectedOpt };
+      console.log(this.queryParams);
+      this.selectPlanError = '';
+      this.router.navigate(['/delivery'], {queryParams: this.queryParams});
     }
   }
 }

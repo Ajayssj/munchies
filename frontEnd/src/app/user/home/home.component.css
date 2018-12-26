@@ -440,9 +440,11 @@ p {
     .content_box img {
         width: 100%;
     }
-    
+    .content-box-icon-left {
+        padding-left: 20px;
+    }
     .content_box div {
-        width: 22%;
+        width: 18%;
         text-align: left;
     }
     .content_box .text {
@@ -459,6 +461,13 @@ p {
     }
     .content_box .content-box-icon {
         width: 18%;
+    }
+    .content_box.one .text {
+        color: #fff;
+    }
+    
+    .content_box.two .text {
+        color: #fff;
     }
     .boxes .box {
         width: 49%; 

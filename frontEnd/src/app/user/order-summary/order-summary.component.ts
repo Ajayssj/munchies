@@ -49,7 +49,6 @@ export class OrderSummaryComponent implements OnInit {
   }
   createOrder() {
     if(!this.coupanCodeError || this.couponCode == '') {
-    this.customerData['planRate'] = this.subTotal - this.discount;
     this.customerData['coupanId'] = this.coupanId;
     console.log("hiiiiii", this.customerData);
     this.http.post(this.auth.getDomainName() + '/api/order/createOrder', this.customerData).subscribe((res : any) => {
