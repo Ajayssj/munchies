@@ -18,7 +18,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  snacks works!\n</p>\n"
+module.exports = "<div class=\"row\">\n  <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n  <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Customer Details\">\n      <!-- <Button class=\"btn btn-primary\" (click)=\"navigateBack()\">Back</Button> -->\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>id</th>\n            <th>title</th>\n            <th>code</th>\n            <th>expiry</th>\n            <th>discount</th>\n            <th>frequency</th>\n            <th>description</th>\n            <th>type</th>\n            <!-- <th>Plan Detail</th> -->\n          </tr>\n        </thead>\n        <tbody>\n            <tr *ngIf=\"customer\">\n            <td>1</td>\n            <td>{{customer.order.customerData.firstName + ' ' + customer.order.customerData.lastName}}</td>\n            <td>{{customer.order.customerData.phoneNo}}</td>\n            <td>{{customer.order.Area_of_delivery}}</td>\n            <td>{{customer.order.address}}</td>\n            <td>{{customer.plan.title}}</td>\n            <td>{{(getActiveWeek(customer.startDate))?getActiveWeek(customer.startDate):'Not started'}}</td>\n            <td><span *ngFor=\"let weeks of customer.skipedWeeks let weekNoIndex = index\">{{weeks.wNo}}<span *ngIf=\"customer.skipedWeeks.length-1 != weekNoIndex\">,</span></span></td>\n          </tr>\n        </tbody>\n      </table>\n    </card>\n  </div>\n</div>\n"
 
 /***/ }),
 

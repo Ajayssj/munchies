@@ -90,7 +90,7 @@ export class SignInComponent implements OnInit {
           console.log(this.authService.getUserName());
           console.log(this.username);
           if (this.authService.isLoggedIn()) {
-            this.router.navigate(['/manage-subscription']);
+            this.router.navigate(['/home']);
           }
         }
         else {

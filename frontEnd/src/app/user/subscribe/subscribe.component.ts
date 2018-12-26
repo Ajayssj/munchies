@@ -78,45 +78,7 @@ export class SubscribeComponent implements OnInit {
     class: "first_box",
     selectedOpt: null
   },
- /* {
-    qId: 2,
-    question: "Pick flavours you don't like",
-    options: [{
-      optionId: 1,
-      optionText: "Chocolate",
-      optName: "q2"
-    },
-    {
-      optionId: 2,
-      optionText: "Strawberry",
-      optName: "q2"
-    },
-    {
-      optionId: 3,
-      optionText: "Mint",
-      optName: "q2"
-    },
-    {
-      optionId: 4,
-      optionText: "Tomato",
-      optName: "q2"
-    },
-    {
-      optionId: 5,
-      optionText: "No Preference",
-      optName: "q2"
-    }],
-    images: [{
-      url: "../../assets/harvest.png",
-      alt: "harvest.png"
-    },
-    {
-      url: "../../assets/cheese.png",
-      alt: "cheese.png"
-    }],
-    class: "second_box",
-    selectedOpt: null
-  },*/
+
   {
     qId: 2,
     question: "Pick fruits you don't like",
@@ -147,7 +109,12 @@ export class SubscribeComponent implements OnInit {
     },
     {
       optionId: 6,
-      optionText: "No Preference",
+      optionText: "Orange",
+      optName: "q3"
+    },
+    {
+      optionId: 7,
+      optionText: "I Will Eat Any",
       optName: "q3"
     }],
     images: [{

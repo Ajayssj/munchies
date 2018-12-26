@@ -45,8 +45,7 @@ p {
     }
     ol {
         margin-top: 35px;
-        margin-left: 5px;
-        padding-left: 5px;
+        padding: 0px 20px;
     }
 }
 @media screen and (min-width: 768px) {
