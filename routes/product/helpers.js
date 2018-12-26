@@ -76,6 +76,11 @@ module.exports = {
                         "weeks._id" : 0
                     }
                 },
+                {
+                    $sort : {
+                        _id : -1
+                    }
+                }
         
             ]
         

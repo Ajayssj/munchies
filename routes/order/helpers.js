@@ -299,11 +299,17 @@ module.exports = {
                             }
                         },
                         {
+                            $sort : {
+                                date : -1
+                            }
+                        },
+                        {
                             $skip : skip
                         },
                         {
                             $limit : limit
-                        }
+                        },
+                        
 
                 
                     ]
@@ -423,6 +429,12 @@ module.exports = {
                          
                     }
                 },
+                
+                {
+                    $sort : {
+                        date : -1
+                    }
+                }
             ]
         
         ).toArray()
@@ -518,5 +530,5 @@ module.exports = {
         }else{
             res.json({success : false, error : 'Invalid Parameters'})
         }
-    }
+    }   
 }
