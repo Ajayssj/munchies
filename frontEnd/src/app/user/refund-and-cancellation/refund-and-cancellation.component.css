@@ -17,6 +17,9 @@
     margin-bottom: 5px;
 }
 
-p {
-    text-align: justify;
+
+@media screen and (max-width: 768px) {
+    .rf_page_wrapper {
+        padding: 40px 20px;
+    }
 }

@@ -44,7 +44,7 @@ nav .wrapper ul li.bars, nav .wrapper ul li.bars_cross {
     display: none;
     position: absolute;
     right: 15px;
-    top: 25px;
+    top: 20px;
     cursor: pointer;
     background: #DE6B48;
     padding: 12px 19px 8px 10px;
@@ -370,16 +370,17 @@ nav .wrapper ul li.bars_cross .bar3 {
         display: block;
         width: 100%;
     }
-    
-   
-}
-
-@media screen and (max-width: 768px) {
     .menu_item{
         display: block;
         width: 100%;
     }
+    .site_header .wrapper{
+        padding: 0px;
+    }
+   
 }
+
+
 @media screen and (min-width: 768px) {
     nav .wrapper ul li {
         margin-right: 20px;

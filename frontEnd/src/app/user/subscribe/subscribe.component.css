@@ -202,8 +202,8 @@ input[type='radio'] {
         position: absolute;
         top: 0px;
         left: 96px;
-        width: 99px;
-        height: 100px;
+        width: auto;
+        height: 70px;
     }
     /*.question_wrapper .product_images.second_box img:last-child {
         position: absolute;
@@ -212,20 +212,25 @@ input[type='radio'] {
     }*/
     .question_wrapper .product_images.first_box img:last-child {
         position: absolute;
-        top: 90px;
+        top: 70px;
         left: 30px;
+        width: auto;
+        height: 90px;
     
     }
     .question_wrapper .product_images.third_box img:first-child {
         position: absolute;
         top: 0px;
+        width: auto;
+        height: 90px;
         
     }
     .question_wrapper .product_images.third_box img:last-child {
         position: absolute;
-        left: 90px;
+        left: 75px;
         top: 83px;
-        width: 90px;
+        width: auto;
+        height: 90px;
     }
   
     .select_plan .plan {

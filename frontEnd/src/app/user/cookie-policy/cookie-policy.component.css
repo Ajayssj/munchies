@@ -15,3 +15,8 @@
 .cp_wrapper p {
     margin: .625rem 0 .625rem 0;
 }
+@media screen and (max-width: 768px) {
+    .cp_wrapper {
+        padding: 40px 20px;
+    }
+}

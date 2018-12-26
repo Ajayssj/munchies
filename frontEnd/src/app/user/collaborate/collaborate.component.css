@@ -1,6 +1,7 @@
 
 .vendors_home_chefs {
     width: 100%;
+    
 }
 .vendors_home_chefs .box {
     padding: 20px;
@@ -45,4 +46,9 @@
     background-color: transparent;
     transition: color 0.4s ease 0s, background-color 0.4s ease 0s;
     font-weight: bold;
+}
+@media screen and (max-width: 768px) {
+    .vendors_home_chefs .box{
+        padding: 40px 20px;
+    }
 }
