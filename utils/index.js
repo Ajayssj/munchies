@@ -2,6 +2,29 @@ var crypto = require('crypto');
 const credentionals = require('../config/credentials');
 const env = require('../config/env');
 const nodemailer = require('nodemailer');
+var request = require("request");
+
+const sendMailRemotely = function(data,cb){
+    var options = { 
+        method: 'GET',
+        url: env.EMAIL_ORIGIN + '/sendMail',
+        qs: data,
+        headers: 
+        { 'postman-token': 'a5408ac3-1715-1d10-d51f-28bdf6576696',
+            'cache-control': 'no-cache',
+            'content-type': 'application/x-www-form-urlencoded' },
+        form: {} };
+
+        request(options, function (error, response, body) {
+        if (error)  cb({success : false, error : error});
+        if(JSON.parse(body).success)
+            cb({success : true, body});
+        else
+            cb({success : false, error : 'Email Not Sent, Something Went Wrong'})
+        console.log(body);
+    });
+
+}
 
 module.exports = {
    createHash : function(data){
@@ -13,7 +36,7 @@ module.exports = {
    },
    sendRecoveryPasswordEmail : function(email,callback){
 
-    let transporter = nodemailer.createTransport(credentionals.MAIL_CRED);
+    /* let transporter = nodemailer.createTransport(credentionals.MAIL_CRED);
     // setup email data with unicode symbols
     let mailOptions = {
         from: credentionals.MAIL_CRED.auth.user, // sender address
@@ -27,10 +50,12 @@ module.exports = {
             callback({result : false, error : error});
         else
             callback({result : true, info });
-    });
+    }); */
+    let data = { link : this.createPasswordRecoveryLink(this.encrypt(email)), type : 2, to : email }
+     sendMailRemotely(data,callback);
    },
    sendSkippedWeekMail : function(info,callback){
-
+/* 
     let transporter = nodemailer.createTransport(credentionals.MAIL_CRED);
     // setup email data with unicode symbols
     let mailOptions = {
@@ -45,12 +70,14 @@ module.exports = {
             callback({result : false, error : error});
         else
             callback({result : true, info });
-    });
+    }); */
+    const data = {firstName : info.user.firstName, lastName : info.user.lastName, week : info.week, to : info.admin, email : info.user.email , type : 1}
+    sendMailRemotely(data,callback);
    },
    sendRegistrationEmail : function(dataObj,callback){
        console.log("sendRegistrationEmail called==>",dataObj.email,dataObj.password);
        
-    let transporter = nodemailer.createTransport(credentionals.MAIL_CRED);
+    /* let transporter = nodemailer.createTransport(credentionals.MAIL_CRED);
     // setup email data with unicode symbols
     let mailOptions = {
         from: credentionals.MAIL_CRED.auth.user, // sender address
@@ -64,7 +91,9 @@ module.exports = {
             callback({result : false, error : error});
         else
             callback({result : true, info:info });
-    });
+    }); */
+    const data = { email :dataObj.email , type : 3, password : dataObj.password, to : dataObj.email}
+    sendMailRemotely(data,callback);
    },
    encrypt : function(data){
     let cipher = crypto.createCipher('aes-128-cbc',credentionals.CRYPTO_Key);
