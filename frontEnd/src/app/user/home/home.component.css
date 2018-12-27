@@ -290,6 +290,9 @@ p {
     width: 100%;
     float: left;
 }
+.content_box_two {
+    padding-top: 0px;
+}
 .icons {
     width: 50%;
     float: left;
@@ -460,6 +463,9 @@ p {
     .content_box_one, .content_box_two, .content_box_three {
         width: 100%;
         padding: 30px 15px;
+    }
+    .content_box_two {
+        padding-top: 0px;
     }
     .content_box_one .icons .left {
         padding: 0px;
