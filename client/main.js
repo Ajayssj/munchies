@@ -4214,7 +4214,7 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.mailchimp = function (email) {
         var _this = this;
         this.http.get(this.authService.getDomainName() + '/api/mailchimp/subscribeUser/' + email, {}).subscribe(function (res) {
-            console.log(email);
+            console.log(res.body.status);
             if (!res.isError) {
                 console.log(email);
                 _this.successMessage = 'Success';
