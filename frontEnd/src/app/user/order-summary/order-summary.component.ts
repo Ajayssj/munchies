@@ -28,24 +28,29 @@ export class OrderSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.customerData = JSON.parse(this.auth.getCustomerData());
-    console.log(this.customerData)
-    this.selectedPlanId = this.customerData.planId;
-    this.planTitle = this.customerData.planName;
-    this.subTotal = this.customerData.planRate;
-    var extraInfo = JSON.parse(this.customerData.extraInfo);
-    console.log(extraInfo)
-    if(extraInfo && extraInfo[0]) {
-       this.question1 = extraInfo[0].value;
+    if(this.customerData == null) {
+      this.router.navigate(['/subscribe']);
     }
-    if(extraInfo && extraInfo[1]) {
-      this.question2 = extraInfo[1].value;
+    else {
+        console.log(this.customerData)
+        this.selectedPlanId = this.customerData.planId;
+        this.planTitle = this.customerData.planName;
+        this.subTotal = this.customerData.planRate;
+        var extraInfo = JSON.parse(this.customerData.extraInfo);
+        console.log(extraInfo)
+        if(extraInfo && extraInfo[0]) {
+          this.question1 = extraInfo[0].value;
+        }
+        if(extraInfo && extraInfo[1]) {
+          this.question2 = extraInfo[1].value;
+        }
+        console.log(this.customerData.planId)
+        console.log(this.question1)
+        console.log(this.question2)
+        console.log(this.customerData);
+        delete this.customerData.planName;
+        console.log(this.customerData);
     }
-    console.log(this.customerData.planId)
-    console.log(this.question1)
-    console.log(this.question2)
-    console.log(this.customerData);
-    delete this.customerData.planName;
-    console.log(this.customerData);
   }
   createOrder() {
     if(!this.coupanCodeError || this.couponCode == '') {

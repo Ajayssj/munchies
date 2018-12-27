@@ -1,8 +1,16 @@
 .pageNo {
-    padding: 5px 10px;
+    padding: 4px 10px;
     cursor: pointer;
     border: 1px solid #e2e2e2;
+    color: #26253c;
 }
-.pageNo.active {
-    background-color: rgba(252,164,0,.5);
+.pageNo.active, .pageNo:hover {
+    background-color: #2199e8;
+    color: #fff;
+    box-shadow: 0px;
+}
+.btn[disabled] {
+    background: #fff;
+    color: #26253c;
+    border: 1px solid gray;
 }

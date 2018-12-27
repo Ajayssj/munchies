@@ -28,67 +28,21 @@
             <td *ngIf="!user.isAccepted" ><a (click)="acceptOrder(user._id,true,i)" class="btn btn-danger"><i class=""></i>No</a></td>
             <!-- <td><a (click)="viewUserPlan(user.user._id,user.planInfo.planId)" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>View</a></td> -->
           </tr>
+          <tr *ngIf="!users && !users.length > 0">
+            <td colspan="6">No Records</td>
+          </tr>
          
         </tbody>
       </table>
-      <div class="pagination-wrapper">
+      <div *ngIf="users && users.length > 0" class="pagination-wrapper">
         <div class="form-group pages">
           <div class="my-pagination">
             <button [disabled]="pageNumber == 1" (click)="pageChanged(pageNumber-1)" class="btn btn-primary">Prev</button>
-            <span class="pageNo" *ngFor="let page of pages; let i=index" [ngClass]="{'active': pageNumber == (i+1)}" (click)="pageChanged(i+1)">{{i+1}}</span>
+            <span class="btn pageNo" *ngFor="let page of pages; let i=index" [ngClass]="{'active': pageNumber == (i+1)}" (click)="pageChanged(i+1)">{{i+1}}</span>
             <button [disabled]="pageNumber == pages.length" (click)="pageChanged(pageNumber+1)" class="btn btn-primary">Next</button>
           </div>
         </div>
       </div>
-      <!-- <form class="pagination-wrapper">
-        <div class="form-group pages">
-          <pagination-controls class="my-pagination" id="pager" (pageChange)="pageChanged($event)" directionLinks="true"
-            autoHide="false" previousLabel="Prev" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
-            screenReaderCurrentLabel="You're on page">
-          </pagination-controls>
-        </div>
-        <div class="form-group options pages">
-          <div class="input-group input-group-sm">
-            <select class="form-control" name="pageChangedName" [(ngModel)]="limit" (ngModelChange)="loadData()">
-              <option>1</option>
-              <option>5</option>
-              <option>10</option>
-              <option>20</option>
-              <option>50</option>
-              <option>100</option>
-              <option>200</option>
-            </select>
-            <span class="input-group-addon addon-right">Per Page</span>
-          </div>
-        </div>
-      </form> -->
     </card>
   </div>
 </div>
-<!-- <div class="row">
-    <div class="col-md-12">
-      <card cardTitle="Customer Details">
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Area of Delivery</th>
-              <th>Week Number</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of users, let i=index">
-              <td>{{i+1}}</td>
-              <td>{{user.user.firstName}} {{user.user.lastName}}</td>
-              <td>{{user.address}}</td>
-              <td>{{user.Area_of_delivery}}</td>
-              <td><a (click)="viewUserWeek(user.user._id,user.planInfo.planId,user.planInfo.weeks,user.planInfo._id)" class="btn btn-info"><i class="fa fa-pencil fa-fw"></i>{{user.planInfo.weeks}}</a></td>
-            </tr>
-           
-          </tbody>
-        </table>
-      </card>
-    </div>
-  </div> -->

@@ -35,6 +35,8 @@ footer .content {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    max-width: 1024px;
+    margin: 0 auto;
 }
 .footer_line div {
     text-align: center;

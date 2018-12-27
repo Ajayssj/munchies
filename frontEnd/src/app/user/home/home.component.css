@@ -4,7 +4,7 @@
     text-align: center;
 }
 .snack_right_video h2 {
-    color: #292929;
+    color: #525252;
     font-size: 40px;
     font-weight: normal;
     letter-spacing: 0em;
@@ -74,12 +74,16 @@
     width: 100%;
     font-size: 30px;
 }
+.content_box_wrapper > h2 {
+    margin: 75px 0px 30px 0px;
+}
 .text-upper {
     text-transform: uppercase;
 }
 .boxes {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 75px;
 }
 .boxes .box {
     border: 6pt solid #e3c567;
@@ -124,7 +128,7 @@
 }
 .subscribe_btn2 a:hover {
     background-color: #fff;
-    color: #292929;
+    color: #525252;
     border-color: #fff;
 }
 .whats_inside {
@@ -273,6 +277,68 @@ p {
     text-align: justify;
 }
 
+/* **************************** Green Box New Code ************************************* */
+
+.green_box {
+    background: #9ebc9e;
+    width: 100%;
+    float: left;
+}
+.content_box_one, .content_box_two, .content_box_three {
+    padding: 50px 75px;
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+}
+.icons {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+}
+.icons img {
+    width: 128px;
+    height: auto;
+}
+.content_box_two .icons {
+    text-align: right;
+}
+.icons div {
+    float: left;
+    box-sizing: border-box;
+}
+.content_box_one .icons .left, .content_box_three .icons .left {
+    padding-right: 50px;
+}
+.content_box_two .icons .left {
+    float: right;
+    padding-right: 0px;
+}
+.content_box_two .icons .right {
+    float: right;
+    padding-right: 50px;
+}
+.content_box_text {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 16px;
+    line-height: 24px;
+}
+.content_box_three .content_box_text {
+    color: #525252;
+    font-size: 18px;
+}
+.content_box_one .content_box_text p, .content_box_three .content_box_text p {
+    text-align: left;
+}
+.content_box_two .content_box_text p {
+    text-align: right;
+}
+
+
+/* **************************** Green Box New Code ************************************* */
+
 @media screen and (min-width: 300px) {
     header, .content {
         left: 0;
@@ -370,6 +436,7 @@ p {
     }
 }
 
+
 @media screen and (max-width: 300px) {
     .content_box .content-box-icon {
         width: 100%;
@@ -389,8 +456,33 @@ p {
 }
 
 
-@media screen and (min-width: 480px) {
-    
+@media screen and (max-width: 768px) {
+    .content_box_one, .content_box_two, .content_box_three {
+        width: 100%;
+        padding: 30px 15px;
+    }
+    .content_box_one .icons .left {
+        padding: 0px;
+    }
+    .content_box_two .icons .right {
+        padding: 0px;
+    }
+    .icons {
+        width: 100%;
+    }
+    .icons div {
+        width: 100%;
+        text-align: center;
+        padding: 0px;
+        margin-bottom: 20px;
+    }
+    .content_box_text {
+        width: 100%;
+        text-align: center;
+    }
+    .content_box_two .content_box_text p {
+        text-align: left;
+    }
 }
 @media screen and (min-width: 768px) {
     
@@ -479,6 +571,9 @@ p {
     .text_area {
         font-size: 14px;
         width: 43%;
+    }
+    .icons img {
+        width: 100px;
     }
     .food_box .img {
         width: 53%;

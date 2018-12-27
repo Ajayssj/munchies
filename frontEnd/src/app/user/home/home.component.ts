@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   mailchimp(email){
     this.http.get( this.authService.getDomainName() +  '/api/mailchimp/subscribeUser/' + email ,{}).subscribe((res : any) => {
        
-      console.log(email);
+      console.log(res.body.status);
       if(!res.isError) {     
         console.log(email);
         this.successMessage = 'Success';

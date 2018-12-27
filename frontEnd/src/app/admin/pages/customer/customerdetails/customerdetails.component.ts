@@ -16,10 +16,10 @@ export class CustomerdetailsComponent implements OnInit {
   tableData: Array<any>;
 
   /* pagination Info */
-  pageSize = 10;
+  pageSize = 1;
   pageNumber: number = 1;
   pages = [];
-  limit = 10;
+  limit = 1;
   pageChanged(pN: number): void {
     this.pageNumber = pN;
     console.log(pN);
