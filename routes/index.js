@@ -13,6 +13,7 @@ module.exports = {
         const analysisApi = require('./analysis');
         const publicApi = require('./public');
         const coupanApi = require('./coupan');
+        const mailchimpApi = require('./mailchimp');
 
         app.use('/public/api',publicApi);
         app.use('/api', userApi);
@@ -23,6 +24,7 @@ module.exports = {
         app.use('/api',companyApi);
         app.use('/api',analysisApi);
         app.use('/api',coupanApi);
+        app.use('/api',mailchimpApi);
         app.use(express.static('client'));
         app.get('/*', (req, res) => res.sendFile(__baseUrl + '/client/'));
 

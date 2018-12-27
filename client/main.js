@@ -4213,7 +4213,7 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.mailchimp = function (email) {
         var _this = this;
-        this.http.get(this.authService.getDomainName() + '/public/api/mailchimp/subscribeUser/' + email, {}).subscribe(function (res) {
+        this.http.get(this.authService.getDomainName() + '/api/mailchimp/subscribeUser/' + email, {}).subscribe(function (res) {
             console.log(email);
             if (!res.isError) {
                 console.log(email);

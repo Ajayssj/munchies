@@ -10,8 +10,8 @@
             <th>No</th>
             <th>Name</th>
             <th>Contact</th>
-            <th>Area</th>
             <th>address</th>
+            <th>Area Of Delivery</th>
             <th>Plan</th>
             <th>Current Week</th>
             <th>Skipped Week</th>
@@ -23,8 +23,8 @@
             <td>1</td>
             <td>{{customer.order.customerData.firstName + ' ' + customer.order.customerData.lastName}}</td>
             <td>{{customer.order.customerData.phoneNo}}</td>
-            <td>{{customer.order.Area_of_delivery}}</td>
             <td>{{customer.order.address}}</td>
+            <td>{{customer.order.Area_of_delivery}}</td>
             <td>{{customer.plan.title}}</td>
             <td>{{(getActiveWeek(customer.startDate))?getActiveWeek(customer.startDate):'Not started'}}</td>
             <td><span *ngFor="let weeks of customer.skipedWeeks let weekNoIndex = index">{{weeks.wNo}}<span *ngIf="customer.skipedWeeks.length-1 != weekNoIndex">,</span></span></td>

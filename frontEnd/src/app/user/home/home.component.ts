@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
   mailchimp(email){
-    this.http.get( this.authService.getDomainName() +  '/public/api/mailchimp/subscribeUser/' + email ,{}).subscribe((res : any) => {
+    this.http.get( this.authService.getDomainName() +  '/api/mailchimp/subscribeUser/' + email ,{}).subscribe((res : any) => {
        
       console.log(email);
       if(!res.isError) {     
