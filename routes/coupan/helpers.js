@@ -136,8 +136,7 @@ module.exports = {
     },
     editCoupan : (req,res) => {
         const coupanId = req.body.coupanId;
-        const coupan = req.body.coupan;
-        if(coupanId && coupan){
+        if(coupanId){
             const title = req.body.title;
             const frequency = req.body.frequency;
             const discount = req.body.discount;
@@ -146,7 +145,7 @@ module.exports = {
 
             Coupan.updateOne({_id : db.toObjectID(coupanId)},
             {
-                $set : {title,code : coupan, expiry : expiryDate, discount : parseFloat(discount), frequency : Number(frequency),description}
+                $set : {title, expiry : expiryDate, discount : parseFloat(discount), frequency : Number(frequency),description}
             }).then(coupan => {
                 if(coupan.result.nModified == 1)
                     res.json({success : true, message : 'Coupan Modified Successfully!'})

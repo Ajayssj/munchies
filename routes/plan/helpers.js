@@ -8,7 +8,6 @@ const PlansExtended = db.getCollection('plansExtended');
 const utils = require('../../utils');
 const User = db.getCollection('user');
 let moment = require('moment-timezone');
-let indianTime = moment.tz('Asia/Calcutta');
 const getAdminEmails = (cb) => {
     User.find({ role : 2}).toArray().then(users => {
         cb({success : true, users : users })
@@ -400,7 +399,7 @@ module.exports = {
             planId : db.toObjectID(planId), 
             userId : db.toObjectID(userId),
             activatedDate : new Date().getTime(),
-            startDate : getNextMondayDate(new Date()),
+            startDate : getNextMondayDate(new Date(moment(moment.tz('Asia/Calcutta').format()))),
             isCustom :  false,
             skipedWeeks : [],
             customWeeks : [],
@@ -758,7 +757,8 @@ module.exports = {
                         getAdminEmails((result) => {
                             if(result.success){
                                 result.users.forEach(admin => {
-                                    utils.sendSkippedWeekMail({week : value.week, user : req.session.user, admin : admin.email},(result) => {
+                                    let nexWeekDate = getNextMondayDate(new Date(moment(moment.tz('Asia/Calcutta').format())))
+                                    utils.sendSkippedWeekMail({week : value.week, user : req.session.user, nexWeekDate, admin : admin.email},(result) => {
                                         if(result.result)
                                             console.log( admin.email + ' Skipped Week Mail Sent Successfully!');
                                         else
