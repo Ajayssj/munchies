@@ -6,7 +6,7 @@
         <div class="signin_box_content">
             <h2>Welcome to MunchPak!</h2>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <div class="invalid-feedback" *ngIf="!success">{{error}}</div>
+                <div class="invalid-feedback error" *ngIf="!success">{{error}}</div>
                 <input class="border_bottom" type="email" formControlName="username" name="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Email ID" required />
                 <div *ngIf="submitted && (f.username.errors || f.username.invalid)" class="invalid-feedback">
                     <div *ngIf="f.username.errors.required">Username is required</div>

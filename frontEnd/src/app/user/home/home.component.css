@@ -334,9 +334,11 @@ p {
 }
 .content_box_one .content_box_text p, .content_box_three .content_box_text p {
     text-align: left;
+    margin: 0px;
 }
 .content_box_two .content_box_text p {
     text-align: right;
+    margin: 0px;
 }
 
 
@@ -354,12 +356,12 @@ p {
     text-align: center;
     box-sizing: border-box;
     background-color: #f2dede;
-    padding: 5px 0px;
+    padding: 10px 0px;
 }
 .error, .success {
     color: #a94442;
     display: inline-block;
-    font-size: 22px;
+    font-size: 16px;
 }
 
 @media screen and (min-width: 300px) {
@@ -487,7 +489,7 @@ p {
     .content_box_two {
         padding-top: 0px;
     }
-    .content_box_one .icons .left {
+    .content_box_one .icons .left, .content_box_three .icons .left {
         padding: 0px;
     }
     .content_box_two .icons .right {
@@ -508,6 +510,7 @@ p {
     }
     .content_box_two .content_box_text p {
         text-align: left;
+        margin-bottom: 20px;
     }
 }
 @media screen and (min-width: 768px) {
@@ -597,9 +600,6 @@ p {
     .text_area {
         font-size: 14px;
         width: 43%;
-    }
-    .icons img {
-        width: 100px;
     }
     .food_box .img {
         width: 53%;

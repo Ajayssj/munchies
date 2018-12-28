@@ -118,7 +118,7 @@ input:focus {
     padding: 5px 30px;
 }
 .error {
-    color: red;
+    color: #a94442;
     margin-bottom: 20px;
     display: inline-block;
 }
