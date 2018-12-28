@@ -289,6 +289,8 @@ p {
     box-sizing: border-box;
     width: 100%;
     float: left;
+    display: flex;
+    align-items: center;
 }
 .content_box_two {
     padding-top: 0px;
@@ -299,7 +301,7 @@ p {
     box-sizing: border-box;
 }
 .icons img {
-    width: 128px;
+    width: 100px;
     height: auto;
 }
 .content_box_two .icons {
@@ -335,10 +337,18 @@ p {
 .content_box_one .content_box_text p, .content_box_three .content_box_text p {
     text-align: left;
     margin: 0px;
+    font-size:16px;
+    line-height: 25px;
 }
 .content_box_two .content_box_text p {
     text-align: right;
     margin: 0px;
+}
+
+.reason-title {
+    text-align: center;
+    color: #9ebc9e;
+    font-size: 18px;
 }
 
 
@@ -520,7 +530,7 @@ p {
         line-height: 60px;
     }
     .watch_video + h2 {
-        font-size: 38px;
+        font-size: 37px;
     }
     .whats_inside h2, .munchers_have_spoken_text {
         font-size: 30px;
