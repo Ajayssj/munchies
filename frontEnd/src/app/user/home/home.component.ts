@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 export class HomeComponent implements OnInit {
   subscribeEmail = '';
   successMessage = '';
+  errorMessage = '';
   constructor(private http : HttpClient, private authService : AuthService) { 
 
   }
@@ -16,20 +17,26 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
   mailchimp(email){
-    this.http.get( this.authService.getDomainName() +  '/api/mailchimp/subscribeUser/' + email ,{}).subscribe((res : any) => {
-       
-      console.log(res.body.status);
-      if(!res.isError) {     
-        console.log(email);
-        this.successMessage = 'Success';
-      }
-      else{
-        // console.log('Error : ', res.reason)
-      }     
+    if(email == '') {
+      this.errorMessage = 'Please Enter Email Address';
+    }
+    else {
+      this.http.get( this.authService.getDomainName() +  '/api/mailchimp/subscribeUser/' + email ,{}).subscribe((res : any) => {
+        
+        console.log(res);
+        if(!res.isError) {     
+          console.log(email);
+          this.errorMessage = '';
+          this.successMessage = res.body.title;
+        }
+        else{
+          // console.log('Error : ', res.reason)
+        }     
 
-    },err => {
+      },err => {
 
-    })
+      })
+    }
   }
 
 }

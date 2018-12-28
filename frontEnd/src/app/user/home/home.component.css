@@ -83,7 +83,7 @@
 .boxes {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 75px;
+    margin-top: 50px;
 }
 .boxes .box {
     border: 6pt solid #e3c567;
@@ -145,7 +145,7 @@
     margin: 50px auto;
     letter-spacing: 1px;
     line-height: 22px;
-    color: #292929;
+    color: #525252;
     /* font-size: 18px; */
 }
 .whats_inside img {
@@ -341,6 +341,26 @@ p {
 
 
 /* **************************** Green Box New Code ************************************* */
+
+.message_wrapper_parent {
+    width: 75%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0px 4px;
+    margin-top: 10px;
+}
+.error_wrapper, .success_wrapper {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: #f2dede;
+    padding: 5px 0px;
+}
+.error, .success {
+    color: #a94442;
+    display: inline-block;
+    font-size: 22px;
+}
 
 @media screen and (min-width: 300px) {
     header, .content {

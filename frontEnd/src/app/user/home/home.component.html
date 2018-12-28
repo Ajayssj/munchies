@@ -128,7 +128,14 @@
 </div>
 <div class="page_down_content">
     <h2>Subscribe to get the latest news about products and healthy snacking recipes</h2>
-    <div *ngIf="successMessage != ''" class="">{{successMessage}}</div>
     <input type="email" [(ngModel)]="subscribeEmail" name="email" placeholder="E-mail Address" />
+    <div class="message_wrapper_parent">
+        <div *ngIf="successMessage != ''" class="success_wrapper">
+            <span class="success">{{successMessage}}</span>
+        </div>
+        <div *ngIf="errorMessage != ''" class="error_wrapper">
+            <span class="error">{{errorMessage}}</span>
+        </div>
+    </div>
     <div class="submitBtn"><button (click)="mailchimp(subscribeEmail)" class="btn submit">Subscribe</button></div>
 </div>
