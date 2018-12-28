@@ -215,7 +215,7 @@ var CustomerdetailsComponent = /** @class */ (function () {
         this.pageSize = 1;
         this.pageNumber = 1;
         this.pages = [];
-        this.limit = 1;
+        this.limit = 10;
         this.getWeekArray = function (weekNo) { return new Array(weekNo); };
     }
     CustomerdetailsComponent.prototype.pageChanged = function (pN) {

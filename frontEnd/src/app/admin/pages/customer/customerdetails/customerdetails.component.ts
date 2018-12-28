@@ -19,7 +19,7 @@ export class CustomerdetailsComponent implements OnInit {
   pageSize = 1;
   pageNumber: number = 1;
   pages = [];
-  limit = 1;
+  limit = 10;
   pageChanged(pN: number): void {
     this.pageNumber = pN;
     console.log(pN);
