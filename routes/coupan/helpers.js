@@ -142,10 +142,11 @@ module.exports = {
             const discount = req.body.discount;
             const description = req.body.description;
             const expiryDate = new Date(moment(req.body.expiry).tz('Asia/Calcutta').format());
+             const type = Number(req.body.type);
 
             Coupan.updateOne({_id : db.toObjectID(coupanId)},
             {
-                $set : {title, expiry : expiryDate, discount : parseFloat(discount), frequency : Number(frequency),description}
+                $set : {title, expiry : expiryDate, discount : parseFloat(discount), frequency : Number(frequency),description, type}
             }).then(coupan => {
                 if(coupan.result.nModified == 1)
                     res.json({success : true, message : 'Coupan Modified Successfully!'})

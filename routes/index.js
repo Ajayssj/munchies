@@ -26,6 +26,7 @@ module.exports = {
         app.use('/api',coupanApi);
         app.use('/api',mailchimpApi);
         app.use(express.static('client'));
+        app.use('/tsvs',express.static('tsvFiles'));
         app.get('/*', (req, res) => res.sendFile(__baseUrl + '/client/'));
 
     },
