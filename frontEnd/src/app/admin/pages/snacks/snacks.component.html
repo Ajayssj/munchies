@@ -1,3 +1,161 @@
-<p>
-  snacks works!
-</p>
+<div class="coupan_wrapper">
+    <div class="container-fluid content">
+      <h2>Coupan</h2>
+  
+      <div>
+        <div class="row">
+          <button (click)="addModal.open()" class="btn btn-primary add_coupan_btn" style="margin:20px">Add Coupan</button>
+          <span class="success" *ngIf="message!=''">{{message}}</span>
+
+  <!-- <a routerLink="/admin/pages/customer/cust/3423/plan/123">cust Plan</a>
+  <a routerLink="/admin/pages/customer/cust/3423/plan/123/week/1">Week Plan</a> -->
+  
+      <!-- <Button class="btn btn-primary" (click)="navigateBack()">Back</Button> -->
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+           
+            <th>title</th>
+            <th>code</th>
+            <th>expiry</th>
+            <th>discount</th>
+            <th>frequency</th>
+            <th>description</th>
+            <th>type</th>
+            <th>Edit/Delete</th>
+            <!-- <th>Plan Detail</th> -->
+          </tr>
+        </thead>
+      <tbody>
+           <tr *ngFor="let coupan of coupansres">
+            <td>{{coupan.title}}</td>
+            <td>{{coupan.code}}</td>
+            <td>{{coupan.expiry}}</td>
+            <td>{{coupan.discount}}</td>
+            <td>{{coupan.frequency}}</td>
+            <td>{{coupan.description}}</td>
+            <td>{{coupan.type}}</td>
+            <button (click)="editModal.open();selectedCoupanObj=coupan" class="btn btn-success mr-20">Edit</button>
+            <button (click)="confirmDeleteCoupanModal.open();CoupanObj=coupan; index=i;" class="btn btn-danger">Delete</button>
+           
+          </tr>
+        </tbody> 
+      </table>
+
+  </div>
+  </div>
+  </div>
+  </div>
+      
+      <modal #addModal>
+          <modal-header>
+            <h3>Add Coupan</h3>
+          </modal-header>
+          <modal-content>
+            <div (click)="hideAutoComplete = false">
+              <div class="form-group">
+                <label class="control-label">Title</label>
+                <input type="text" [(ngModel)]="addctitle" class="form-control" placeholder="Enter coupan title" />
+               
+              </div>
+              <div class="form-group">
+                <label class="control-label">Code</label>
+                <input readonly type="text" [(ngModel)]="coupanCode" class="form-control" placeholder="Enter coupan title" />
+
+                <button (click)="createCoupan()" class="btn btn-primary">Generate Coupan Code</button>
+              </div>
+              <div class="form-group">
+                <label class="control-label">Expiry</label>
+                <input type="date" [(ngModel)]="addcexpiry" class="form-control" placeholder="Enter coupan Expiry" />
+              </div>
+              <div class="form-group">
+                <label class="control-label">Discount</label>
+                <input type="text" [(ngModel)]="addcdiscount" class="form-control" placeholder="Enter coupan Discount" />
+              </div>
+              <div class="form-group">
+                  <label class="control-label">Frequency</label>
+                  <input type="text" [(ngModel)]="addcfrq" class="form-control" placeholder="Enter coupan frequency" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Description</label>
+                    <input type="text" [(ngModel)]="addcdes" class="form-control" placeholder="Enter coupan Description" />
+                  </div>
+                  <div class="form-group">
+                  <label class="control-label">Discount Type</label>
+                  <select [(ngModel)]="addctype" placeholder="Select Type" class="form-control">
+                    <option value="" default="" disabled="" style="display: none;">Select Discount type Percentage or Amount</option>
+                    <option value="1">Percent</option>
+                    <option value="2">amount</option>
+                  </select>
+                  </div>
+              <!-- <div class="form-group">
+                <label class="control-label">Discount Type</label>
+                <input type="text" [(ngModel)]="addctype" class="form-control" placeholder="Enter coupan Type" />
+              </div> -->
+              <button (click)="addCoupan(addModal)" class="btn btn-primary">Add Coupan</button>
+            </div>
+          </modal-content>
+        </modal>
+          <modal #editModal>
+            <modal-header>
+              <h3>Edit Coupan</h3>
+            </modal-header>
+            <modal-content>
+              <div (click)="hideAutoComplete = false" *ngIf="selectedCoupanObj">
+                <div class="form-group">
+                  <label class="control-label">Title</label>
+                  <input type="text" class="form-control" [(ngModel)]="selectedCoupanObj.title" />
+                </div>
+               <div class="form-group">
+                  <label class="control-label">Code</label>
+                  <input readonly type="text" class="form-control" [(ngModel)]="selectedCoupanObj.code" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Expiry</label>
+                  <input type="text" class="form-control" [(ngModel)]="selectedCoupanObj.expiry" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Discount</label>
+                  <input type="text" class="form-control" [(ngModel)]="selectedCoupanObj.discount" />
+                </div>
+               
+                <div class="form-group">
+                  <label class="control-label">Frequency</label>
+                  <input type="text" class="form-control" [(ngModel)]="selectedCoupanObj.frequency" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Description</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedCoupanObj.description" />
+                  </div>
+                  <div class="form-group">
+                      <label class="control-label">Discount Type</label>
+                  <select [(ngModel)]="selectedCoupanObj.type"class="form-control">
+                      <option value="" default="" disabled="" style="display: none;">Select Discount type Percentage or Amount</option>
+                      <option value="1">Percent</option>
+                      <option value="2">amount</option>
+                    </select>
+                  </div>
+                  <!-- <div class="form-group">
+                      <label class="control-label">Discount Type</label>
+                      <input type="text" class="form-control" [(ngModel)]="selectedCoupanObj.type" />
+                    </div> -->
+                <button class="btn btn-primary" (click)="editCoupan(editModal, selectedCoupanObj,selectedCoupanObj._id)">Edit Coupan</button>
+              </div>
+            </modal-content>
+          </modal>
+         
+        
+            <modal #confirmDeleteCoupanModal class="confirmDeleteModal">
+              <modal-header>
+                <h3>Confirm Delete</h3>
+              </modal-header>
+              <modal-content>
+                <h4>Are you sure you want to delete this product?</h4>
+              </modal-content>
+              <modal-footer>
+                  <button class="btn btn-danger" (click)="deleteItem(CoupanObj._id, confirmDeleteCoupanModal, index);">Yes</button>
+                  <button class="btn btn-success" (click)="closeModal(confirmDeleteCoupanModal);">No</button>
+              </modal-footer>
+            </modal>
+      

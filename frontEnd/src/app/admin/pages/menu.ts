@@ -23,6 +23,11 @@ export let MENU_ITEM = [
         path: 'products',
         title: 'products',
         icon: 'building'
+    },
+    {
+        path: 'coupon',
+        title: 'coupon',
+        icon: 'building'
     }
     // ,
     // {

@@ -259,7 +259,7 @@ addProduct(modal) {
       console.log(err);
     });
     this.http.post(this.auth.getDomainName() + '/api/product/add', this.addProductArray).subscribe((response: any)=>{
-      console.log(response);
+    
       if(response.success) {
         this.message = response.message;
         console.log(this.addProductArray)

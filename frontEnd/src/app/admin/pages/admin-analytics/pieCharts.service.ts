@@ -30,6 +30,31 @@ planSelectedOptions = {
         }
     ]
 }
+GreenTeaSelectedOptions = {
+    tooltip: {
+        trigger: 'item',
+        formatter: '{a} :  ({b}%)'
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        // data: ['1 week', '4 week', '12 week']
+        data:[]
+    },
+    roseType: 'angle',
+    series: [
+        {
+            name: 'Green_tea',
+            type: 'pie',
+            radius: [0, '50%'],
+            data: [
+                // { value: 235, name: '1 week' },
+                // { value: 210, name: '4 week' },
+                // { value: 162, name: '12 week' }
+            ]
+        }
+    ]
+}
 allergyOptions = {
     tooltip: {
         trigger: 'item',
@@ -188,5 +213,29 @@ fruitOptions = {
         err => {
 
         });        
+    }
+    getGreentea(cb){
+      
+        this.http.get(this.auth.getDomainName() + '/api/analysis/greentea')
+        //this.http.get('http://localhost:9191/public/api/analysis/greentea')
+        .subscribe((res: any) => {
+            console.log(res.data);
+            if(res.success) {
+                res.data.forEach(greenteaItem => {
+                    if(greenteaItem && greenteaItem._id) {
+                        this.GreenTeaSelectedOptions.legend.data.push( greenteaItem && greenteaItem._id ? greenteaItem._id.toUpperCase() :"");
+                        this.GreenTeaSelectedOptions.series[0].data.push({value: greenteaItem.count, name:greenteaItem && greenteaItem._id ? greenteaItem._id.toUpperCase() :""});
+                    }
+                });
+                console.log(this.GreenTeaSelectedOptions);
+                cb(this.GreenTeaSelectedOptions);
+            }   
+            else {
+                cb(this.GreenTeaSelectedOptions);
+            }
+        },
+        err => {
+
+        });
     }
 }

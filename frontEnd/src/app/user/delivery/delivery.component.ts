@@ -26,6 +26,7 @@ export class DeliveryComponent implements OnInit {
   selectedPlanId = '';
   question1 = '';
   question2 = '';
+  question3 = '';
   customerData = { 
     firstName: '',
     lastName: '',
@@ -68,6 +69,7 @@ export class DeliveryComponent implements OnInit {
     this.selectedPlanId = this.route.snapshot.queryParamMap.get('selectedPlan');
     this.question1 = this.route.snapshot.queryParamMap.get('question1');
     this.question2 = this.route.snapshot.queryParamMap.get('question2');
+    this.question3 = this.route.snapshot.queryParamMap.get('question3');
   }
   // convenience getter for easy access to form fields
   get f() { return this.deliveryForm.controls; }
@@ -91,6 +93,7 @@ export class DeliveryComponent implements OnInit {
     {
       var question1 = this.route.snapshot.queryParamMap.get('question1');
       var question2 = this.route.snapshot.queryParamMap.get('question2');
+      var question3 = this.route.snapshot.queryParamMap.get('question3');
       var selectedPlanName = this.route.snapshot.queryParamMap.get('selectedPlanName');
       var selectedPlanRate = this.route.snapshot.queryParamMap.get('selectedPlanRate');
       var questionInfo =[]
@@ -99,6 +102,9 @@ export class DeliveryComponent implements OnInit {
       }
       if(question2 && question2.length > 0)  {
         questionInfo.push({ type: 'fruits', value: question2})
+      }
+      if(question2 && question3.length > 0)  {
+        questionInfo.push({ type: 'green_tea', value: question3})
       }
       
     this.data = {

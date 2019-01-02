@@ -1,32 +1,28 @@
-.select_delivery_address_wrapper {
-    width: 60%;
+ .select_delivery_address_wrapper {
+    width: 70%;
     margin: 0 auto;
     padding: 60px 0px;
     display: block;
     height: 100%;
     overflow: hidden;
 }
-.delivery_content {
-    width: 100%;
-    
-    display: inline-block;
-}
+
 .select_delivery_address_wrapper h3 {
     font-size: 23px;
     color: #E5663D;
 }
-.delivery_form form .row:first-child {
+/* .delivery_form form .row:first-child {
     width: 40%;
-    /*float: left;*/
+
     margin-left: 0px;
     display: inline-block!important;
 }
 .delivery_form form .row:nth-child(2) {
     width: 59%;
-    /*float: left;*/
+    
     margin-left: 1%;
     display: inline-block;
-}
+} */
 .form_control {
     width: 100%;
     padding: 10px;
@@ -47,7 +43,7 @@
     border: 2px solid #f2dede !important;
     margin-bottom: 20px;
 }
-.delivery_form p {
+.field p {
     margin-top: 0;
     font-size: 14px;
     color: #E5663D;
@@ -93,18 +89,17 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 
-@media screen and (max-width: 768px){
-    .delivery_form form .row:nth-child(2){
-         width: 98%;
-        float: left;
+@media screen and (max-width: 922px){
+    .select_delivery_address_wrapper .deliver_form_fields_wrapper .field_first{
+         width: 98%!important;
+        margin-right: 0px!important;
         
         
     }
-    .delivery_form form .row:first-child {
+    .select_delivery_address_wrapper .deliver_form_fields_wrapper .field_second{
         
-        width: 98%;
-        float: left;
-         margin-left: 5px;
+        width: 98%!important;
+    
     }
     
    
@@ -121,3 +116,20 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 20px;
 }
 
+.select_delivery_address_wrapper .deliver_form_fields_wrapper {
+     display: flex; 
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+.select_delivery_address_wrapper .deliver_form_fields_wrapper .field_first {
+
+    width: 237px;
+    margin-right: 10px;
+    
+} 
+.select_delivery_address_wrapper .deliver_form_fields_wrapper .field_second{
+    width: 370px;
+   
+}

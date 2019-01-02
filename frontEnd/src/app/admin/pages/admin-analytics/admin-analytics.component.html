@@ -28,6 +28,13 @@
       <div *ngIf="fruitOptions" echarts [options]="fruitOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
     </card>
   </div>
+  <div class="question_block">
+    <h3>Green tea in bag</h3>
+    <card cardTitle='Pie Chart'>
+      <div *ngIf="GreenTeaSelectedOptions" echarts [options]="GreenTeaSelectedOptions" [loading]="showloading" theme="light" class="demo-chart"></div>
+    </card>
+  </div>
+ 
   <!-- <div class="question_block">
     <h3>Month Wise website traffic</h3>
     <card cardTitle='Line Chart'>

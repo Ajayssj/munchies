@@ -15,6 +15,18 @@ module.exports = {
         const coupanApi = require('./coupan');
         const mailchimpApi = require('./mailchimp');
 
+        // app.use('/public/api',publicApi);
+        // app.use('/api', userApi);
+        // app.use('/api', productApi);
+        // app.use('/api', planApi);
+        // app.use('/api', ordrApi);
+		// app.use('/api',typeApi);
+        // app.use('/api',companyApi);
+        // app.use('/public/api',analysisApi);
+        // app.use('/public/api',coupanApi);
+        // app.use('/api',mailchimpApi);
+        // app.use(express.static('client'));
+        // app.get('/*', (req, res) => res.sendFile(__baseUrl + '/client/'));
         app.use('/public/api',publicApi);
         app.use('/api', userApi);
         app.use('/api', productApi);

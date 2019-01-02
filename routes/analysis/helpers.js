@@ -132,6 +132,42 @@ module.exports = {
         }).catch(err => res.json({success : false, error : err}));
         
     },
+    getGreentea : (req,res) => {
+        Extra.aggregate(
+
+            // Pipeline
+            [
+                {
+                    $match : {
+                        type : 'green_tea'
+                    }
+                },
+                // Stage 1
+                {
+                    $group: {
+                       _id : '$value',
+                        count: {
+                                $sum: 1
+                            }
+                        
+                    }
+                },
+        
+                // Stage 2
+                {
+                    $sort: {
+                        count : -1
+                    }
+                },
+        
+            ]
+        
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+        
+        ).toArray().then(result => {
+            res.json({success : true, data : result});
+        }).catch(err => res.json({success : false, error : err}));
+    },
     getMostLikedFruits : (req,res) => {
         Extra.aggregate(
 

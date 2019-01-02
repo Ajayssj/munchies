@@ -1,84 +1,173 @@
+<form [formGroup] = "deliveryForm" (ngSubmit) = "onSubmit()">
 <div class="select_delivery_address_wrapper">
+        <h3>MunchPak bag to this address</h3>
+    <div class="deliver_form_fields_wrapper">
+        <div class="field_first">
+            <input class="form_control mar" [value]="customerData.firstName || ''" formControlName="name" type="text" name="name" placeholder="Name" />  
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback form_control">
+                <div *ngIf="submitted && f.name.errors.required">Name is required</div>
+                 <div *ngIf="submitted && f.name.errors.pattern">Your Name must contain only letters </div>
+            </div>
+        </div>
+        <div class="field_second">
+            <select class="form_control dd_custom" [value]="customerData.Area_of_delivery || ''" formControlName="area" name="area" placeholder="Area">
+                <option value="" default="" disabled="" style="display: none;">Area of Delivery</option>
+                <option value="Cantonment">Cantonment</option>
+                <option value="Domlur">Domlur</option>
+                <option value="Indiranagar">Indiranagar</option>
+                <option value="Ulsoor">Ulsoor</option>
+                <option value="Vasanth Nagar">Vasanth Nagar</option>
+             
+                <option value="Koramangala">Koramangala</option>
+               
+                <option value="Madiwala">Madiwala</option>
+                <option value="BTM Layout">BTM Layout</option>
+                <option value="Whitefield">Whitefield</option>
+                <option value="Marathahalli">Marathahalli</option>
+                <option value="CV Raman Nagar">CV Raman Nagar</option>
+            </select>
+            <div *ngIf="submitted && f.area.errors" class="invalid-feedback form_control">
+                <div *ngIf="submitted && f.area.errors.required">Area is required</div>
+                <div *ngIf="submitted && f.area.errors.pattern">please enter valid address</div>
+            </div>
+        </div>
+        <div class="field_first">
+            <input class="form_control" [value]="customerData.lastName || ''" type="text" formControlName="surName" name="surName" placeholder="Surname" />
+            <div *ngIf="submitted && f.surName.errors" class="invalid-feedback form_control">
+                <div *ngIf="submitted && f.surName.errors.required">SurName is required</div>
+                <div *ngIf="submitted && f.surName.errors.pattern">Your SurName must contain only letters </div>
+            </div> 
+        </div>
+        <div class="field_second">
+            <input class="form_control" [value]="customerData.address || ''" type="text" formControlName="address" name="address" placeholder="Address..." />
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback form_control">
+                <div *ngIf="submitted && f.address.errors.required">Address is required</div>
+            </div>
+        </div>
+       
+        <div class="field_first">
+            <input class="form_control" [value]="customerData.phoneNo || ''" type="tel" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
+            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback form_control">
+                <div *ngIf="submitted && f.phone.errors.required">Phone Number is required</div>
+                <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>
+                <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid Phone Number</div>
+            </div> 
+        </div>
+    
+       
+        <div class="field_second">
+            <input class="form_control" [value]="customerData.postalCode || ''" type="number" formControlName="postalCode" name="postalCode" placeholder="Postal Code" />
+            <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback form_control">
+                <div *ngIf="submitted && f.postalCode.errors.required">Postal Code is required</div>
+                <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid address</div>
+            </div>
+        </div>
+        <div class="field">
+            <p>*If you can't find you're area, we aren't delivering there yet. But we will be there soon :)</p>
+            <div *ngIf="!isLoggedIn" class="btns">
+               <a routerLink="/signIn" class="btn">Sign In</a>
+               <a routerLink="/sign-up" class="btn">Sign Up</a>
+            </div>
+            <button *ngIf="isLoggedIn" (click)="showOrderConfirm();" class="btn ok_btn" >Ok</button>
+        </div>
+   </div> 
+</div>
+</form>
 
-      <div class="delivery_content">
-      <h3>MunchPak bag to this address</h3>
-      <div class="delivery_form">
-          <form [formGroup] = "deliveryForm" (ngSubmit) = "onSubmit()">
-              <div class="row">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="select_delivery_address_wrapper">
+
+    <div class="delivery_content">
+    <h3>MunchPak bag to this address</h3>
+    <div class="delivery_form">
+        <form [formGroup] = "deliveryForm" (ngSubmit) = "onSubmit()">
+            <div class="row">
+                <div class="fields">
+                    <div>
+                      <input class="form_control mar" [value]="customerData.firstName || ''" formControlName="name" type="text" name="name" placeholder="Name" />
+                      <div *ngIf="submitted && f.name.errors" class="invalid-feedback form_control">
+                          <div *ngIf="submitted && f.name.errors.required">Name is required</div>
+                           <div *ngIf="submitted && f.name.errors.pattern">Your Name must contain only letters </div>
+                      </div>
+                    </div>
+                    <div>
+                      <input class="form_control" [value]="customerData.lastName || ''" type="text" formControlName="surName" name="surName" placeholder="Surname" />
+                      <div *ngIf="submitted && f.surName.errors" class="invalid-feedback form_control">
+                          <div *ngIf="submitted && f.surName.errors.required">SurName is required</div>
+                          <div *ngIf="submitted && f.surName.errors.pattern">Your SurName must contain only letters </div>
+                      </div>
+                    </div>
+                    <div>
+                      <input class="form_control" [value]="customerData.phoneNo || ''" type="tel" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
+                      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback form_control">
+                          <div *ngIf="submitted && f.phone.errors.required">Phone Number is required</div>
+                          <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>
+                          <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid Phone Number</div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                   <div class="fields">
                       <div>
-                        <input class="form_control mar" [value]="customerData.firstName || ''" formControlName="name" type="text" name="name" placeholder="Name" />
-                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback form_control">
-                            <div *ngIf="submitted && f.name.errors.required">Name is required</div>
-                             <div *ngIf="submitted && f.name.errors.pattern">Your Name must contain only letters </div>
-                        </div>
+                          <select class="form_control dd_custom" [value]="customerData.Area_of_delivery || ''" formControlName="area" name="area" placeholder="Area">
+                              <option value="" default="" disabled="" style="display: none;">Area of Delivery</option>
+                              <option value="Cantonment">Cantonment</option>
+                              <option value="Domlur">Domlur</option>
+                              <option value="Indiranagar">Indiranagar</option>
+                              <option value="Ulsoor">Ulsoor</option>
+                              <option value="Vasanth Nagar">Vasanth Nagar</option>
+                           
+                              <option value="Koramangala">Koramangala</option>
+                             
+                              <option value="Madiwala">Madiwala</option>
+                              <option value="BTM Layout">BTM Layout</option>
+                              <option value="Whitefield">Whitefield</option>
+                              <option value="Marathahalli">Marathahalli</option>
+                              <option value="CV Raman Nagar">CV Raman Nagar</option>
+                          </select>
+                          <div *ngIf="submitted && f.area.errors" class="invalid-feedback form_control">
+                              <div *ngIf="submitted && f.area.errors.required">Area is required</div>
+                              <div *ngIf="submitted && f.area.errors.pattern">please enter valid address</div>
+                          </div>
                       </div>
                       <div>
-                        <input class="form_control" [value]="customerData.lastName || ''" type="text" formControlName="surName" name="surName" placeholder="Surname" />
-                        <div *ngIf="submitted && f.surName.errors" class="invalid-feedback form_control">
-                            <div *ngIf="submitted && f.surName.errors.required">SurName is required</div>
-                            <div *ngIf="submitted && f.surName.errors.pattern">Your SurName must contain only letters </div>
-                        </div>
+                          <input class="form_control" [value]="customerData.address || ''" type="text" formControlName="address" name="address" placeholder="Address..." />
+                          <div *ngIf="submitted && f.address.errors" class="invalid-feedback form_control">
+                              <div *ngIf="submitted && f.address.errors.required">Address is required</div>
+                          </div>
                       </div>
                       <div>
-                        <input class="form_control" [value]="customerData.phoneNo || ''" type="tel" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
-                        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback form_control">
-                            <div *ngIf="submitted && f.phone.errors.required">Phone Number is required</div>
-                            <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>
-                            <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid Phone Number</div>
-                        </div>
+                          <input class="form_control" [value]="customerData.postalCode || ''" type="number" formControlName="postalCode" name="postalCode" placeholder="Postal Code" />
+                          <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback form_control">
+                              <div *ngIf="submitted && f.postalCode.errors.required">Postal Code is required</div>
+                              <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid address</div>
+                          </div>
                       </div>
                   </div>
-              </div>
-              <div class="row">
-                    <div class="fields">
-                        <div>
-                            <select class="form_control dd_custom" [value]="customerData.Area_of_delivery || ''" formControlName="area" name="area" placeholder="Area">
-                                <option value="" default="" disabled="" style="display: none;">Area of Delivery</option>
-                                <option value="Cantonment">Cantonment</option>
-                                <option value="Domlur">Domlur</option>
-                                <option value="Indiranagar">Indiranagar</option>
-                                <option value="Ulsoor">Ulsoor</option>
-                                <option value="Vasanth Nagar">Vasanth Nagar</option>
-                                <!-- <option value="Electronic city">Electronic city</option> -->
-                                <option value="Koramangala">Koramangala</option>
-                                <!-- <option value="HSR layout">HSR Layout</option> -->
-                                <option value="Madiwala">Madiwala</option>
-                                <option value="BTM Layout">BTM Layout</option>
-                                <option value="Whitefield">Whitefield</option>
-                                <option value="Marathahalli">Marathahalli</option>
-                                <option value="CV Raman Nagar">CV Raman Nagar</option>
-                            </select>
-                            <div *ngIf="submitted && f.area.errors" class="invalid-feedback form_control">
-                                <div *ngIf="submitted && f.area.errors.required">Area is required</div>
-                                <div *ngIf="submitted && f.area.errors.pattern">please enter valid address</div>
-                            </div>
-                        </div>
-                        <div>
-                            <input class="form_control" [value]="customerData.address || ''" type="text" formControlName="address" name="address" placeholder="Address..." />
-                            <div *ngIf="submitted && f.address.errors" class="invalid-feedback form_control">
-                                <div *ngIf="submitted && f.address.errors.required">Address is required</div>
-                            </div>
-                        </div>
-                        <div>
-                            <input class="form_control" [value]="customerData.postalCode || ''" type="number" formControlName="postalCode" name="postalCode" placeholder="Postal Code" />
-                            <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback form_control">
-                                <div *ngIf="submitted && f.postalCode.errors.required">Postal Code is required</div>
-                                <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid address</div>
-                            </div>
-                        </div>
-                    </div>
-              </div>
-          <p>*If you can't find you're area, we aren't delivering there yet. But we will be there soon :)</p>
-          <div *ngIf="!isLoggedIn" class="btns">
-             <a routerLink="/signIn" class="btn">Sign In</a>
-             <a routerLink="/sign-up" class="btn">Sign Up</a>
-          </div>
-          <button *ngIf="isLoggedIn" (click)="showOrderConfirm();" class="btn ok_btn" >Ok</button>
+            </div>
+        <p>*If you can't find you're area, we aren't delivering there yet. But we will be there soon :)</p>
+        <div *ngIf="!isLoggedIn" class="btns">
+           <a routerLink="/signIn" class="btn">Sign In</a>
+           <a routerLink="/sign-up" class="btn">Sign Up</a>
+        </div>
+        <button *ngIf="isLoggedIn" (click)="showOrderConfirm();" class="btn ok_btn" >Ok</button>
 
-        </form>
-        <app-alert-popup [showAlert]="showOrderConfirmAlert" [okRedirectBtn]="redirectToHome"></app-alert-popup>
-         
+      </form>
+      <app-alert-popup [showAlert]="showOrderConfirmAlert" [okRedirectBtn]="redirectToHome"></app-alert-popup>
+       
 </div>
-</div>
-
+</div> -->

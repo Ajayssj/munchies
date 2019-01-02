@@ -44,6 +44,7 @@ export class AuthService {
   setUserName(value) {
     localStorage.setItem('username', value);
   }
+ 
   verifyFirebaseToken = function (token, callback) {
     this.http.post(this.getDomainName() + '/public/api/user/verifyFirebaseToken', {token}).subscribe(resData => {
       console.log("data",resData);

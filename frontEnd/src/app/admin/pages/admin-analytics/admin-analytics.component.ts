@@ -10,6 +10,7 @@ import { AuthService } from '../../../user/auth.service';
   providers: [ChartsService]
 })
 export class AdminAnalyticsComponent implements OnInit, OnChanges {
+  GreenTeaSelectedOptions;
   planSelectedOptions;
   allergyOptions;
   fruitOptions;
@@ -31,6 +32,9 @@ export class AdminAnalyticsComponent implements OnInit, OnChanges {
     });
      this.chartsService.getFruitsLikedMost((options) => {
       this.fruitOptions = options;
+    });
+    this.chartsService.getGreentea((options) => {
+      this.GreenTeaSelectedOptions = options;
     });
     console.log("plan", this.planSelectedOptions);
     this.http.get(this.auth.getDomainName() + '/api/analysis/most/delivered/area')

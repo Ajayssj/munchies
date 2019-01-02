@@ -142,7 +142,8 @@ module.exports = {
             const discount = req.body.discount;
             const description = req.body.description;
             const expiryDate = new Date(moment(req.body.expiry).tz('Asia/Calcutta').format());
-             const type = Number(req.body.type);
+            const type = Number(req.body.type);
+
 
             Coupan.updateOne({_id : db.toObjectID(coupanId)},
             {

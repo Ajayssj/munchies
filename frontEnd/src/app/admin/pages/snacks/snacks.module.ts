@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routing } from './snacks.routing';
 import { SharedModule } from '../../shared/shared.module';
 import { SnacksComponent } from './snacks.component';
+import { ModalModule } from 'ngx-modal';
 
 @NgModule({
     imports: [
@@ -11,7 +12,8 @@ import { SnacksComponent } from './snacks.component';
         FormsModule,
         ReactiveFormsModule,
         SharedModule,
-        routing
+        routing,
+        ModalModule
     ],
     declarations: [
         SnacksComponent

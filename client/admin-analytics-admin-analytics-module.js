@@ -18,7 +18,7 @@ module.exports = ".question_block .card-header {\r\n    display: none;\r\n}\r\n.
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"question_block\">\n    <h3>Plan selected the most</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"planSelectedOptions\" echarts [options]=\"planSelectedOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Areas with the most Delivery</h3>\n    <card cardTitle='Most delivery'>\n      <div *ngFor=\"let area of areaInfo\" class=\"area\">\n        <div class=\"area_text\">{{area.areaName}}</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"{{area.percent}}%\" [ngStyle]=\"{'width.%': area.percent}\" class=\"pbar\"><span> {{area.count + ' (' + area.percent}} %)</span></div>\n        </div>\n      </div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Allergens and People</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"allergyOptions\" echarts [options]=\"allergyOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Fruits disliked the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"fruitOptions\" echarts [options]=\"fruitOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <!-- <div class=\"question_block\">\n    <h3>Month Wise website traffic</h3>\n    <card cardTitle='Line Chart'>\n      <div echarts [options]=\"monthWiseTrafficOption\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div> -->\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"question_block\">\n    <h3>Plan selected the most</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"planSelectedOptions\" echarts [options]=\"planSelectedOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Areas with the most Delivery</h3>\n    <card cardTitle='Most delivery'>\n      <div *ngFor=\"let area of areaInfo\" class=\"area\">\n        <div class=\"area_text\">{{area.areaName}}</div>\n        <div class=\"pbar_wrapper\">\n           <div title=\"{{area.percent}}%\" [ngStyle]=\"{'width.%': area.percent}\" class=\"pbar\"><span> {{area.count + ' (' + area.percent}} %)</span></div>\n        </div>\n      </div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Allergens and People</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"allergyOptions\" echarts [options]=\"allergyOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Fruits disliked the most?</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"fruitOptions\" echarts [options]=\"fruitOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n  <div class=\"question_block\">\n    <h3>Green tea in bag</h3>\n    <card cardTitle='Pie Chart'>\n      <div *ngIf=\"GreenTeaSelectedOptions\" echarts [options]=\"GreenTeaSelectedOptions\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div>\n \n  <!-- <div class=\"question_block\">\n    <h3>Month Wise website traffic</h3>\n    <card cardTitle='Line Chart'>\n      <div echarts [options]=\"monthWiseTrafficOption\" [loading]=\"showloading\" theme=\"light\" class=\"demo-chart\"></div>\n    </card>\n  </div> -->\n</div>\n"
 
 /***/ }),
 
@@ -69,6 +69,9 @@ var AdminAnalyticsComponent = /** @class */ (function () {
         });
         this.chartsService.getFruitsLikedMost(function (options) {
             _this.fruitOptions = options;
+        });
+        this.chartsService.getGreentea(function (options) {
+            _this.GreenTeaSelectedOptions = options;
         });
         console.log("plan", this.planSelectedOptions);
         this.http.get(this.auth.getDomainName() + '/api/analysis/most/delivered/area')
@@ -239,6 +242,31 @@ var ChartsService = /** @class */ (function () {
                 }
             ]
         };
+        this.GreenTeaSelectedOptions = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} :  ({b}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'left',
+                // data: ['1 week', '4 week', '12 week']
+                data: []
+            },
+            roseType: 'angle',
+            series: [
+                {
+                    name: 'Green_tea',
+                    type: 'pie',
+                    radius: [0, '50%'],
+                    data: [
+                    // { value: 235, name: '1 week' },
+                    // { value: 210, name: '4 week' },
+                    // { value: 162, name: '12 week' }
+                    ]
+                }
+            ]
+        };
         this.allergyOptions = {
             tooltip: {
                 trigger: 'item',
@@ -392,6 +420,28 @@ var ChartsService = /** @class */ (function () {
             }
             else {
                 cb(_this.fruitOptions);
+            }
+        }, function (err) {
+        });
+    };
+    ChartsService.prototype.getGreentea = function (cb) {
+        var _this = this;
+        this.http.get(this.auth.getDomainName() + '/api/analysis/greentea')
+            //this.http.get('http://localhost:9191/public/api/analysis/greentea')
+            .subscribe(function (res) {
+            console.log(res.data);
+            if (res.success) {
+                res.data.forEach(function (greenteaItem) {
+                    if (greenteaItem && greenteaItem._id) {
+                        _this.GreenTeaSelectedOptions.legend.data.push(greenteaItem && greenteaItem._id ? greenteaItem._id.toUpperCase() : "");
+                        _this.GreenTeaSelectedOptions.series[0].data.push({ value: greenteaItem.count, name: greenteaItem && greenteaItem._id ? greenteaItem._id.toUpperCase() : "" });
+                    }
+                });
+                console.log(_this.GreenTeaSelectedOptions);
+                cb(_this.GreenTeaSelectedOptions);
+            }
+            else {
+                cb(_this.GreenTeaSelectedOptions);
             }
         }, function (err) {
         });
