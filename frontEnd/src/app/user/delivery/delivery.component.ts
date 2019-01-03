@@ -91,20 +91,23 @@ export class DeliveryComponent implements OnInit {
     }
     else
     {
-      var question1 = this.route.snapshot.queryParamMap.get('question1');
-      var question2 = this.route.snapshot.queryParamMap.get('question2');
-      var question3 = this.route.snapshot.queryParamMap.get('question3');
+      var question1 = this.route.snapshot.queryParamMap.get('q1');
+      var question2 = this.route.snapshot.queryParamMap.get('q2');
+      var question3 = this.route.snapshot.queryParamMap.get('q3');
       var selectedPlanName = this.route.snapshot.queryParamMap.get('selectedPlanName');
       var selectedPlanRate = this.route.snapshot.queryParamMap.get('selectedPlanRate');
       var questionInfo =[]
       if(question1 && question1.length > 0)  {
-        questionInfo.push({type: 'allergic', value: question1})
+        question1.split(',').forEach(item => questionInfo.push({type: 'allergic', value: item}) )
+        
       }
       if(question2 && question2.length > 0)  {
-        questionInfo.push({ type: 'fruits', value: question2})
+        question2.split(',').forEach(item => questionInfo.push({type: 'fruits', value: item}) )
+        // questionInfo.push({ type: 'fruits', value: question2})
       }
       if(question2 && question3.length > 0)  {
-        questionInfo.push({ type: 'green_tea', value: question3})
+        question2.split(',').forEach(item => questionInfo.push({type: 'green_tea', value: item}) )
+        // questionInfo.push({ type: 'green_tea', value: question3})
       }
       
     this.data = {

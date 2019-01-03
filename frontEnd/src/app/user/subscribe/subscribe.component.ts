@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Options } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-subscribe',
@@ -7,13 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./subscribe.component.css']
 })
 export class SubscribeComponent implements OnInit {
+  
+ 
+ 
+ 
   constructor(private router: Router) {}
+ 
+  selectedIndex =[];
   selectedPlanId = null;
   noOfWeeks = 0;
   selectedPlanName = '';
   selectedPlanRate = '';
   queryParams = {};
   selectPlanError = '';
+  optText = '';
+  optIndex = [];
+  queid= '';
   plan = [{
     planId: "5c0e2531cdfb5107849569ea",
     planName: "Trial Week",
@@ -38,6 +48,7 @@ export class SubscribeComponent implements OnInit {
   questions = [{
     qId: 1,
     question: "Are you allergic to any of the following?",
+    type:"allergic",
     options: [
       //{
     //   optionId: 1,
@@ -47,27 +58,32 @@ export class SubscribeComponent implements OnInit {
     {
       optionId: 1,
       optionText: "Eggs",
-      optName: "q1"
+      optName: "q1",
+      checked : false
     },
     {
       optionId: 2,
       optionText: "Peanuts",
-      optName: "q1"
+      optName: "q1",
+      checked : false
     },
     {
       optionId: 3,
       optionText: "Other Nuts",
-      optName: "q1"
+      optName: "q1",
+      checked : false
     },
     {
       optionId: 4,
       optionText: "Gluten",
-      optName: "q1"
+      optName: "q1",
+      checked : false
     },
     {
       optionId: 5,
       optionText: "none",
-      optName: "q1"
+      optName: "q1",
+      checked : false
     }],
     images: [{
       url: "../../assets/peanut.png",
@@ -78,46 +94,54 @@ export class SubscribeComponent implements OnInit {
       alt: "chocolate_bar.png"
     }],
     class: "first_box",
-    selectedOpt: null
+    selectedIndex:null
   },
 
   {
     qId: 2,
     question: "Pick fruits you don't like",
+    type:"fruits",
     options: [{
       optionId: 1,
       optionText: "Banana",
-      optName: "q3"
+      optName: "q2",
+      checked : false
     },
     {
       optionId: 2,
       optionText: "Apple",
-      optName: "q3"
+      optName: "q2",
+      checked : false
     },
     {
       optionId: 3,
       optionText: "Pear",
-      optName: "q3"
+      optName: "q2",
+      checked : false
     },
     {
       optionId: 4,
       optionText: "Guava",
-      optName: "q3"
+      optName: "q2",
+      checked : false
     },
     {
       optionId: 5,
       optionText: "Mango",
-      optName: "q3"
+      optName: "q2",
+      checked : false
     },
     {
       optionId: 6,
       optionText: "Orange",
-      optName: "q3"
+      optName: "q2",
+      checked : false
     },
     {
       optionId: 7,
       optionText: "I Will Eat Any",
-      optName: "q3"
+      optName: "q2",
+      checked : false
     }],
     images: [{
       url: "../../assets/harvest.png",
@@ -128,15 +152,40 @@ export class SubscribeComponent implements OnInit {
       url: "../../assets/cheese.png",
       alt: "cheese.png"
     }],
+    class: "second_box",
+   
+    selectedIndex:null
+  },
+  
+  {
+    qId: 3,
+    type:"green_tea",
+    question: "should your bag contain green tea with honey sachets?",
+    options: [{
+      optionId: 1,
+      optionText: "Yes",
+      optName: "q3",
+      checked : false
+    },
+    {
+      optionId: 2,
+      optionText: "No",
+      optName: "q3",
+      checked : false
+    }],
     class: "third_box",
-    selectedOpt: null
+    selectedOpt: null,
+    optionType:"radio",
+    selectedIndex:null
   }
-  ]
+]
+  
 
 
   ngOnInit() {
     console.log("hiiiiii", this.questions);
-  } 
+    
+  }
 
   selectedPlan(itemObj) {
     this.selectedPlanId = itemObj.planId;
@@ -145,9 +194,17 @@ export class SubscribeComponent implements OnInit {
     this.selectedPlanRate = itemObj.planRate;
     
   }
+
   checkDelivery(element) {
     console.log("in check delivery");
     console.log("plan selected", this.selectedPlanId);
+    let obj = {};
+    this.questions.forEach((question) => {
+      let checked = question.options.filter(item => item.checked)
+      let values = checked.map(item => item.optionText).join(',');
+      (checked && checked.length)?obj[checked[0].optName] = values:''
+    });
+    console.log(obj);
     if(this.selectedPlanId == null || this.selectedPlanId == '') {
       this.selectPlanError = 'Please select a plan';
       console.log(element);
@@ -155,12 +212,14 @@ export class SubscribeComponent implements OnInit {
       this.router.navigate(['/subscribe']);
     }
     else {
-      this.queryParams = { selectedPlan: this.selectedPlanId, selectedPlanRate: this.selectedPlanRate,
-        selectedPlanName: this.selectedPlanName,question1: this.questions[0].selectedOpt,
-        question2: this.questions[1].selectedOpt };
-      console.log(this.queryParams);
-      this.selectPlanError = '';
+
+      
+       this.queryParams = { selectedPlan: this.selectedPlanId, selectedPlanRate: this.selectedPlanRate,
+        selectedPlanName: this.selectedPlanName , ...obj};
+       console.log(this.queryParams);
+       this.selectPlanError = '';
       this.router.navigate(['/delivery'], {queryParams: this.queryParams});
     }
   }
+  
 }

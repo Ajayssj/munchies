@@ -21,6 +21,7 @@ export class OrderSummaryComponent implements OnInit {
   discount: number = 0;
   coupanId = '';
   coupanCodeError = '';
+
   constructor(
     private http: HttpClient, 
     private router: Router,
@@ -39,22 +40,26 @@ export class OrderSummaryComponent implements OnInit {
         this.subTotal = this.customerData.planRate;
         var extraInfo = JSON.parse(this.customerData.extraInfo);
         console.log(extraInfo)
-        if(extraInfo && extraInfo[0]) {
-          this.question1 = extraInfo[0].value;
-        }
-        if(extraInfo && extraInfo[1]) {
-          this.question2 = extraInfo[1].value;
-        }
-        if(extraInfo && extraInfo[2]) {
-          this.question3 = extraInfo[2].value;
-        }
-        console.log(this.customerData.planId)
-        console.log(this.question1)
-        console.log(this.question2)
-        console.log(this.question3)
-        console.log(this.customerData);
-        delete this.customerData.planName;
-        console.log(this.customerData);
+        extraInfo.forEach((extraInfo) => {
+          console.log(extraInfo.value);
+          console.log(extraInfo);
+        });
+        // if(extraInfo && extraInfo[0]) {
+        //   this.question1 = extraInfo[0].value;
+        // }
+        // if(extraInfo && extraInfo[1]) {
+        //   this.question2 = extraInfo[1].value;
+        // }
+        // if(extraInfo && extraInfo[2]) {
+        //   this.question3 = extraInfo[2].value;
+        // }
+        // console.log(this.customerData.planId)
+        // console.log(this.question1)
+        // console.log(this.question2)
+        // console.log(this.question3)
+        // console.log(this.customerData);
+        // delete this.customerData.planName;
+        // console.log(this.customerData);
     }
   }
   createOrder() {

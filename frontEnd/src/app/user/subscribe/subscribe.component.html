@@ -7,6 +7,7 @@
         <span class="error">{{selectPlanError}}</span>
       </div>
     </div>
+   
     <div class="select_plan">
       <div class="plans">
         <div class="plan" [ngClass]="{'active':selectedPlanId == item.planId}" *ngFor="let item of plan; let i = index" (click)="selectedPlan(item)">
@@ -21,7 +22,12 @@
       <div class="question_wrapper" *ngFor="let q of questions">
         <p>{{q.question}}</p>
         <ul>
-          <li *ngFor="let opt of q.options"><input type="radio" value="{{opt.optionText}}" name="{{opt.optName}}" [(ngModel)]="q.selectedOpt" />{{opt.optionText}}</li>
+          
+          <!-- <li *ngFor="let opt of q.options;let optionIndex = index" (click)="selectedIndex=optionIndex"> -->
+              <li *ngFor="let opt of q.options;let optionIndex = index">
+              <span *ngIf="q.type !== 'radio'"><input type="checkbox" [(ngModel)]="opt.checked" id="optionIndex" />{{opt.optionText}}</span>
+            <span *ngIf="q.type == 'radio'" (click)="q.selectedIndex=optionIndex"><input type="radio" name="q.type" id="optionIndex"  />{{opt.optionText}}</span>
+          </li>
         </ul>
         <div class="product_images + {{ q.class}}">
           <img *ngFor="let image of q.images" src="{{image.url}}" alt="{{image.alt}}" />
