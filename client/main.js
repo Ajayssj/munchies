@@ -3134,8 +3134,8 @@ var AuthService = /** @class */ (function () {
                     that.verifyFirebaseToken(idToken, function (res) {
                         console.log("res data", res);
                         if (res.success) {
-                            this.setLoggedIn(true);
-                            this.setUserRole(res.data.role);
+                            that.setLoggedIn(true);
+                            that.setUserRole(res.data.role);
                             var token = {
                                 token: res
                             };
@@ -3176,8 +3176,8 @@ var AuthService = /** @class */ (function () {
                     that.verifyFirebaseToken(idToken, function (res) {
                         console.log("res data", res);
                         if (res.success) {
-                            this.setLoggedIn(true);
-                            this.setUserRole(res.data.role);
+                            that.setLoggedIn(true);
+                            that.setUserRole(res.data.role);
                             var token = {
                                 token: res
                             };
