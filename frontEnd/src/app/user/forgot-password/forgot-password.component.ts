@@ -50,6 +50,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.http.post(this.authService.getDomainName() + '/public/api/user/password/recover', data).subscribe( (data:Res) => {
           this.success = data.success;
           this.error = data.error;
+          console.log(this.error)
+          console.log(data)
           if(this.success){
             this.message = data.message;
 

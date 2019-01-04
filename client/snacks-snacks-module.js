@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["snacks-snacks-module"],{
 
-/***/ "./node_modules/coupon-code/coupon-code.js":
-/*!*************************************************!*\
-  !*** ./node_modules/coupon-code/coupon-code.js ***!
-  \*************************************************/
+/***/ "../node_modules/coupon-code/coupon-code.js":
+/*!**************************************************!*\
+  !*** ../node_modules/coupon-code/coupon-code.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26,7 +26,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 // npm
-var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js");
+var xtend = __webpack_require__(/*! xtend */ "../node_modules/xtend/immutable.js");
 
 // --------------------------------------------------------------------------------------------------------------------
 // constants
@@ -167,10 +167,10 @@ module.exports.hasBadWord = hasBadWord
 
 /***/ }),
 
-/***/ "./node_modules/xtend/immutable.js":
-/*!*****************************************!*\
-  !*** ./node_modules/xtend/immutable.js ***!
-  \*****************************************/
+/***/ "../node_modules/xtend/immutable.js":
+/*!******************************************!*\
+  !*** ../node_modules/xtend/immutable.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -284,7 +284,7 @@ var SnacksComponent = /** @class */ (function () {
         modal.close();
     };
     SnacksComponent.prototype.createCoupan = function () {
-        var cc = __webpack_require__(/*! coupon-code */ "./node_modules/coupon-code/coupon-code.js");
+        var cc = __webpack_require__(/*! coupon-code */ "../node_modules/coupon-code/coupon-code.js");
         // generate a 4 part code
         this.addccode = cc.generate({ parts: 4 });
         this.coupanCode = this.addccode;
