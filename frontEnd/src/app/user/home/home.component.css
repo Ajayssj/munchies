@@ -214,10 +214,10 @@
 .munchers_have_spoken_box span {
     position: absolute;
     width: 0;
-    border-top: 60px solid #9ebc9e;
-    border-left: 60px solid #9ebc9e;
-    bottom: -55px;
-    border-bottom: 100px solid transparent;
+    border-top: 10px solid #9ebc9e;
+    border-left: 56px solid #9ebc9e;
+    bottom: -99px;
+    border-bottom: 101px solid transparent;
 }
 
 .page_down_content {

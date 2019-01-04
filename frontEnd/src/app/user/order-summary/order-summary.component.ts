@@ -21,7 +21,7 @@ export class OrderSummaryComponent implements OnInit {
   discount: number = 0;
   coupanId = '';
   coupanCodeError = '';
-
+  info = '';
   constructor(
     private http: HttpClient, 
     private router: Router,
@@ -42,7 +42,11 @@ export class OrderSummaryComponent implements OnInit {
         console.log(extraInfo)
         extraInfo.forEach((extraInfo) => {
           console.log(extraInfo.value);
-          console.log(extraInfo);
+          this.info =extraInfo.value;
+          
+          console.log(this.info);
+          console.log(this.info[0]);
+         
         });
         // if(extraInfo && extraInfo[0]) {
         //   this.question1 = extraInfo[0].value;
