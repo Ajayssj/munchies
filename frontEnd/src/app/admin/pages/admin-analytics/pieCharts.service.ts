@@ -33,7 +33,7 @@ planSelectedOptions = {
 GreenTeaSelectedOptions = {
     tooltip: {
         trigger: 'item',
-        formatter: '{a} :  ({b}%)'
+        formatter:  '{a} <br/>{b}: {c} ({d}%)'
     },
     legend: {
         orient: 'vertical',

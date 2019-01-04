@@ -245,7 +245,7 @@ var ChartsService = /** @class */ (function () {
         this.GreenTeaSelectedOptions = {
             tooltip: {
                 trigger: 'item',
-                formatter: '{a} :  ({b}%)'
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
             },
             legend: {
                 orient: 'vertical',
