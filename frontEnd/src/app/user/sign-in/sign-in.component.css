@@ -26,14 +26,14 @@
     padding-left: 10px;
 }
 .signin_box_content h2 {
-    margin: 40px 0px 20px 80px;
+    margin: 40px 0px 20px 65px;
     color: #DE6B48;
     font-size: 30px;
 }
 .signin_box_content input[type="email"], .signin_box_content input[type="password"] {
     padding: 15px;
     border: 0px;
-    width: 58%;
+    width: 65%;
     margin: 0px 0px 15px 70px;
     color: rgba(63,124,172,1);
 }
@@ -45,7 +45,7 @@
     display: block;
 }
 .remember_me {
-    margin: 20px 85px 20px 70px;
+    margin: 20px 75px 20px 68px;
     display: inline-block;
     font-size: 16px;
     color: #DE6B48;

@@ -196,14 +196,20 @@ export class SubscribeComponent implements OnInit {
   }
 
   checkDelivery(element) {
-    console.log("in check delivery");
+    console.log("in check delivery",this.questions);
     console.log("plan selected", this.selectedPlanId);
     let obj = {};
     this.questions.forEach((question) => {
       let checked = question.options.filter(item => item.checked)
       let values = checked.map(item => item.optionText).join(',');
-      (checked && checked.length)?obj[checked[0].optName] = values:''
+      (checked && checked.length)?obj[checked[0].optName] = values:'';
+      if(question.optionType == "radio") {
+        obj["q3"] = question.selectedIndex ? "No":"Yes";
+      }
     });
+    
+    
+
     console.log(obj);
     if(this.selectedPlanId == null || this.selectedPlanId == '') {
       this.selectPlanError = 'Please select a plan';

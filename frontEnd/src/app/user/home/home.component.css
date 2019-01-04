@@ -198,7 +198,7 @@
 }
 .munchers_have_spoken_box {
     width: 30%;
-    height: 289px;
+    height: auto;
     background-color: #9ebc9e;
     border-radius: 40px;
     padding: 30px;
@@ -276,7 +276,7 @@
 }
 p {
    
-    overflow-y: auto;
+   
     height: 100%;
     
     padding: 0 5px;

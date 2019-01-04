@@ -3,7 +3,7 @@
         <h3>MunchPak bag to this address</h3>
     <div class="deliver_form_fields_wrapper">
         <div class="field_first">
-            <input class="form_control mar" [value]="customerData.firstName || ''" formControlName="name" type="text" name="name" placeholder="Name" />  
+            <input class="form_control" [value]="customerData.firstName || ''" formControlName="name" type="text" name="name" placeholder="Name" />  
             <div *ngIf="submitted && f.name.errors" class="invalid-feedback form_control">
                 <div *ngIf="submitted && f.name.errors.required">Name is required</div>
                  <div *ngIf="submitted && f.name.errors.pattern">Your Name must contain only letters </div>

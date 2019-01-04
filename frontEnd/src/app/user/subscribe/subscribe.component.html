@@ -25,8 +25,8 @@
           
           <!-- <li *ngFor="let opt of q.options;let optionIndex = index" (click)="selectedIndex=optionIndex"> -->
               <li *ngFor="let opt of q.options;let optionIndex = index">
-              <span *ngIf="q.type !== 'radio'"><input type="checkbox" [(ngModel)]="opt.checked" id="optionIndex" />{{opt.optionText}}</span>
-            <span *ngIf="q.type == 'radio'" (click)="q.selectedIndex=optionIndex"><input type="radio" name="q.type" id="optionIndex"  />{{opt.optionText}}</span>
+              <span *ngIf="q.optionType !== 'radio'"><input type="checkbox" [(ngModel)]="opt.checked" id="optionIndex" />{{opt.optionText}}</span>
+            <span *ngIf="q.optionType == 'radio'" (click)="q.selectedIndex=optionIndex"><input type="radio"  name="q.type" id="optionIndex"  />{{opt.optionText}}</span>
           </li>
         </ul>
         <div class="product_images + {{ q.class}}">

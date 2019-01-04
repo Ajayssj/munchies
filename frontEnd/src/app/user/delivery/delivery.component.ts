@@ -55,9 +55,9 @@ export class DeliveryComponent implements OnInit {
     }
     console.log(this.customerData)
     this.deliveryForm = this.formBuilder.group({
-      name: [this.customerData.firstName || '', [Validators.required]], //Validators.pattern('^[a-zA-Z]+')
+      name: [this.customerData.firstName || '', [Validators.required,Validators.pattern('^[a-zA-Z]+')]], //Validators.pattern('^[a-zA-Z]+')
       area: [this.customerData.Area_of_delivery || '', Validators.required],
-      surName: [this.customerData.lastName || '', [Validators.required , Validators.pattern('^[a-zA-Z]+')]],
+      surName: [this.customerData.lastName || '', [Validators.required,Validators.pattern('^[a-zA-Z]+')]],
       address: [this.customerData.address || '', Validators.required],
       phone: [this.customerData.phoneNo || '', [
         Validators.required,
