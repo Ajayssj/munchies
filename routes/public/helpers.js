@@ -138,18 +138,9 @@ module.exports = {
                             
                             utils.sendRegistrationEmail(dataObj,
                                 result =>{
-                                    if(result.result){
-                                        // console.log("mail Send",result);
-                                        
-                                        res.json({success : true, data : { role : 1}, message : 'Successfully Registered,Please Check Your Mail!'})
-
-                                    }
-                                    else{
-                                        // console.log("mail Not Send",result);
-                                        res.json({success : false, message : 'Registration Fail'});
-
-                                    }
+                                   
                                 })
+                            res.json({success : true, data : { role : 1}, message : 'Successfully Registered,Please Check Your Mail!'})
 
                             // res.json({success : true, user : user})
                         })
