@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
         if(res.isError) {     
           console.log(email);
           this.errorMessage = res.reason;
-        }else if(res.body.status == 400){
+        }else if(res.body.status == 400 || res.body.status == 401){
           this.errorMessage = res.body.title;
           // console.log('Error : ', res.reason)
         }else{

@@ -14,7 +14,7 @@
                   <span>Dietary Selections</span>
                   <span>Change</span>
               </div>
-              <div *ngFor="let Info of info"> No {{Info}}</div>  
+              <div *ngFor="let info of extraInfo"> <span *ngIf="info.type != 'green_tea'">No {{info.value}}</span></div>  
               <!-- <div *ngIf="question1" class="selected_product">No {{extraInfo.value}}</div>
               <div *ngIf="!question2" class="selected_product">No Preference</div>
               <div *ngIf="question2" class="selected_product">No {{question2}}</div>

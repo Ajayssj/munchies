@@ -19,10 +19,13 @@ export class AdminAnalyticsComponent implements OnInit, OnChanges {
   areaInfo = [];
   monthWiseTrafficOption;
   Math: any;
+  numberOfSubscribers: number;
+  orderValue: number;
   constructor(private chartsService: ChartsService, private http: HttpClient, private auth: AuthService) {
     this.Math = Math;
   }
   ngOnInit() {
+    this.width = 40;
     this.chartsService.getAllPlans((options) => {
       this.planSelectedOptions = options;
       console.log(this.planSelectedOptions)
@@ -53,7 +56,22 @@ export class AdminAnalyticsComponent implements OnInit, OnChanges {
     err => {
 
   });
-  this.width = 40;
+  this.http.get(this.auth.getDomainName() + '/api/analysis/subscribers')
+  .subscribe((res:any) => {
+    console.log(res.data.total);
+    this.numberOfSubscribers = res.data.total;
+  },
+  err => {
+
+  });
+  this.http.get(this.auth.getDomainName() + '/api/analysis/total/order/value')
+  .subscribe((res:any) => {
+    console.log(res);
+    this.orderValue = res.data.totalOrderValue;
+  },
+  err => {
+
+  });
 }
 ngOnChanges() {  
 }

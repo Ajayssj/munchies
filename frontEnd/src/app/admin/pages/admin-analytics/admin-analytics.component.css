@@ -28,3 +28,97 @@
     font-size: 9px;
     color: brown;
 }
+.bg-default[_ngcontent-c9]{
+    background:linear-gradient(to top right,#999,#b3b2b2);
+    background:-webkit-linear-gradient(to top right,#999,#b3b2b2)
+}
+.bg-primary, .tip-card   .tip-ico-primary{
+    background:linear-gradient(to top right,#fca400,#ffd17c);
+    background:-webkit-linear-gradient(to top right,#fca400,#ffd17c)
+}
+.bg-success, .tip-card   .tip-ico-success{
+    background:linear-gradient(to top right,#16be9a,#42e697);
+    background:-webkit-linear-gradient(to top right,#16be9a,#42e697)
+}
+.bg-danger, .tip-card  .tip-ico-danger{
+    background:linear-gradient(to top right,#fa5167,#fda09c);
+    background:-webkit-linear-gradient(to top right,#fa5167,#fda09c)
+}
+.bg-warning, .tip-card   .tip-ico-warning{
+    background:linear-gradient(to top right,#ff7403,#fac980);
+    background:-webkit-linear-gradient(to top right,#ff7403,#fac980)
+}
+.bg-info, .tip-card   .tip-ico-info{
+    background:linear-gradient(to top right,#2cc3ff,#15f8bf);
+    background:-webkit-linear-gradient(to top right,#2cc3ff,#15f8bf)
+}
+.tip-card{
+    padding:10px;
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-direction:row;
+    flex-direction:row;
+    -ms-flex-pack:distribute;
+    justify-content:space-around
+}
+.tip-card  .tip-msg{
+    -ms-flex:1;
+    flex:1
+}
+.tip-card   .tip-msg   h3{
+    line-height:0;
+    margin-bottom:20px
+}
+.tip-card  .tip-msg   span{
+    color:rgba(38,37,60,.6);
+    font-size:23px;
+    font-weight: bold;
+}
+.tip-card   .tip-ico{
+    margin:0 10px;
+    border-radius:3px;
+    color:#fff;
+    width:60px;
+    height:60px;
+    text-align:center;
+    line-height:60px;
+    font-size:30px;
+    border:none;
+    outline:none
+}
+.tip-card  .tip-ico:active{
+    box-shadow:inset 0 2px 10px 0 rgba(0,0,0,.4);
+    -o-box-shadow:0 2px 10px 0 rgba(0,0,0,.4) inset;
+    -moz-box-shadow:0 2px 10px 0 rgba(0,0,0,.4) inset;
+    -webkit-box-shadow:0 2px 10px 0 rgba(0,0,0,.4) inset
+}
+.tip-card  .tip-ico-primary{
+    box-shadow:0 2px 10px 0 rgba(252,164,0,.5);
+    -o-box-shadow:0 2px 10px 0 rgba(252,164,0,.5);
+    -moz-box-shadow:0 2px 10px 0 rgba(252,164,0,.5);
+    -webkit-box-shadow:0 2px 10px 0 rgba(252,164,0,.5)
+}
+.tip-card   .tip-ico-success{
+    box-shadow:0 2px 10px 0 rgba(22,190,154,.5);
+    -o-box-shadow:0 2px 10px 0 rgba(22,190,154,.5);
+    -moz-box-shadow:0 2px 10px 0 rgba(22,190,154,.5);
+    -webkit-box-shadow:0 2px 10px 0 rgba(22,190,154,.5)
+}
+.tip-card  .tip-ico-danger{
+    box-shadow:0 2px 10px 0 rgba(250,81,103,.5);
+    -o-box-shadow:0 2px 10px 0 rgba(250,81,103,.5);
+    -moz-box-shadow:0 2px 10px 0 rgba(250,81,103,.5);
+    -webkit-box-shadow:0 2px 10px 0 rgba(250,81,103,.5)
+}
+.tip-card   .tip-ico-warning{
+    box-shadow:0 2px 10px 0 rgba(255,116,3,.5);
+    -o-box-shadow:0 2px 10px 0 rgba(255,116,3,.5);
+    -moz-box-shadow:0 2px 10px 0 rgba(255,116,3,.5);
+    -webkit-box-shadow:0 2px 10px 0 rgba(255,116,3,.5)
+}
+.tip-card   .tip-ico-info{
+    box-shadow:0 2px 10px 0 rgba(44,195,255,.5);
+    -o-box-shadow:0 2px 10px 0 rgba(44,195,255,.5);
+    -moz-box-shadow:0 2px 10px 0 rgba(44,195,255,.5);
+    -webkit-box-shadow:0 2px 10px 0 rgba(44,195,255,.5)
+}

@@ -105,8 +105,8 @@ export class DeliveryComponent implements OnInit {
         question2.split(',').forEach(item => questionInfo.push({type: 'fruits', value: item}) )
         // questionInfo.push({ type: 'fruits', value: question2})
       }
-      if(question2 && question3.length > 0)  {
-        question2.split(',').forEach(item => questionInfo.push({type: 'green_tea', value: item}) )
+      if(question3 && question3.length > 0)  {
+        question3.split(',').forEach(item => questionInfo.push({type: 'green_tea', value: item}) )
         // questionInfo.push({ type: 'green_tea', value: question3})
       }
       

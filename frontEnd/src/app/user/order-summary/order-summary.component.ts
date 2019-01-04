@@ -21,7 +21,7 @@ export class OrderSummaryComponent implements OnInit {
   discount: number = 0;
   coupanId = '';
   coupanCodeError = '';
-  info = [];
+  extraInfo = [];
   constructor(
     private http: HttpClient, 
     private router: Router,
@@ -38,17 +38,7 @@ export class OrderSummaryComponent implements OnInit {
         this.selectedPlanId = this.customerData.planId;
         this.planTitle = this.customerData.planName;
         this.subTotal = this.customerData.planRate;
-        var extraInfo = JSON.parse(this.customerData.extraInfo);
-        this.info =extraInfo;
-        console.log(extraInfo)
-        extraInfo.forEach((extraInfo) => {
-          
-           this.info =extraInfo;
-          
-          console.log(extraInfo);
-          console.log(extraInfo.value);
-         
-        });
+        this.extraInfo = JSON.parse(this.customerData.extraInfo);
         // if(extraInfo && extraInfo[0]) {
         //   this.question1 = extraInfo[0].value;
         // }

@@ -38,15 +38,15 @@ export class CompanyComponent implements OnInit {
   selectedTypeObj= {};
   addCompanyName: string;
   addCompanyOnType: any;
-  addType: any;
-  addPname: any;
-  addPtype: any;
+  addType = '';
+  addPname = '';
+  addPtype = '';
   addPcompany = '';
-  addPquantity: any;
-  addPcost: any;
-  addPmrp: any;
-  addPallergyDetails: any;
-  addPkcal: any;
+  addPquantity = '';
+  addPcost = '';
+  addPmrp = '';
+  addPallergyDetails = '';
+  addPkcal = '';
   // product Tab var
   addProductArray = {};
   editProductArray = {};
@@ -185,6 +185,7 @@ export class CompanyComponent implements OnInit {
     this.http.delete(this.auth.getDomainName() + '/api/product/delete/' + pid, {}).subscribe((res: productRes)=> {
       console.log(res.success);
         this.message = res.message; 
+        alert(this.message);
         // this.products = this.auth.getAllProducts();
         this.products.splice(index, 1);
         console.log(this.products);
@@ -201,7 +202,6 @@ export class CompanyComponent implements OnInit {
   ifMatchString(name,companyObj) {
     
     // this.ref.detectChanges();
-    console.log(name);
     if(name && name.length > 0 && companyObj.includes(name)) {
       // this.hideAutoComplete = false;
       return true;
@@ -251,7 +251,7 @@ addProduct(modal) {
       kcal: this.addPkcal,
       weeks: []
     }
-    
+    console.log(this.addProductArray)
     this.http.post(this.auth.getDomainName() + '/api/company/add', {company: this.addPcompany}).subscribe(data=>{
       console.log(data);
     }, 
@@ -262,6 +262,7 @@ addProduct(modal) {
     
       if(response.success) {
         this.message = response.message;
+        alert(this.message);
         console.log(this.addProductArray)
         this.products.push({ ...this.addProductArray, ...{_id : response.data._id}});
         // this.scrollTop();

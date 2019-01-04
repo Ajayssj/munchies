@@ -377,13 +377,23 @@ p {
     width: 100%;
     text-align: center;
     box-sizing: border-box;
-    background-color: #f2dede;
     padding: 10px 0px;
 }
+.error_wrapper {
+    background-color: #f2dede;
+}
+.success_wrapper {
+    background-color: #dff0d8;
+}
 .error, .success {
-    color: #a94442;
     display: inline-block;
     font-size: 16px;
+}
+.error {
+    color: #a94442;
+}
+.success {
+    color: #3c763d;
 }
 
 @media screen and (min-width: 300px) {
