@@ -98,7 +98,7 @@ module.exports = {
             .then(user => {
                 if(user){
                         req.session.user = user;
-                        res.json({success : true});
+                        res.json({success : true, data : user});
                         // console.log("Session user==>",req.session.user);
                         
                  
@@ -129,9 +129,10 @@ module.exports = {
                                     
                             //         res.json({success : false, error : err});
                             //     });
-                            var dataObj={
+                            var dataObj = {
                                 email:decodedToken.email,
-                                password:password
+                                password:password,
+                                role : 1
                             }
                             // console.log("DataObj==>",dataObj);
                             
@@ -140,7 +141,7 @@ module.exports = {
                                     if(result.result){
                                         // console.log("mail Send",result);
                                         
-                                        res.json({success : true, message : 'Successfully Registered,Please Check Your Mail!'})
+                                        res.json({success : true, data : { role : 1}, message : 'Successfully Registered,Please Check Your Mail!'})
 
                                     }
                                     else{
