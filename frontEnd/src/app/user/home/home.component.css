@@ -198,7 +198,7 @@
 }
 .munchers_have_spoken_box {
     width: 30%;
-    height: 250px;
+    height: 289px;
     background-color: #9ebc9e;
     border-radius: 40px;
     padding: 30px;
@@ -278,9 +278,10 @@ p {
    
     overflow-y: auto;
     height: 100%;
-    scroll-margin-left: -168px;
+    
     padding: 0 5px;
     margin: 0px;
+    font-size: 14px;
 }
 
 /* **************************** Green Box New Code ************************************* */
@@ -430,7 +431,7 @@ p {
     }
     .munchers_have_spoken_box {
         width: 75%;
-        margin: 0 auto 70px auto;
+        margin: 31px auto 100px;
     }
     .munchers_have_spoken_box:nth-child(2) {
         margin: 0 auto 70px auto;

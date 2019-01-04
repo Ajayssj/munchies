@@ -81,7 +81,7 @@ export class SubscribeComponent implements OnInit {
     },
     {
       optionId: 5,
-      optionText: "none",
+      optionText: "None",
       optName: "q1",
       checked : false
     }],
