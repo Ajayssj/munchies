@@ -3,6 +3,8 @@ const db = require('../../database');
 const Order = db.getCollection('orders');
 const Extra = db.getCollection('extraInfo');
 const User = db.getCollection('user');
+const request = require('request');
+
 module.exports = {
     getMostUsedPlan : (req,res) => {
         Order.aggregate(
@@ -231,6 +233,25 @@ module.exports = {
     },
     getSubscribers : (req,res) =>{
         
+        var options = {
+            uri:"https://us7.api.mailchimp.com/3.0/lists/91e86cd360",
+            method:"GET",
+            headers:{
+                "content-type": "application/json",
+                "Authorization": "any fda839a19d6f99acbb39f849e6f05ed4-us7",
+                // user: 'anystring:8d50a55eaf85162d5d167f17c49c02da-us7',
+            }
+        }
+        request(options,function(error,response,body){
+            if(error) {
+                res.json({
+                    isError:true,
+                    reason:error,
+                })
+                return;
+            }
+            res.json({success : true, data : JSON.parse(body).stats.member_count})
+        })   
        /*  .then(result => {
             res.json({success : true, data : result[0]})
         }).catch(err => res.json({success : false, error : err})); */

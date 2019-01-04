@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
       this.errorMessage = 'Please Enter Email Address';
     }
     else {
-      this.http.get( this.authService.getDomainName() +  '/api/mailchimp/subscribeUser/' + email ,{}).subscribe((res : any) => {
+      this.http.get( this.authService.getDomainName() +  '/public/api/mailchimp/subscribeUser/' + email ,{}).subscribe((res : any) => {
         
         console.log(res);
         if(!res.isError) {     
