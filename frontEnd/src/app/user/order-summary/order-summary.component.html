@@ -14,13 +14,15 @@
                   <span>Dietary Selections</span>
                   <span>Change</span>
               </div>
-              <div *ngIf="!question1" class="selected_product">No Preference</div>
-              <div *ngIf="question1" class="selected_product">No {{extraInfo.value}}</div>
+              <div *ngFor="let Info of info">
+        
+              <div>No {{Info}}</div>
+              <!-- <div *ngIf="question1" class="selected_product">No {{extraInfo.value}}</div>
               <div *ngIf="!question2" class="selected_product">No Preference</div>
               <div *ngIf="question2" class="selected_product">No {{question2}}</div>
 
               <div *ngIf="!question3" class="selected_product">{{question3}} Green tea with honey sachets</div>
-              <div *ngIf="question3" class="selected_product">{{question3}} Green tea with honey sachets </div>
+              <div *ngIf="question3" class="selected_product">{{question3}} Green tea with honey sachets </div> -->
           </div>
           <div class="sub_total_shipment">
                 <span class="error" *ngIf="coupanCodeError != ''">{{coupanCodeError}}</span>

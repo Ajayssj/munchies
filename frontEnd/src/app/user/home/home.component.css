@@ -275,11 +275,12 @@
     text-align: center;
 }
 p {
-    text-align: justify;
+   
     overflow-y: auto;
     height: 100%;
     scroll-margin-left: -168px;
     padding: 0 5px;
+    margin: 0px;
 }
 
 /* **************************** Green Box New Code ************************************* */
