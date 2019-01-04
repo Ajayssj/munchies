@@ -136,6 +136,7 @@ module.exports = {
                             }
                             // console.log("DataObj==>",dataObj);
                             
+                            req.session.user = userObj;
                             utils.sendRegistrationEmail(dataObj,result => { console.log('Email Sne')})
                             res.json({success : true, data : { role : 1}, message : 'Successfully Registered,Please Check Your Mail!'})
 
