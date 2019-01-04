@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
   mailchimp(email){
+    this.errorMessage = '';
+    this.successMessage = '';
     if(email == '') {
       this.errorMessage = 'Please Enter Email Address';
     }
@@ -24,13 +26,14 @@ export class HomeComponent implements OnInit {
       this.http.get( this.authService.getDomainName() +  '/public/api/mailchimp/subscribeUser/' + email ,{}).subscribe((res : any) => {
         
         console.log(res);
-        if(!res.isError) {     
+        if(res.isError) {     
           console.log(email);
-          this.errorMessage = '';
-          this.successMessage = res.body.title;
-        }
-        else{
+          this.errorMessage = res.reason;
+        }else if(res.body.status == 400){
+          this.errorMessage = res.body.title;
           // console.log('Error : ', res.reason)
+        }else{
+          this.successMessage = 'User Subscribed';
         }     
 
       },err => {

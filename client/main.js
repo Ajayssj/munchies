@@ -4233,19 +4233,24 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.mailchimp = function (email) {
         var _this = this;
+        this.errorMessage = '';
+        this.successMessage = '';
         if (email == '') {
             this.errorMessage = 'Please Enter Email Address';
         }
         else {
             this.http.get(this.authService.getDomainName() + '/public/api/mailchimp/subscribeUser/' + email, {}).subscribe(function (res) {
                 console.log(res);
-                if (!res.isError) {
+                if (res.isError) {
                     console.log(email);
-                    _this.errorMessage = '';
-                    _this.successMessage = res.body.title;
+                    _this.errorMessage = res.reason;
+                }
+                else if (res.body.status == 400) {
+                    _this.errorMessage = res.body.title;
+                    // console.log('Error : ', res.reason)
                 }
                 else {
-                    // console.log('Error : ', res.reason)
+                    _this.successMessage = 'User Subscribed';
                 }
             }, function (err) {
             });
