@@ -4,6 +4,8 @@ const db = require('../../database');
 const Product = db.getCollection('products');
 const utils = require('../../utils');
 const companyModule = require('../company/helpers');
+const PlansExtended = db.getCollection('plansExtended');
+
 const isProductExists = (productId) => {
     return new Promise((success,error) => {
         Product.findOne({_id : db.toObjectID(productId)})
@@ -60,6 +62,11 @@ module.exports = {
             [
                 // Stage 1
                 {
+                    $match : {
+                        isActive : true
+                    }
+                },  
+                {
                     $lookup: {
                         "from" : "plansExtended",
                         "localField" : "_id",
@@ -98,7 +105,7 @@ module.exports = {
     deleteProduct : (req,res) => {
         const productId = req.params.productId;
         if(productId){
-            Product.findOneAndDelete({_id : db.toObjectID(productId)})
+            Product.updateOne({_id : db.toObjectID(productId)},{ $set : { isActive : false}})
             .then(product => {
                 if(product){
                     res.json({success : true, message : 'Product Deleted Successfully!' });

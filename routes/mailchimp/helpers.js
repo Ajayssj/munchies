@@ -9,7 +9,7 @@ module.exports = {
             method:"POST",
             headers:{
                 "content-type": "application/json",
-                "Authorization": "any fda839a19d6f99acbb39f849e6f05ed4-us7",
+                "Authorization": "any " + process.env.MAILCHIMP_API_KEY,
                 // user: 'anystring:8d50a55eaf85162d5d167f17c49c02da-us7',
             },
           //  "anystring":"anystring:571d24b50a217608a00f3e640dfa10fc-us7",
