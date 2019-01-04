@@ -16,6 +16,7 @@ routes.get('/analysis/most/delivered/area',permit(ADMIN),helpers.getDeliveredAre
 routes.get('/analysis/most/allergic',permit(ADMIN),helpers.getAllergic);
 routes.get('/analysis/most/liked/fruits',permit(ADMIN),helpers.getMostLikedFruits);
 routes.get('/analysis/subscribers',permit(ADMIN),helpers.getSubscribers);
+routes.get('/analysis/customers',permit(ADMIN),helpers.getCustomers);
 routes.get('/analysis/total/order/value',permit(ADMIN),helpers.getTotalOrderValue);
 routes.get('/analysis/greentea',permit(ADMIN),helpers.getGreentea);
 

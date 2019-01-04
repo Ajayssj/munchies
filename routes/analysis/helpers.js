@@ -205,15 +205,13 @@ module.exports = {
         }).catch(err => res.json({success : false, error : err}));
         
     },
-    getSubscribers : (req,res) =>{
-        User.aggregate(
-            // Pipeline
+    getCustomers : (req,res) => {
+        Order.aggregate(
             [
-                // Stage 1
                 {
                     $group: {
                         _id : null,
-                        total : {
+                        count : {
                               $sum : 1
                         }
                     }
@@ -225,11 +223,17 @@ module.exports = {
                         _id : 0
                     }
                 },
-        
             ]
         ).toArray().then(result => {
             res.json({success : true, data : result[0]})
         }).catch(err => res.json({success : false, error : err}));
+        
+    },
+    getSubscribers : (req,res) =>{
+        
+       /*  .then(result => {
+            res.json({success : true, data : result[0]})
+        }).catch(err => res.json({success : false, error : err})); */
         
     },
     getTotalOrderValue : (req,res) => {
