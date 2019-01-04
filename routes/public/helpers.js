@@ -111,7 +111,8 @@ module.exports = {
                     if (password.length) {
                         const userObj = {
                             email : decodedToken.email,
-                            password : utils.createHash(password)
+                            password : utils.createHash(password),
+                            role : 1
                         }
                         // console.log("user Not registered Password Created==>",password);
                         
@@ -131,8 +132,7 @@ module.exports = {
                             //     });
                             var dataObj = {
                                 email:decodedToken.email,
-                                password:password,
-                                role : 1
+                                password:password
                             }
                             // console.log("DataObj==>",dataObj);
                             
