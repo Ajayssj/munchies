@@ -136,10 +136,7 @@ module.exports = {
                             }
                             // console.log("DataObj==>",dataObj);
                             
-                            utils.sendRegistrationEmail(dataObj,
-                                result =>{
-                                   
-                                })
+                            utils.sendRegistrationEmail(dataObj,result => { console.log('Email Sne')})
                             res.json({success : true, data : { role : 1}, message : 'Successfully Registered,Please Check Your Mail!'})
 
                             // res.json({success : true, user : user})
