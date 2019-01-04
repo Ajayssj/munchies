@@ -86,7 +86,7 @@
               <div *ngIf="product.weeks.length > 0" class="card-content">
                 <span *ngFor="let weekItem of product.weeks;let weekIndex = index;">
                   <span class="selectedWeeks">
-                    <button class="btn btn-warning">{{'Week ' + weekItem}}
+                    <button class="btn btn-warning weekBtn">{{'Week ' + weekItem}}
                       <i (click)="confirmDeleteModal.open(); productObj=product; weekNo=weekItem;" class="fa fa-close"></i></button>
                   </span>
                 </span>

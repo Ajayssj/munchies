@@ -29,13 +29,15 @@
                     <input class="offer_code_input" type="text" [(ngModel)]="couponCode" name="code" placeholder="Code" />
                     <button (click)="applyCoupon(couponCode)" class="btn apply">Apply</button>
                 </div>
+                <div *ngIf="coupanCodeSuccess != ''" class="coupanCodeMessage">{{coupanCodeSuccess}}</div>
                 <div class="block">
                     <span>Delivery</span>
                     <span>50rs</span>
                 </div>
               <div class="block">
                   <span>Sub Total</span>
-                  <span>{{subTotal - discount}}</span>
+                  <span [ngClass]="{'underline': discount > 0}">{{subTotal}} </span>
+                  <span *ngIf="discount > 0"> {{subTotal - discount}}</span>
               </div>
           </div>
           <div class="submit_btn">

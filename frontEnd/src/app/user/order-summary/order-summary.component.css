@@ -122,3 +122,13 @@ input:focus {
     margin-bottom: 20px;
     display: inline-block;
 }
+.underline {
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+.coupanCodeMessage {
+    color: #3c763d;
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+}

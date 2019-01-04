@@ -11,6 +11,7 @@
             <th>Type</th>
             <th>Product</th>
             <th>MRP</th>
+            <th>Rate</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -19,6 +20,7 @@
             <td>{{weekprod.type}}</td>
             <td>{{weekprod.name}}</td>
             <td>{{weekprod.price}}</td>
+            <td>{{weekprod.cost}}</td>
             <td><button (click)="deleteWeekProd(weekprod._id, i, alertModal)" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Delete</button></td>
           </tr>
         </tbody>

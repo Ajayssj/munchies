@@ -92,7 +92,7 @@ var AdminAnalyticsComponent = /** @class */ (function () {
         this.http.get(this.auth.getDomainName() + '/api/analysis/subscribers')
             .subscribe(function (res) {
             console.log(res.data.total);
-            _this.numberOfSubscribers = res.data.total;
+            _this.numberOfSubscribers = res.data;
         }, function (err) {
         });
         this.http.get(this.auth.getDomainName() + '/api/analysis/total/order/value')

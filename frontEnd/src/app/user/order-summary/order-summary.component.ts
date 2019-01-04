@@ -22,6 +22,7 @@ export class OrderSummaryComponent implements OnInit {
   coupanId = '';
   coupanCodeError = '';
   extraInfo = [];
+  coupanCodeSuccess = '';
   constructor(
     private http: HttpClient, 
     private router: Router,
@@ -86,13 +87,14 @@ export class OrderSummaryComponent implements OnInit {
         else {
           this.discount = (this.subTotal * res.data.discount) / 100;
         }
+        this.coupanCodeSuccess = "Coupan code applied successfully";
       }
       else {
         this.coupanCodeError = res.error;
         console.log(this.coupanCodeError)
         this.subTotal = this.subTotal;
       }
-      console.log(this.subTotal)
+      console.log(this.subTotal + 50)
     },
     err => {
 
