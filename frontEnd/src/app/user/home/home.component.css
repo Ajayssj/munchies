@@ -289,7 +289,7 @@ p {
 .green_box {
     background: #9ebc9e;
     /* height: 350px;*/
-    width: 1000px; 
+    width: 100%; 
     float: left;
 }
 .content_box_one, .content_box_two, .content_box_three {
@@ -348,12 +348,11 @@ p {
     margin: 0px;
     font-size:16px;
     line-height: 25px;
-  
 }
 .content_box_two .content_box_text p {
-    text-align: left;
+    text-align: right;
     margin: 0px;
-    
+    font-size:16px;    
     height: auto;
 }
 
