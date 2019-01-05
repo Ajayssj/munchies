@@ -5,7 +5,7 @@ module.exports = {
         const email = req.params.email;
         // res.send(email)
         var options = {
-            uri:"https://us7.api.mailchimp.com/3.0/lists/91e86cd360/members",
+            uri:"https://us7.api.mailchimp.com/3.0/lists/7812daaa38/members",
             method:"POST",
             headers:{
                 "content-type": "application/json",
