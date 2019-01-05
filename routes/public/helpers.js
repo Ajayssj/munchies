@@ -83,6 +83,12 @@ module.exports = {
             }   
         }
     },
+    isUserLoggedIn : (req,res) =>{
+        if(req.session.user)
+            res.json({success : true});
+        else
+            res.json({success : false});
+    },
     verifyFirebaseToken : (req,res) => {
         const errors = validationResult(req);
         //  console.log("verifyFirebaseToken Req==>",req.body);
