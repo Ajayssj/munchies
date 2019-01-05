@@ -21,6 +21,14 @@
 
               <div *ngIf="!question3" class="selected_product">{{question3}} Green tea with honey sachets</div>
               <div *ngIf="question3" class="selected_product">{{question3}} Green tea with honey sachets </div> -->
+          </div>
+          <div class="plan">
+            <div class="heading">
+                <span>Green Tea and honey</span>
+                <span>Change</span>
+            </div>
+            <div *ngIf="greenTea != ''"> <span>{{greenTea}}</span></div>
+          </div>
  
           <div class="sub_total_shipment">
                 <span class="error" *ngIf="coupanCodeError != ''">{{coupanCodeError}}</span>
@@ -30,9 +38,13 @@
                     <button (click)="applyCoupon(couponCode)" class="btn apply">Apply</button>
                 </div>
                 <div *ngIf="coupanCodeSuccess != ''" class="coupanCodeMessage">{{coupanCodeSuccess}}</div>
+                <div *ngIf="greenTea == 'Yes'" class="block">
+                    <span>Green Tea with honey</span>
+                    <span>39rs per week</span>
+                </div>
                 <div class="block">
                     <span>Delivery</span>
-                    <span>50rs</span>
+                    <span>50rs per week</span>
                 </div>
               <div class="block">
                   <span>Sub Total</span>

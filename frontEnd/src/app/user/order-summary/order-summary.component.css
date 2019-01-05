@@ -48,7 +48,7 @@
     margin-bottom: 30px;
 }
 .sub_total_shipment .block span:first-child {
-    min-width: 135px;
+    min-width: 60%;
     display: inline-block;
 }
 .sub_total_shipment .block span.offer_code {
