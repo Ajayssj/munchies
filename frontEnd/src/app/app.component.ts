@@ -25,7 +25,7 @@ export class AppComponent {
            this.authService.setLoggedIn(false);
            this.authService.setUserName('');
            this.authService.setUserRole(1);
-           this.router.navigate(['/signIn'])
+          //  this.router.navigate(['/signIn'])
         }
           
       });
