@@ -114,7 +114,7 @@ nav .wrapper ul li a {
 }
 
 nav .wrapper ul li .getthebag_btn {
-    border: 2px solid red;
+    border: 2px solid rgba(158, 188, 158, 1);
     padding: 8px 25px;
     border-radius: 40px;
     font-weight: bold;
