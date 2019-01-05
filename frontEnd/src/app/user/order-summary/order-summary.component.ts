@@ -40,6 +40,13 @@ export class OrderSummaryComponent implements OnInit {
         this.selectedPlanId = this.customerData.planId;
         this.planTitle = this.customerData.planName;
         console.log(this.planTitle);
+        this.extraInfo = JSON.parse(this.customerData.extraInfo);
+        console.log(this.extraInfo);
+        this.extraInfo.forEach(info=> {
+          if(info.type == "green_tea") {
+            this.greenTea = info.value;
+          }
+        });
         if(this.planTitle == 'Trial Week') {
           this.weeks = 1;
         }
@@ -49,16 +56,15 @@ export class OrderSummaryComponent implements OnInit {
         else {
           this.weeks = 12;
         }
-        console.log(this.weeks)
-        this.subTotal = (JSON.parse(this.customerData.planRate) + (50 * this.weeks));
+        console.log(this.weeks);
+        
+        if(this.greenTea == 'Yes') {
+          this.subTotal = (JSON.parse(this.customerData.planRate) + (50 * this.weeks) + (39 * this.weeks));
+        }
+        else {
+          this.subTotal = (JSON.parse(this.customerData.planRate) + (50 * this.weeks));
+        }
         console.log(this.subTotal);
-        this.extraInfo = JSON.parse(this.customerData.extraInfo);
-        console.log(this.extraInfo);
-        this.extraInfo.forEach(info=> {
-          if(info.type == "green_tea") {
-            this.greenTea = info.value;
-          }
-        });
         // if(extraInfo && extraInfo[0]) {
         //   this.question1 = extraInfo[0].value;
         // }
@@ -112,12 +118,7 @@ export class OrderSummaryComponent implements OnInit {
         this.coupanCodeSuccess = '';
         this.coupanCodeError = res.error;
         console.log(this.coupanCodeError);
-        if(this.greenTea == "Yes") {
-          this.subTotal = (this.subTotal + (39 * this.weeks));
-        }
-        else {
-          this.subTotal = this.subTotal;
-        }
+        this.subTotal = this.subTotal;
         console.log(this.subTotal);
       }
     },

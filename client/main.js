@@ -4675,6 +4675,13 @@ var OrderSummaryComponent = /** @class */ (function () {
             this.selectedPlanId = this.customerData.planId;
             this.planTitle = this.customerData.planName;
             console.log(this.planTitle);
+            this.extraInfo = JSON.parse(this.customerData.extraInfo);
+            console.log(this.extraInfo);
+            this.extraInfo.forEach(function (info) {
+                if (info.type == "green_tea") {
+                    _this.greenTea = info.value;
+                }
+            });
             if (this.planTitle == 'Trial Week') {
                 this.weeks = 1;
             }
@@ -4685,15 +4692,13 @@ var OrderSummaryComponent = /** @class */ (function () {
                 this.weeks = 12;
             }
             console.log(this.weeks);
-            this.subTotal = (JSON.parse(this.customerData.planRate) + (50 * this.weeks));
+            if (this.greenTea == 'Yes') {
+                this.subTotal = (JSON.parse(this.customerData.planRate) + (50 * this.weeks) + (39 * this.weeks));
+            }
+            else {
+                this.subTotal = (JSON.parse(this.customerData.planRate) + (50 * this.weeks));
+            }
             console.log(this.subTotal);
-            this.extraInfo = JSON.parse(this.customerData.extraInfo);
-            console.log(this.extraInfo);
-            this.extraInfo.forEach(function (info) {
-                if (info.type == "green_tea") {
-                    _this.greenTea = info.value;
-                }
-            });
             // if(extraInfo && extraInfo[0]) {
             //   this.question1 = extraInfo[0].value;
             // }
@@ -4748,12 +4753,7 @@ var OrderSummaryComponent = /** @class */ (function () {
                 _this.coupanCodeSuccess = '';
                 _this.coupanCodeError = res.error;
                 console.log(_this.coupanCodeError);
-                if (_this.greenTea == "Yes") {
-                    _this.subTotal = (_this.subTotal + (39 * _this.weeks));
-                }
-                else {
-                    _this.subTotal = _this.subTotal;
-                }
+                _this.subTotal = _this.subTotal;
                 console.log(_this.subTotal);
             }
         }, function (err) {
