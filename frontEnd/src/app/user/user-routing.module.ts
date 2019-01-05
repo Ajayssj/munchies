@@ -24,6 +24,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ProfileComponent } from './profile/profile.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
+import { SubscribeFormComponent } from './subscribe-form/subscribe-form.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: "cookie-policy", component: CookiePolicyComponent },
   { path : "forgot-password", component : ForgotPasswordComponent },
   { path : "reset-password/:token", component : ResetPasswordComponent},
+  { path : "subscribe-form", component : SubscribeFormComponent},
   { path: "delivery", component: DeliveryComponent,
   canActivate: [
     AuthGuard

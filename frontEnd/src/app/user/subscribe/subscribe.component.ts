@@ -45,7 +45,8 @@ export class SubscribeComponent implements OnInit {
     planText: "1 snack bag delivered each week every Monday for 12 weeks!",
     weeks : 12
   }];
-  questions = [{
+  questions = [
+    {
     qId: 1,
     question: "Are you allergic to any of the following?",
     type:"allergic",
@@ -160,6 +161,7 @@ export class SubscribeComponent implements OnInit {
   {
     qId: 3,
     type:"green_tea",
+    planRate:39,
     question: "should your bag contain green tea with honey sachets?",
     options: [{
       optionId: 1,
@@ -180,7 +182,20 @@ export class SubscribeComponent implements OnInit {
   }
 ]
   
-
+shippingCharges:any  = {
+  'Cantonment' : 50,
+  'Domlur' : 50,
+  'Indiranagar' : 50,
+  'Ulsoor' : 50,
+  'Vasanth Nagar' : 50,
+  'Koramangala' : 50,
+  'Madiwala' : 50,
+  'BTM_Layout' : 50,
+  'Whitefield' : 50,
+  'Marathahalli' : 50,
+  'CV Raman Naga' : 50,
+  default:50
+}
 
   ngOnInit() {
     console.log("hiiiiii", this.questions);
@@ -221,7 +236,7 @@ export class SubscribeComponent implements OnInit {
 
       
        this.queryParams = { selectedPlan: this.selectedPlanId, selectedPlanRate: this.selectedPlanRate,
-        selectedPlanName: this.selectedPlanName , ...obj};
+        selectedPlanName: this.selectedPlanName , ...obj ,deliveryCharge:this.shippingCharges.default, greenTeaCharge:39 };
        console.log(this.queryParams);
        this.selectPlanError = '';
       this.router.navigate(['/delivery'], {queryParams: this.queryParams});

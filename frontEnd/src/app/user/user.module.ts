@@ -37,6 +37,7 @@ import { AlertPopupComponent } from './alert-popup/alert-popup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
+import { SubscribeFormComponent } from './subscribe-form/subscribe-form.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
     AlertPopupComponent,
     ProfileComponent,
     TermsAndConditionsComponent,
-    CookiePolicyComponent
+    CookiePolicyComponent,
+    SubscribeFormComponent
   ],
   imports: [
     BrowserModule,
