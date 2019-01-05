@@ -250,7 +250,8 @@ module.exports = {
                 })
                 return;
             }
-            res.json({success : true, data : JSON.parse(body).stats.member_count})
+            let data = JSON.parse(body);
+            res.json({success : true, data : (data.stats.member_count)?data.stats.member_count:0 })
         })   
        /*  .then(result => {
             res.json({success : true, data : result[0]})

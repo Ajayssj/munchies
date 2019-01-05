@@ -21,7 +21,7 @@ routes.delete('/plan/active/:planId/product/:productId/week/:weekId',helpers.del
 
 
 routes.post('/plan/core/add',permit(ADMIN),...validation.core.add ,helpers.addCorePlan);
-routes.get('/plan/core/',permit(ADMIN),helpers.getCorePlans);
+routes.get('/plan/core/',permit(ADMIN,USER),helpers.getCorePlans);
 routes.delete('/plan/core/delete',permit(ADMIN),helpers.deleteCorePlan);
 routes.put('/plan/core/edit',permit(ADMIN), ...validation.core.edit ,helpers.editCorePlan);
 

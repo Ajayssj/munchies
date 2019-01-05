@@ -158,6 +158,14 @@ export class CustomerdetailsComponent implements OnInit {
   }
 
   viewUserWeek(user) {
+    if(user.nextWeekId){
+      var userId = user.user._id;
+      var activeplanID = user.planInfo._id;
+      let weekId = user.nextWeekId;
+      this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+activeplanID+'/week/'+weekId);
+    }
+  }
+  /* viewUserWeek(user) {
     
     let res = this.getNextWeek(user);
     if(res.success){
@@ -172,7 +180,7 @@ export class CustomerdetailsComponent implements OnInit {
       alert(res.value);
     }
     
-  }
+  } */
   viewUserPlan(userId, planId) {
     console.log(userId, planId);
     this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+planId);

@@ -23,7 +23,8 @@
             <td>{{user.Area_of_delivery}}</td>
             <!-- <td><a routerLink='/admin/pages/customer/cust/3423/plan/123/week/1/' class="btn btn-info"><i class="fa fa-pencil fa-fw"></i>{{user.planInfo.weeks}}</a></td>
             <td><a routerLink="/admin/pages/customer/cust/3423/plan/123" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>View</a></td> -->
-            <td><a (click)="viewUserWeek(user)" class="btn btn-info"><i class="fa fa-pencil fa-fw"></i>{{getNextWeek(user).value}}</a></td>
+            <!-- <td><a (click)="viewUserWeek(user)" class="btn btn-info"><i class="fa fa-pencil fa-fw"></i>{{getNextWeek(user).value}}</a></td> -->
+            <td><a (click)="viewUserWeek(user)" class="btn {{ (!user.nextWeekId)?'btn-danger':'btn-info'}}"><i class="fa fa-pencil fa-fw"></i>{{user.nextWeek}}</a></td>
             <td *ngIf="user.isAccepted" ><a (click)="acceptOrder(user._id,false,i)" class="btn btn-info"><i class=""></i>Yes</a></td>
             <td *ngIf="!user.isAccepted" ><a (click)="acceptOrder(user._id,true,i)" class="btn btn-danger"><i class=""></i>No</a></td>
             <!-- <td><a (click)="viewUserPlan(user.user._id,user.planInfo.planId)" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>View</a></td> -->

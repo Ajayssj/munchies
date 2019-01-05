@@ -113,6 +113,15 @@ module.exports = {
     },
     getCoupans : (req,res) =>{
         Coupan.find({}).toArray().then(coupans => {
+            if(coupans && coupans.length){
+                coupans.forEach((coupan,index) => {
+                    let expired = isCoupanExpired(coupan.expiry)
+                    if(expired)
+                        coupans[index].status = 'Expired';
+                    else
+                        coupans[index].status = 'Active';
+                })
+            }
             res.json({success : true, data  : coupans});
         }).catch(err =>{
             res.json({success : false, error : err});

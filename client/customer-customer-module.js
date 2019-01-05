@@ -171,7 +171,7 @@ module.exports = ".pageNo {\r\n    padding: 4px 10px;\r\n    cursor: pointer;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n  <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Customer Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>No</th>\n            <th>Name</th>\n            <th>Address</th>\n            <th>Area of Delivery</th>\n            <th>Next Week</th>\n            <th>Accepted</th>\n            <!-- <th>Plan Detail</th> -->\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let user of users, let i=index\">\n            <td>{{ pageSize * (pageNumber - 1) + i+1 }}</td>\n            <td (click)=\"viewCustomerInfo(user.planInfo._id)\" style=\"cursor: pointer;\">{{user.user.firstName}} {{user.user.lastName}}</td>\n            <td>{{user.address}}</td>\n            <td>{{user.Area_of_delivery}}</td>\n            <!-- <td><a routerLink='/admin/pages/customer/cust/3423/plan/123/week/1/' class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            <td><a routerLink=\"/admin/pages/customer/cust/3423/plan/123\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n            <td><a (click)=\"viewUserWeek(user)\" class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{getNextWeek(user).value}}</a></td>\n            <td *ngIf=\"user.isAccepted\" ><a (click)=\"acceptOrder(user._id,false,i)\" class=\"btn btn-info\"><i class=\"\"></i>Yes</a></td>\n            <td *ngIf=\"!user.isAccepted\" ><a (click)=\"acceptOrder(user._id,true,i)\" class=\"btn btn-danger\"><i class=\"\"></i>No</a></td>\n            <!-- <td><a (click)=\"viewUserPlan(user.user._id,user.planInfo.planId)\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n          </tr>\n          <tr *ngIf=\"!users && !users.length > 0\">\n            <td colspan=\"6\">No Records</td>\n          </tr>\n         \n        </tbody>\n      </table>\n      <div *ngIf=\"users && users.length > 0\" class=\"pagination-wrapper\">\n        <div class=\"form-group pages\">\n          <div class=\"my-pagination\">\n            <button [disabled]=\"pageNumber == 1\" (click)=\"pageChanged(pageNumber-1)\" class=\"btn btn-primary\">Prev</button>\n            <span class=\"btn pageNo\" *ngFor=\"let page of pages; let i=index\" [ngClass]=\"{'active': pageNumber == (i+1)}\" (click)=\"pageChanged(i+1)\">{{i+1}}</span>\n            <button [disabled]=\"pageNumber == pages.length\" (click)=\"pageChanged(pageNumber+1)\" class=\"btn btn-primary\">Next</button>\n          </div>\n        </div>\n      </div>\n    </card>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\n  <!-- <a routerLink=\"/admin/pages/customer/cust/3423/plan/123\">cust Plan</a>\n  <a routerLink=\"/admin/pages/customer/cust/3423/plan/123/week/1\">Week Plan</a> -->\n  <div class=\"col-md-12\">\n    <card cardTitle=\"Customer Details\">\n      <table class=\"table table-bordered table-hover\">\n        <thead>\n          <tr>\n            <th>No</th>\n            <th>Name</th>\n            <th>Address</th>\n            <th>Area of Delivery</th>\n            <th>Next Week</th>\n            <th>Accepted</th>\n            <!-- <th>Plan Detail</th> -->\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let user of users, let i=index\">\n            <td>{{ pageSize * (pageNumber - 1) + i+1 }}</td>\n            <td (click)=\"viewCustomerInfo(user.planInfo._id)\" style=\"cursor: pointer;\">{{user.user.firstName}} {{user.user.lastName}}</td>\n            <td>{{user.address}}</td>\n            <td>{{user.Area_of_delivery}}</td>\n            <!-- <td><a routerLink='/admin/pages/customer/cust/3423/plan/123/week/1/' class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.planInfo.weeks}}</a></td>\n            <td><a routerLink=\"/admin/pages/customer/cust/3423/plan/123\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n            <!-- <td><a (click)=\"viewUserWeek(user)\" class=\"btn btn-info\"><i class=\"fa fa-pencil fa-fw\"></i>{{getNextWeek(user).value}}</a></td> -->\n            <td><a (click)=\"viewUserWeek(user)\" class=\"btn {{ (!user.nextWeekId)?'btn-danger':'btn-info'}}\"><i class=\"fa fa-pencil fa-fw\"></i>{{user.nextWeek}}</a></td>\n            <td *ngIf=\"user.isAccepted\" ><a (click)=\"acceptOrder(user._id,false,i)\" class=\"btn btn-info\"><i class=\"\"></i>Yes</a></td>\n            <td *ngIf=\"!user.isAccepted\" ><a (click)=\"acceptOrder(user._id,true,i)\" class=\"btn btn-danger\"><i class=\"\"></i>No</a></td>\n            <!-- <td><a (click)=\"viewUserPlan(user.user._id,user.planInfo.planId)\" class=\"btn btn-warning\"><i class=\"fa fa-pencil fa-fw\"></i>View</a></td> -->\n          </tr>\n          <tr *ngIf=\"!users && !users.length > 0\">\n            <td colspan=\"6\">No Records</td>\n          </tr>\n         \n        </tbody>\n      </table>\n      <div *ngIf=\"users && users.length > 0\" class=\"pagination-wrapper\">\n        <div class=\"form-group pages\">\n          <div class=\"my-pagination\">\n            <button [disabled]=\"pageNumber == 1\" (click)=\"pageChanged(pageNumber-1)\" class=\"btn btn-primary\">Prev</button>\n            <span class=\"btn pageNo\" *ngFor=\"let page of pages; let i=index\" [ngClass]=\"{'active': pageNumber == (i+1)}\" (click)=\"pageChanged(i+1)\">{{i+1}}</span>\n            <button [disabled]=\"pageNumber == pages.length\" (click)=\"pageChanged(pageNumber+1)\" class=\"btn btn-primary\">Next</button>\n          </div>\n        </div>\n      </div>\n    </card>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -355,18 +355,29 @@ var CustomerdetailsComponent = /** @class */ (function () {
         this.getData(this.pageNumber, this.limit);
     };
     CustomerdetailsComponent.prototype.viewUserWeek = function (user) {
-        var res = this.getNextWeek(user);
-        if (res.success) {
-            var nextWeek = this.getNextWeek(user).value;
+        if (user.nextWeekId) {
             var userId = user.user._id;
             var activeplanID = user.planInfo._id;
-            var weekId = this.getNextWeekId(nextWeek, user.weekIds)._id;
+            var weekId = user.nextWeekId;
             this.router.navigateByUrl('/admin/pages/customer/cust/' + userId + '/plan/' + activeplanID + '/week/' + weekId);
         }
-        else {
-            alert(res.value);
-        }
     };
+    /* viewUserWeek(user) {
+      
+      let res = this.getNextWeek(user);
+      if(res.success){
+        
+        let nextWeek = this.getNextWeek(user).value;
+        
+        var userId = user.user._id;
+        var activeplanID = user.planInfo._id;
+        let weekId = this.getNextWeekId(nextWeek,user.weekIds)._id;
+        this.router.navigateByUrl('/admin/pages/customer/cust/'+userId+'/plan/'+activeplanID+'/week/'+weekId);
+      }else{
+        alert(res.value);
+      }
+      
+    } */
     CustomerdetailsComponent.prototype.viewUserPlan = function (userId, planId) {
         console.log(userId, planId);
         this.router.navigateByUrl('/admin/pages/customer/cust/' + userId + '/plan/' + planId);

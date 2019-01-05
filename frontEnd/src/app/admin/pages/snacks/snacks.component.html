@@ -21,7 +21,7 @@
             <th>discount</th>
             <th>frequency</th>
             <th>description</th>
-            <th>type</th>
+            <th>status</th>
             <th>Edit/Delete</th>
             <!-- <th>Plan Detail</th> -->
           </tr>
@@ -31,10 +31,10 @@
             <td>{{coupan.title}}</td>
             <td>{{coupan.code}}</td>
             <td>{{coupan.expiry}}</td>
-            <td>{{coupan.discount}}</td>
+            <td>{{((coupan.type == 1)?'&#x20b9;':'') + coupan.discount  + ((coupan.type == 2)?'%':'')}}</td>
             <td>{{coupan.frequency}}</td>
             <td>{{coupan.description}}</td>
-            <td>{{coupan.type}}</td>
+            <td class="{{(coupan.status == 'Active'?'text-success':'text-danger')}}">{{coupan.status}}</td>
             <button (click)="editModal.open();selectedCoupanObj=coupan" class="btn btn-success mr-20">Edit</button>
             <button (click)="confirmDeleteCoupanModal.open();CoupanObj=coupan; index=i;" class="btn btn-danger">Delete</button>
            

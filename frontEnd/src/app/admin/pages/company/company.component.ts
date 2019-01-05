@@ -17,7 +17,7 @@ interface productRes {
 })
 export class CompanyComponent implements OnInit {
   view: String = 'company';
-  products;
+  products = [];
   productResponse;
   message = '';
   data = {};

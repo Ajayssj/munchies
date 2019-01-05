@@ -69,11 +69,11 @@ export class SnacksComponent implements OnInit {
   createCoupan(){
         
     var cc = require('coupon-code');    
-// generate a 4 part code
-this.addccode = cc.generate({ parts : 4 });
-this.coupanCode = this.addccode;
-console.log("generated code");
-console.log(this.addccode);
+  // generate a 4 part code
+    this.addccode = cc.generate({ parts : 4 });
+    this.coupanCode = this.addccode;
+    console.log("generated code");
+    console.log(this.addccode);
 
   }
   addCoupan(modal) {

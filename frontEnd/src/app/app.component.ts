@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
+import { AuthService } from './user/auth.service';
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,7 @@ import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/route
 })
 export class AppComponent {
   loadingRouteConfig: boolean;
-  constructor (private router: Router) {
+  constructor (private http : HttpClient,  private router: Router, private authService : AuthService ) {
   }
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -17,7 +19,18 @@ export class AppComponent {
       } else if (event instanceof RouteConfigLoadEnd) {
           this.loadingRouteConfig = false;
       }
+        // this._socketService.init();
+      this.http.get(this.authService.getDomainName() + '/public/api/user/islogged').subscribe((res : any) =>{
+        if(!res.success){
+           this.authService.setLoggedIn(false);
+           this.authService.setUserName('');
+           this.authService.setUserRole(1);
+           this.router.navigate(['/signIn'])
+        }
+          
+      });
   });
+
   }
 
 

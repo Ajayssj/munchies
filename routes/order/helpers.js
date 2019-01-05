@@ -104,7 +104,8 @@ const getWeeKState = (order) => {
       actweek = getActiveWeek(new Date((moment(moment(order.plans.startDate).tz('Asia/Calcutta').format()))),order.plans.weeks);
       let nextWeek = actweek + 1;
       if(notLastWeek(nextWeek,order.plans.weeks)){
-        let weekObj = getNextWeekId(nextWeek - order.plans.skipedWeeks.length,order.weekIds);
+        let skippedWeeks = order.plans.skipedWeeks.length;
+        let weekObj = getNextWeekId((nextWeek > skippedWeeks)  ? (nextWeek - skippedWeeks) : nextWeek,order.weekIds);
         if(weekObj){
           if(order.plans.skipedWeeks.find(week => week.wNo == actweek)) actweek += ' (skipped)'
           if(!isThisWeekSkip(order.plans.skipedWeeks,nextWeek)){
@@ -208,6 +209,12 @@ const  insertOrder = async (obj,callback) => {
                 let area = (orderInfo.Area_of_delivery)?orderInfo.Area_of_delivery:'';
                 const shippingCharge = (shippingCharges[area.trim()])?shippingCharges[area.trim()]:50;                                          
                 let totalPrice = Number(planInfo.pricePerBag);
+                let greenTeaPrice = 0;
+                if(extraInfo && Array.isArray(extraInfo) && extraInfo.length){
+                   let found = extraInfo.find(item => item.type == "green_tea");
+                   if(found && found.value === "Yes") greenTeaPrice = 39;
+                }
+                totalPrice += greenTeaPrice;
                 if(coupan && coupan.type == 1) totalPrice  -= getDiscountAmount(coupan.discount,totalPrice).toFixed(2); else if(coupan && coupan.type == 2) totalPrice  -= coupan.discount;
                 const orderObj = {
                     customerData:{
@@ -249,6 +256,13 @@ const  insertOrder = async (obj,callback) => {
         callback({success : false, error : err});
     }
 }
+function findNextWeek(wNo,skipedWeeks){
+    let found = skipedWeeks.find(item => item.wNo == wNo);
+    if(found)
+       return findNextWeek(++wNo,skipedWeeks);
+    else
+       return wNo;
+ }
 module.exports = {
     getAllOrders : (req,res) => {
         var pageNo = parseInt(req.query.pageNo)
@@ -314,6 +328,28 @@ module.exports = {
                 
                     ]
                 ).toArray().then(orders => {
+                    orders.forEach((order,index) => {
+                        order.plans = order.planInfo;
+                        // let result = getWeeKState(order);
+                        let actweek = getActiveWeek(new Date((moment(moment(order.plans.startDate).tz('Asia/Calcutta').format()))),order.plans.weeks);
+                        const label = 'No Next Week';
+                        orders[index].label = '';
+                        orders[index].nextWeek = (actweek)?((actweek == 10000)?label:actweek + 1):1;
+                        if(orders[index].nextWeek > order.plans.weeks) orders[index].nextWeek = label;
+                        if(!isNaN(orders[index].nextWeek) && isThisWeekSkip(order.plans.skipedWeeks,orders[index].nextWeek)){
+                            orders[index].label = " Skipped ";
+                          }
+                        
+                        if(!isNaN(orders[index].nextWeek)){
+                             let skippedWeeks = order.plans.skipedWeeks.length;
+                            // if((nextWeek > skippedWeeks)  ? (nextWeek - skippedWeeks) : nextWeek)
+                            orders[index].nextWeek = findNextWeek(orders[index].nextWeek,order.plans.skipedWeeks);
+                            orders[index].nextWeekId = getNextWeekId(((orders[index].nextWeek > skippedWeeks)?orders[index].nextWeek - skippedWeeks:orders[index].nextWeek),order.weekIds)._id;
+                        }
+                        delete order.plans;
+                        delete orders[index].planInfo.skipedWeeks;
+                        // delete orders[index].weekIds;
+                    })
                     res.json({success : true, data : {orders, totalCount}})
                 }).catch(err => res.json({success : false, error : err}))
             }else{

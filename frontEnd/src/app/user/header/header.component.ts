@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
     this.http.get(this.auth.getDomainName() + '/public/api/user/logout').subscribe((res:any) => {
       console.log(res)
       if(!res.success){
-        alert(res.error);
+        // alert(res.error);
       }
       this.auth.setLoggedIn(false);
       this.displayHeader = false;
