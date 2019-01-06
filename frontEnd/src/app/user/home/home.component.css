@@ -1,38 +1,47 @@
 
 .snack_right_video {
-    margin: 150px auto 150px auto;
+    margin: 50px auto 25px auto;
     text-align: center;
 }
 .snack_right_video h2 {
     color: #525252;
-    font-size: 40px;
+    font-size: 35pt;
     font-weight: normal;
-    letter-spacing: 0em;
-    padding: 0px 15%;
-    line-height: 60px;
+    letter-spacing: 2px;
+    line-height: 40pt;
+    margin: 0px;
+    padding: 0 20px;
+}
+.slider {
+    height: 500px;
+    margin-bottom: 25px;
 }
 .watch_video {
     text-align: center;
-    margin-bottom: 70px;
+    margin-bottom: 25px;
 }
 .watch_video h3 {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
-    color: #E5663D;
+    color: #525252;
+    margin: 0px auto;
+    width: 110px;
+    line-height: 30px;
 }
 .watch_video + h2 {
     text-align: center;
     color: #de6b48;
-    font-size: 38px;
+    font-size: 30px;
     font-weight: bold;
+    margin-bottom: 50px;
 }
 .snack_right_img {
     width: 0;
     height: 0;
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent;
-    border-left: 50px solid #e3c567;
-    margin: 30px auto 0px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid #e3c567;
+    margin: 0px auto 10px auto;
 }
 .content_box {
     background-color: #fff;
@@ -74,8 +83,12 @@
     width: 100%;
     font-size: 30px;
 }
+.munchers_have_spoken_text {
+    margin: 75px auto;
+    font-weight: bold;
+}
 .content_box_wrapper > h2 {
-    margin: 75px 0px 75px 0px;
+    margin: 75px 0px 50px 0px;
 }
 .text-upper {
     /* text-transform: uppercase; */
@@ -83,16 +96,16 @@
 .boxes {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 75px;
 }
 .boxes .box {
-    border: 6pt solid #e3c567;
+    border: 6px solid #e3c567;
     margin-right: 10px;
     /* padding: 10px 15px; */
-    padding: 25px 15px 10px 15px;
+    padding: 25px 10px 10px 10px;
     float: left;
     width: 24%;
     box-sizing: border-box;
+    margin-bottom: 20px;
 }
 .boxes .box:nth-child(4) {
     margin-right: 0px;
@@ -101,30 +114,30 @@
     color: gray;
     letter-spacing: 1px;
     text-align: center;
-    line-height: 30px;
-    font-size: 23px;
+    font-size: 20px;
     font-weight: normal;
+    margin: 0px auto 25px auto;
 }
 .boxes .box p {
     /* font-size: 18px; */
     font-weight: normal;
     color: gray; /* rgb(63, 61, 61) */
+    line-height: 21px;
 }
 .subscribe_btn2 {
-    margin: 80px 0px;
+    margin: 55px 0px 75px 0px;
     text-align: center;
     float: left;
     width: 100%;
 }
 .subscribe_btn2 a {
-    border: 4px solid;
     border-color: #de6b48;
-    padding: 5px 30px;
+    padding: 8.5px 31px;
     text-decoration: none;
     letter-spacing: 1px;
     color: #fff;
     background-color: #de6b48;
-    font-size: 23px;
+    font-size: 20px;
     transition: border-color 0.4s ease 0s, background-color 0.4s ease 0s;
 }
 .subscribe_btn2 a:hover {
@@ -137,16 +150,17 @@
 }
 .whats_inside h2 {
     color: #DE6B48;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
     font-size: 30px;
     font-weight: bold;
 }
 .whats_inside p {
     width: 80%;
-    margin: 50px auto;
+    margin: 25px auto 50px auto;
     letter-spacing: 1px;
-    line-height: 22px;
-    color: #525252;
+    line-height: 21px;
+    color: gray;
+    font-size: 16px;
     /* font-size: 18px; */
 }
 .whats_inside img {
@@ -162,11 +176,11 @@
     margin: 0 auto;
 }
 .you_will_get h3 {
-    margin-left: 90px;
-    font-size: 23px;
+    margin-left: 70px;
+    font-size: 20px;
     /* color: #E5663D; */
-    color: #605e5e; 
     margin-bottom: 35px;
+    font-weight: normal;
 }
 .list {
     width: 100%;
@@ -177,20 +191,20 @@
     margin-bottom: 30px;
 }
 .list_item .list_number {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     /* background-color: #3F7CAC; */
     background-color: #9ebc9e;
     border-radius: 50%;
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
     color: #fff;
     margin-right: 30px;
-    font-size: 22px;
+    font-size: 16px;
 }
 .list_item .list_text {
-    line-height: 50px;
-    font-size: 23px;
+    line-height: 40px;
+    font-size: 16px;
     /* color: #605e5e; */
     color: #DE6B48;
     font-weight: bold;
@@ -198,7 +212,6 @@
 .munchers_have_spoken_box_wrapper {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 60px;
 }
 .munchers_have_spoken_box {
     width: 30%;
@@ -247,6 +260,7 @@
 }
 .svg-img {
     text-align: center;
+    margin-bottom: 25px;
 }
 .svg-img img{
     height: 100px;
@@ -351,18 +365,19 @@ p {
     text-align: left;
     margin: 0px;
     font-size:16px;
-    line-height: 25px;
+    line-height: 21pt;
 }
 .content_box_two .content_box_text p {
     text-align: right;
     margin: 0px;
-    font-size:16px;    
+    font-size:16px;  
+    line-height: 21pt;  
     height: auto;
 }
 
 .reason-title {
     text-align: center;
-    color: #9ebc9e;
+    color: #525252;
     font-size: 18px;
 }
 
@@ -452,7 +467,6 @@ p {
   
     .boxes .box {
         margin-right: 0px;
-        margin-bottom: 10px;
         width: 100%;
         min-height: 200px;
     }
@@ -548,15 +562,19 @@ p {
     .green_box {
         width: 100%;
     }
+    .you_will_get h3 {
+        margin-left: 43px;
+    }
 }
 @media screen and (min-width: 768px) {
     
     .snack_right_video h2 {
-        font-size: 40px;
-        line-height: 60px;
+        font-size: 35pt;
+        line-height: 40pt;
+        padding: 0 20px;
     }
     .watch_video + h2 {
-        font-size: 37px;
+        font-size: 30px;
     }
     .whats_inside h2, .munchers_have_spoken_text {
         font-size: 30px;
@@ -568,18 +586,18 @@ p {
         display: flex;
     }
     .list_item .list_number {
-        width: 58px;
-        height: 58px;
-        line-height: 58px;
-        font-size: 23px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
         vertical-align: top;
         margin-right: 30px;
         font-weight: bold;
     }
     .list_item .list_text {
         width: auto;
-        font-size: 23px;
-        line-height: 58px;
+        font-size: 16px;
+        line-height: 40px;
     }
     .munchers_have_spoken_box_wrapper {
         flex-direction: row;

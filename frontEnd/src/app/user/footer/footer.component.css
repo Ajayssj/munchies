@@ -36,7 +36,7 @@ footer .content {
     flex-wrap: wrap;
     flex-direction: row;
     max-width: 1024px;
-    margin: 0 auto;
+    margin: 20px auto 0px auto;
 }
 .footer_line div {
     text-align: center;
@@ -115,6 +115,6 @@ footer .content {
         width: 100%;
     }
     .footer_line div {
-        font-size: 16px;
+        font-size: 14px;
     }
 }

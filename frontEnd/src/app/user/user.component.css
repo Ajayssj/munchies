@@ -19,7 +19,7 @@ header, .content, footer .content {
     font-family: 'Comfortaa';
 }
 .content_position {
-    padding-top: 80px;
+    padding-top: 57px;
     padding-bottom: 50px;
     height: 100%;
     min-height: 100%;
@@ -36,7 +36,6 @@ header, .content, footer .content {
 
 @media screen and (min-width: 300px) {
     header, .content {
-        padding-top: 10px;
         left: 0;
         width: 100%;
         box-sizing: border-box;
@@ -48,7 +47,6 @@ header, .content, footer .content {
 }
 @media screen and (min-width: 768px) {
     header, .content {
-        padding-top: 80px;
         padding-left: 10px;
         padding-right: 10px;
     }

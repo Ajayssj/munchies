@@ -18,6 +18,7 @@ header, .content, footer .content {
     z-index: 100;
     left: 0;
     right: 0;
+    height: 75px;
 }
 
 .site_header .wrapper {
