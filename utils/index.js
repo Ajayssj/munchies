@@ -10,9 +10,10 @@ const sendMailRemotely = function(data,cb){
         url: env.EMAIL_ORIGIN + '/sendMail',
         qs: data,
         headers: 
-        { 'postman-token': 'a5408ac3-1715-1d10-d51f-28bdf6576696',
+        {  'postman-token': 'a5408ac3-1715-1d10-d51f-28bdf6576696',
             'cache-control': 'no-cache',
-            'content-type': 'application/x-www-form-urlencoded' },
+            'content-type': 'application/x-www-form-urlencoded',
+            'Origin' : env.MY_ORIGIN },
         form: {} };
 
         request(options, function (error, response, body) {
@@ -40,6 +41,9 @@ module.exports = {
    createPasswordRecoveryLink : function(cipherEmail){
     //  return `${env.HOST_NAME}api/user/password/recover/${cipherEmail}`;
      return `${env.HOST_NAME}/reset-password/${cipherEmail}`;
+   },
+   sendOrderEmail : function(data,callback){
+    sendMailRemotely(data,callback);
    },
    sendRecoveryPasswordEmail : function(email,callback){
 

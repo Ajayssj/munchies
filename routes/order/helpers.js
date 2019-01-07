@@ -3,12 +3,13 @@ const { validationResult } = require('express-validator/check');
 const db = require('../../database');
 const Order = db.getCollection('orders');
 const ActivePlan = db.getCollection('activePlans');
-const CustomPlan = db.getCollection('customPlans');
+const User = db.getCollection('user');
 const PlansExtended = db.getCollection('plansExtended');
 const Extra = db.getCollection('extraInfo');
 const Plan = db.getCollection('plans');
 const isValidCoupan = require('../coupan/helpers').isValidCoupan;
 const env = require('../../config/env');
+const utils = require('../../utils');
 let moment = require('moment-timezone');
 
 const shippingCharges  = {
@@ -189,7 +190,28 @@ const getPlanInfo = function(planId){
 const getDiscountAmount = function(discount, total){
     return (parseFloat(discount).toFixed(2) / 100) * parseFloat(total).toFixed(2);
 }
-
+const getAdminEmails = (cb) => {
+    User.find({ role : 2}).toArray().then(users => {
+        cb({success : true, users : users })
+    }).catch(err => {cb({success : false, error : err})});
+}
+const parseExtraInfo = (extraInfo) => {
+    let info  = { a : [],b : [],c  : []}
+    extraInfo.forEach(obj => {
+        switch(obj.type){
+            case "allergic":
+                info.a.push(obj.value);
+                break;
+            case "fruits" :
+                info.b.push(obj.value);
+                break;
+            case "green_tea" :
+                info.c.push(obj.value);
+                break; 
+        }
+    })
+    return info;
+}
 const  insertOrder = async (obj,callback) => {
     let extraInfo = obj.orderInfo.extraInfo;
     let coupan = obj.coupan;
@@ -236,6 +258,40 @@ const  insertOrder = async (obj,callback) => {
                 }
                 if(coupan) orderObj.coupanId = coupan._id;
                 Order.insertOne(orderObj).then(order => {
+                    let data  = { 
+                        order : {
+                            firstName : orderObj.customerData.firstName, 
+                            lastName : orderObj.customerData.lastName,
+                            phoneNo : orderObj.customerData.phoneNo,
+                            Area_of_delivery : orderObj.Area_of_delivery,
+                            postalCode : orderObj.postalCode,
+                            address : orderObj.address,
+                            date : moment(orderObj.date).tz('Asia/Calcutta').format("MMMM Do YYYY, h:mm:ss a"),
+                            total : orderObj.total,
+                            shippingCost : orderObj.shippingCost,
+                            greenTeaPrice : greenTeaPrice
+
+                        },
+                        plan : { title : planInfo.title},
+                        email : orderInfo.email,
+                        type : 4,
+                        extraInfo : parseExtraInfo(extraInfo)
+                    }
+
+                    getAdminEmails((result) => {
+                        if(result.success){
+                            result.users.forEach(admin => {
+                                data.to = admin.email;
+                                console.log('Order Email Sending ... to ' , admin.email);
+                                utils.sendOrderEmail(data,(result) => {
+                                    if(result.success)
+                                        console.log('Order Email Sent Successfully');
+                                    else
+                                        console.log("Order email sent failed!", result.error)
+                                })
+                            })
+                        }
+                    })
                     if(extraInfo && Array.isArray(extraInfo) && extraInfo.length){
                         insertExtraInfo(order.ops[0]._id,extraInfo)
                         .then(result => {
@@ -365,6 +421,7 @@ module.exports = {
         if(planId && userId){
             let data = {orderInfo : req.body};
             data.orderInfo.userId = userId;
+            data.orderInfo.email = req.session.user.email;
             if(coupanId){
                 isValidCoupan(coupanId,function(coupan) {
                     if(coupan.success){

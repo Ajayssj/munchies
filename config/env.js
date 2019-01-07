@@ -10,6 +10,7 @@ var env = {
   DB_NAME: (envirnoment === 'development')?'munchies':'heroku_3tn4qs1k',
   DB_PORT: (envirnoment === 'development')? 27017 : 37149,
   // EMAIL_ORIGIN : 'http://localhost:3000',
+  MY_ORIGIN : 'http://dev-munchies.herokuapp',
   EMAIL_ORIGIN : 'http://mails.xsella.com',
   GREEN_TEA_PRICE : 39
 }

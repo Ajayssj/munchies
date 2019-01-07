@@ -4,8 +4,11 @@ const db = require('../../database');
 const User = db.getCollection('user');
 const utils = require('../../utils');
 var serviceAccount = require("../../constant/firebase.json");
+let Plan = db.getCollection('plans');
 var admin = require("firebase-admin");
 var generator = require('generate-password');
+const env = require('../../config/env');
+
 const isEmailExists = function(email){
     return new Promise((success,error) =>{
          User.findOne({email : email},function(err,result){
@@ -19,6 +22,14 @@ const isEmailExists = function(email){
     })
  }
 module.exports = {
+   getCorePlans : (req,res) => {
+     Plan.find().toArray()
+        .then(plans => {
+            res.json({success : true, data : {plans, greenTeaPrice : env.GREEN_TEA_PRICE},  });
+        }).catch(err => {
+            res.json({success : false, error : err});
+        })
+   },
     passwordRecovery : (req,res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -31,10 +42,10 @@ module.exports = {
                     if(exists){ 
                         utils.sendRecoveryPasswordEmail(email,
                             result =>{
-                                if(result.result)
-                                    res.json({success : true, message : 'Password Recovery Email Sent, Please Check Your Mail!'})
-                                else
-                                    res.json(result);
+                                    if(result.success)
+                                        res.json({success : true, message : 'Password Recovery Email Sent, Please Check Your Mail!'})
+                                    else
+                                        res.json(result);
                             });
                     }else{
                         res.json({success : false, error : 'Email ID Does Not Exists!'});
