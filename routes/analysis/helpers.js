@@ -234,7 +234,7 @@ module.exports = {
     getSubscribers : (req,res) =>{
         
         var options = {
-            uri:"https://us7.api.mailchimp.com/3.0/lists/91e86cd360",
+            uri:"https://us7.api.mailchimp.com/3.0/lists/7812daaa38",
             method:"GET",
             headers:{
                 "content-type": "application/json",
