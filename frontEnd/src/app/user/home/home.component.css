@@ -10,7 +10,6 @@
     letter-spacing: 2px;
     line-height: 40pt;
     margin: 0px;
-    padding: 0 20px;
 }
 .slider {
     height: 500px;
@@ -571,7 +570,6 @@ p {
     .snack_right_video h2 {
         font-size: 35pt;
         line-height: 40pt;
-        padding: 0 20px;
     }
     .watch_video + h2 {
         font-size: 30px;

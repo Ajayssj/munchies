@@ -25,6 +25,9 @@ export class OrderSummaryComponent implements OnInit {
   coupanCodeSuccess = '';
   greenTea = '';
   weeks: number;
+  urlParams: any;
+  deliveryCharge: number;
+  greenTeaCharge: number;
   constructor(
     private http: HttpClient, 
     private router: Router,
@@ -33,14 +36,30 @@ export class OrderSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.customerData = JSON.parse(this.auth.getCustomerData());
+    this.urlParams = JSON.parse(this.auth.getQueryParams());
+    console.log(this.urlParams);
+    this.deliveryCharge = this.urlParams.deliveryCharge;
+    this.greenTeaCharge = this.urlParams.greenTeaCharge;
     if(this.customerData == null) {
       this.router.navigate(['/subscribe']);
     }
     else {
-        this.selectedPlanId = this.customerData.planId;
-        this.planTitle = this.customerData.planName;
+        this.selectedPlanId = this.urlParams.selectedPlan;
+        this.planTitle = this.urlParams.selectedPlanName;
         console.log(this.planTitle);
-        this.extraInfo = JSON.parse(this.customerData.extraInfo);
+        var question1 = this.urlParams.q1;
+        var question2 = this.urlParams.q2;
+        var question3 = this.urlParams.q3;
+        if(question1 && question1.length > 0)  {
+          question1.split(',').forEach(item => this.extraInfo.push({type: 'allergic', value: item}) )
+          
+        }
+        if(question2 && question2.length > 0)  {
+          question2.split(',').forEach(item => this.extraInfo.push({type: 'fruits', value: item}) )
+        }
+        if(question3 && question3.length > 0)  {
+          question3.split(',').forEach(item => this.extraInfo.push({type: 'green_tea', value: item}) )
+        }
         console.log(this.extraInfo);
         this.extraInfo.forEach(info=> {
           if(info.type == "green_tea") {
@@ -59,12 +78,14 @@ export class OrderSummaryComponent implements OnInit {
         console.log(this.weeks);
         
         if(this.greenTea == 'Yes') {
-          this.subTotal = (JSON.parse(this.customerData.planRate) + (50 * this.weeks) + (39 * this.weeks));
+          this.subTotal = (JSON.parse(this.urlParams.selectedPlanRate) + (this.deliveryCharge * this.weeks) + (this.greenTeaCharge * this.weeks));
         }
         else {
-          this.subTotal = (JSON.parse(this.customerData.planRate) + (50 * this.weeks));
+          this.subTotal = (JSON.parse(this.urlParams.selectedPlanRate) + (this.deliveryCharge * this.weeks));
         }
         console.log(this.subTotal);
+        this.customerData['planId'] = this.selectedPlanId;
+        this.customerData['extraInfo'] = this.extraInfo;
         // if(extraInfo && extraInfo[0]) {
         //   this.question1 = extraInfo[0].value;
         // }
@@ -97,6 +118,7 @@ export class OrderSummaryComponent implements OnInit {
         if(err.status == 401)
           alert(err.error.error);
         console.log(err);
+        this.router.navigate(['/signIn'], {queryParams: {backPage: "order-summary"}});
       });
     }
   }

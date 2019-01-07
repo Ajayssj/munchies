@@ -40,6 +40,8 @@ nav .wrapper ul {
     margin: 0;   
     float: right;
     white-space: nowrap;
+}
+nav .wrapper ul.header_height {
     height: 75px;
 }
 nav .wrapper ul li.bars, nav .wrapper ul li.bars_cross {

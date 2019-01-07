@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, Form, NgModel } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
@@ -27,11 +27,16 @@ export class SignInComponent implements OnInit {
   password = '';
   forgetPasswordMail = '';
   rememberMe = false;
+  isBackPage = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router, private http: HttpClient, private authService: AuthService) {
-  }
+    private router: Router, 
+    private http: HttpClient,
+    private authService: AuthService,
+    private route: ActivatedRoute
+    ) { }
+
   onChange(state : any) {
     this.rememberMe = state;
     console.log('Remember me : ', this.rememberMe);
@@ -63,6 +68,7 @@ export class SignInComponent implements OnInit {
       username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+    this.isBackPage = this.route.snapshot.queryParamMap.get('backPage');
   }
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
@@ -88,8 +94,11 @@ export class SignInComponent implements OnInit {
           
           console.log(this.authService.getUserName());
           console.log(this.username);
-          if (this.authService.isLoggedIn()) {
+          if (this.authService.isLoggedIn() && this.isBackPage == '') {
             this.router.navigate(['/home']);
+          }
+          if (this.authService.isLoggedIn() && this.isBackPage != '') {
+            this.router.navigate(['/order-summary']);
           }
         }
         else {

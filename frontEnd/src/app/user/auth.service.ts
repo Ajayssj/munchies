@@ -37,6 +37,13 @@ export class AuthService {
     console.log(data);
     localStorage.setItem('custData', data);
   }
+  getQueryParams() {
+    return localStorage.getItem('planInfo');
+  }
+  setQueryParams(data) {
+    console.log(data);
+    localStorage.setItem('planInfo', data);
+  }
 
   setLoggedIn(value) {
     localStorage.setItem("isLoggedIn", value);

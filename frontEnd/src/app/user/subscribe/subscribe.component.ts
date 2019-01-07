@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Options } from 'selenium-webdriver';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-subscribe',
@@ -12,7 +13,7 @@ export class SubscribeComponent implements OnInit {
  
  
  
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
  
   selectedIndex =[];
   selectedPlanId = null;
@@ -239,7 +240,8 @@ shippingCharges:any  = {
         selectedPlanName: this.selectedPlanName , ...obj ,deliveryCharge:this.shippingCharges.default, greenTeaCharge:39 };
        console.log(this.queryParams);
        this.selectPlanError = '';
-      this.router.navigate(['/delivery'], {queryParams: this.queryParams});
+       this.auth.setQueryParams(JSON.stringify(this.queryParams));
+      this.router.navigate(['/delivery']);
     }
   }
   
