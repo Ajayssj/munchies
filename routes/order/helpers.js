@@ -231,14 +231,18 @@ const  insertOrder = async (obj,callback) => {
             .then(plan => {
                 let area = (orderInfo.Area_of_delivery)?orderInfo.Area_of_delivery:'';
                 const shippingCharge = (shippingCharges[area.trim()])?shippingCharges[area.trim()]:50;                                          
+                let orignalPrice = Number(planInfo.pricePerBag);
                 let totalPrice = Number(planInfo.pricePerBag);
                 let greenTeaPrice = 0;
                 if(extraInfo && Array.isArray(extraInfo) && extraInfo.length){
                    let found = extraInfo.find(item => item.type == "green_tea");
                    if(found && found.value === "Yes") greenTeaPrice = env.GREEN_TEA_PRICE;
                 }
+                totalPrice += shippingCharge;
                 totalPrice += greenTeaPrice;
-                if(coupan && coupan.type == 1) totalPrice  -= getDiscountAmount(coupan.discount,totalPrice).toFixed(2); else if(coupan && coupan.type == 2) totalPrice  -= coupan.discount;
+                coupanDiscount = 0;
+                if(coupan && coupan.type == 1) coupanDiscount = getDiscountAmount(coupan.discount,totalPrice).toFixed(2); else if(coupan && coupan.type == 2) coupanDiscount = coupan.discount;
+                totalPrice -= coupanDiscount;
                 const orderObj = {
                     customerData:{
                         firstName :orderInfo.firstName,
@@ -269,8 +273,10 @@ const  insertOrder = async (obj,callback) => {
                             date : moment(orderObj.date).tz('Asia/Calcutta').format("MMMM Do YYYY, h:mm:ss a"),
                             total : orderObj.total,
                             shippingCost : orderObj.shippingCost,
-                            greenTeaPrice : greenTeaPrice
-
+                            greenTeaPrice : greenTeaPrice,
+                            coupan : (coupanDiscount)?coupan.code:'',
+                            coupanDiscount : ((coupan && coupan.type == 1)?'&#x20b9;':'') + coupanDiscount  + ((coupan && coupan.type == 2)?'%':''),
+                            subTotal : orignalPrice
                         },
                         plan : { title : planInfo.title},
                         email : orderInfo.email,
