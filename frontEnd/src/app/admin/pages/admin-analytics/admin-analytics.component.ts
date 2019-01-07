@@ -58,8 +58,11 @@ export class AdminAnalyticsComponent implements OnInit, OnChanges {
   });
   this.http.get(this.auth.getDomainName() + '/api/analysis/subscribers')
   .subscribe((res:any) => {
-    console.log(res.data.total);
-    this.numberOfSubscribers = res.data;
+    if(res.success)
+      this.numberOfSubscribers = res.data;
+    else
+      this.numberOfSubscribers = res.error;
+      console.log(res.error);
   },
   err => {
 

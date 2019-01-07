@@ -1,5 +1,6 @@
 
 const { validationResult } = require('express-validator/check');
+const env = require('../../config/env');
 const db = require('../../database');
 const Plan = db.getCollection('plans');
 const ActivePlan = db.getCollection('activePlans');
@@ -241,9 +242,8 @@ module.exports = {
                         "user.lastName" : 1,
                         "user.firstName" : 1,
                         "user.email" : 1,
-                        "startDate" : 1
-                        
-                        
+                        "startDate" : 1,
+                        "weeks" : 1
                     }
                 },
         
@@ -252,6 +252,8 @@ module.exports = {
             // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
         
         ).toArray().then(info => {
+            info[0].currentWeek = getActiveWeek(new Date((moment(moment(info[0].startDate).tz('Asia/Calcutta').format()))),info[0].weeks);           
+            info[0].currentWeek = (info[0].currentWeek)?(info[0].currentWeek == 10000)?'Expired':info[0].currentWeek:'Not Started';
             res.json({success : true, data : info});
         }).catch(err => res.json({success : false, error : err}));    
      }else{
@@ -662,7 +664,7 @@ module.exports = {
     //  const adminId = db.toObjectID(req.session.user._id);
      Plan.find().toArray()
         .then(plans => {
-            res.json({success : true, data : plans});
+            res.json({success : true, data : {plans, greenTeaPrice : env.GREEN_TEA_PRICE},  });
         }).catch(err => {
             res.json({success : false, error : err});
         })

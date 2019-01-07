@@ -251,7 +251,22 @@ module.exports = {
                 return;
             }
             let data = JSON.parse(body);
-            res.json({success : true, data : (data.stats.member_count)?data.stats.member_count:0 })
+            if(data.status == 200)
+                res.json({success : true, data : (data.stats && data.stats.member_count)?data.stats.member_count:0 })
+            else
+                res.json({success : false, error : data.title}) 
+            /* if(error) {
+                res.json({
+                    success:false,
+                    error:error,
+                })
+                return;
+            }
+            let data = JSON.parse(body);
+            if(data.status == 200)
+                res.json({success : true, data : (data.stats.member_count)?data.stats.member_count:0 })
+            else
+                res.json({success : false, error : data.title}) */
         })   
        /*  .then(result => {
             res.json({success : true, data : result[0]})
