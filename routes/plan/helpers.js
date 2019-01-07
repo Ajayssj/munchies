@@ -760,8 +760,8 @@ module.exports = {
                             if(result.success){
                                 result.users.forEach(admin => {
                                     let nexWeekDate = getNextMondayDate(new Date(moment(moment.tz('Asia/Calcutta').format())))
-                                    utils.sendSkippedWeekMail({week : value.week, user : req.session.user, nexWeekDate, admin : admin.email},(result) => {
-                                        if(result.result)
+                                    utils.sendSkippedWeekMail({week : value.week, user : req.session.user, nexWeekDate : new Date(nexWeekDate).toLocaleDateString(), admin : admin.email},(result) => {
+                                        if(result.success)
                                             console.log( admin.email + ' Skipped Week Mail Sent Successfully!');
                                         else
                                             console.log( admin.email + ' Skipped Week Mail not Sent!');

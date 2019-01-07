@@ -82,7 +82,7 @@ module.exports = {
         else
             callback({result : true, info });
     }); */
-    const data = {firstName : info.user.firstName, lastName : info.user.lastName, week : info.week, to : info.admin, email : info.user.email, nexWeekDate , type : 1}
+    const data = {firstName : info.user.firstName, lastName : info.user.lastName, week : info.week, to : info.admin, email : info.user.email, nexWeekDate : info.nexWeekDate , type : 1}
     sendMailRemotely(data,callback);
    },
    sendRegistrationEmail : function(dataObj,callback){
