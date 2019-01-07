@@ -26,12 +26,13 @@ header, .content, footer .content {
     justify-content: center;
 }
 nav .wrapper .logo {
-    height: 85px;
+    height: 75px;
     float: left;
    
 }
 nav .wrapper .logo img {
-    width: 140px;
+    width: auto;
+    height: 75px;
 }
 nav .wrapper ul {
     list-style: none;
@@ -39,7 +40,7 @@ nav .wrapper ul {
     margin: 0;   
     float: right;
     white-space: nowrap;
-    margin-top: 10px;
+    height: 75px;
 }
 nav .wrapper ul li.bars, nav .wrapper ul li.bars_cross {
     display: none;
