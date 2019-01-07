@@ -28,7 +28,7 @@
             </select>
             <div *ngIf="submitted && f.area.errors" class="invalid-feedback form_control">
                 <div *ngIf="submitted && f.area.errors.required">Area is required</div>
-                <div *ngIf="submitted && f.area.errors.pattern">please enter valid address</div>
+                <div *ngIf="submitted && f.area.errors.pattern">please enter valid area</div>
             </div>
         </div>
         <div class="field_first">
@@ -49,7 +49,7 @@
             <input class="form_control" [value]="customerData.phoneNo || ''" type="tel" formControlName="phone" name="phone" minlength="10" maxlength="10" placeholder="Phone Number" />
             <div *ngIf="submitted && f.phone.errors" class="invalid-feedback form_control">
                 <div *ngIf="submitted && f.phone.errors.required">Phone Number is required</div>
-                <div *ngIf="submitted && f.phone.errors.maxlength">Maxlength</div>
+               
                 <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid Phone Number</div>
             </div> 
         </div>
@@ -59,7 +59,7 @@
             <input class="form_control" [value]="customerData.postalCode || ''" type="number" formControlName="postalCode" name="postalCode" placeholder="Postal Code" />
             <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback form_control">
                 <div *ngIf="submitted && f.postalCode.errors.required">Postal Code is required</div>
-                <div *ngIf="submitted && f.phone.errors.pattern">Please enter valid address</div>
+                <div *ngIf="submitted && f.postalCode.errors.pattern">Please enter valid postalCode</div>
             </div>
         </div>
         <div class="field">

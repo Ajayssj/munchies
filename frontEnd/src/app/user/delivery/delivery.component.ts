@@ -62,7 +62,7 @@ export class DeliveryComponent implements OnInit {
       phone: [this.customerData.phoneNo || '', [
         Validators.required,
         Validators.maxLength(10),
-        Validators.pattern('[0-9]+')  // validates input is digit
+        Validators.pattern('^[0-9]+')  // validates input is digit
       ]],
       postalCode: [this.customerData.postalCode || '', [Validators.required, Validators.pattern('^[0-9]{6}(?:-[0-9]{4})?$')]],
     });

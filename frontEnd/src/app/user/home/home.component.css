@@ -242,7 +242,7 @@
     text-align: center;
 }
 .page_down_content h2 {
-	font-size: 36px;
+	font-size: 30pt;
     color: #605E5E;
 }
 .page_down_content input {
@@ -580,7 +580,7 @@ p {
         font-size: 30px;
     }
     .page_down_content h2 {
-        font-size: 36px;
+        font-size: 30pt;
     }
     .list_item {
         display: flex;

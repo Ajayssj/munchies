@@ -162,7 +162,7 @@ export class SubscribeComponent implements OnInit {
     qId: 3,
     type:"green_tea",
     planRate:39,
-    question: "should your bag contain green tea with honey sachets?",
+    question: "Should your bag contain green tea with honey sachets?",
     options: [{
       optionId: 1,
       optionText: "Yes",
