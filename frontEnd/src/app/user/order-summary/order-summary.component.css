@@ -80,15 +80,19 @@ input:focus {
     cursor: pointer;
 }
 .order_summary_wrapper p {
-    text-align: center;
     color: #E5663D;
     width: 100%;
 }
 .sub-content{
- padding-left: 10px;
+    padding: 0px 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 .submit_btn{
-    padding: 0px 17px;
+    padding: 0px 20px;
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
 }
 
 .btn {

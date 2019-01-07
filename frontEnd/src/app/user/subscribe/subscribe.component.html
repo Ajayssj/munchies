@@ -22,19 +22,17 @@
       <div class="question_wrapper" *ngFor="let q of questions">
         <p>{{q.question}}</p>
         <ul>
-          
           <!-- <li *ngFor="let opt of q.options;let optionIndex = index" (click)="selectedIndex=optionIndex"> -->
               <li *ngFor="let opt of q.options;let optionIndex = index">
-              <span *ngIf="q.optionType !== 'radio'"><input type="checkbox" [(ngModel)]="opt.checked" id="optionIndex" />{{opt.optionText}}</span>
-            <span *ngIf="q.optionType == 'radio'" (click)="q.selectedIndex=optionIndex"><input type="radio"  name="q.type" id="optionIndex"  />{{opt.optionText}}</span>
+              <span *ngIf="q.optionType !== 'radio'"><input type="checkbox" [(ngModel)]="opt.checked" (change)="unSelectOthers(opt)" id="optionIndex" />{{opt.optionText}}</span>
+            <span *ngIf="q.optionType == 'radio'" (click)="q.selectedIndex=opt.optionText"><input type="radio"  name="q.type" id="optionIndex"  />{{opt.optionText}}</span>
           </li>
         </ul>
         <div class="product_images + {{ q.class}}">
           <img *ngFor="let image of q.images" src="{{image.url}}" alt="{{image.alt}}" />
         </div>
       </div>
-    </div>
-    
+    </div>    
    <!-- <div (click)="checkDelivery()">
         <button class="ok_button"  (click)="checkDelivery()">ok</button> -->
  <div class="ok_button">

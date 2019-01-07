@@ -209,6 +209,43 @@ shippingCharges:any  = {
     
   }
 
+  unSelectOthers(options) {
+    console.log(options);
+      // this.questions.forEach(question=> {
+      //   if(question.type == "allergic") {
+      //     question.options.forEach((option, index)=>{
+      //       if(options.optionText == "None" && options.checked == true) {
+      //         if(index != 4) {
+      //           option.checked = false;
+      //           console.log("option", "11111")
+      //         }
+      //       }
+      //       else {
+      //         if(index == 4) {
+      //           console.log("option", "222222")
+      //           option.checked = false;
+      //         }
+      //       }
+      //     })
+      //   }
+      // });
+      this.questions[0].options.forEach((option, index)=>{
+        console.log(option, index)
+        if(options.optionText == "None" && options.checked == true) {
+          if(index != 4) {
+            option.checked = false;
+            console.log("option", "11111")
+          }
+        }
+        else {
+          if(index == 4) {
+            console.log("option", "222222")
+            option.checked = false;
+          }
+        }
+      })
+  }
+
   checkDelivery(element) {
     console.log("in check delivery",this.questions);
     console.log("plan selected", this.selectedPlanId);
@@ -218,7 +255,7 @@ shippingCharges:any  = {
       let values = checked.map(item => item.optionText).join(',');
       (checked && checked.length)?obj[checked[0].optName] = values:'';
       if(question.optionType == "radio") {
-        obj["q3"] = question.selectedIndex ? "No":"Yes";
+        obj["q3"] = question.selectedIndex ? question.selectedIndex : '';
       }
     });
     
@@ -232,8 +269,6 @@ shippingCharges:any  = {
       this.router.navigate(['/subscribe']);
     }
     else {
-
-      
        this.queryParams = { selectedPlan: this.selectedPlanId, selectedPlanRate: this.selectedPlanRate,
         selectedPlanName: this.selectedPlanName , ...obj ,deliveryCharge:this.shippingCharges.default, greenTeaCharge:39 };
        console.log(this.queryParams);

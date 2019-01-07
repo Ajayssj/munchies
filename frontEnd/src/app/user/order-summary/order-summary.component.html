@@ -22,12 +22,12 @@
               <div *ngIf="!question3" class="selected_product">{{question3}} Green tea with honey sachets</div>
               <div *ngIf="question3" class="selected_product">{{question3}} Green tea with honey sachets </div> -->
           </div>
-          <div class="plan">
+          <div *ngIf="greenTea != ''" class="plan">
             <div class="heading">
                 <span>Green Tea and honey</span>
                 <span (click)="routePage()">Change</span>
             </div>
-            <div *ngIf="greenTea != ''"> <span>{{greenTea}}</span></div>
+            <div> <span>{{greenTea}}</span></div>
           </div>
  
           <div class="sub_total_shipment">
@@ -40,11 +40,11 @@
                 <div *ngIf="coupanCodeSuccess != ''" class="coupanCodeMessage">{{coupanCodeSuccess}}</div>
                 <div *ngIf="greenTea == 'Yes'" class="block">
                     <span>Green Tea with honey</span>
-                    <span>Rs {{greenTeaCharge}} per week x {{weeks}}</span>
+                    <span>Rs{{greenTeaCharge}} per week x {{weeks}}</span>
                 </div>
                 <div class="block">
                     <span>Delivery</span>
-                    <span>Rs {{deliveryCharge}} per week x {{weeks}}</span>
+                    <span>Rs{{deliveryCharge}} per week x {{weeks}}</span>
                 </div>
               <div class="block">
                   <span>Sub Total</span>

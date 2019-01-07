@@ -538,6 +538,11 @@ p {
     .content_box_two {
         padding-top: 0px;
     }
+    .snack_right_video h2 {
+        font-size: 25px;
+        line-height: 40pt;
+        padding: 0 20px;
+    }
     .content_box_one .icons .left, .content_box_three .icons .left {
         padding: 0px;
     }
@@ -571,8 +576,9 @@ p {
 @media screen and (min-width: 768px) {
     
     .snack_right_video h2 {
-        font-size: 35pt;
+        font-size: 27pt;
         line-height: 40pt;
+        padding: 0 20px;
     }
     .watch_video + h2 {
         font-size: 30px;
@@ -652,6 +658,9 @@ p {
     .boxes .box:nth-child(odd) {
         margin-right: 2%;
     }
+    .green_box {
+        width: 100%;
+    }
     .text_area {
         font-size: 14px;
         width: 43%;
@@ -708,6 +717,15 @@ p {
     }
     .boxes{
         padding: 0px 20px; 
+    }
+}
+@media screen and (min-width: 1024px) {
+    .green_box {
+        width: 1000px;
+    }
+    .snack_right_video h2 {
+        font-size: 32pt;
+        padding: 0px;
     }
 }
 @media screen and (min-width: 1280px) {
