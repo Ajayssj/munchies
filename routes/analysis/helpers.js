@@ -251,6 +251,7 @@ module.exports = {
                 return;
             }
             let data = JSON.parse(body);
+            console.log(' MailChimp List ;  ' , body);
             if(data.status == 200)
                 res.json({success : true, data : (data.stats && data.stats.member_count)?data.stats.member_count:0 })
             else
