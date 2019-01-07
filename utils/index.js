@@ -17,11 +17,17 @@ const sendMailRemotely = function(data,cb){
 
         request(options, function (error, response, body) {
         if (error)  cb({success : false, error : error});
-        if(JSON.parse(body).success)
-            cb({success : true, body});
-        else
+        try{
+            let data = JSON.parse(body);
+            if(data.success)
+                cb({success : true, body});
+            else
+                cb({success : false, error : 'Email Not Sent, Something Went Wrong'})
+            console.log(body);
+        }catch(err){
             cb({success : false, error : 'Email Not Sent, Something Went Wrong'})
-        console.log(body);
+        }
+        
     });
 
 }
