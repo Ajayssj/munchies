@@ -48,17 +48,15 @@
                 </div>
               <div class="block">
                   <span>Sub Total</span>
-                  <span [ngClass]="{'underline': discount > 0}">{{subTotal}} </span>
-                  <span *ngIf="discount > 0"> {{subTotal - discount}}</span>
+                  <span [ngClass]="{'underline': discount > 0}">Rs {{subTotal}} </span>
+                  <span *ngIf="discount > 0">Rs {{subTotal - discount}}</span>
               </div>
+          </div>
+        </div>
+          <div class="sub-content">
+            <p>* Deliveries are only on Mondays, so you'll get bag at the closest Monday from when you place your order.</p>
           </div>
           <div class="submit_btn">
               <button (click)="createOrder()" class="btn">Submit</button>
           </div>
-      </div>
-      <!-- <div class="payment">
-        <a >Payment</a>
-      </div> -->
-  </div>
-  <p>* Deliveries are only on Mondays, so you'll get bag at the closest Monday from when you place your order.</p>
-</div>
+      

@@ -84,6 +84,12 @@ input:focus {
     color: #E5663D;
     width: 100%;
 }
+.sub-content{
+ padding-left: 10px;
+}
+.submit_btn{
+    padding: 0px 17px;
+}
 
 .btn {
     text-decoration: none;

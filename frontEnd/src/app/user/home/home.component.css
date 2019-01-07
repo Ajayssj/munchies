@@ -241,7 +241,7 @@
     text-align: center;
 }
 .page_down_content h2 {
-	font-size: 30pt;
+	font-size: 30px;
     color: #605E5E;
 }
 .page_down_content input {
@@ -299,6 +299,9 @@ p {
     padding: 0 5px;
     margin: 0px;
     font-size: 14px;
+}
+.input_name{
+    margin-top: 20px!important;
 }
 
 /* **************************** Green Box New Code ************************************* */
@@ -578,7 +581,7 @@ p {
         font-size: 30px;
     }
     .page_down_content h2 {
-        font-size: 30pt;
+        font-size: 30px;
     }
     .list_item {
         display: flex;

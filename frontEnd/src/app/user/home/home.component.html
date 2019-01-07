@@ -60,7 +60,7 @@
               <img src="../../assets/student-on-computer.png" />
           </div>
           <h3 class="text-upper">Choose a Plan</h3>
-          <p>Chose from a one week trial pack, a 4 week plan or a 12 week plan.Remember you have the flexibility of skipping a week if you’re not aound.</p>
+          <p>Choose from a one week trial pack, a 4 week plan or a 12 week plan.Remember you have the flexibility of skipping a week if you’re not aound.</p>
       </div>
       <div class="box">
           <div class="img svg-img">
@@ -92,7 +92,7 @@
   <div class="whats_inside">
       <h2 class="text-upper">What's Inside?</h2>
       <img src="assets/give.png" alt="No Image"/>
-      <p style="text-align:center">Inside every munchPak bag is a mix of healthy and hearty snacks, juice, a fruit and some optional green tea. We've collaborated with some of the best snacking companies to give you the best experience. Depending on your customization we'll deliver a different set of snacks each week at your doorstep. <a href="/subscribe"><span>Try our one week trial pack today!</span></a></p>
+      <p style="text-align:center">Inside every munchPak bag is a mix of healthy and hearty snacks, juice, a fruit and some optional green tea. We've collaborated with some of the best snacking companies to give you the best experience. Depending on your customization we'll deliver a different set of snacks each week at your doorstep. <a href="/subscribe"><span><br>Try our one week trial pack today!</span></a></p>
   </div>
 <div class="you_will_get">
     <h3>You Will Get:</h3>
@@ -119,7 +119,7 @@
 <div class="munchers_have_spoken_box_wrapper">
     <div class="munchers_have_spoken_box">
         <p> I liked most was the variety and that I could enjoy them guilt free. The quantity was enough for a week (of course not if you are binge eating snacks while watching Netflix on a weekend!). Also, someone curates a different variety of snacks each week, so I look forward to the surprise. 
-            <br><br><i>- Gayatri Murralidharan<br> https://ecolove.co.in/  </i></p>
+            <br><br><i>- Gayatri Murralidharan<br><a href="https://ecolove.co.in/">https://ecolove.co.in/</a></i></p>
           
         <span></span>
     </div>
@@ -136,7 +136,8 @@
 </div>
 <div class="page_down_content">
     <h2>Subscribe to get the latest news about products and healthy snacking recipes</h2>
-    <input type="email" [(ngModel)]="subscribeEmail" name="email" placeholder="E-mail Address" />
+    <input type="name" [(ngModel)]="name" name="name" placeholder="Full Name"/>
+    <input type="email" [(ngModel)]="subscribeEmail" name="email" class="input_name" placeholder="E-mail Address" />
     <div class="message_wrapper_parent">
         <div *ngIf="successMessage != ''" class="success_wrapper">
             <span class="success">{{successMessage}}</span>
@@ -145,7 +146,7 @@
             <span class="error">{{errorMessage}}</span>
         </div>
     </div>
-    <div class="submitBtn"><button (click)="mailchimp(subscribeEmail)" class="btn submit">Subscribe</button></div>
+    <div class="submitBtn"><button (click)="mailchimp(subscribeEmail,name)" class="btn submit">Subscribe</button></div>
     <!-- <div class="submitBtn"><button [routerLink]="['/subscribe-form']"class="btn submit">Subscribe</button></div> -->
 
 </div>

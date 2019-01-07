@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Options } from 'selenium-webdriver';
 import { AuthService } from '../auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-subscribe',
@@ -13,7 +16,7 @@ export class SubscribeComponent implements OnInit {
  
  
  
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(private router: Router, private auth: AuthService,private http: HttpClient,private activatedRoute: ActivatedRoute) {}
  
   selectedIndex =[];
   selectedPlanId = null;
@@ -25,27 +28,7 @@ export class SubscribeComponent implements OnInit {
   optText = '';
   optIndex = [];
   queid= '';
-  plan = [{
-    planId: "5c0e2531cdfb5107849569ea",
-    planName: "Trial Week",
-    planRate: "499",
-    planText: "Try our Munchpak Bag today!",
-    weeks : 4
-  },
-  {
-    planId: "5c0e2571cdfb5107849569ef",
-    planName: "For 4 Weeks",
-    planRate: "1950",
-    planText: "1 snack bag delivered each week every Monday for 4 weeks! ",
-    weeks : 4
-  },
-  { 
-    planId: "5c0e258acdfb5107849569f4",
-    planName: "For 12 Weeks",
-    planRate: "5740",
-    planText: "1 snack bag delivered each week every Monday for 12 weeks!",
-    weeks : 12
-  }];
+  plan = [];
   questions = [
     {
     qId: 1,
@@ -200,14 +183,29 @@ shippingCharges:any  = {
 
   ngOnInit() {
     console.log("hiiiiii", this.questions);
+    this.http.get(this.auth.getDomainName() + '/public/api/plan/core/').subscribe((res: any) => {
+      // this.http.get('http://localhost:9191/public/api/coupan').subscribe((res: any)=> {
+         console.log("res");
+         console.log(res);
+       this.plan = res.data.plans;
+        
+        
+        console.log(this.plan);
+        
+         
+    },
+    err => {
+
+    });
+    
     
   }
 
   selectedPlan(itemObj) {
-    this.selectedPlanId = itemObj.planId;
+    this.selectedPlanId = itemObj._id;
     this.noOfWeeks = itemObj.weeks;
-    this.selectedPlanName = itemObj.planName;
-    this.selectedPlanRate = itemObj.planRate;
+    this.selectedPlanName = itemObj.title;
+    this.selectedPlanRate = itemObj.pricePerBag;
     
   }
 

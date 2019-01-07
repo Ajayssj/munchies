@@ -10,10 +10,10 @@
    
     <div class="select_plan">
       <div class="plans">
-        <div class="plan" [ngClass]="{'active':selectedPlanId == item.planId}" *ngFor="let item of plan; let i = index" (click)="selectedPlan(item)">
-          <h3>{{item.planName}}</h3>
-          <h2 class="rate">Rs{{item.planRate}}<span *ngIf="i == 0">/Bag</span> </h2>
-          <p>{{item.planText}}</p>
+        <div class="plan" [ngClass]="{'active':selectedPlanId == item._id}" *ngFor="let item of plan; let i = index" (click)="selectedPlan(item)">
+          <h3>{{item.title}}</h3>
+          <h2 class="rate">Rs{{item.pricePerBag}}<span *ngIf="i == 0">/Bag</span> </h2>
+          <p>{{item.description}}</p>
         </div>
       </div>
     </div>
