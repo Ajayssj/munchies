@@ -8,6 +8,7 @@ const PlansExtended = db.getCollection('plansExtended');
 const Extra = db.getCollection('extraInfo');
 const Plan = db.getCollection('plans');
 const isValidCoupan = require('../coupan/helpers').isValidCoupan;
+const env = require('../../config/env');
 let moment = require('moment-timezone');
 
 const shippingCharges  = {
@@ -212,7 +213,7 @@ const  insertOrder = async (obj,callback) => {
                 let greenTeaPrice = 0;
                 if(extraInfo && Array.isArray(extraInfo) && extraInfo.length){
                    let found = extraInfo.find(item => item.type == "green_tea");
-                   if(found && found.value === "Yes") greenTeaPrice = 39;
+                   if(found && found.value === "Yes") greenTeaPrice = env.GREEN_TEA_PRICE;
                 }
                 totalPrice += greenTeaPrice;
                 if(coupan && coupan.type == 1) totalPrice  -= getDiscountAmount(coupan.discount,totalPrice).toFixed(2); else if(coupan && coupan.type == 2) totalPrice  -= coupan.discount;
