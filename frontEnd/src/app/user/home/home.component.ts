@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
           // console.log('Error : ', res.reason)
         }else{
           this.successMessage = 'User Subscribed';
-          this.router.navigate(['/Thank-you']);
+          this.router.navigate(['/thank-you-mailchimp']);
         }     
 
       },err => {

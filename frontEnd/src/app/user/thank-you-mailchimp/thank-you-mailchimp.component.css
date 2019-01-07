@@ -1,0 +1,26 @@
+.thank_you_page_wrapper {
+    
+}
+.thank_you_page_wrapper h2 {
+    text-align: center;
+    margin: 80px 0px 40px 0px;
+    font-size: 23px;
+    color: #E5663D;
+}
+.thank_you_page_wrapper p {
+    text-align: center;
+    color: #E5663D
+}
+.thank_you_page_circleimage {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    position: absolute;
+    right: 100px;
+    top: 50px;
+    background-color: #e3c567;
+}
+.thank_you_page_circleimage img {
+    margin: 150px 0 0 30px;
+    width: 150px;
+}

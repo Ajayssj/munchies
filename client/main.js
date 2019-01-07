@@ -4280,7 +4280,7 @@ var HomeComponent = /** @class */ (function () {
                 }
                 else {
                     _this.successMessage = 'User Subscribed';
-                    _this.router.navigate(['/Thank-you']);
+                    _this.router.navigate(['/thank-you-mailchimp']);
                 }
             }, function (err) {
             });
@@ -6113,6 +6113,69 @@ var TermsAndConditionsComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.css":
+/*!****************************************************************************!*\
+  !*** ./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.css ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".thank_you_page_wrapper {\r\n    \r\n}\r\n.thank_you_page_wrapper h2 {\r\n    text-align: center;\r\n    margin: 80px 0px 40px 0px;\r\n    font-size: 23px;\r\n    color: #E5663D;\r\n}\r\n.thank_you_page_wrapper p {\r\n    text-align: center;\r\n    color: #E5663D\r\n}\r\n.thank_you_page_circleimage {\r\n    width: 300px;\r\n    height: 300px;\r\n    border-radius: 50%;\r\n    position: absolute;\r\n    right: 100px;\r\n    top: 50px;\r\n    background-color: #e3c567;\r\n}\r\n.thank_you_page_circleimage img {\r\n    margin: 150px 0 0 30px;\r\n    width: 150px;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlci90aGFuay15b3UtbWFpbGNoaW1wL3RoYW5rLXlvdS1tYWlsY2hpbXAuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Q0FFQztBQUNEO0lBQ0ksbUJBQW1CO0lBQ25CLDBCQUEwQjtJQUMxQixnQkFBZ0I7SUFDaEIsZUFBZTtDQUNsQjtBQUNEO0lBQ0ksbUJBQW1CO0lBQ25CLGNBQWM7Q0FDakI7QUFDRDtJQUNJLGFBQWE7SUFDYixjQUFjO0lBQ2QsbUJBQW1CO0lBQ25CLG1CQUFtQjtJQUNuQixhQUFhO0lBQ2IsVUFBVTtJQUNWLDBCQUEwQjtDQUM3QjtBQUNEO0lBQ0ksdUJBQXVCO0lBQ3ZCLGFBQWE7Q0FDaEIiLCJmaWxlIjoic3JjL2FwcC91c2VyL3RoYW5rLXlvdS1tYWlsY2hpbXAvdGhhbmsteW91LW1haWxjaGltcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRoYW5rX3lvdV9wYWdlX3dyYXBwZXIge1xyXG4gICAgXHJcbn1cclxuLnRoYW5rX3lvdV9wYWdlX3dyYXBwZXIgaDIge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgbWFyZ2luOiA4MHB4IDBweCA0MHB4IDBweDtcclxuICAgIGZvbnQtc2l6ZTogMjNweDtcclxuICAgIGNvbG9yOiAjRTU2NjNEO1xyXG59XHJcbi50aGFua195b3VfcGFnZV93cmFwcGVyIHAge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgY29sb3I6ICNFNTY2M0RcclxufVxyXG4udGhhbmtfeW91X3BhZ2VfY2lyY2xlaW1hZ2Uge1xyXG4gICAgd2lkdGg6IDMwMHB4O1xyXG4gICAgaGVpZ2h0OiAzMDBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHJpZ2h0OiAxMDBweDtcclxuICAgIHRvcDogNTBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNlM2M1Njc7XHJcbn1cclxuLnRoYW5rX3lvdV9wYWdlX2NpcmNsZWltYWdlIGltZyB7XHJcbiAgICBtYXJnaW46IDE1MHB4IDAgMCAzMHB4O1xyXG4gICAgd2lkdGg6IDE1MHB4O1xyXG59Il19 */"
+
+/***/ }),
+
+/***/ "./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.html":
+/*!*****************************************************************************!*\
+  !*** ./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.html ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"thank_you_page_wrapper\">\n  <h2>Thank you!</h2>\n  <p> Thank you for subscription</p>\n  <div class=\"thank_you_page_circleimage\">\n      <img src=\"../assets/a.png\" />\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.ts":
+/*!***************************************************************************!*\
+  !*** ./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.ts ***!
+  \***************************************************************************/
+/*! exports provided: ThankYouMailchimpComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThankYouMailchimpComponent", function() { return ThankYouMailchimpComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ThankYouMailchimpComponent = /** @class */ (function () {
+    function ThankYouMailchimpComponent() {
+    }
+    ThankYouMailchimpComponent.prototype.ngOnInit = function () {
+    };
+    ThankYouMailchimpComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-thank-you-mailchimp',
+            template: __webpack_require__(/*! ./thank-you-mailchimp.component.html */ "./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.html"),
+            styles: [__webpack_require__(/*! ./thank-you-mailchimp.component.css */ "./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ThankYouMailchimpComponent);
+    return ThankYouMailchimpComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/user/thank-you/thank-you.component.css":
 /*!********************************************************!*\
   !*** ./src/app/user/thank-you/thank-you.component.css ***!
@@ -6212,6 +6275,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _terms_and_conditions_terms_and_conditions_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./terms-and-conditions/terms-and-conditions.component */ "./src/app/user/terms-and-conditions/terms-and-conditions.component.ts");
 /* harmony import */ var _cookie_policy_cookie_policy_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./cookie-policy/cookie-policy.component */ "./src/app/user/cookie-policy/cookie-policy.component.ts");
 /* harmony import */ var _subscribe_form_subscribe_form_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./subscribe-form/subscribe-form.component */ "./src/app/user/subscribe-form/subscribe-form.component.ts");
+/* harmony import */ var _thank_you_mailchimp_thank_you_mailchimp_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./thank-you-mailchimp/thank-you-mailchimp.component */ "./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6232,6 +6296,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 //import { SkipWeekComponent } from './skip-week/skip-week.component';
+
 
 
 
@@ -6286,6 +6351,10 @@ var routes = [
               AuthGuard
             ]  },*/
             { path: "thank-you", component: _thank_you_thank_you_component__WEBPACK_IMPORTED_MODULE_13__["ThankYouComponent"],
+                canActivate: [
+                    _auth_auth_guard__WEBPACK_IMPORTED_MODULE_18__["AuthGuard"]
+                ] },
+            { path: "thank-you-mailchimp", component: _thank_you_mailchimp_thank_you_mailchimp_component__WEBPACK_IMPORTED_MODULE_26__["ThankYouMailchimpComponent"],
                 canActivate: [
                     _auth_auth_guard__WEBPACK_IMPORTED_MODULE_18__["AuthGuard"]
                 ] },
@@ -6473,6 +6542,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _terms_and_conditions_terms_and_conditions_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./terms-and-conditions/terms-and-conditions.component */ "./src/app/user/terms-and-conditions/terms-and-conditions.component.ts");
 /* harmony import */ var _cookie_policy_cookie_policy_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./cookie-policy/cookie-policy.component */ "./src/app/user/cookie-policy/cookie-policy.component.ts");
 /* harmony import */ var _subscribe_form_subscribe_form_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./subscribe-form/subscribe-form.component */ "./src/app/user/subscribe-form/subscribe-form.component.ts");
+/* harmony import */ var _thank_you_mailchimp_thank_you_mailchimp_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./thank-you-mailchimp/thank-you-mailchimp.component */ "./src/app/user/thank-you-mailchimp/thank-you-mailchimp.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6500,6 +6570,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 //import { SkipWeekComponent } from './skip-week/skip-week.component';
+
 
 
 
@@ -6551,7 +6622,8 @@ var UserModule = /** @class */ (function () {
                 _profile_profile_component__WEBPACK_IMPORTED_MODULE_34__["ProfileComponent"],
                 _terms_and_conditions_terms_and_conditions_component__WEBPACK_IMPORTED_MODULE_35__["TermsAndConditionsComponent"],
                 _cookie_policy_cookie_policy_component__WEBPACK_IMPORTED_MODULE_36__["CookiePolicyComponent"],
-                _subscribe_form_subscribe_form_component__WEBPACK_IMPORTED_MODULE_37__["SubscribeFormComponent"]
+                _subscribe_form_subscribe_form_component__WEBPACK_IMPORTED_MODULE_37__["SubscribeFormComponent"],
+                _thank_you_mailchimp_thank_you_mailchimp_component__WEBPACK_IMPORTED_MODULE_38__["ThankYouMailchimpComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],

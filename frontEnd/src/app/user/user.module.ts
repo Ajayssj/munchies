@@ -38,6 +38,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { SubscribeFormComponent } from './subscribe-form/subscribe-form.component';
+import { ThankYouMailchimpComponent } from './thank-you-mailchimp/thank-you-mailchimp.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { SubscribeFormComponent } from './subscribe-form/subscribe-form.componen
     ProfileComponent,
     TermsAndConditionsComponent,
     CookiePolicyComponent,
-    SubscribeFormComponent
+    SubscribeFormComponent,
+    ThankYouMailchimpComponent
   ],
   imports: [
     BrowserModule,

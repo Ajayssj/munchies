@@ -25,7 +25,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { SubscribeFormComponent } from './subscribe-form/subscribe-form.component';
-
+import {ThankYouMailchimpComponent} from './thank-you-mailchimp/thank-you-mailchimp.component';
 const routes: Routes = [
   {
   path: '',
@@ -67,6 +67,10 @@ const routes: Routes = [
     AuthGuard
   ]  },*/
   { path: "thank-you", component: ThankYouComponent,
+  canActivate: [
+    AuthGuard
+  ] },
+  { path: "thank-you-mailchimp", component: ThankYouMailchimpComponent,
   canActivate: [
     AuthGuard
   ] },
