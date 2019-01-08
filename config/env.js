@@ -9,11 +9,11 @@ var env = {
   DB_PASWORD: '',
   DB_NAME: (envirnoment === 'development')?'munchies':'heroku_3tn4qs1k',
   DB_PORT: (envirnoment === 'development')? 27017 : 37149,
-  EMAIL_ORIGIN : 'http://localhost:3000',
+//   EMAIL_ORIGIN : 'http://localhost:3000',
   MY_ORIGIN : 'http://dev-munchies.herokuapp',
-  // EMAIL_ORIGIN : 'http://mails.xsella.com',
+  EMAIL_ORIGIN : 'http://mails.xsella.com',
   GREEN_TEA_PRICE : 39,
-  PASSWORD_RESET_EXPIRY : 3,
+  PASSWORD_RESET_EXPIRY : 30, // In Minutes
 }
 env.DB_URL = (envirnoment === 'development')?`mongodb://${env.DB_HOST}/${env.DB_PORT}/`:`mongodb://munchies:munchies12345@ds137149.mlab.com:37149/heroku_3tn4qs1k`;
 env.HOST_NAME = (envirnoment === 'development')?`http://localhost:${env.SERVER_PORT}/`:`https://dev-munchies.herokuapp.com/`;
