@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: "terms-and-conditions", component: TermsAndConditionsComponent },
   { path: "cookie-policy", component: CookiePolicyComponent },
   { path : "forgot-password", component : ForgotPasswordComponent },
-  { path : "reset-password/:token", component : ResetPasswordComponent},
+  { path : "reset-password/:token/:expiry", component : ResetPasswordComponent},
   { path : "subscribe-form", component : SubscribeFormComponent},
   { path: "delivery", component: DeliveryComponent,
   canActivate: [

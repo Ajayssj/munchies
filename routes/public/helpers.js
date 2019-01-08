@@ -61,34 +61,39 @@ module.exports = {
             return res.status(422).json({ errors: errors.array() });
         }else{
             const cipherEmail = req.body.token;
+            const cipherExpiry = req.body.expiry;
             let email;
             try{
-                email = utils.decrypt(cipherEmail);
-                isEmailExists(email)
-                        .then(exists => {
-                            if(exists){ 
-                                const pass = req.body.password.trim();
-                                if(pass){
-                                    const password = utils.createHash(pass);
-                                    User.updateOne({email : email},{$set : { password : password}})
-                                        .then(passwordSet => {
-                                          /*   if(passwordSet.result.nModified == 1)
+                let expiryDate = utils.decrypt(cipherExpiry);
+                if(!utils.isExpired(expiryDate))
+                {   
+                    email = utils.decrypt(cipherEmail);
+                    isEmailExists(email)
+                            .then(exists => {
+                                if(exists){ 
+                                    const pass = req.body.password.trim();
+                                    if(pass){
+                                        const password = utils.createHash(pass);
+                                        User.updateOne({email : email},{$set : { password : password}})
+                                            .then(passwordSet => {
+                                            /*   if(passwordSet.result.nModified == 1)
+                                                    res.json({success : true, message : 'Password Reset Successfully! Try to login again!'});
+                                                else
+                                                    res.json({success : false, error : 'Something went wrong!'}); */
                                                 res.json({success : true, message : 'Password Reset Successfully! Try to login again!'});
-                                            else
-                                                res.json({success : false, error : 'Something went wrong!'}); */
-                                            res.json({success : true, message : 'Password Reset Successfully! Try to login again!'});
-    
-                                        }).catch(err => {
-                                        })
+        
+                                            }).catch(err => {
+                                            })
+                                    }else{
+                                        res.json({success : false, error : 'Password should not be empty'});
+                                    }
                                 }else{
-                                    res.json({success : false, error : 'Password should not be empty'});
+                                    res.json({success : false, error : 'Email ID Doest Exists!'});
                                 }
-                            }else{
-                                res.json({success : false, error : 'Email ID Doest Exists!'});
-                            }
-                        }).catch(err => {
-                            res.json({success : false, error : err});
-                        })
+                            }).catch(err => {
+                                res.json({success : false, error : err});
+                            })
+                        }else res.json({success : false, error : 'This link is expired!'});
             }catch(err){
                 res.json({success : false, error : 'Invalid Token!'});
             }   

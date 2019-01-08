@@ -24,6 +24,7 @@ export class ResetPasswordComponent implements OnInit {
   confirmPassword = '';
   passwordNotMatch = false;
   token = '';
+  expiry = '';
   constructor(
     private route : ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -38,9 +39,12 @@ export class ResetPasswordComponent implements OnInit {
         confirmPassword: ['', Validators.required]
     });
     this.token = this.route.snapshot.params["token"];
+    this.expiry = this.route.snapshot.params["expiry"];
   }
   resetForm(){
+    this.submitted = false;
     this.resetPasswordForm.reset();
+    // this.submitted = false;
   }
   get f() { return this.resetPasswordForm.controls; }
   onSubmit() {
@@ -59,7 +63,8 @@ export class ResetPasswordComponent implements OnInit {
         this.passwordNotMatch = false;
         this.data = {
           'password': this.password,
-          'token' : this.token
+          'token' : this.token,
+          'expiry' : this.expiry
         }
         this.http.post(this.authService.getDomainName() + '/public/api/user/password/reset', this.data).subscribe( (data:Res) => {
             this.success = data.success;
@@ -67,7 +72,10 @@ export class ResetPasswordComponent implements OnInit {
             // this.router.navigate(['/sign-up']);
             if(this.success){
               this.message = data.message
+              
+            setTimeout(() => {
               this.resetForm();
+            },3000)
             }
           },
           error => {

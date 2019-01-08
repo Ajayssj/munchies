@@ -3,6 +3,7 @@ const credentionals = require('../config/credentials');
 const env = require('../config/env');
 const nodemailer = require('nodemailer');
 var request = require("request");
+let moment = require('moment-timezone');
 
 const sendMailRemotely = function(data,cb){
     var options = { 
@@ -35,12 +36,19 @@ const sendMailRemotely = function(data,cb){
 }
 
 module.exports = {
+    isExpired : function(expiry){
+        if(new Date(moment().tz('Asia/Calcutta').format()).getTime() > new Date(moment(parseInt(expiry)).tz('Asia/Calcutta').format()).getTime())
+            return true;
+        else
+            return false;
+    },
    createHash : function(data){
         return crypto.createHash('md5').update(data).digest('hex')
    },
    createPasswordRecoveryLink : function(cipherEmail){
     //  return `${env.HOST_NAME}api/user/password/recover/${cipherEmail}`;
-     return `${env.HOST_NAME}/reset-password/${cipherEmail}`;
+    const expiry = new Date(moment().tz('Asia/Calcutta').add(env.PASSWORD_RESET_EXPIRY,'minutes').format()).getTime();
+     return `${env.HOST_NAME}reset-password/${cipherEmail}/${this.encrypt(expiry.toString())}`;
    },
    sendOrderEmail : function(data,callback){
     sendMailRemotely(data,callback);
